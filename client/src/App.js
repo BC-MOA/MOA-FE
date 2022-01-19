@@ -1,7 +1,6 @@
 import "./App.css";
-import Home from "./components/home/Home";
 import styled from "styled-components";
-
+import AllRoutes from "./route/Routes";
 const MobileBox = styled.div`
   width: 375px;
   height: 743px;
@@ -13,7 +12,7 @@ const MobileBox = styled.div`
 function App() {
   return (
     <MobileBox>
-      <Home />
+      <AllRoutes />
     </MobileBox>
   );
 }
