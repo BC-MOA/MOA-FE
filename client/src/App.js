@@ -1,5 +1,5 @@
 import "./App.css";
-import NavBar from "./route/NavBar";
+import Home from "./components/home/Home";
 import styled from "styled-components";
 
 const MobileBox = styled.div`
@@ -13,8 +13,7 @@ const MobileBox = styled.div`
 function App() {
   return (
     <MobileBox>
-      <div>app</div>
-      <NavBar />
+      <Home />
     </MobileBox>
   );
 }
