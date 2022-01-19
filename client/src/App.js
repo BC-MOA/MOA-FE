@@ -1,12 +1,21 @@
 import "./App.css";
 import NavBar from "./route/NavBar";
+import styled from "styled-components";
+
+const MobileBox = styled.div`
+  width: 375px;
+  height: 743px;
+  border: 1px solid black;
+  margin: 0 auto;
+  text-align: center;
+`;
 
 function App() {
   return (
-    <div className="App">
+    <MobileBox>
       <div>app</div>
       <NavBar />
-    </div>
+    </MobileBox>
   );
 }
 
