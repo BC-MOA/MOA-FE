@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { backButtonBox } from "style/common";
 import styled from "styled-components";
+import AvailableSavingList from "./AvailableSavingList";
 
 function AddMilitarySavings() {
   const history = useNavigate();
-  const [listControl, setListControl] = useState("");
+  const [listControl, setListControl] = useState("최고금리순");
   // todo - api datas
   const userName = "민수";
   const avgApplyNum = 1234;
@@ -28,11 +29,9 @@ function AddMilitarySavings() {
           <span>군적금 상품들이에요.</span>
         </div>
         <div className="notice">
-          <span>
-            이번달 새로 군적금을 신청한 장병은{" "}
-            <span className="noticeBold">{avgApplyNum.toLocaleString()}</span>{" "}
-            명 입니다.
-          </span>
+          <span>이번달 새로 군적금을 신청한 장병은 </span>
+          <span className="noticeBold">{avgApplyNum.toLocaleString()}</span>
+          <span> 명 입니다.</span>
         </div>
       </MessageBox>
       <ListControlBox>
@@ -73,6 +72,7 @@ function AddMilitarySavings() {
           }}
         />
       </ListControlBox>
+      <AvailableSavingList></AvailableSavingList>
     </Container>
   );
 }
@@ -103,12 +103,14 @@ const MessageBox = styled.div`
     color: var(--Body_01);
 
     display: flex;
-    align-items: flex-start;
+    justify-content: flex-start;
+    align-items: center;
   }
   .noticeBold {
     font-family: "Pretendard-Medium";
     font-size: 16px;
     line-height: 25px;
+    margin: 0 2px;
     color: var(--Title_02);
   }
 `;
