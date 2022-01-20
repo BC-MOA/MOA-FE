@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { backButtonBox } from "style/common";
 import styled from "styled-components";
 import AvailableSavingList from "./AvailableSavingList";
-
+import ContentControlBtn from "./ContentControlBtn";
 function AddMilitarySavings() {
   const history = useNavigate();
-  const [listControl, setListControl] = useState("최고금리순");
+  const controlNameList = ["최고금리순", "기본금리순"];
+  const [listControl, setListControl] = useState(controlNameList[0]);
+
   // todo - api datas
   const userName = "민수";
   const avgApplyNum = 1234;
@@ -34,44 +36,11 @@ function AddMilitarySavings() {
           <span> 명 입니다.</span>
         </div>
       </MessageBox>
-      <ListControlBox>
-        <label htmlFor="최고금리순">
-          <span className={"최고금리순" === listControl ? "isClick" : ""}>
-            최고금리순
-          </span>
-          <div
-            className={"최고금리순" === listControl ? "clickedBar" : ""}
-          ></div>
-        </label>
-        <input
-          type="radio"
-          name="listControl"
-          id="최고금리순"
-          value="최고금리순"
-          checked="checked"
-          onChange={(e) => {
-            setListControl(e.target.value);
-          }}
-        />
-
-        <label htmlFor="기본금리순">
-          <span className={"기본금리순" === listControl ? "isClick" : ""}>
-            기본금리순
-          </span>
-          <div
-            className={"기본금리순" === listControl ? "clickedBar" : ""}
-          ></div>
-        </label>
-        <input
-          type="radio"
-          name="listControl"
-          id="기본금리순"
-          value="기본금리순"
-          onChange={(e) => {
-            setListControl(e.target.value);
-          }}
-        />
-      </ListControlBox>
+      <ContentControlBtn
+        listControl={listControl}
+        setListControl={setListControl}
+        controlNameList={controlNameList}
+      ></ContentControlBtn>
       <AvailableSavingList listControl={listControl}></AvailableSavingList>
     </Container>
   );
@@ -114,49 +83,6 @@ const MessageBox = styled.div`
     line-height: 25px;
     margin: 0 2px;
     color: var(--Title_02);
-  }
-`;
-
-const ListControlBox = styled.div`
-  display: flex;
-  font-family: "Pretendard-Regular";
-  font-size: 16px;
-  line-height: 25px;
-  color: var(--Body_02);
-  margin-bottom: 20px;
-  label {
-    width: 77px;
-    margin-right: calc(10 / 375 * 100vw);
-    :last-child {
-      margin-right: 0px;
-    }
-    :hover {
-      cursor: pointer;
-    }
-    span.isClick {
-      font-family: "Pretendard-SemiBold";
-      font-size: calc(16rem / 16);
-      line-height: 25px;
-      color: var(--Title_02);
-      z-index: 1px;
-    }
-  }
-  .clickedBar {
-    margin-top: -9px;
-    height: 9px;
-    background: var(--a3);
-    opacity: 0.5;
-    border-radius: 2px;
-    z-index: -1;
-  }
-  input[type="radio"] {
-    margin: 0;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    outline: 0;
-    box-shadow: none;
-    border: none;
   }
 `;
 
