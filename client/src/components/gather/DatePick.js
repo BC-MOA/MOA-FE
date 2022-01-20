@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
 import { subDays } from "date-fns";
 import styled from "styled-components";
+import { GoalContext } from "./Goal";
 
 const Container = styled.div`
   .react-datepicker {
@@ -54,8 +55,9 @@ const Container = styled.div`
   }
 `;
 
-function DatePick({ setInputs, inputs }) {
+function DatePick() {
   const [startDate, setStartDate] = useState(null);
+  const { inputs, setInputs } = useContext(GoalContext);
 
   return (
     <Container>
