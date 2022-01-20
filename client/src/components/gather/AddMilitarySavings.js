@@ -77,7 +77,9 @@ function AddMilitarySavings() {
   );
 }
 const Container = styled.div`
-  margin: 8px 20px;
+  padding: 8px 20px;
+  box-sizing: border-box;
+  background: #f8f8f8;
 `;
 const BackButton = styled.div`
   ${backButtonBox}
