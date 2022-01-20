@@ -1,9 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-function ContentControlBtn({ controlNameList, listControl, setListControl }) {
+function ContentControlBtn({
+  marginBottom,
+  controlNameList,
+  listControl,
+  setListControl,
+}) {
   return (
-    <ListControlBox>
+    <ListControlBox marginBottom={marginBottom}>
       {controlNameList.map((name) => {
         return (
           <>
@@ -34,7 +39,7 @@ const ListControlBox = styled.div`
   font-size: 16px;
   line-height: 25px;
   color: var(--Body_02);
-  margin-bottom: 20px;
+  margin-bottom: ${(props) => props.marginBottom};
   label {
     width: 77px;
     margin-right: calc(10 / 375 * 100vw);

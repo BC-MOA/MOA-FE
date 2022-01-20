@@ -37,6 +37,7 @@ function AddMilitarySavings() {
         </div>
       </MessageBox>
       <ContentControlBtn
+        marginBottom="20px"
         listControl={listControl}
         setListControl={setListControl}
         controlNameList={controlNameList}
