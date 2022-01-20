@@ -36,10 +36,9 @@ function AvailableSavingItem({ item }) {
 export default AvailableSavingItem;
 
 const SavingItemBox = styled.div`
-  width: 335px;
-  height: 89px;
+  width: 100%;
   display: flex;
-  padding: 0 16px;
+  padding: 20px 16px;
   box-sizing: border-box;
   align-items: center;
   background: #ffffff;
@@ -52,10 +51,13 @@ const SavingItemBox = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
+    width: calc(48 / 375 * 100vw);
+    height: calc(48 / 375 * 100vw);
     background: #edefed;
-    border-radius: 24px;
+    border-radius: calc(48 / 2 / 375 * 100vw);
+    img {
+      width: calc(24 / 375 * 100vw);
+    }
   }
   .savingInfo {
     display: flex;
@@ -65,14 +67,14 @@ const SavingItemBox = styled.div`
     flex-grow: 1;
     .savingName {
       font-family: "Pretendard-Medium";
-      font-size: 16px;
+      font-size: calc(16rem / 16);
       line-height: 25px;
       margin-bottom: 2px;
       color: var(--Title_02);
     }
     .savingRate {
       font-family: "Pretendard-Regular";
-      font-size: 14px;
+      font-size: calc(14rem / 16);
       line-height: 22px;
       color: var(--Body_01);
     }
@@ -85,13 +87,13 @@ const SavingItemBox = styled.div`
     color: var(--a2);
     .maxRateNum {
       font-family: "Roboto";
-      font-size: 18px;
+      font-size: calc(18rem / 16);
       font-weight: 700;
       line-height: 28px;
     }
     span {
       font-family: "Pretendard-Regular";
-      font-size: 14px;
+      font-size: calc(14rem / 16);
       line-height: 22px;
     }
   }

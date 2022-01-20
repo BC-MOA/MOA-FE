@@ -89,7 +89,7 @@ const MessageBox = styled.div`
   margin-bottom: 24px;
   .title {
     font-family: "Pretendard-SemiBold";
-    font-size: 21px;
+    font-size: calc(21rem / 16);
     line-height: 33px;
     color: var(--Title_01);
 
@@ -100,7 +100,7 @@ const MessageBox = styled.div`
   }
   .notice {
     font-family: "Pretendard-Regular";
-    font-size: 14px;
+    font-size: calc(14rem / 16);
     line-height: 22px;
     color: var(--Body_01);
 
@@ -110,7 +110,7 @@ const MessageBox = styled.div`
   }
   .noticeBold {
     font-family: "Pretendard-Medium";
-    font-size: 16px;
+    font-size: calc(16rem / 16);
     line-height: 25px;
     margin: 0 2px;
     color: var(--Title_02);
@@ -126,7 +126,7 @@ const ListControlBox = styled.div`
   margin-bottom: 20px;
   label {
     width: 77px;
-    margin-right: 10px;
+    margin-right: calc(10 / 375 * 100vw);
     :last-child {
       margin-right: 0px;
     }
@@ -135,7 +135,7 @@ const ListControlBox = styled.div`
     }
     span.isClick {
       font-family: "Pretendard-SemiBold";
-      font-size: 16px;
+      font-size: calc(16rem / 16);
       line-height: 25px;
       color: var(--Title_02);
       z-index: 1px;
