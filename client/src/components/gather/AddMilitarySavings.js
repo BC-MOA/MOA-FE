@@ -72,7 +72,7 @@ function AddMilitarySavings() {
           }}
         />
       </ListControlBox>
-      <AvailableSavingList></AvailableSavingList>
+      <AvailableSavingList listControl={listControl}></AvailableSavingList>
     </Container>
   );
 }
