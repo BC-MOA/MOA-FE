@@ -6,7 +6,6 @@ const CategoryBox = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 12px 23px;
-  margin-top: 4px;
   background-color: #fff;
   padding: 16px 20px;
   border-radius: 8px;
@@ -49,14 +48,14 @@ function Category() {
   ];
 
   return (
-    <div>
+    <>
       <div className="SubTitle">무엇을 위해서?</div>
       <CategoryBox>
         {categories.map((El, idx) => (
           <CategoryEl El={El} key={idx} />
         ))}
       </CategoryBox>
-    </div>
+    </>
   );
 }
 

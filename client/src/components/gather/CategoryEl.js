@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled, { css } from "styled-components";
+import { GoalContext } from "./Goal";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: fit-content;
+  cursor: pointer;
 
   .name {
     width: fit-content;
@@ -34,10 +36,25 @@ const ElBox = styled.div`
 
 function CategoryEl({ El }) {
   const { en_Name, kr_Name } = El;
+  const { inputs, setInputs } = useContext(GoalContext);
+  const isSelected = inputs.category === El.kr_Name;
+
   return (
     <Container>
-      <ElBox>
-        <img src={require(`assets/goal/${en_Name}.svg`)} alt={kr_Name} />
+      <ElBox selected={isSelected}>
+        <img
+          onClick={(e) =>
+            setInputs({
+              ...inputs,
+              category: e.target.name,
+            })
+          }
+          name={kr_Name}
+          src={require(`assets/goal/${
+            isSelected ? en_Name + "_active" : en_Name
+          }.svg`)}
+          alt={kr_Name}
+        />
       </ElBox>
       <div className="name">{kr_Name}</div>
     </Container>
