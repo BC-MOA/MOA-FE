@@ -7,6 +7,12 @@ const MobileBox = styled.div`
   border: 1px solid black;
   margin: 0 auto;
   text-align: center;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 function App() {
