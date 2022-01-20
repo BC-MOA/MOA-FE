@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { backButtonBox } from "style/common";
 import styled from "styled-components";
 
 function AddMilitarySavings() {
   const history = useNavigate();
+  const [listControl, setListControl] = useState("");
   // todo - api datas
   const userName = "민수";
   const avgApplyNum = 1234;
@@ -34,6 +35,44 @@ function AddMilitarySavings() {
           </span>
         </div>
       </MessageBox>
+      <ListControlBox>
+        <label htmlFor="최고금리순">
+          <span className={"최고금리순" === listControl ? "isClick" : ""}>
+            최고금리순
+          </span>
+          <div
+            className={"최고금리순" === listControl ? "clickedBar" : ""}
+          ></div>
+        </label>
+        <input
+          type="radio"
+          name="listControl"
+          id="최고금리순"
+          value="최고금리순"
+          checked="checked"
+          onChange={(e) => {
+            setListControl(e.target.value);
+          }}
+        />
+
+        <label htmlFor="기본금리순">
+          <span className={"기본금리순" === listControl ? "isClick" : ""}>
+            기본금리순
+          </span>
+          <div
+            className={"기본금리순" === listControl ? "clickedBar" : ""}
+          ></div>
+        </label>
+        <input
+          type="radio"
+          name="listControl"
+          id="기본금리순"
+          value="기본금리순"
+          onChange={(e) => {
+            setListControl(e.target.value);
+          }}
+        />
+      </ListControlBox>
     </Container>
   );
 }
@@ -45,6 +84,7 @@ const BackButton = styled.div`
   margin-bottom:12px;
 `;
 const MessageBox = styled.div`
+  margin-bottom: 24px;
   .title {
     font-family: "Pretendard-SemiBold";
     font-size: 21px;
@@ -54,6 +94,7 @@ const MessageBox = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin-bottom: 4px;
   }
   .notice {
     font-family: "Pretendard-Regular";
@@ -69,6 +110,48 @@ const MessageBox = styled.div`
     font-size: 16px;
     line-height: 25px;
     color: var(--Title_02);
+  }
+`;
+
+const ListControlBox = styled.div`
+  display: flex;
+  font-family: "Pretendard-Regular";
+  font-size: 16px;
+  line-height: 25px;
+  color: var(--Body_02);
+  label {
+    width: 77px;
+    margin-right: 10px;
+    :last-child {
+      margin-right: 0px;
+    }
+    :hover {
+      cursor: pointer;
+    }
+    span.isClick {
+      font-family: "Pretendard-SemiBold";
+      font-size: 16px;
+      line-height: 25px;
+      color: var(--Title_02);
+      z-index: 1px;
+    }
+  }
+  .clickedBar {
+    margin-top: -9px;
+    height: 9px;
+    background: var(--a3);
+    opacity: 0.5;
+    border-radius: 2px;
+    z-index: -1;
+  }
+  input[type="radio"] {
+    margin: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: none;
   }
 `;
 
