@@ -64,7 +64,7 @@ function AvailableSavingList() {
   return (
     <SavingList>
       {availableSavingList.map((item) => {
-        return <AvailableSavingItem item={item} id={uuid()} />;
+        return <AvailableSavingItem item={item} key={uuid()} />;
       })}
     </SavingList>
   );
