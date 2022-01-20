@@ -1,5 +1,6 @@
-import React from "react";
+import React, { Fragment } from "react";
 import styled from "styled-components";
+import { v1 as uuid } from "uuid";
 
 function ContentControlBtn({
   marginBottom,
@@ -11,7 +12,7 @@ function ContentControlBtn({
     <ListControlBox marginBottom={marginBottom}>
       {controlNameList.map((name) => {
         return (
-          <>
+          <Fragment key={uuid()}>
             <label htmlFor={name}>
               <span className={listControl === name ? "isClick" : ""}>
                 {name}
@@ -27,7 +28,7 @@ function ContentControlBtn({
                 setListControl(e.target.value);
               }}
             />
-          </>
+          </Fragment>
         );
       })}
     </ListControlBox>
