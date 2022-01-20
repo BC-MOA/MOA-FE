@@ -19,7 +19,6 @@ function ContentControlBtn({ controlNameList, listControl, setListControl }) {
               id={name}
               value={name}
               onChange={(e) => {
-                console.log("che", name, controlNameList[0]);
                 setListControl(e.target.value);
               }}
             />
