@@ -1,0 +1,22 @@
+import styled, { css } from "styled-components";
+
+export const styleTitle = css`
+  font-family: "Pretendard-SemiBold";
+  font-size: 21px;
+  line-height: 33px;
+  color: var(--Title_01);
+`;
+
+export const styleSubTitle = css`
+  font-family: "Pretendard-Medium";
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--Title_02);
+`;
+
+export const styleNotice = css`
+  font-family: "Pretendard-Regular";
+  font-size: 12px;
+  line-height: 19px;
+  color: var(--Body_01);
+`;
