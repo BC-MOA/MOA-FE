@@ -119,6 +119,7 @@ const ListControlBox = styled.div`
   font-size: 16px;
   line-height: 25px;
   color: var(--Body_02);
+  margin-bottom: 20px;
   label {
     width: 77px;
     margin-right: 10px;
