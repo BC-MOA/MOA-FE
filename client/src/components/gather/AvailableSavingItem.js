@@ -7,9 +7,10 @@ function AvailableSavingItem({ item }) {
   return (
     <SavingItemBox
       onClick={() => {
-        history(`/gather/add-militarySaving/${item.은행명}`);
+        history(`/gather/add-militarySaving/${item.은행명}`, {
+          state: item,
+        });
       }}
-      className="item"
     >
       {/* 로고 */}
       <div className="banklogo">
