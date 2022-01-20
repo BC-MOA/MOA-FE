@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { backButtonBox } from "style/common";
 import styled from "styled-components";
+import ContentControlBtn from "./ContentControlBtn";
 
 function AvailableSavingItemDetail() {
+  const controlNameList = ["상품안내", "금리이율", "안내사항"];
   const history = useNavigate();
   const { state: item } = useLocation();
+  const [listControl, setListControl] = useState(controlNameList[0]);
   return (
     <Container>
       <BackButton
@@ -44,6 +47,12 @@ function AvailableSavingItemDetail() {
           <span className="cardTextBold">6개월 이상 24개월 이하</span>
         </CardText>
       </SavingItemCard>
+      <ContentControlBtn
+        marginBottom="12px"
+        listControl={listControl}
+        setListControl={setListControl}
+        controlNameList={controlNameList}
+      ></ContentControlBtn>
     </Container>
   );
 }
