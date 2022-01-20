@@ -119,6 +119,26 @@ function Goal() {
             가능합니다.
           </div>
         </InputEl>
+        <InputEl>
+          <div className="SubTitle">얼마마다</div>
+          <SelectBox>
+            <div className="depositMethod">자동이체</div>
+            <div className="depositMethod">넣고 싶을 때마다</div>
+          </SelectBox>
+          <div className="Notice">
+            <span className="Empasis">자동이체</span> 하시면, 더 많은{" "}
+            <span className="Empasis">리워드</span>를 받을 수 있어요!
+          </div>
+          {inputs.depositMethod === "자동이체" && (
+            <SubSelectBox>
+              <SelectBox>
+                <div className="howOften">매월 10일</div>
+                <div className="howOften">매주 월요일</div>
+                <div className="howOften">매일</div>
+              </SelectBox>
+            </SubSelectBox>
+          )}
+        </InputEl>
       </Container>
     </GoalContext.Provider>
   );
