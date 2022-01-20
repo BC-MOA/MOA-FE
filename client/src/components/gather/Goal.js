@@ -1,32 +1,14 @@
 import React from "react";
 import styled, { css } from "styled-components";
-
-const styleTitle = css`
-  font-family: "Pretendard-SemiBold";
-  font-size: 21px;
-  line-height: 33px;
-  color: var(--Title_01);
-`;
-
-const styleSubTitle = css`
-  font-family: "Pretendard-Medium";
-  font-size: 14px;
-  line-height: 22px;
-  color: var(--Title_02);
-`;
-
-const styleNotice = css`
-  font-family: "Pretendard-Regular";
-  font-size: 12px;
-  line-height: 19px;
-  color: var(--Body_01);
-`;
+import { styleTitle, styleSubTitle, styleNotice } from "style/common";
+import Category from "./Category";
 
 const Container = styled.div`
   width: 100%;
   height: 100%;
   padding: 12px 20px 0;
   box-sizing: border-box;
+  text-align: left;
 
   .Title {
     ${styleTitle}
@@ -34,13 +16,21 @@ const Container = styled.div`
   .SubTitle {
     ${styleSubTitle}
   }
+  .Notice {
+    ${styleNotice}
+  }
 `;
 
 function Goal() {
+  const avgCnt = 2;
+
   return (
     <Container>
       <div className="Title">목표 세우기</div>
-      <div className="SubTitle">무엇을 위해서?</div>
+      <div>
+        다른 장병들은 <span>평균 {avgCnt}개</span>의 목표를 세웠어요.
+      </div>
+      <Category />
     </Container>
   );
 }
