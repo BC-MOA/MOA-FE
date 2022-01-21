@@ -1,31 +1,18 @@
+import BackHeader from "components/common/BackHeader";
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { backButtonBox } from "style/common";
+import { useLocation } from "react-router-dom";
+import { hideScrollBar } from "style/common";
 import styled from "styled-components";
 import ContentControlBtn from "./ContentControlBtn";
 
 function AvailableSavingItemDetail() {
   const controlNameList = ["상품안내", "금리이율", "안내사항"];
-  const history = useNavigate();
   const { state: item } = useLocation();
   const [listControl, setListControl] = useState(controlNameList[0]);
   const [isScrolled, setIsScrolled] = useState(false);
   return (
     <Container>
-      <Header className={isScrolled ? "isScrolled" : ""}>
-        <div
-          className="backBtn"
-          onClick={() => {
-            history(-1);
-          }}
-        >
-          <img
-            src={require("assets/gather/ic_back.svg").default}
-            alt="뒤로가기"
-          />
-        </div>
-        <span className={isScrolled ? "isScrolled" : ""}>{item.적금명}</span>
-      </Header>
+      <BackHeader title={item.적금명} isScrolled={isScrolled}></BackHeader>
       <ScrollBox
         onScroll={(e) => {
           let scrollLocation = e.target.scrollTop;
@@ -95,39 +82,11 @@ const Container = styled.div`
   }
 `;
 const ScrollBox = styled.div`
+  ${hideScrollBar}
   height: 100%;
-  padding-top: 20px;
+  padding-top: 12px;
   padding-bottom: 24px;
   box-sizing: border-box;
-  overflow-y: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  ::-webkit-scrollbar {
-    display: none;
-  }
-`;
-const Header = styled.div`
-  display: flex;
-  align-items: center;
-  .backBtn {
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    ${backButtonBox}
-  }
-  span {
-    display: none;
-  }
-  .isScrolled {
-    display: block;
-    width: 50%;
-    transform: translateX(50%);
-    margin-left: calc(-20px);
-    font-family: "Pretendard-semibold";
-    font-size: calc(16rem / 16);
-    line-height: 28px;
-  }
 `;
 const SavingItemCard = styled.div`
   width: 100%;

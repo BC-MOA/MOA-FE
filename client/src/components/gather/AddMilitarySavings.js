@@ -1,13 +1,13 @@
+import BackHeader from "components/common/BackHeader";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { backButtonBox } from "style/common";
+import { hideScrollBar } from "style/common";
 import styled from "styled-components";
 import AvailableSavingList from "./AvailableSavingList";
 import ContentControlBtn from "./ContentControlBtn";
 function AddMilitarySavings() {
-  const history = useNavigate();
   const controlNameList = ["최고금리순", "기본금리순"];
   const [listControl, setListControl] = useState(controlNameList[0]);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   // todo - api datas
   const userName = "민수";
@@ -15,34 +15,36 @@ function AddMilitarySavings() {
 
   return (
     <Container>
-      <BackButton
-        onClick={() => {
-          history(-1);
+      <BackHeader isScrolled={isScrolled}></BackHeader>
+      <ScrollBox
+        onScroll={(e) => {
+          let scrollLocation = e.target.scrollTop;
+          if (scrollLocation > 70) {
+            setIsScrolled(true);
+          } else {
+            setIsScrolled(false);
+          }
         }}
       >
-        <img
-          src={require("assets/gather/ic_back.svg").default}
-          alt="뒤로가기"
-        />
-      </BackButton>
-      <MessageBox>
-        <div className="title">
-          <span>{userName}님이 가입 가능한</span>
-          <span>군적금 상품들이에요.</span>
-        </div>
-        <div className="notice">
-          <span>이번달 새로 군적금을 신청한 장병은 </span>
-          <span className="noticeBold">{avgApplyNum.toLocaleString()}</span>
-          <span> 명 입니다.</span>
-        </div>
-      </MessageBox>
-      <ContentControlBtn
-        marginBottom="20px"
-        listControl={listControl}
-        setListControl={setListControl}
-        controlNameList={controlNameList}
-      ></ContentControlBtn>
-      <AvailableSavingList listControl={listControl}></AvailableSavingList>
+        <MessageBox>
+          <div className="title">
+            <span>{userName}님이 가입 가능한</span>
+            <span>군적금 상품들이에요.</span>
+          </div>
+          <div className="notice">
+            <span>이번달 새로 군적금을 신청한 장병은 </span>
+            <span className="noticeBold">{avgApplyNum.toLocaleString()}</span>
+            <span> 명 입니다.</span>
+          </div>
+        </MessageBox>
+        <ContentControlBtn
+          marginBottom="20px"
+          listControl={listControl}
+          setListControl={setListControl}
+          controlNameList={controlNameList}
+        ></ContentControlBtn>
+        <AvailableSavingList listControl={listControl}></AvailableSavingList>
+      </ScrollBox>
     </Container>
   );
 }
@@ -50,12 +52,15 @@ const Container = styled.div`
   padding: 8px 20px;
   box-sizing: border-box;
   background: var(--Surface);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 `;
-const BackButton = styled.div`
-  ${backButtonBox}
-  display:flex;
-  align-items: flex-start;
-  margin-bottom: 12px;
+const ScrollBox = styled.div`
+  ${hideScrollBar}
+  height: 100%;
+  padding-top: 12px;
+  box-sizing: border-box;
 `;
 const MessageBox = styled.div`
   margin-bottom: 24px;
