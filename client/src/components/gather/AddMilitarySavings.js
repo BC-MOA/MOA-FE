@@ -15,7 +15,7 @@ function AddMilitarySavings() {
 
   return (
     <Container>
-      <BackHeader isScrolled={isScrolled}></BackHeader>
+      <BackHeader path={"/gather"} isScrolled={isScrolled}></BackHeader>
       <ScrollBox
         onScroll={(e) => {
           let scrollLocation = e.target.scrollTop;
