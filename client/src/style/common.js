@@ -23,8 +23,6 @@ export const styleNotice = css`
 export const backButtonBox = css`
   padding: 6px;
   box-sizing: border-box;
-  display: flex;
-  align-items: center;
   :hover {
     cursor: pointer;
   }
