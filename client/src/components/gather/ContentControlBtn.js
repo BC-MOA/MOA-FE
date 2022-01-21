@@ -55,7 +55,6 @@ const ListControlBox = styled.div`
       font-size: calc(16rem / 16);
       line-height: 25px;
       color: var(--Title_02);
-      z-index: 1px;
     }
   }
   .clickedBar {
@@ -64,7 +63,6 @@ const ListControlBox = styled.div`
     background: var(--a3);
     opacity: 0.5;
     border-radius: 2px;
-    z-index: -1;
   }
   input[type="radio"] {
     margin: 0;
