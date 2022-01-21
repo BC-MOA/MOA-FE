@@ -49,11 +49,13 @@ function AddMilitarySavings() {
 const Container = styled.div`
   padding: 8px 20px;
   box-sizing: border-box;
-  background: #f8f8f8;
+  background: var(--Surface);
 `;
 const BackButton = styled.div`
   ${backButtonBox}
-  margin-bottom:12px;
+  display:flex;
+  align-items: flex-start;
+  margin-bottom: 12px;
 `;
 const MessageBox = styled.div`
   margin-bottom: 24px;
