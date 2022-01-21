@@ -23,7 +23,10 @@ function AvailableSavingItem({ item }) {
       <div className="savingInfo">
         <span className="savingName">{item.적금명}</span>
         <span className="savingRate">
-          기본 {item.기본금리.toFixed(1)}% (12개월)
+          <span className="rigntMargin">기본</span>
+          <span className="robotoFont">{item.기본금리.toFixed(1)}% (12</span>
+          <span>개월</span>
+          <span className="robotoFont">)</span>
         </span>
       </div>
       {/* 최대금리 */}
@@ -82,10 +85,18 @@ const SavingItemBox = styled.div`
       color: var(--Title_02);
     }
     .savingRate {
+      display: flex;
+      align-items: center;
       font-family: "Pretendard-Regular";
       font-size: calc(14rem / 16);
       line-height: 22px;
       color: var(--Body_01);
+      .robotoFont {
+        font-family: "Roboto";
+      }
+      .rigntMargin {
+        margin-right: 2px;
+      }
     }
   }
 
