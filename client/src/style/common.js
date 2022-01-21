@@ -27,3 +27,11 @@ export const backButtonBox = css`
     cursor: pointer;
   }
 `;
+export const hideScrollBar = css`
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
