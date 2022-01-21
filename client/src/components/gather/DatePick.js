@@ -7,6 +7,10 @@ import styled from "styled-components";
 import { GoalContext } from "./Goal";
 
 const Container = styled.div`
+  .react-datepicker-popper {
+    z-index: 5;
+    padding: 0;
+  }
   .react-datepicker {
     font-family: "Pretendard-regular";
     button {
