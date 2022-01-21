@@ -7,7 +7,6 @@ import ContentControlBtn from "./ContentControlBtn";
 function AddMilitarySavings() {
   const controlNameList = ["최고금리순", "기본금리순"];
   const [listControl, setListControl] = useState(controlNameList[0]);
-  const [isScrolled, setIsScrolled] = useState(false);
 
   // todo - api datas
   const userName = "민수";
@@ -15,17 +14,8 @@ function AddMilitarySavings() {
 
   return (
     <Container>
-      <BackHeader path={"/gather"} isScrolled={isScrolled}></BackHeader>
-      <ScrollBox
-        onScroll={(e) => {
-          let scrollLocation = e.target.scrollTop;
-          if (scrollLocation > 70) {
-            setIsScrolled(true);
-          } else {
-            setIsScrolled(false);
-          }
-        }}
-      >
+      <BackHeader path={"/gather"} isScrolled={true}></BackHeader>
+      <ScrollBox>
         <MessageBox>
           <div className="title">
             <span>{userName}님이 가입 가능한</span>
