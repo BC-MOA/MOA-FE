@@ -26,6 +26,7 @@ function BackHeader({ isScrolled, title, path }) {
 }
 BackHeader.defaultProps = {
   title: "",
+  isScrolled: false,
 };
 const Header = styled.div`
   display: flex;
