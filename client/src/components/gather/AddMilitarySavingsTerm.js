@@ -3,6 +3,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { hideScrollBar } from "style/common";
 import styled from "styled-components";
+import TermCheckBox from "./TermCheckBox";
 
 function AddMilitarySavingsTerm() {
   const { state: item } = useLocation();
@@ -22,6 +23,7 @@ function AddMilitarySavingsTerm() {
           <span className="highLight">약관 및 동의서</span>
           <span>를 확인합니다.</span>
         </TermPageNotice>
+        <TermCheckBox></TermCheckBox>
       </ScrollBox>
     </Container>
   );
