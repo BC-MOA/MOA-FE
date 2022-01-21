@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { backButtonBox } from "style/common";
 import styled from "styled-components";
 
-function BackHeader({ isScrolled, title }) {
+function BackHeader({ isScrolled, title, path }) {
   const history = useNavigate();
   return (
     <Header className={isScrolled ? "isScrolled" : ""}>
       <div
         className="backBtn"
         onClick={() => {
-          history(-1);
+          history(path);
         }}
       >
         <img
