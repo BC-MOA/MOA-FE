@@ -64,8 +64,17 @@ function AvailableSavingItemDetail() {
           controlNameList={controlNameList}
         ></ContentControlBtn>
         <div className="content">
-          {/* todo - 이미지가 아닌 text로 변환할 것 */}
-          <div>data</div>
+          {/* todo - text 추가할 것 */}
+          <div className={controlNameList[0] === listControl ? "isSelect" : ""}>
+            {controlNameList[0]}
+          </div>
+          <div className={controlNameList[1] === listControl ? "isSelect" : ""}>
+            {controlNameList[1]}
+          </div>
+          <div className={controlNameList[2] === listControl ? "isSelect" : ""}>
+            {controlNameList[2]}
+          </div>
+          {/* </div> */}
         </div>
       </ScrollBox>
       <SubmitButton
@@ -93,6 +102,12 @@ const Container = styled.div`
     background: #fff;
     box-shadow: 0px 1px 2px rgba(33, 33, 33, 0.08);
     border-radius: 12px;
+    div {
+      display: none;
+    }
+    .isSelect {
+      display: block;
+    }
   }
 `;
 const ScrollBox = styled.div`
@@ -160,22 +175,5 @@ const CardText = styled.div`
     color: var(--Title_02);
   }
 `;
-const ApplyBtn = styled.div`
-  display: none;
-  height: 49px;
-  text-align: center;
-  border-radius: 12px;
-  background-color: var(--a3);
 
-  font-family: "Pretendard-SemiBold";
-  font-size: 16px;
-  line-height: 49px;
-  color: #fff;
-  &.isScrolled {
-    display: block;
-  }
-  :hover {
-    cursor: pointer;
-  }
-`;
 export default AvailableSavingItemDetail;
