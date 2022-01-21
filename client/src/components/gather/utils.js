@@ -15,7 +15,7 @@ export const calcAmount = (inputs) => {
         monthCnt -= 1;
       }
 
-      return priceFormat(monthCnt * amount);
+      return monthCnt * amount;
 
     case "매주 월요일":
       let sDate = "";
@@ -27,29 +27,15 @@ export const calcAmount = (inputs) => {
 
       const eDate = moment(deadline).day(1)._d;
       const weekCnt = moment(eDate).diff(moment(sDate), "weeks") + 2;
-      return priceFormat(weekCnt * amount);
+      return weekCnt * amount;
 
     case "매일":
       const dayCnt = Math.ceil(
         (deadline.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)
       );
-      return priceFormat(dayCnt * amount);
+      return dayCnt * amount;
 
     default:
       break;
   }
-};
-
-export const priceFormat = (input) => {
-  //   const str = String(input);
-  //   return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
-  const comma = (input) => {
-    input = String(input);
-    return input.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
-  };
-  const uncomma = (input) => {
-    input = String(input);
-    return input.replace(/[^\d]+/g, "");
-  };
-  return comma(uncomma(input));
 };
