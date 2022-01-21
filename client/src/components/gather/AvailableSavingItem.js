@@ -53,12 +53,16 @@ const SavingItemBox = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: calc(48 / 375 * 100vw);
-    height: calc(48 / 375 * 100vw);
+    width: 48px;
+    height: 48px;
+    /* width: calc(48 / 375 * 100vw);
+    height: calc(48 / 375 * 100vw); */
     background: #edefed;
-    border-radius: calc(48 / 2 / 375 * 100vw);
+    border-radius: 48px;
+    /* border-radius: calc(48 / 2 / 375 * 100vw); */
     img {
-      width: calc(24 / 375 * 100vw);
+      width: 24px;
+      /* width: calc(24 / 375 * 100vw); */
     }
   }
   .savingInfo {
