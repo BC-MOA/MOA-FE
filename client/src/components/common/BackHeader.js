@@ -18,7 +18,9 @@ function BackHeader({ isScrolled, title, path }) {
           alt="뒤로가기"
         />
       </div>
-      {title && <span className={isScrolled ? "isScrolled" : ""}>{title}</span>}
+      {title && (
+        <span className={isScrolled ? "headerTitle" : ""}>{title}</span>
+      )}
     </Header>
   );
 }
@@ -39,11 +41,9 @@ const Header = styled.div`
   span {
     display: none;
   }
-  .isScrolled {
+  .headerTitle {
     display: block;
-    width: 50%;
     transform: translateX(50%);
-    margin-left: calc(-20px);
     font-family: "Pretendard-semibold";
     font-size: calc(16rem / 16);
     line-height: 28px;
