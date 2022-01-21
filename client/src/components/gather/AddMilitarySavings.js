@@ -72,15 +72,14 @@ const MessageBox = styled.div`
     color: var(--Body_01);
 
     display: flex;
-    align-items: flex-start;
-  }
-  .noticeBold {
-    font-family: "Roboto";
-    font-size: calc(16rem / 16);
-    font-weight: 500;
-    line-height: 25px;
-    margin: 0 2px;
-    color: var(--Title_02);
+    align-items: center;
+    .noticeBold {
+      font-family: "Roboto";
+      font-size: calc(16rem / 16);
+      font-weight: 500;
+      line-height: 25px;
+      color: var(--Title_02);
+    }
   }
 `;
 
