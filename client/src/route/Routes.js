@@ -8,6 +8,7 @@ import Profile from "../components/profile/Profile";
 import AddMilitarySavings from "../components/gather/AddMilitarySavings";
 import AvailableSavingItemDetail from "components/gather/AvailableSavingItemDetail";
 import AddMilitarySavingsTerm from "components/gather/AddMilitarySavingsTerm";
+import AddMilitarySavingsForm from "components/gather/AddMilitarySavingsForm";
 
 function AllRoutes() {
   return (
@@ -26,6 +27,10 @@ function AllRoutes() {
       <Route
         path="/gather/add-militarySaving/:bankname/term"
         element={<AddMilitarySavingsTerm />}
+      />
+      <Route
+        path="/gather/add-militarySaving/:bankname/term/form"
+        element={<AddMilitarySavingsForm />}
       />
       <Route path="/save" element={<Save />} />
       <Route path="/compete" element={<Compete />} />
