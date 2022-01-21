@@ -1,13 +1,15 @@
 import BackHeader from "components/common/BackHeader";
-import React from "react";
-import { useLocation } from "react-router-dom";
+import SubmitButton from "components/common/SubmitButton";
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { hideScrollBar } from "style/common";
 import styled from "styled-components";
 import TermCheckBox from "./TermCheckBox";
 
 function AddMilitarySavingsTerm() {
+  const [isAllChecked, setIsAllChecked] = useState(false);
   const { state: item } = useLocation();
-
+  const history = useNavigate();
   return (
     <Container>
       <BackHeader path={-1} title={item.적금명} isScrolled={true}></BackHeader>
@@ -23,8 +25,18 @@ function AddMilitarySavingsTerm() {
           <span className="highLight">약관 및 동의서</span>
           <span>를 확인합니다.</span>
         </TermPageNotice>
-        <TermCheckBox></TermCheckBox>
+        <TermCheckBox
+          isAllChecked={isAllChecked}
+          setIsAllChecked={setIsAllChecked}
+        ></TermCheckBox>
       </ScrollBox>
+      <SubmitButton
+        title={"다음"}
+        onClickFunc={() => {
+          history("form");
+        }}
+        isActive={isAllChecked}
+      ></SubmitButton>
     </Container>
   );
 }

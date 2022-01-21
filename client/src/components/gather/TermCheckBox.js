@@ -16,8 +16,7 @@ const checkLists = [
   },
   { isCheck: false, name: "예금자보호법 설명 확인", necessary: true },
 ];
-function TermCheckBox() {
-  const [isAllChecked, setIsAllChecked] = useState(false);
+function TermCheckBox({ isAllChecked, setIsAllChecked }) {
   const [checkList, setCheckList] = useState(checkLists);
   const checks = useMemo(() => {
     return checkList.map((item) => {
