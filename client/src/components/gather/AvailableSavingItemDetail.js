@@ -1,6 +1,6 @@
 import BackHeader from "components/common/BackHeader";
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { hideScrollBar } from "style/common";
 import styled from "styled-components";
 import ContentControlBtn from "./ContentControlBtn";
@@ -10,6 +10,7 @@ function AvailableSavingItemDetail() {
   const { state: item } = useLocation();
   const [listControl, setListControl] = useState(controlNameList[0]);
   const [isScrolled, setIsScrolled] = useState(false);
+  const history = useNavigate();
   return (
     <Container>
       <BackHeader title={item.적금명} isScrolled={isScrolled}></BackHeader>
@@ -60,7 +61,12 @@ function AvailableSavingItemDetail() {
           <div>data</div>
         </div>
       </ScrollBox>
-      <ApplyBtn className={isScrolled ? "isScrolled" : ""}>
+      <ApplyBtn
+        className={isScrolled ? "isScrolled" : ""}
+        onClick={() => {
+          history("term");
+        }}
+      >
         군적금 신청하기
       </ApplyBtn>
     </Container>
