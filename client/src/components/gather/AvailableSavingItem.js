@@ -45,6 +45,7 @@ const SavingItemBox = styled.div`
   background: #ffffff;
   box-shadow: 0px 1px 2px rgba(33, 33, 33, 0.08);
   border-radius: 12px;
+  margin-bottom: 12px;
   :hover {
     cursor: pointer;
   }
