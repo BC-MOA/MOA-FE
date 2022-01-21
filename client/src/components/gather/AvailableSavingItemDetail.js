@@ -13,7 +13,11 @@ function AvailableSavingItemDetail() {
   const history = useNavigate();
   return (
     <Container>
-      <BackHeader title={item.적금명} isScrolled={isScrolled}></BackHeader>
+      <BackHeader
+        path={-1}
+        title={item.적금명}
+        isScrolled={isScrolled}
+      ></BackHeader>
       <ScrollBox
         onScroll={(e) => {
           let scrollLocation = e.target.scrollTop;
@@ -36,7 +40,9 @@ function AvailableSavingItemDetail() {
           </div>
           <CardText>
             <span>최고</span>
-            <span className="cardTextBold">{item.최대금리}% (12개월)</span>
+            <span className="cardTextBold">
+              {item.최대금리.toFixed(1)}% (12개월)
+            </span>
           </CardText>
           <CardText>
             <span>금액</span>
@@ -64,7 +70,9 @@ function AvailableSavingItemDetail() {
       <ApplyBtn
         className={isScrolled ? "isScrolled" : ""}
         onClick={() => {
-          history("term");
+          history("term", {
+            state: item,
+          });
         }}
       >
         군적금 신청하기
