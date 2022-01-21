@@ -1,4 +1,5 @@
 import BackHeader from "components/common/BackHeader";
+import SubmitButton from "components/common/SubmitButton";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { hideScrollBar } from "style/common";
@@ -67,16 +68,15 @@ function AvailableSavingItemDetail() {
           <div>data</div>
         </div>
       </ScrollBox>
-      <ApplyBtn
-        className={isScrolled ? "isScrolled" : ""}
-        onClick={() => {
+      <SubmitButton
+        title={"군적금 신청하기"}
+        onClickFunc={() => {
           history("term", {
             state: item,
           });
         }}
-      >
-        군적금 신청하기
-      </ApplyBtn>
+        isActive={true}
+      />
     </Container>
   );
 }
