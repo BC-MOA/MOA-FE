@@ -10,7 +10,6 @@ const data = {
 
 //Header
 const Header = styled.div`
-  background-color: gray;
   height: 44px;
   padding: 0 20px;
 
@@ -61,6 +60,12 @@ const Bell = ({ className }) => (
 const StyledBell = styled(Bell)`
   width: 24px;
   height: 24px;
+
+  transition: 1s all;
+
+  :hover {
+    opacity: 0.5;
+  }
 `;
 
 function CompHeader(props) {

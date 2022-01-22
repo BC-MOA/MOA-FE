@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-
 import List from "./CompList";
 
+//swiper
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+
+//버튼
 const Button = styled.button`
   width: 50%;
   height: 42px;
@@ -23,6 +27,34 @@ const Button = styled.button`
     background-color: white;
   }
 `;
+
+//swiper = 챌린지 참여 안내 배너
+const Banner = styled.div`
+  width: 335px;
+  height: 76px;
+  margin: 24px 20px;
+`;
+
+const Img = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+
+const Swipe = () => {
+  return (
+    <Swiper spaceBetween={50} slidesPerView={1}>
+      <SwiperSlide>
+        <Img src={require("assets/compete/banner.png")} />
+      </SwiperSlide>
+      <SwiperSlide>
+        <Img src={require("assets/compete/banner.png")} />
+      </SwiperSlide>
+      <SwiperSlide>
+        <Img src={require("assets/compete/banner.png")} />
+      </SwiperSlide>
+    </Swiper>
+  );
+};
 
 function CompBody() {
   //category가 true일 때 전체 챌린지, false일때 내 챌린지
@@ -46,6 +78,9 @@ function CompBody() {
           내 챌린지
         </Button>
       </div>
+      <Banner>
+        <Swipe></Swipe>
+      </Banner>
       <List category={category}></List>
     </div>
   );
