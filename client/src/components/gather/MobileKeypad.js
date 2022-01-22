@@ -82,7 +82,11 @@ function MobileKeypad() {
       <Content>
         <input disabled placeholder="얼마를 입력할까요?" value={input} />
       </Content>
-      <CustomBtn path={-1} active={input !== ""}>
+      <CustomBtn
+        path={"/gather/add-safebox"}
+        active={input !== ""}
+        data={input}
+      >
         입력 완료
       </CustomBtn>
       <Box>

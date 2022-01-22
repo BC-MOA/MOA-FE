@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import SlideRule from "react-slide-rule";
 import styled from "styled-components";
 
@@ -18,6 +19,9 @@ const Container = styled.div`
     font-family: "Pretendard-SemiBold";
     margin-bottom: 16px;
   }
+  .btn {
+    cursor: pointer;
+  }
 `;
 
 const Custom = styled.div`
@@ -29,11 +33,19 @@ const Custom = styled.div`
 
 function SliderInput({ inputs, setInputs }) {
   const { amount } = inputs;
+  const history = useNavigate();
 
   return (
     <Container>
       <div className="Title">{amount.toLocaleString()} 원</div>
-      <div className="SubTitle green">직접입력</div>
+      <div
+        className="SubTitle green btn"
+        onClick={() => {
+          history("/keypad");
+        }}
+      >
+        직접입력
+      </div>
       <SlideRule
         step={1000}
         max={1000000}

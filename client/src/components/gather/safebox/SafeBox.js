@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { styleTitle, styleSubTitle, styleNotice } from "style/common";
 import BackHeader from "components/common/BackHeader";
 import CustomBtn from "components/gather/CustomBtn";
 import CustomSelect from "components/gather/CustomSelect";
-import { hideScrollBar } from "style/common";
 import SliderInput from "components/gather/safebox/SliderInput";
+import { useLocation } from "react-router-dom";
 
 const Container = styled.div`
   width: 100%;
@@ -51,10 +51,8 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
-  /* ${hideScrollBar} */
   padding-bottom: 10px;
   flex: 1;
-  /* display: flex; */
 `;
 
 const InputEl = styled.div`
@@ -62,6 +60,17 @@ const InputEl = styled.div`
 `;
 
 function SafeBox() {
+  const { state } = useLocation();
+
+  useEffect(() => {
+    if (state) {
+      setSafeInputs({
+        ...safeInputs,
+        amount: state,
+      });
+    }
+  }, [state]);
+
   const avgSafeAmount = 200000;
   const accountList = [
     {
@@ -85,6 +94,7 @@ function SafeBox() {
       accountNumber: "123-226-78-913511",
     },
   ];
+
   const [safeInputs, setSafeInputs] = useState({
     amount: 0,
     account: "",
@@ -97,6 +107,7 @@ function SafeBox() {
       [name]: value,
     });
   };
+
   return (
     <Container>
       <BackHeader path={-1} />
@@ -124,7 +135,7 @@ function SafeBox() {
         </InputEl>
       </Content>
       <CustomBtn
-        path={"/complete"}
+        path={"complete"}
         data={{ inputs: safeInputs, name: "비상금" }}
         active={!Object.values(safeInputs).filter((x) => x === "").length}
       >
