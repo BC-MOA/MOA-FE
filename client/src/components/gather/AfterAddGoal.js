@@ -11,7 +11,6 @@ const styleText = css`
   padding-top: 8px;
 `;
 const Container = styled.div`
-  padding: 0 20px;
   .Title {
     ${styleTitle}
     font-size: 24px;

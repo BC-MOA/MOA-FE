@@ -14,13 +14,16 @@ const Select = styled.select`
   color: var(--Title_01);
 
   option {
-    /* padding: 10px; */
+    &:first-child {
+      color: var(--Body_01);
+    }
   }
 `;
 
 function CustomSelect({ name, onChange, accounts }) {
   return (
     <Select name={name} onChange={onChange}>
+      <option>출금계좌를 선택해주세요</option>
       {accounts.map((x) => (
         <option value={x.bank} key={x.accountNumber}>
           {x.name}

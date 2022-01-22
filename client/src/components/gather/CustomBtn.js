@@ -5,7 +5,6 @@ import styled, { css } from "styled-components";
 const Btn = styled.button`
   width: 100%;
   padding: 12px 0;
-  margin: 40px 0 49px;
   background-color: #e5e5e5;
   border: none;
   border-radius: 12px;

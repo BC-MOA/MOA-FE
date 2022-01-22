@@ -32,7 +32,6 @@ const Header = styled.div`
   .backBtn {
     width: 28px;
     height: 28px;
-    margin-left: 20px;
     display: flex;
     align-items: center;
     ${backButtonBox}
