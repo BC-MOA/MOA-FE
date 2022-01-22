@@ -21,7 +21,7 @@ const Btn = styled.button`
     `}
 `;
 
-function CustomBtn({ path, active, children }) {
+function CustomBtn({ path, data, active, children }) {
   const history = useNavigate();
   return (
     <div>
@@ -29,7 +29,9 @@ function CustomBtn({ path, active, children }) {
         Active={active}
         disabled={!active}
         onClick={() => {
-          history(path);
+          history(path, {
+            state: data,
+          });
         }}
       >
         {children}
