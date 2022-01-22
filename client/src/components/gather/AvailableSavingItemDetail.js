@@ -22,7 +22,7 @@ function AvailableSavingItemDetail() {
       ></BackHeader>
       <ScrollBox
         paddingValue={"12px 0 24px"}
-        onScroll={(e) => {
+        onScrollFunc={(e) => {
           let scrollLocation = e.target.scrollTop;
           if (scrollLocation > 70) {
             setIsScrolled(true);
@@ -87,7 +87,7 @@ function AvailableSavingItemDetail() {
             state: item,
           });
         }}
-        isActive={true}
+        isActive={isScrolled}
       />
     </Container>
   );

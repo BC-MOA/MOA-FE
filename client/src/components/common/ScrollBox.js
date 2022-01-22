@@ -2,9 +2,11 @@ import React from "react";
 import { hideScrollBar } from "style/common";
 import styled from "styled-components";
 
-function ScrollBox({ children, paddingValue }) {
+function ScrollBox({ onScrollFunc, children, paddingValue }) {
   return (
-    <ScrollBoxStyle paddingValue={paddingValue}>{children}</ScrollBoxStyle>
+    <ScrollBoxStyle onScroll={onScrollFunc} paddingValue={paddingValue}>
+      {children}
+    </ScrollBoxStyle>
   );
 }
 ScrollBox.defaultProps = {
