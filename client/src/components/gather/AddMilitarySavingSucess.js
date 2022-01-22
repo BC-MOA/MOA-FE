@@ -2,10 +2,11 @@ import Container from "components/common/Container";
 import ScrollBox from "components/common/ScrollBox";
 import SubmitButton from "components/common/SubmitButton";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function AddMilitarySavingSuccess() {
   const history = useNavigate();
+  const { state: formData } = useLocation();
   return (
     <Container>
       <ScrollBox paddingValue={"16px 0 40px "}></ScrollBox>
