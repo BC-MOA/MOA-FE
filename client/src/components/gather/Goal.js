@@ -1,23 +1,22 @@
 import React, { useState, createContext, useEffect } from "react";
 import styled from "styled-components";
 import { styleTitle, styleSubTitle, styleNotice } from "style/common";
-import Category from "./Category";
-import DatePick from "./DatePick";
-import SelectBox from "./SelectBox";
-import CustomBtn from "./CustomBtn";
-import { calcAmount } from "./utils";
-import CustomSelect from "./CustomSelect";
+import Category from "components/gather/Category";
+import DatePick from "components/gather/DatePick";
+import SelectBox from "components/gather/SelectBox";
+import CustomBtn from "components/gather/CustomBtn";
+import { calcAmount } from "components/gather/utils";
+import CustomSelect from "components/gather/CustomSelect";
 import BackHeader from "components/common/BackHeader";
-
 import { hideScrollBar } from "style/common";
 
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  box-sizing: border-box;
-  text-align: left;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
+  text-align: left;
 
   .Title {
     ${styleTitle}
@@ -59,6 +58,8 @@ const Container = styled.div`
 const Content = styled.div`
   ${hideScrollBar}
   padding-bottom: 10px;
+  /* flex: 1;
+  display: flex; */
 `;
 
 const InputEl = styled.div`
@@ -251,7 +252,7 @@ function Goal() {
             </div>
           </InputEl>
           <InputEl>
-            <div className="SubTitle">자동이체 출금계좌</div>
+            <div className="SubTitle">출금계좌</div>
             <CustomSelect
               name="account"
               onChange={onChange}
@@ -261,12 +262,12 @@ function Goal() {
         </Content>
 
         <CustomBtn
-          path={"/afterAddGoal"}
+          path={"/complete"}
+          data={{ inputs: inputs, name: "목표" }}
           active={!Object.values(inputs).filter((x) => x === "").length}
         >
           목표 세우기 완료
         </CustomBtn>
-        {/* <button onClick={() => console.log(inputs)}>버튼</button> */}
       </Container>
     </GoalContext.Provider>
   );
