@@ -30,6 +30,7 @@ function AddMilitarySavingsForm() {
           <span>를 입력합니다.</span>
         </TermPageNotice>
         <MilitaryFormBox
+          savingType={formData.savingType}
           controlNameList={controlNameList}
           setFormData={setFormData}
           item={item}
