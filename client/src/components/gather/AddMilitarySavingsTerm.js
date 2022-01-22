@@ -1,8 +1,9 @@
 import BackHeader from "components/common/BackHeader";
+import Container from "components/common/Container";
+import ScrollBox from "components/common/ScrollBox";
 import SubmitButton from "components/common/SubmitButton";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { hideScrollBar } from "style/common";
 import styled from "styled-components";
 import TermCheckBox from "./TermCheckBox";
 
@@ -13,7 +14,7 @@ function AddMilitarySavingsTerm() {
   return (
     <Container>
       <BackHeader path={-1} title={item.적금명} isScrolled={true}></BackHeader>
-      <ScrollBox>
+      <ScrollBox paddingValue={"16px 0 0 0"}>
         <TermPageNum>
           <span className="bold">1</span>
           <span>/</span>
@@ -33,27 +34,13 @@ function AddMilitarySavingsTerm() {
       <SubmitButton
         title={"다음"}
         onClickFunc={() => {
-          history("form");
+          history("form", { state: item });
         }}
         isActive={isAllChecked}
       ></SubmitButton>
     </Container>
   );
 }
-const Container = styled.div`
-  padding: 8px 20px;
-  box-sizing: border-box;
-  background: var(--Surface);
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-`;
-const ScrollBox = styled.div`
-  ${hideScrollBar}
-  height: 100%;
-  padding-top: 16px;
-  box-sizing: border-box;
-`;
 const TermPageNum = styled.div`
   display: flex;
   align-items: center;

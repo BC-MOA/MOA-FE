@@ -1,6 +1,7 @@
 import BackHeader from "components/common/BackHeader";
+import Container from "components/common/Container";
+import ScrollBox from "components/common/ScrollBox";
 import React, { useState } from "react";
-import { hideScrollBar } from "style/common";
 import styled from "styled-components";
 import AvailableSavingList from "./AvailableSavingList";
 import ContentControlBtn from "./ContentControlBtn";
@@ -38,20 +39,6 @@ function AddMilitarySavings() {
     </Container>
   );
 }
-const Container = styled.div`
-  padding: 8px 20px;
-  box-sizing: border-box;
-  background: var(--Surface);
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-`;
-const ScrollBox = styled.div`
-  ${hideScrollBar}
-  height: 100%;
-  padding-top: 12px;
-  box-sizing: border-box;
-`;
 const MessageBox = styled.div`
   margin-bottom: 24px;
   .title {

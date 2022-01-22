@@ -1,8 +1,9 @@
 import BackHeader from "components/common/BackHeader";
+import Container from "components/common/Container";
+import ScrollBox from "components/common/ScrollBox";
 import SubmitButton from "components/common/SubmitButton";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { hideScrollBar } from "style/common";
 import styled from "styled-components";
 import ContentControlBtn from "./ContentControlBtn";
 
@@ -20,6 +21,7 @@ function AvailableSavingItemDetail() {
         isScrolled={isScrolled}
       ></BackHeader>
       <ScrollBox
+        paddingValue={"12px 0 24px"}
         onScroll={(e) => {
           let scrollLocation = e.target.scrollTop;
           if (scrollLocation > 70) {
@@ -63,7 +65,7 @@ function AvailableSavingItemDetail() {
           setListControl={setListControl}
           controlNameList={controlNameList}
         ></ContentControlBtn>
-        <div className="content">
+        <Content>
           {/* todo - text 추가할 것 */}
           <div className={controlNameList[0] === listControl ? "isSelect" : ""}>
             {controlNameList[0]}
@@ -75,7 +77,7 @@ function AvailableSavingItemDetail() {
             {controlNameList[2]}
           </div>
           {/* </div> */}
-        </div>
+        </Content>
       </ScrollBox>
       <SubmitButton
         title={"군적금 신청하기"}
@@ -89,34 +91,20 @@ function AvailableSavingItemDetail() {
     </Container>
   );
 }
-const Container = styled.div`
-  padding: 8px 20px;
-  box-sizing: border-box;
-  background: var(--Surface);
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  .content {
-    width: 100%;
-    min-height: 100%;
-    background: #fff;
-    box-shadow: 0px 1px 2px rgba(33, 33, 33, 0.08);
-    border-radius: 12px;
-    div {
-      display: none;
-    }
-    .isSelect {
-      display: block;
-    }
+const Content = styled.div`
+  width: 100%;
+  min-height: 100%;
+  background: #fff;
+  box-shadow: 0px 1px 2px rgba(33, 33, 33, 0.08);
+  border-radius: 12px;
+  div {
+    display: none;
+  }
+  .isSelect {
+    display: block;
   }
 `;
-const ScrollBox = styled.div`
-  ${hideScrollBar}
-  height: 100%;
-  padding-top: 12px;
-  padding-bottom: 24px;
-  box-sizing: border-box;
-`;
+
 const SavingItemCard = styled.div`
   width: 100%;
   padding: 16px;
