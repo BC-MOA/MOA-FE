@@ -43,7 +43,6 @@ const ListControlBox = styled.div`
   margin-bottom: ${(props) => props.marginBottom};
   label {
     width: 77px;
-    margin-right: calc(10 / 375 * 100vw);
     :last-child {
       margin-right: 0px;
     }
