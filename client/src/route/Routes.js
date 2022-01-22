@@ -7,6 +7,8 @@ import Compete from "../components/compete/Compete";
 import Profile from "../components/profile/Profile";
 import Complete from "components/gather/Complete";
 import Goal from "components/gather/Goal";
+import SafeBox from "components/gather/safebox/SafeBox";
+import MobileKeypad from "components/gather/MobileKeypad";
 
 function AllRoutes() {
   return (
@@ -16,9 +18,12 @@ function AllRoutes() {
       <Route path="/gather" element={<Gather />} />
       <Route path="/gather/add-goal" element={<Goal />} />
       <Route path="/gather/add-goal/complete" element={<Complete />} />
+      <Route path="/gather/add-safebox" element={<SafeBox />} />
+      <Route path="/gather/add-safebox/complete" element={<Complete />} />
       <Route path="/save" element={<Save />} />
       <Route path="/compete" element={<Compete />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/keypad" element={<MobileKeypad />} />
     </Routes>
   );
 }
