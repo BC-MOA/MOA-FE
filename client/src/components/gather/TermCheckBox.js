@@ -52,6 +52,7 @@ function TermCheckBox({ isAllChecked, setIsAllChecked }) {
         />
         <span>전체동의</span>
       </AllCheckBox>
+      <img src={require("assets/gather/devider.svg").default} alt="구분선" />
       <CheckListBox>
         {checkList.map((item, index) => {
           return (
@@ -76,13 +77,11 @@ const TermCheckBoxStyle = styled.div`
 `;
 const AllCheckBox = styled.div`
   padding: 12px 20px;
-
   text-align: start;
   display: flex;
   align-items: center;
   color: var(--Titel_02);
   font-family: "Pretendard-Medium";
-  border-bottom: 1px solid var(--Line_03);
   font-size: 16px;
   line-height: 25px;
   :hover {
