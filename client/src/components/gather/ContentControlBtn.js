@@ -7,9 +7,10 @@ function ContentControlBtn({
   controlNameList,
   listControl,
   setListControl,
+  btnGap,
 }) {
   return (
-    <ListControlBox marginBottom={marginBottom}>
+    <ListControlBox btnGap={btnGap} marginBottom={marginBottom}>
       {controlNameList.map((name) => {
         return (
           <Fragment key={uuid()}>
@@ -34,6 +35,9 @@ function ContentControlBtn({
     </ListControlBox>
   );
 }
+ContentControlBtn.defaultProps = {
+  btnGap: "10px",
+};
 const ListControlBox = styled.div`
   display: flex;
   font-family: "Pretendard-Regular";
@@ -42,7 +46,11 @@ const ListControlBox = styled.div`
   color: var(--Body_02);
   margin-bottom: ${(props) => props.marginBottom};
   label {
-    width: 77px;
+    padding: 0 4px 0;
+    margin-right: ${(props) => props.btnGap};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     :last-child {
       margin-right: 0px;
     }
@@ -57,6 +65,8 @@ const ListControlBox = styled.div`
     }
   }
   .clickedBar {
+    width: 100%;
+    padding: 0 4px;
     margin-top: -9px;
     height: 9px;
     background: var(--a3);
