@@ -7,7 +7,8 @@ export const calcAmount = (inputs) => {
 
   switch (method) {
     case "매월 10일":
-      let monthCnt = deadline.getMonth() - now.getMonth() + 1;
+      let monthCnt = (deadline.getYear() - now.getYear()) * 12;
+      monthCnt += deadline.getMonth() - now.getMonth() + 1;
       if (now.getDate() > 10) {
         monthCnt -= 1;
       }
@@ -33,6 +34,7 @@ export const calcAmount = (inputs) => {
       const dayCnt = Math.ceil(
         (deadline.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)
       );
+      console.log(dayCnt);
       return dayCnt * amount;
 
     default:
