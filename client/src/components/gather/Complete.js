@@ -93,7 +93,7 @@ function Complete() {
     <Container>
       <Content>
         <img
-          className="check"
+          className="check animate__animated animate__flipInX"
           src={require("assets/goal/check.svg").default}
           data-micron="bounce"
         />
