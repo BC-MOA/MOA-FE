@@ -76,6 +76,7 @@ const SavingItemBox = styled.div`
     flex-direction: column;
     align-items: flex-start;
     margin-left: 12px;
+    margin-bottom: -8px;
     flex-grow: 1;
     .savingName {
       font-family: "Pretendard-Medium";
