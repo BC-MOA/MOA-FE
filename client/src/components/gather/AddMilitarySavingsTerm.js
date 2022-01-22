@@ -75,7 +75,7 @@ const TermPageNotice = styled.div`
   margin-bottom: 28px;
 
   .highLight {
-    color: var(--a3);
+    color: var(--a2);
   }
 `;
 
