@@ -68,13 +68,13 @@ function DatePick() {
       <DatePicker
         showPopperArrow={false}
         selected={startDate}
-        onChange={(date) => (
-          setStartDate(date),
+        onChange={(date) => {
+          setStartDate(date);
           setInputs({
             ...inputs,
             deadline: date,
-          })
-        )}
+          });
+        }}
         minDate={subDays(new Date(), -32)}
         placeholderText="목표한 날짜를 선택해주세요."
         dateFormat="yyyy년 MM월 dd일"

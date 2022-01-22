@@ -262,7 +262,7 @@ function Goal() {
         </Content>
 
         <CustomBtn
-          path={"/complete"}
+          path={"complete"}
           data={{ inputs: inputs, name: "목표" }}
           active={!Object.values(inputs).filter((x) => x === "").length}
         >

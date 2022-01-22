@@ -155,7 +155,7 @@ function Complete() {
         </CheckInfo>
       </Content>
 
-      <CustomBtn path={"/home"} active={true}>
+      <CustomBtn path={"/"} active={true}>
         확인
       </CustomBtn>
     </Container>
