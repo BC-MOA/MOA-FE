@@ -60,6 +60,7 @@ function AvailableSavingItemDetail() {
           </CardText>
         </SavingItemCard>
         <ContentControlBtn
+          btnGap="20px"
           marginBottom="12px"
           listControl={listControl}
           setListControl={setListControl}

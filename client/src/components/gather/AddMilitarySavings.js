@@ -29,6 +29,7 @@ function AddMilitarySavings() {
           </div>
         </MessageBox>
         <ContentControlBtn
+          btnGap="10px"
           marginBottom="20px"
           listControl={listControl}
           setListControl={setListControl}
@@ -55,7 +56,7 @@ const MessageBox = styled.div`
   .notice {
     font-family: "Pretendard-Regular";
     font-size: calc(14rem / 16);
-    line-height: 22px;
+    line-height: 25px;
     color: var(--Body_01);
 
     display: flex;
@@ -64,7 +65,6 @@ const MessageBox = styled.div`
       font-family: "Roboto";
       font-size: calc(16rem / 16);
       font-weight: 500;
-      line-height: 25px;
       color: var(--Title_02);
     }
   }
