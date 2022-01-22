@@ -6,16 +6,18 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react/cjs/react.development";
 import styled from "styled-components";
+import MilitaryFormBox from "./MilitaryFormBox";
+const controlNameList = ["자동이체", "자유입금"];
 
 function AddMilitarySavingsForm() {
   const { state: item } = useLocation();
   const history = useNavigate();
   const [isAvildForm, setIsAvildForm] = useState(true);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({ savingType: controlNameList[0] });
   return (
     <Container>
       <BackHeader path={-1} title={item.적금명} isScrolled={true}></BackHeader>
-      <ScrollBox paddingValue={"16px 0 20px "}>
+      <ScrollBox paddingValue={"16px 0 40px "}>
         <TermPageNum>
           <span className="bold">2</span>
           <span>/</span>
@@ -27,6 +29,11 @@ function AddMilitarySavingsForm() {
           <span className="highLight">정보</span>
           <span>를 입력합니다.</span>
         </TermPageNotice>
+        <MilitaryFormBox
+          controlNameList={controlNameList}
+          setFormData={setFormData}
+          item={item}
+        />
       </ScrollBox>
       <SubmitButton
         title={"신청 완료"}
