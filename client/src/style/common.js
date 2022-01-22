@@ -20,3 +20,12 @@ export const styleNotice = css`
   line-height: 19px;
   color: var(--Body_01);
 `;
+
+export const hideScrollBar = css`
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
