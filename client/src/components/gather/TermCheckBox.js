@@ -1,23 +1,15 @@
 import React, { useMemo } from "react";
-import { useEffect, useState } from "react/cjs/react.development";
+import { useEffect } from "react/cjs/react.development";
 import styled from "styled-components";
 import CheckListItem from "./CheckListItem";
 import { v1 as uuid } from "uuid";
 
-const checkLists = [
-  { isCheck: false, name: "예금거래기본약관", necessary: true },
-  { isCheck: false, name: "적립식예금약관", necessary: true },
-  { isCheck: false, name: "군적금 특약", necessary: true },
-  { isCheck: false, name: "군적금 상품 설명서", necessary: true },
-  {
-    isCheck: false,
-    name: "불법/탈법 차명거래 금지 설명 확인",
-    necessary: true,
-  },
-  { isCheck: false, name: "예금자보호법 설명 확인", necessary: true },
-];
-function TermCheckBox({ isAllChecked, setIsAllChecked }) {
-  const [checkList, setCheckList] = useState(checkLists);
+function TermCheckBox({
+  checkList,
+  setCheckList,
+  isAllChecked,
+  setIsAllChecked,
+}) {
   const checks = useMemo(() => {
     return checkList.map((item) => {
       return item.isCheck;
@@ -27,7 +19,7 @@ function TermCheckBox({ isAllChecked, setIsAllChecked }) {
     setIsAllChecked(checks.reduce((a, b) => a * b));
   }, [checks]);
 
-  function funcMakeAllCheck() {
+  function funcChangeAllCheck() {
     const temp = [...checkList];
     temp.map((item, index) => {
       if (isAllChecked) {
@@ -43,7 +35,7 @@ function TermCheckBox({ isAllChecked, setIsAllChecked }) {
 
   return (
     <TermCheckBoxStyle>
-      <AllCheckBox onClick={funcMakeAllCheck}>
+      <AllCheckBox onClick={funcChangeAllCheck}>
         <img
           src={require(`assets/gather/ic_term_allcheck${
             isAllChecked ? "_active" : ""
