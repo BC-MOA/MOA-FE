@@ -16,17 +16,18 @@ const Header = styled.div`
   display: felx;
   justify-content: flex-end;
   align-items: center;
+  background-color: var(--Surface);
 `;
 
 //Key
-const Key = ({ className }) => (
-  <div className={className}>
+const Key = (props) => (
+  <StyledKeyBox>
     <img src={require("assets/compete/key-simple.svg").default} />
-    <div className="text">{data.keyCount}개</div>
-  </div>
+    <div className="text">{props.count}개</div>
+  </StyledKeyBox>
 );
 
-const StyledKey = styled(Key)`
+const StyledKeyBox = styled.div`
   width: 69px;
   height: 24px;
   margin-right: 8px;
@@ -43,21 +44,21 @@ const StyledKey = styled(Key)`
 
 //Bell
 //Home 컴포넌트로 이동하는 링크로 설정
-const Bell = ({ className }) => (
-  <div className={className}>
-    <Link to="/home">
+const Bell = (props) => (
+  <StyledBellBox>
+    <Link to="/compete">
       <img
         src={
-          data.alarm
+          props.alarm
             ? require("assets/compete/alarm.svg").default
             : require("assets/compete/key-simple.svg").default
         }
       />
     </Link>
-  </div>
+  </StyledBellBox>
 );
 
-const StyledBell = styled(Bell)`
+const StyledBellBox = styled.div`
   width: 24px;
   height: 24px;
 
@@ -71,8 +72,8 @@ const StyledBell = styled(Bell)`
 function CompHeader(props) {
   return (
     <Header>
-      <StyledKey></StyledKey>
-      <StyledBell></StyledBell>
+      <Key count={data.keyCount}></Key>
+      <Bell alarm={data.alarm}></Bell>
     </Header>
   );
 }
