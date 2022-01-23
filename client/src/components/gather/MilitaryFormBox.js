@@ -1,8 +1,47 @@
 import React, { Fragment } from "react";
+import { useEffect, useState } from "react/cjs/react.development";
 import styled, { css } from "styled-components";
 import { v1 as uuid } from "uuid";
+import MilitaryAutoSavingForm from "./MilitaryAutoSavingForm";
+import MilitaryFreeSavingForm from "./MilitaryFreeSavingForm";
 
-function MilitaryFormBox({ savingType, controlNameList, item, setFormData }) {
+function MilitaryFormBox({
+  savingType,
+  controlNameList,
+  item,
+  formData,
+  userAccountList,
+  setFormData,
+}) {
+  const [monthOptions, setMonthOptions] = useState([]);
+  // todo - api
+  const userSavingMonth = [6, 7];
+  useEffect(() => {
+    const dropDownOptions = [];
+    for (let index = 0; index < userSavingMonth[1]; index++) {
+      const month = userSavingMonth[0] + index;
+      dropDownOptions.push(`${month}개월`);
+    }
+    setMonthOptions(dropDownOptions);
+  }, []);
+
+  function resetFormData(type) {
+    const FreeSavingFormTemp = {
+      savingType: "자유입금",
+      formDataMonth: "",
+      formDataAccount: userAccountList[0],
+    };
+    const AutoSavingFormTemp = {
+      savingType: "자동이체",
+      formDataMonth: "",
+      formDataAccount: userAccountList[0],
+    };
+    if (type === controlNameList[1]) {
+      setFormData(FreeSavingFormTemp);
+    } else {
+      setFormData(AutoSavingFormTemp);
+    }
+  }
   return (
     <FormBox>
       <SavigType>
@@ -27,10 +66,7 @@ function MilitaryFormBox({ savingType, controlNameList, item, setFormData }) {
                   id={name}
                   value={name}
                   onChange={(e) => {
-                    setFormData((preData) => ({
-                      ...preData,
-                      savingType: e.target.value,
-                    }));
+                    resetFormData(e.target.value);
                   }}
                 />
               </Fragment>
@@ -39,12 +75,37 @@ function MilitaryFormBox({ savingType, controlNameList, item, setFormData }) {
         </div>
       </SavigType>
       {/* 1. 자동이체 */}
+      <MilitaryAutoSavingForm savingType={savingType} item={item} />
       {/* 2. 자유입금*/}
+      <MilitaryFreeSavingForm
+        formData={formData}
+        setFormData={setFormData}
+        userAccountList={userAccountList}
+        userMonthOptions={monthOptions}
+        savingType={savingType}
+        item={item}
+      />
     </FormBox>
   );
 }
-const FormBox = styled.div``;
-
+const MessageStyle = css`
+  .message {
+    text-align: start;
+    font-family: "Pretendard-Regular";
+    font-size: 12px;
+    line-height: 19px;
+    margin-left: 4px;
+    color: var(--Body_01);
+    margin-bottom: 24px;
+    .bold {
+      color: var(--Title_02);
+    }
+    .roboto {
+      font-family: "Roboto";
+      font-size: 13px;
+    }
+  }
+`;
 const FormTile = css`
   font-family: "Pretendard-Medium";
   font-size: 14px;
@@ -94,10 +155,14 @@ const typeButton = css`
     }
   }
 `;
-const SavigType = styled.div`
+const FormBox = styled.div`
+  ${MessageStyle}
   .title {
     ${FormTile}
   }
+`;
+const SavigType = styled.div`
+  margin-bottom: 8px;
   ${typeButton}
 `;
 export default MilitaryFormBox;

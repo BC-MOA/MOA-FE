@@ -14,6 +14,8 @@ function AddMilitarySavingsForm() {
   const history = useNavigate();
   const [isAvildForm, setIsAvildForm] = useState(true);
   const [formData, setFormData] = useState({ savingType: controlNameList[0] });
+  // todo - api 데이터
+  const [userAccountList, setUserAccountList] = useState(["통장1", "통장2"]);
   return (
     <Container>
       <BackHeader path={-1} title={item.적금명} isScrolled={true}></BackHeader>
@@ -30,6 +32,8 @@ function AddMilitarySavingsForm() {
           <span>를 입력합니다.</span>
         </TermPageNotice>
         <MilitaryFormBox
+          formData={formData}
+          userAccountList={userAccountList}
           savingType={formData.savingType}
           controlNameList={controlNameList}
           setFormData={setFormData}
