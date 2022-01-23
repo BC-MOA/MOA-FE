@@ -4,7 +4,7 @@ import ScrollBox from "components/common/ScrollBox";
 import SubmitButton from "components/common/SubmitButton";
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react/cjs/react.development";
+import { useEffect, useState } from "react/cjs/react.development";
 import styled from "styled-components";
 import MilitaryFormBox from "./MilitaryFormBox";
 const controlNameList = ["자동이체", "자유입금"];
@@ -12,10 +12,39 @@ const controlNameList = ["자동이체", "자유입금"];
 function AddMilitarySavingsForm() {
   const { state: item } = useLocation();
   const history = useNavigate();
-  const [isAvildForm, setIsAvildForm] = useState(true);
-  const [formData, setFormData] = useState({ savingType: controlNameList[0] });
   // todo - api 데이터
   const [userAccountList, setUserAccountList] = useState(["통장1", "통장2"]);
+  // ---
+  const FreeSavingFormTemp = {
+    savingType: "자유입금",
+    formDataMonth: "",
+    formDataAccount: userAccountList[0],
+  };
+  const AutoSavingFormTemp = {
+    savingType: "자동이체",
+    formDataMonth: "",
+    formDataAccount: userAccountList[0],
+  };
+  const [formData, setFormData] = useState(AutoSavingFormTemp);
+  const [isAvildForm, setIsAvildForm] = useState(true);
+
+  useEffect(() => {
+    const test = Object.values(formData).findIndex(
+      (data) => data === "" || data === null
+    );
+    if (test !== -1) {
+      setIsAvildForm(false);
+    } else {
+      setIsAvildForm(true);
+    }
+  }, [formData]);
+  function resetFormData(type) {
+    if (type === controlNameList[1]) {
+      setFormData(FreeSavingFormTemp);
+    } else {
+      setFormData(AutoSavingFormTemp);
+    }
+  }
   return (
     <Container>
       <BackHeader path={-1} title={item.적금명} isScrolled={true}></BackHeader>
@@ -32,6 +61,7 @@ function AddMilitarySavingsForm() {
           <span>를 입력합니다.</span>
         </TermPageNotice>
         <MilitaryFormBox
+          resetFormData={resetFormData}
           formData={formData}
           userAccountList={userAccountList}
           savingType={formData.savingType}

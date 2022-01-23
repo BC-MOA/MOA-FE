@@ -6,6 +6,7 @@ import MilitaryAutoSavingForm from "./MilitaryAutoSavingForm";
 import MilitaryFreeSavingForm from "./MilitaryFreeSavingForm";
 
 function MilitaryFormBox({
+  resetFormData,
   savingType,
   controlNameList,
   item,
@@ -25,23 +26,6 @@ function MilitaryFormBox({
     setMonthOptions(dropDownOptions);
   }, []);
 
-  function resetFormData(type) {
-    const FreeSavingFormTemp = {
-      savingType: "자유입금",
-      formDataMonth: "",
-      formDataAccount: userAccountList[0],
-    };
-    const AutoSavingFormTemp = {
-      savingType: "자동이체",
-      formDataMonth: "",
-      formDataAccount: userAccountList[0],
-    };
-    if (type === controlNameList[1]) {
-      setFormData(FreeSavingFormTemp);
-    } else {
-      setFormData(AutoSavingFormTemp);
-    }
-  }
   return (
     <FormBox>
       <SavigType>
