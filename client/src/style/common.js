@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import { css } from "styled-components";
 
 export const styleTitle = css`
   font-family: "Pretendard-SemiBold";
@@ -29,7 +29,6 @@ export const hideScrollBar = css`
     display: none;
   }
 `;
-
 export const backButtonBox = css`
   padding: 6px;
   box-sizing: border-box;
