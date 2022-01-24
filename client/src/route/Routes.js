@@ -5,11 +5,15 @@ import Gather from "../components/gather/Gather";
 import Save from "../components/save/Save";
 import Compete from "../components/compete/Compete";
 import Profile from "../components/profile/Profile";
-import AddMilitarySavings from "../components/gather/AddMilitarySavings";
-import AvailableSavingItemDetail from "components/gather/AvailableSavingItemDetail";
-import AddMilitarySavingsTerm from "components/gather/AddMilitarySavingsTerm";
-import AddMilitarySavingsForm from "components/gather/AddMilitarySavingsForm";
-import AddMilitarySavingSuccess from "components/gather/AddMilitarySavingSucess";
+import AddMilitarySavings from "../components/gather/addMilitarySavings/AddMilitarySavings";
+import AvailableSavingItemDetail from "components/gather/addMilitarySavings/AvailableSavingItemDetail";
+import AddMilitarySavingsTerm from "components/gather/addMilitarySavings/AddMilitarySavingsTerm";
+import AddMilitarySavingsForm from "components/gather/addMilitarySavings/AddMilitarySavingsForm";
+import AddMilitarySavingSuccess from "components/gather/addMilitarySavings/AddMilitarySavingSucess";
+import SafeBox from "components/gather/safebox/SafeBox";
+import Goal from "components/gather/addGoal/Goal";
+import Complete from "components/gather/addGoal/Complete";
+import MobileKeypad from "components/gather/addGoal/MobileKeypad";
 
 function AllRoutes() {
   return (
@@ -37,11 +41,14 @@ function AllRoutes() {
         path="/gather/add-militarySaving/:bankname/term/form/success"
         element={<AddMilitarySavingSuccess />}
       />
-
-      <></>
+      <Route path="/gather/add-goal" element={<Goal />} />
+      <Route path="/gather/add-goal/complete" element={<Complete />} />
+      <Route path="/gather/add-safebox" element={<SafeBox />} />
+      <Route path="/gather/add-safebox/complete" element={<Complete />} />
       <Route path="/save" element={<Save />} />
       <Route path="/compete" element={<Compete />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/keypad" element={<MobileKeypad />} />
     </Routes>
   );
 }

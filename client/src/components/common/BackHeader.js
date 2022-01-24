@@ -13,10 +13,7 @@ function BackHeader({ isScrolled, title, path }) {
           history(path);
         }}
       >
-        <img
-          src={require("assets/gather/ic_back.svg").default}
-          alt="뒤로가기"
-        />
+        <img src={require("assets/ic_back.svg").default} alt="뒤로가기" />
       </div>
       {title && (
         <span className={isScrolled ? "headerTitle" : ""}>{title}</span>
@@ -33,6 +30,7 @@ const Header = styled.div`
   align-items: center;
   padding-bottom: 8px;
   position: relative;
+
   .backBtn {
     width: 28px;
     height: 28px;
