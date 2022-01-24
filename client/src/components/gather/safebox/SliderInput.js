@@ -37,7 +37,7 @@ function SliderInput({ inputs, setInputs }) {
 
   return (
     <Container>
-      <div className="Title">{amount.toLocaleString()} 원</div>
+      <div className="Title">{Number(amount).toLocaleString()} 원</div>
       <div
         className="SubTitle green btn"
         onClick={() => {

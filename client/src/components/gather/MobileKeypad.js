@@ -80,7 +80,11 @@ function MobileKeypad() {
   return (
     <Container>
       <Content>
-        <input disabled placeholder="얼마를 입력할까요?" value={input} />
+        <input
+          disabled
+          placeholder="얼마를 입력할까요?"
+          value={Number(input).toLocaleString() + " 원"}
+        />
       </Content>
       <CustomBtn
         path={"/gather/add-safebox"}
@@ -92,17 +96,23 @@ function MobileKeypad() {
       <Box>
         <div>
           {[1, 2, 3].map((x) => (
-            <NumBtn onClick={onClick}>{x}</NumBtn>
+            <NumBtn onClick={onClick} key={x}>
+              {x}
+            </NumBtn>
           ))}
         </div>
         <div>
           {[4, 5, 6].map((x) => (
-            <NumBtn onClick={onClick}>{x}</NumBtn>
+            <NumBtn onClick={onClick} key={x}>
+              {x}
+            </NumBtn>
           ))}
         </div>
         <div>
           {[7, 8, 9].map((x) => (
-            <NumBtn onClick={onClick}>{x}</NumBtn>
+            <NumBtn onClick={onClick} key={x}>
+              {x}
+            </NumBtn>
           ))}
         </div>
         <div className="last">
