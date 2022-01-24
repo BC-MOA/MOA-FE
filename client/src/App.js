@@ -1,19 +1,23 @@
 import "./App.css";
-import Home from "./components/home/Home";
 import styled from "styled-components";
+import AllRoutes from "./route/Routes";
+import Test from "components/gather/Test";
 
 const MobileBox = styled.div`
   width: 375px;
   height: 743px;
-  border: 1px solid black;
+  padding: 0 20px 34px;
+  box-sizing: border-box;
   margin: 0 auto;
   text-align: center;
+  background-color: var(--Surface);
 `;
 
 function App() {
   return (
     <MobileBox>
-      <Home />
+      <AllRoutes />
+      {/* <Test /> */}
     </MobileBox>
   );
 }
