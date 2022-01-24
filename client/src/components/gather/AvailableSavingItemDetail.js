@@ -87,7 +87,7 @@ function AvailableSavingItemDetail() {
             state: item,
           });
         }}
-        isActive={isScrolled}
+        isActive={true}
       />
     </Container>
   );
