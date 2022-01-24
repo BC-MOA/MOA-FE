@@ -157,9 +157,7 @@ function Goal() {
     console.log("변경");
     if (inputs.depositMethod === "자동이체") {
       setInputs({
-        category: "여행",
-        name: "",
-        deadline: "",
+        ...inputs,
         depositMethod: "자동이체",
         howOften: "매월 10일",
         amount: "",
@@ -168,12 +166,10 @@ function Goal() {
       });
     } else {
       setInputs({
-        category: "여행",
-        name: "",
-        deadline: "",
+        ...inputs,
         depositMethod: "넣고 싶을 때마다",
-        howOften: "",
-        amount: "",
+        howOften: "-",
+        amount: "-",
         targetAmount: "",
         account: "",
       });
@@ -263,7 +259,11 @@ function Goal() {
             <CustomInput
               placeholder="모을 금액을 입력해주세요."
               disabled={inputs.depositMethod === "자동이체"}
-              value={inputs.targetAmount}
+              value={
+                inputs.targetAmount
+                  ? Number(inputs.targetAmount).toLocaleString()
+                  : ""
+              }
               onChange={onChange}
               name="targetAmount"
             />
