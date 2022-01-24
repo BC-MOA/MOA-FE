@@ -153,6 +153,33 @@ function Goal() {
     }
   }, [inputs.howOften, inputs.deadline]);
 
+  useEffect(() => {
+    console.log("변경");
+    if (inputs.depositMethod === "자동이체") {
+      setInputs({
+        category: "여행",
+        name: "",
+        deadline: "",
+        depositMethod: "자동이체",
+        howOften: "매월 10일",
+        amount: "",
+        targetAmount: "",
+        account: "",
+      });
+    } else {
+      setInputs({
+        category: "여행",
+        name: "",
+        deadline: "",
+        depositMethod: "넣고 싶을 때마다",
+        howOften: "",
+        amount: "",
+        targetAmount: "",
+        account: "",
+      });
+    }
+  }, [inputs.depositMethod]);
+
   const onChange = (event) => {
     const { name, value } = event.target;
     setInputs({
@@ -236,11 +263,9 @@ function Goal() {
             <CustomInput
               placeholder="모을 금액을 입력해주세요."
               disabled={inputs.depositMethod === "자동이체"}
-              value={
-                inputs.targetAmount
-                  ? Number(inputs.targetAmount).toLocaleString()
-                  : inputs.targetAmount
-              }
+              value={inputs.targetAmount}
+              onChange={onChange}
+              name="targetAmount"
             />
             <div className="Notice">
               최소 <span className="Empasis l_space">10 만원</span>부터 모을 수
