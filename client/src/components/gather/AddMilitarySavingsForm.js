@@ -23,6 +23,8 @@ function AddMilitarySavingsForm() {
   const AutoSavingFormTemp = {
     savingType: "자동이체",
     formDataMonth: "",
+    formDataAmount: "",
+    formDataDay: "",
     formDataAccount: userAccountList[0],
   };
   const [formData, setFormData] = useState(AutoSavingFormTemp);
