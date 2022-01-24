@@ -4,9 +4,17 @@ import AllRoutes from "./route/Routes";
 const MobileBox = styled.div`
   width: 375px;
   height: 743px;
-  border: 1px solid black;
+  padding: 8px 20px;
+  box-sizing: border-box;
   margin: 0 auto;
   text-align: center;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  background-color: var(--Surface);
 `;
 
 function App() {
