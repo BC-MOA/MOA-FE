@@ -46,6 +46,7 @@ function AddBtn({ name, children }) {
     },
     {
       category: "목표",
+      goal_category: "전자기기",
       name: "아이패드 사기",
       currentAmount: 600000,
       targetAmount: 1000000,
@@ -68,13 +69,7 @@ function AddBtn({ name, children }) {
       {gatherList
         .filter((x) => x.category === name)
         .map((x) => (
-          <StateGather
-            key={name}
-            category={x.category}
-            name={x.name}
-            currentAmount={x.currentAmount}
-            targetAmount={x.targetAmount}
-          />
+          <StateGather key={name} props={x} />
         ))}
     </Container>
   );

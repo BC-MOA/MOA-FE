@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import "react-step-progress-bar/styles.css";
 import { ProgressBar } from "react-step-progress-bar";
 import Tag from "components/common/Tag";
+import StoreSvg from "components/gather/StoreSvg";
 
 const Container = styled.div`
   /* position: relative; */
@@ -46,6 +47,28 @@ const Icon = styled.div`
   margin-right: 12px;
   background: #f8f8f8;
   border-radius: 10.2698px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ${({ category }) =>
+    category === "목표"
+      ? css`
+          path.main {
+            fill: #28a49d;
+          }
+        `
+      : category === "비상금"
+      ? css`
+          path.main {
+            fill: #f8cb57;
+          }
+        `
+      : css`
+          path.main {
+            fill: #4caf5b;
+          }
+        `}
 `;
 
 const State = styled.div`
@@ -63,12 +86,10 @@ const State = styled.div`
     color: var(--Body_02);
 
     .currentAmount {
-      /* color: var(--Title_02); */
       display: flex;
       gap: 2px;
     }
     .targetAmount {
-      /* color: var(--Body_02); */
       display: flex;
       gap: 2px;
     }
@@ -82,11 +103,19 @@ const State = styled.div`
   }
 `;
 
-function StateGather(props) {
+function StateGather({ props }) {
   return (
     <Container category={props.category}>
       <Main>
-        <Icon></Icon>
+        <Icon category={props.category}>
+          {props.goal_category ? (
+            <StoreSvg category="여행" />
+          ) : props.category === "군적금" ? (
+            <StoreSvg category="군적금" />
+          ) : (
+            <StoreSvg category="비상금" />
+          )}
+        </Icon>
         <div className="content">
           <div>{props.name}</div>
           {props.category !== "비상금" && <div className="dDay">D-123</div>}
