@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 import moment from "moment";
+import { Link } from "react-router-dom";
 import "moment/locale/ko";
 
 const Card = styled.div`
@@ -10,6 +11,12 @@ const Card = styled.div`
   margin: 15px 0;
   border-radius: 12px;
   padding: 10px 20px;
+
+  transition: 0.5s all;
+
+  :hover {
+    opacity: 0.5;
+  }
 `;
 
 const Date = styled.div`
@@ -71,6 +78,10 @@ const Count = styled.div`
   color: var(--a2);
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
+
 //1.14 (금) 21:00
 function formatDate(dateobj) {
   const month = dateobj.getMonth() + 1;
@@ -91,19 +102,21 @@ function CompCard(props) {
 
   //월 일 요일 시간
   return (
-    <Card>
-      <Date>{formatDate(obj.due)} 마감</Date>
-      <ContentBox>
-        <Thumb src={require("assets/compete/" + obj.thumb)} />
-        <TextBox>
-          <Title>{obj.title}</Title>
-          <Versus>
-            {obj.versus[0]} vs {obj.versus[1]}
-          </Versus>
-        </TextBox>
-        <Count>{obj.total}명 참여</Count>
-      </ContentBox>
-    </Card>
+    <StyledLink to={"/compete/" + obj.key} state={{ info: obj }}>
+      <Card>
+        <Date>{formatDate(obj.due)} 마감</Date>
+        <ContentBox>
+          <Thumb src={require("assets/compete/" + obj.thumb)} />
+          <TextBox>
+            <Title>{obj.title}</Title>
+            <Versus>
+              {obj.versus[0]} vs {obj.versus[1]}
+            </Versus>
+          </TextBox>
+          <Count>{obj.total}명 참여</Count>
+        </ContentBox>
+      </Card>
+    </StyledLink>
   );
 }
 

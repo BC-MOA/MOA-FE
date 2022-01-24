@@ -5,6 +5,7 @@ import Gather from "../components/gather/Gather";
 import Save from "../components/save/Save";
 import Compete from "../components/compete/Compete";
 import Profile from "../components/profile/Profile";
+import CompeteDetail from "../components/compete/CompDetail";
 
 function AllRoutes() {
   return (
@@ -14,6 +15,7 @@ function AllRoutes() {
       <Route path="/gather" element={<Gather />} />
       <Route path="/save" element={<Save />} />
       <Route path="/compete" element={<Compete />} />
+      <Route path="/compete/:id" element={<CompeteDetail />} />
       <Route path="/profile" element={<Profile />} />
     </Routes>
   );
