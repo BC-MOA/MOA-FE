@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { SetType, Type } from "./CompSetType";
+import { SetType, Type } from "./Common/SetCategory";
 import AllList from "./CompAllList";
 import MyList from "./CompMyList";
 
 function CompList(props) {
+  //리스트별 카테고리 기본 설정값
   const [filter, setFilter] = useState("popular");
+  const [Done, setDone] = useState(false);
 
   function setFilterWrapper(input) {
     setFilter(input);

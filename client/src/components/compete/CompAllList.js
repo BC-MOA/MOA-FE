@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Card from "./CompCard";
+import Card from "./Common/Card";
 import { hideScrollBar } from "style/common";
 
 //전체 챌린지 리스트
@@ -69,11 +69,6 @@ function filterList(cond) {
   return cardList;
 }
 
-//리스트-전체
-const AllList = (props) => (
-  <StyledAllList>{filterList(props.cond)}</StyledAllList>
-);
-
 const StyledAllList = styled.div`
   background-color: var(--Surface);
   height: 400px;
@@ -82,5 +77,10 @@ const StyledAllList = styled.div`
 
   ${hideScrollBar}
 `;
+
+//리스트-전체
+const AllList = (props) => (
+  <StyledAllList>{filterList(props.cond)}</StyledAllList>
+);
 
 export default AllList;

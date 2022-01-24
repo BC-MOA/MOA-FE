@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import List from "./CompList";
-import Banner from "./CompBanner";
-import Nav from "./CompNav";
+import CompLists from "./CompLists";
+import Banner from "./Common/Banner";
 
 //임시 하단 nav
 const TempNav = styled.div`
@@ -11,6 +10,32 @@ const TempNav = styled.div`
   width: 375px;
   position: absolute;
   top: 695px;
+`;
+
+//버튼-전체 챌린지, 내 챌린지
+const Navigation = styled.button`
+  width: 50%;
+  height: 42px;
+  border: none;
+
+  border-bottom: 3px var(--Line_02) solid;
+  color: var(--Line_02);
+  background-color: var(--Surface);
+
+  font-family: "Pretendard-SemiBold";
+  font-size: 18px;
+
+  transition: all 0.5s;
+
+  :disabled {
+    border-bottom: 3px var(--a2) solid;
+    color: var(--a2);
+  }
+
+  :hover {
+    background-color: var(--Surface);
+    opacity: 0.8;
+  }
 `;
 
 function CompBody() {
@@ -22,14 +47,14 @@ function CompBody() {
 
   return (
     <>
-      <Nav disabled={isAll} onClick={() => setCategoryWrapper(true)}>
+      <Navigation disabled={isAll} onClick={() => setCategoryWrapper(true)}>
         전체 챌린지
-      </Nav>
-      <Nav disabled={!isAll} onClick={() => setCategoryWrapper(false)}>
+      </Navigation>
+      <Navigation disabled={!isAll} onClick={() => setCategoryWrapper(false)}>
         내 챌린지
-      </Nav>
+      </Navigation>
       {isAll ? <Banner></Banner> : <></>}
-      <List category={isAll}></List>
+      <CompLists category={isAll}></CompLists>
       <TempNav>임시 내비게이션바 입니다</TempNav>
     </>
   );

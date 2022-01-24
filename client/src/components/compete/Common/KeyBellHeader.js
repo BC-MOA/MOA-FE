@@ -50,8 +50,8 @@ const Bell = (props) => (
       <img
         src={
           props.alarm
-            ? require("assets/compete/alarm.svg").default
-            : require("assets/compete/key-simple.svg").default
+            ? require("assets/compete/alarm-on.svg").default
+            : require("assets/compete/alarm-off.svg").default
         }
       />
     </Link>
