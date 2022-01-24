@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import styled, { css } from "styled-components";
 import { GoalContext } from "./Goal";
+import StoreSvg from "components/gather/StoreSvg";
 
 const Container = styled.div`
   display: flex;
@@ -31,6 +32,10 @@ const ElBox = styled.div`
     selected &&
     css`
       background-color: #4caf5b26;
+
+      path.main {
+        fill: var(--a2);
+      }
     `}
 `;
 
@@ -40,21 +45,16 @@ function CategoryEl({ El }) {
   const isSelected = inputs.category === El.kr_Name;
 
   return (
-    <Container>
-      <ElBox selected={isSelected}>
-        <img
-          onClick={(e) =>
-            setInputs({
-              ...inputs,
-              category: e.target.name,
-            })
-          }
-          name={kr_Name}
-          src={require(`assets/goal/${
-            isSelected ? en_Name + "_active" : en_Name
-          }.svg`)}
-          alt={kr_Name}
-        />
+    <Container
+      onClick={(e) => {
+        setInputs({
+          ...inputs,
+          category: e.currentTarget.children[1].innerText,
+        });
+      }}
+    >
+      <ElBox selected={isSelected} name={kr_Name}>
+        <StoreSvg en_Name={en_Name} />
       </ElBox>
       <div className="name">{kr_Name}</div>
     </Container>
