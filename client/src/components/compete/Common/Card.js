@@ -1,11 +1,13 @@
 import styled from "styled-components";
+import { css } from "styled-components";
 import React from "react";
 import { Link } from "react-router-dom";
 import { Key } from "./KeyBellHeader";
 import { BetButtonBox, StyledBetButton } from "./BetCardButton";
+import formatDate from "./DateChanger";
 
-//기본 카드
-const Card = styled.div`
+//기본 카드 디자인
+const CardDesign = css`
   background-color: white;
   width: 295px;
   height: 80px;
@@ -13,44 +15,40 @@ const Card = styled.div`
   border-radius: 12px;
   padding: 10px 20px;
 
-  transition: 0.5s all;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+//기본 카드
+const Card = styled.div`
+  ${CardDesign}
+  transition: 0.1s all;
 
   :hover {
     opacity: 0.5;
+    text-decoration: none;
   }
+`;
+
+//배팅 카드
+const BetCard = styled.div`
+  ${CardDesign}
+
+  height: 124px;
+`;
+
+//배팅 종료 카드
+const BetEndCard = styled.div`
+  ${CardDesign}
+
+  filter: grayscale(80%);
 `;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
-//배팅 카드
-const BetCard = styled.div`
-  background-color: white;
-  width: 295px;
-  height: 124px;
-  margin: 15px 0;
-  border-radius: 12px;
-  padding: 10px 20px;
-`;
-
-const StyleKey = styled(Key)`
-  margin-left: 15px;
-`;
-
-//배팅 종료 카드
-const BetEndCard = styled.div`
-  background-color: white;
-  width: 295px;
-  height: 55px;
-  margin: 15px 0;
-  border-radius: 12px;
-  padding: 10px 20px;
-
-  filter: grayscale(80%);
-`;
-
-//공통 요소
 const Date = styled.div`
   width: 108px;
   height: 19px;
@@ -98,12 +96,12 @@ const Versus = styled.div`
 `;
 
 const Count = styled.div`
-  width: 71px;
+  width: 75px;
+  min-width: 75px;
   height: 19px;
   background-color: rgba(76, 175, 91, 0.15);
 
   border-radius: 8px;
-  margin-left: 5px;
   margin-top: 10px;
 
   line-height: 19px;
@@ -112,21 +110,6 @@ const Count = styled.div`
   font-family: "Pretendard-Medium";
   color: var(--a2);
 `;
-
-//1.14 (금) 21:00
-function formatDate(dateobj) {
-  const month = dateobj.getMonth() + 1;
-  const date = dateobj.getDate();
-  //요일
-  const dow = dateobj.toLocaleString("ko-KR", { weekday: "short" });
-
-  const hour = dateobj.getHours();
-  const min = (dateobj.getMinutes() < 10 ? "0" : "") + dateobj.getMinutes();
-
-  const result = `${month}.${date} (${dow}) ${hour}:${min}`;
-
-  return result;
-}
 
 function BasicCompCard(props) {
   const obj = props.obj;
@@ -167,7 +150,7 @@ function BetCompCard(props) {
           </Versus>
         </TextBox>
         <div>
-          <StyleKey count={obj.bet}></StyleKey>
+          <Key count={obj.bet}></Key>
           <Count>{obj.total}명 참여</Count>
         </div>
       </ContentBox>

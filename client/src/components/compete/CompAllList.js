@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BasicCompCard } from "./Common/Card";
+import { BasicCompCard } from "./common/Card";
 import { hideScrollBar } from "style/common";
 
 //전체 챌린지 리스트

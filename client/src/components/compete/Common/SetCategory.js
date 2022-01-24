@@ -25,7 +25,7 @@ const Type = styled.button`
 
   :disabled {
     color: var(--Title_01);
-    background: linear-gradient(0deg, var(--a3) 50%, var(--Surface) 50%);
+    background: linear-gradient(0deg, var(--a3) 40%, var(--Surface) 0%);
   }
 
   :hover {

@@ -15,19 +15,26 @@ const Header = styled.div`
   display: felx;
   justify-content: flex-end;
   align-items: center;
-  background-color: var(--Surface);
+`;
+
+//Container
+const Container = styled.div`
+  width: 110px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 //Key
-const Key = ({ className, count }) => (
-  <StyledKeyBox className={className}>
+const Key = (props) => (
+  <StyledKeyBox>
     <img src={require("assets/compete/key-simple.svg").default} />
-    <div className="text">{count}개</div>
+    <div className="text">{props.count}개</div>
   </StyledKeyBox>
 );
 
 const StyledKeyBox = styled.div`
-  width: 60px;
+  width: 70px;
   height: 24px;
 
   display: flex;
@@ -44,37 +51,24 @@ const StyledKeyBox = styled.div`
 //Bell
 //Home 컴포넌트로 이동하는 링크로 설정
 const Bell = (props) => (
-  <StyledBellBox>
-    <Link to="/compete">
-      <img
-        src={
-          props.alarm
-            ? require("assets/compete/alarm-on.svg").default
-            : require("assets/compete/alarm-off.svg").default
-        }
-      />
-    </Link>
-  </StyledBellBox>
+  <Link to="/compete">
+    <img
+      src={
+        props.alarm
+          ? require("assets/compete/alarm-on.svg").default
+          : require("assets/compete/alarm-off.svg").default
+      }
+    />
+  </Link>
 );
-
-const StyledBellBox = styled.div`
-  width: 24px;
-  height: 24px;
-
-  margin-left: 20px;
-
-  transition: 1s all;
-
-  :hover {
-    opacity: 0.5;
-  }
-`;
 
 function CompHeader(props) {
   return (
     <Header>
-      <Key count={data.keyCount}></Key>
-      <Bell alarm={data.alarm}></Bell>
+      <Container>
+        <Key count={data.keyCount}></Key>
+        <Bell alarm={data.alarm}></Bell>
+      </Container>
     </Header>
   );
 }

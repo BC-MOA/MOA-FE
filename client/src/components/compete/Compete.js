@@ -1,5 +1,5 @@
 import React from "react";
-import { CompHeader } from "./Common/KeyBellHeader";
+import { CompHeader } from "./common/KeyBellHeader";
 import Body from "./CompBody";
 
 function Compete() {

@@ -28,7 +28,7 @@ const StyledBetButton = styled(BetButton)`
 `;
 
 const BetButtonBox = styled.div`
-  width: 300x;
+  width: 300px;
   height: 40px;
   margin: 5px auto;
 
