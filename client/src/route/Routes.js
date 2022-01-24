@@ -14,6 +14,7 @@ import SafeBox from "components/gather/safebox/SafeBox";
 import Goal from "components/gather/addGoal/Goal";
 import Complete from "components/gather/addGoal/Complete";
 import MobileKeypad from "components/gather/addGoal/MobileKeypad";
+import KeyPopUp from "components/common/KeyPopUp";
 
 function AllRoutes() {
   return (
@@ -49,6 +50,7 @@ function AllRoutes() {
       <Route path="/compete" element={<Compete />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/keypad" element={<MobileKeypad />} />
+      <Route path="/key" element={<KeyPopUp />}></Route>
     </Routes>
   );
 }
