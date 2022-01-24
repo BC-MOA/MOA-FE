@@ -59,7 +59,14 @@ function MilitaryFormBox({
         </div>
       </SavigType>
       {/* 1. 자동이체 */}
-      <MilitaryAutoSavingForm savingType={savingType} item={item} />
+      <MilitaryAutoSavingForm
+        formData={formData}
+        setFormData={setFormData}
+        userAccountList={userAccountList}
+        userMonthOptions={monthOptions}
+        savingType={savingType}
+        item={item}
+      />
       {/* 2. 자유입금*/}
       <MilitaryFreeSavingForm
         formData={formData}
@@ -139,10 +146,83 @@ const typeButton = css`
     }
   }
 `;
+const InputBox = css`
+  display: flex;
+  justify-content: space-between;
+  padding-right: 16px;
+  align-items: center;
+  font-family: "Roboto";
+  font-size: 16px;
+  line-height: 25px;
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: #ffffff;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  color: var(--Title_01);
+  input {
+    padding: 10px 0 10px 16px;
+    border: none;
+    flex-grow: 1;
+    ::placeholder {
+      font-family: "Pretendard-Regular";
+      color: var(--Line_01);
+      opacity: 1;
+    }
+    :-ms-input-placeholder {
+      font-family: "Pretendard-Regular";
+      /* Internet Explorer 10-11 */
+      color: red;
+    }
+
+    ::-ms-input-placeholder {
+      font-family: "Pretendard-Regular";
+      /* Microsoft Edge */
+      color: red;
+    }
+  }
+  .unit {
+    font-family: "Pretendard-Regular";
+    color: var(--Body_01);
+  }
+`;
+const InterestBox = css`
+  display: flex;
+  justify-content: space-between;
+
+  .boxItem {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    .boxNum {
+      font-family: "Pretendard-Medium";
+      font-size: 18px;
+      line-height: 28px;
+      margin-left: 4px;
+      color: var(--Title_01);
+      .green {
+        color: var(--a2);
+      }
+      .roboto {
+        font-family: "Roboto";
+        font-weight: 500;
+      }
+    }
+  }
+`;
 const FormBox = styled.div`
   ${MessageStyle}
   .title {
     ${FormTile}
+  }
+  .inputBox {
+    ${InputBox}
+  }
+  .interestBox {
+    margin-top: 8px;
+    margin-bottom: 32px;
+    ${InterestBox};
   }
 `;
 const SavigType = styled.div`
