@@ -58,8 +58,6 @@ const Container = styled.div`
 const Content = styled.div`
   ${hideScrollBar}
   padding-bottom: 10px;
-  /* flex: 1;
-  display: flex; */
 `;
 
 const InputEl = styled.div`
@@ -143,8 +141,6 @@ function Goal() {
   });
 
   useEffect(() => {
-    console.log("effect!");
-
     if (
       inputs.deadline !== "" &&
       inputs.depositMethod === "자동이체" &&

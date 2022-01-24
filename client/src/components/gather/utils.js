@@ -34,7 +34,6 @@ export const calcAmount = (inputs) => {
       const dayCnt = Math.ceil(
         (deadline.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)
       );
-      console.log(dayCnt);
       return dayCnt * amount;
 
     default:

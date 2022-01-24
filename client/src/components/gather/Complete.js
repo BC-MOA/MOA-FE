@@ -83,7 +83,7 @@ const InfoEl = styled.div`
 function Complete() {
   const { state } = useLocation();
   const { inputs: userInfo, name } = state;
-  console.log(userInfo, name);
+
   const accountInfo = {
     Bank: "KB국민",
     Account: "123-456-78-970111",
@@ -136,7 +136,9 @@ function Complete() {
           )}
           <InfoEl className="Text">
             <div>{name === "목표" ? "" : "보관"}금액</div>
-            <div className="userInfo green">{userInfo.amount} 원</div>
+            <div className="userInfo green">
+              {Number(userInfo.amount).toLocaleString()} 원
+            </div>
           </InfoEl>
           <InfoEl className="Text">
             <div>출금계좌</div>
@@ -145,7 +147,9 @@ function Complete() {
           {name !== "목표" && (
             <InfoEl className="Text">
               <div>출금계좌 예상잔액</div>
-              <div className="userInfo">{userInfo.balance}</div>
+              <div className="userInfo">
+                {userInfo.balance.toLocaleString()} 원
+              </div>
             </InfoEl>
           )}
           <img
