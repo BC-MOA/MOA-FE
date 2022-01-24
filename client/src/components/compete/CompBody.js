@@ -12,6 +12,10 @@ const TempNav = styled.div`
   top: 695px;
 `;
 
+const IgnorePaddingBox = styled.div`
+  margin: 0 -20px;
+`;
+
 //버튼-전체 챌린지, 내 챌린지
 const Navigation = styled.button`
   width: 50%;
@@ -46,7 +50,7 @@ function CompBody() {
   }
 
   return (
-    <>
+    <IgnorePaddingBox>
       <Navigation disabled={isAll} onClick={() => setCategoryWrapper(true)}>
         전체 챌린지
       </Navigation>
@@ -56,7 +60,7 @@ function CompBody() {
       {isAll ? <Banner></Banner> : <></>}
       <CompLists category={isAll}></CompLists>
       <TempNav>임시 내비게이션바 입니다</TempNav>
-    </>
+    </IgnorePaddingBox>
   );
 }
 

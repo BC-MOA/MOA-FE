@@ -11,7 +11,6 @@ const data = {
 //Header
 const Header = styled.div`
   height: 44px;
-  padding: 0 20px;
 
   display: felx;
   justify-content: flex-end;
@@ -33,12 +32,12 @@ const StyledKeyBox = styled.div`
 
   display: flex;
   justify-content: center;
-
-  font-family: Roboto;
-  font-size: 14px;
+  align-items: center;
 
   .text {
     margin-left: 3px;
+    font-family: Roboto;
+    font-size: 14px;
   }
 `;
 
@@ -61,7 +60,8 @@ const Bell = (props) => (
 const StyledBellBox = styled.div`
   width: 24px;
   height: 24px;
-  margin-left: 8px;
+
+  margin-left: 20px;
 
   transition: 1s all;
 
