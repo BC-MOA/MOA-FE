@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 const ButtonWrapper = styled.div`
-  width: 375px;
+  width: 335px;
   height: 44px;
   background-color: yellow;
 `;

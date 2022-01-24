@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import CompLists from "./CompLists";
-import Banner from "./Common/Banner";
+import Banner from "./Common/BannerSwiper";
 
 //임시 하단 nav
 const TempNav = styled.div`

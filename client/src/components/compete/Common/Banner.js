@@ -1,41 +1,17 @@
 import styled from "styled-components";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-
-const Banner = styled.div`
-  width: 335px;
-  height: 76px;
-  padding: 12px 20px;
-  background-color: var(--Surface);
-`;
+import { Link } from "react-router-dom";
 
 const Img = styled.img`
   width: 100%;
   height: 100%;
 `;
 
-const Swipe = () => {
+function Banner(props) {
   return (
-    <Swiper spaceBetween={50} slidesPerView={1}>
-      <SwiperSlide>
-        <Img src={require("assets/compete/banner.png")} />
-      </SwiperSlide>
-      <SwiperSlide>
-        <Img src={require("assets/compete/banner.png")} />
-      </SwiperSlide>
-      <SwiperSlide>
-        <Img src={require("assets/compete/banner.png")} />
-      </SwiperSlide>
-    </Swiper>
-  );
-};
-
-function CompBanner() {
-  return (
-    <Banner>
-      <Swipe></Swipe>
-    </Banner>
+    <Link to={props.to}>
+      <Img src={props.src}></Img>
+    </Link>
   );
 }
 
-export default CompBanner;
+export default Banner;
