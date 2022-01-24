@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Card from "./Common/Card";
+import { BetCompCard, BetEndCompCard } from "./Common/Card";
 import { hideScrollBar } from "style/common";
 
 //전체 챌린지 리스트
@@ -13,6 +13,7 @@ const data = {
       title: "오늘 뮤직뱅크 1위는?",
       versus: ["아이유", "BTS"],
       total: 100,
+      bet: 3,
     },
     {
       key: "A2",
@@ -21,47 +22,56 @@ const data = {
       title: "월드컵 예선 승자는?",
       versus: ["벨기에", "스페인"],
       total: 400,
+      bet: 1,
     },
     {
       key: "A3",
-      due: new Date("2022-01-11T21:00:00"),
+      due: new Date("2022-01-28T21:00:00"),
       thumb: "soccer.png",
       title: "프리미어리그 경기 승자는?",
       versus: ["맨시티", "리버풀"],
       total: 320,
-    },
-    {
-      key: "A4",
-      due: new Date("2022-01-26T21:00:00"),
-      thumb: "game.png",
-      title: "롤챔스 경기 승자는?",
-      versus: ["NS", "DK"],
-      total: 300,
+      bet: 4,
     },
   ],
 };
 
-//조건을 전달받아 가공된 리스트 return하는 함수
-function ListMaker() {
-  let list = [];
+function filterList(cond) {
+  let filterdList;
+  let cardList = [];
 
-  for (const obj of data.compList) {
-    list.push(<Card key={obj.key} obj={obj}></Card>);
+  //ing
+  if (!cond) {
+    const now = new Date();
+    filterdList = data.compList.filter((obj) => obj.due > now);
+
+    for (const obj of filterdList) {
+      cardList.push(<BetCompCard key={obj.key} obj={obj}></BetCompCard>);
+    }
+  }
+  //done
+  else {
+    const now = new Date();
+    filterdList = data.compList.filter((obj) => obj.due < now);
+
+    for (const obj of filterdList) {
+      cardList.push(<BetEndCompCard key={obj.key} obj={obj}></BetEndCompCard>);
+    }
   }
 
-  return list;
+  return cardList;
 }
 
 //리스트-참여중
 const MyList = styled.div`
   background-color: var(--Surface);
-  height: 600px;
+  height: 550px;
 
   padding: 0 20px 49px;
 
   ${hideScrollBar}
 `;
 
-const Result = () => <MyList>{ListMaker()}</MyList>;
+const Result = (props) => <MyList>{filterList(props.cond)}</MyList>;
 
 export default Result;

@@ -12,6 +12,10 @@ function CompList(props) {
     setFilter(input);
   }
 
+  function setDoneWrapper(input) {
+    setDone(input);
+  }
+
   return (
     <>
       {props.category ? (
@@ -39,7 +43,17 @@ function CompList(props) {
           <AllList cond={filter}></AllList>
         </>
       ) : (
-        <MyList></MyList>
+        <>
+          <SetType>
+            <Type disabled={!Done} onClick={() => setDoneWrapper(false)}>
+              참가중
+            </Type>
+            <Type disabled={Done} onClick={() => setDoneWrapper(true)}>
+              참가완료
+            </Type>
+          </SetType>
+          <MyList cond={Done}></MyList>
+        </>
       )}
     </>
   );

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Card from "./Common/Card";
+import { BasicCompCard } from "./Common/Card";
 import { hideScrollBar } from "style/common";
 
 //전체 챌린지 리스트
@@ -63,7 +63,7 @@ function filterList(cond) {
   let cardList = [];
 
   for (const obj of filterdList) {
-    cardList.push(<Card key={obj.key} obj={obj}></Card>);
+    cardList.push(<BasicCompCard key={obj.key} obj={obj}></BasicCompCard>);
   }
 
   return cardList;

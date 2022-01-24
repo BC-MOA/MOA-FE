@@ -3,7 +3,7 @@ import styled from "styled-components";
 //필터-전체 챌린지 필터/정렬
 const SetType = styled.div`
   height: 50px;
-  padding: 0 20px;
+  padding: 12px 20px 0px;
 
   display: flex;
   align-items: center;
@@ -11,7 +11,7 @@ const SetType = styled.div`
 `;
 
 const Type = styled.button`
-  width: 60px;
+  display: inline-block;
   height: 25px;
   margin-right: 20px;
 

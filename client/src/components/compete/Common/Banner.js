@@ -5,7 +5,7 @@ import "swiper/css";
 const Banner = styled.div`
   width: 335px;
   height: 76px;
-  padding: 24px 20px;
+  padding: 12px 20px;
   background-color: var(--Surface);
 `;
 

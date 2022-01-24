@@ -20,19 +20,19 @@ const Header = styled.div`
 `;
 
 //Key
-const Key = (props) => (
-  <StyledKeyBox>
+const Key = ({ className, count }) => (
+  <StyledKeyBox className={className}>
     <img src={require("assets/compete/key-simple.svg").default} />
-    <div className="text">{props.count}개</div>
+    <div className="text">{count}개</div>
   </StyledKeyBox>
 );
 
 const StyledKeyBox = styled.div`
-  width: 69px;
+  width: 60px;
   height: 24px;
-  margin-right: 8px;
 
   display: flex;
+  justify-content: center;
 
   font-family: Roboto;
   font-size: 14px;
@@ -61,6 +61,7 @@ const Bell = (props) => (
 const StyledBellBox = styled.div`
   width: 24px;
   height: 24px;
+  margin-left: 8px;
 
   transition: 1s all;
 
@@ -78,4 +79,4 @@ function CompHeader(props) {
   );
 }
 
-export default CompHeader;
+export { CompHeader, Key };
