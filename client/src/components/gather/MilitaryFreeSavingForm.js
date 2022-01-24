@@ -11,15 +11,6 @@ function MilitaryFreeSavingForm({
   setFormData,
   userAccountList,
 }) {
-  const [formDataMonth, setFormDataMonth] = useState("");
-  const [formDataAccount, setFormDataAccount] = useState(userAccountList[0]);
-  useEffect(() => {
-    setFormData((predata) => ({
-      ...predata,
-      formDataMonth,
-      formDataAccount,
-    }));
-  }, [formDataMonth, formDataAccount]);
   return (
     <FreeSavingForm className={savingType === "자유입금" ? "isSelect" : ""}>
       <div className="message">
@@ -32,10 +23,10 @@ function MilitaryFreeSavingForm({
       </div>
       <div className="title">기간</div>
       <Dropdown
+        valueName={"formDataMonth"}
+        setValue={setFormData}
         selectValue={formData.formDataMonth}
-        setValue={setFormDataMonth}
         placeHolder={"적금하실 기간을 선택해주세요"}
-        defaultValue={""}
         options={userMonthOptions}
       />
       {/* todo - 사용자 이름 개월 수 최고금리 표시 */}
@@ -61,8 +52,9 @@ function MilitaryFreeSavingForm({
       </div>
       <div className="title">출금계좌</div>
       <Dropdown
-        setValue={setFormDataAccount}
-        value={userAccountList[0]}
+        valueName={"formDataAccount"}
+        setValue={setFormData}
+        selectValue={formData.formDataAccount}
         options={userAccountList}
       ></Dropdown>
     </FreeSavingForm>

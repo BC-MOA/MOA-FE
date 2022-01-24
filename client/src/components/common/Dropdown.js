@@ -2,12 +2,12 @@ import React from "react";
 import { v1 as uuid } from "uuid";
 import styled from "styled-components";
 
-function Dropdown({ options, selectValue, setValue, placeHolder }) {
+function Dropdown({ valueName, options, selectValue, setValue, placeHolder }) {
   const bgUrl = require("assets/gather/ic_select_arrow.svg").default;
   return (
     <DropdownBox
       onChange={(e) => {
-        setValue(e.target.value);
+        setValue((preData) => ({ ...preData, [valueName]: e.target.value }));
       }}
       className={selectValue !== "" ? "isSelect" : ""}
       bgUrl={bgUrl}
