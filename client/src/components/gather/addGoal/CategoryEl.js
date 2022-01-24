@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styled, { css } from "styled-components";
 import { GoalContext } from "./Goal";
-import StoreSvg from "components/gather/StoreSvg";
+import StoreSvg from "./StoreSvg";
 
 const Container = styled.div`
   display: flex;

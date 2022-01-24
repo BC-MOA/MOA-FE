@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { styleTitle, styleSubTitle, styleNotice } from "style/common";
-import BackHeader from "components/common/BackHeader";
-import CustomBtn from "components/gather/CustomBtn";
-import CustomSelect from "components/gather/CustomSelect";
-import SliderInput from "components/gather/safebox/SliderInput";
 import { useLocation } from "react-router-dom";
+import BackHeader from "components/common/BackHeader";
+import SliderInput from "./SliderInput";
+import CustomSelect from "../addGoal/CustomSelect";
+import CustomBtn from "../addGoal/CustomBtn";
 
 const Container = styled.div`
   width: 100%;

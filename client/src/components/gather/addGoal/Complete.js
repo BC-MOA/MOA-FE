@@ -93,6 +93,7 @@ function Complete() {
     <Container>
       <Content>
         <img
+          alt="성공"
           className="check animate__animated animate__flipInX"
           src={require("assets/goal/check.svg").default}
           data-micron="bounce"
@@ -155,11 +156,12 @@ function Complete() {
           <img
             className="character"
             src={require("assets/goal/army_character.svg").default}
+            alt="character"
           />
         </CheckInfo>
       </Content>
 
-      <CustomBtn path={"/"} active={true}>
+      <CustomBtn path={"/gather"} active={true}>
         확인
       </CustomBtn>
     </Container>

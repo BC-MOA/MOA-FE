@@ -16,12 +16,12 @@ function AddMilitarySavingsForm() {
   const [userAccountList, setUserAccountList] = useState(["통장1", "통장2"]);
   // ---
   const FreeSavingFormTemp = {
-    savingType: "자유입금",
+    savingType: controlNameList[1],
     formDataMonth: "",
     formDataAccount: userAccountList[0],
   };
   const AutoSavingFormTemp = {
-    savingType: "자동이체",
+    savingType: controlNameList[0],
     formDataMonth: "",
     formDataAmount: "",
     formDataDay: "",

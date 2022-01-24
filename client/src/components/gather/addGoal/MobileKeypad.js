@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import CustomBtn from "components/gather/CustomBtn";
+import CustomBtn from "components/gather/addGoal/CustomBtn";
 
 const Container = styled.div`
   width: 100%;

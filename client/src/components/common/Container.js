@@ -5,7 +5,6 @@ function Container({ children }) {
   return <ContainerStyle>{children}</ContainerStyle>;
 }
 const ContainerStyle = styled.div`
-  padding: 8px 20px;
   box-sizing: border-box;
   background: var(--Surface);
   display: flex;

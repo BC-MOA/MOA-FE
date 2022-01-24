@@ -1,14 +1,14 @@
 import React, { useState, createContext, useEffect } from "react";
 import styled from "styled-components";
 import { styleTitle, styleSubTitle, styleNotice } from "style/common";
-import Category from "components/gather/Category";
-import DatePick from "components/gather/DatePick";
-import SelectBox from "components/gather/SelectBox";
-import CustomBtn from "components/gather/CustomBtn";
-import { calcAmount } from "components/gather/utils";
-import CustomSelect from "components/gather/CustomSelect";
+import Category from "components/gather/addGoal/Category";
+import SelectBox from "components/gather/addGoal/SelectBox";
+import CustomBtn from "components/gather/addGoal/CustomBtn";
+import { calcAmount } from "components/gather/addGoal/utils";
+import CustomSelect from "components/gather/addGoal/CustomSelect";
 import BackHeader from "components/common/BackHeader";
 import { hideScrollBar } from "style/common";
+import DatePick from "./DatePick";
 
 const Container = styled.div`
   width: 100%;
