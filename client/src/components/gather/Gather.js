@@ -4,8 +4,11 @@ import AddBtn from "components/gather/AddBtn";
 import ContentControlBtn from "components/gather/ContentControlBtn";
 import { hideScrollBar } from "style/common";
 import NavBar from "components/common/NavBar";
+import StateGather from "components/gather/StateGather";
+import { ReactSortable } from "react-sortablejs";
 
 const Container = styled.div`
+  position: relative;
   width: 100%;
   height: 100%;
   display: flex;
@@ -38,6 +41,19 @@ const Content = styled.div`
   ${hideScrollBar}
   flex: 1;
 `;
+const EditBtn = styled.button`
+  position: absolute;
+  top: 90px;
+  right: 0;
+  font-family: "Pretendard-Medium";
+  font-size: 13px;
+  line-height: 25px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #f8cb57;
+  color: var(--Title_01);
+`;
 
 function Gather() {
   const userName = "민수";
@@ -55,7 +71,7 @@ function Gather() {
       name: "아이패드 사기",
       currentAmount: 600000,
       targetAmount: 1000000,
-      isCompleted: false,
+      isCompleted: true,
     },
     {
       category: "비상금",
@@ -68,10 +84,30 @@ function Gather() {
   const totalAmount = gatherList.reduce((acc, cur) => {
     return (acc += cur.currentAmount);
   }, 0);
+  const inProgressList = gatherList.filter((x) => !x.isCompleted);
+  const completedList = gatherList.filter((x) => x.isCompleted);
 
   const controlNameList = ["진행중", "완료"];
   const [listControl, setListControl] = useState(controlNameList[0]);
+  const [editToggle, setEditToggle] = useState(true);
 
+  const [gather, setGather] = useState([
+    {
+      id: 1,
+      name: "군적금",
+      adText: "은행 최고이율과 국가지원혜택까지 받아보세요.",
+    },
+    {
+      id: 2,
+      name: "목표",
+      adText: "부대 내에서 목표를 잡고 돈을 모아나가보세요.",
+    },
+    {
+      id: 3,
+      name: "비상금",
+      adText: "저축하고 남은 돈을 비상금처럼 따로 보관하세요.",
+    },
+  ]);
   return (
     <Container>
       <div className="Title">{userName}님이 지금까지 모은 금액은?</div>
@@ -86,16 +122,34 @@ function Gather() {
         controlNameList={controlNameList}
       />
       <Content>
-        <AddBtn name="군적금" gatherList={gatherList} state={listControl}>
-          은행 최고이율과 국가지원혜택까지 받아보세요.
-        </AddBtn>
-        <AddBtn name="목표" gatherList={gatherList} state={listControl}>
-          부대 내에서 목표를 잡고 돈을 모아나가보세요.
-        </AddBtn>
-        <AddBtn name="비상금" gatherList={gatherList} state={listControl}>
-          저축하고 남은 돈을 비상금처럼 따로 보관하세요.
-        </AddBtn>
+        {listControl === "진행중" ? (
+          <ReactSortable
+            list={gather}
+            setList={setGather}
+            disabled={editToggle}
+            animation={500}
+          >
+            {gather.map((x) => (
+              <AddBtn key={x.id} name={x.name} gatherList={inProgressList}>
+                {x.adText}
+              </AddBtn>
+            ))}
+          </ReactSortable>
+        ) : (
+          <>
+            {completedList.map((x) => (
+              <StateGather key={x.name} props={x} />
+            ))}
+          </>
+        )}
       </Content>
+      <EditBtn
+        onClick={() => {
+          setEditToggle(!editToggle);
+        }}
+      >
+        {editToggle ? "순서 변경" : "순서 저장"}
+      </EditBtn>
       <NavBar />
     </Container>
   );
