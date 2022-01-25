@@ -8,6 +8,7 @@ const Container = styled.div`
   background-color: #fff;
   box-shadow: 0px 1px 2px rgba(33, 33, 33, 0.08);
   border-radius: 12px;
+  margin-bottom: 12px;
 
   .btnName {
     color: var(--Title_02);
@@ -33,9 +34,9 @@ const Container = styled.div`
     text-align: left;
   }
 
-  & + & {
-    margin-top: 12px;
-  }
+  /* & + & {
+    
+  } */
 `;
 function AddBtn({ name, gatherList, state, children }) {
   const history = useNavigate();

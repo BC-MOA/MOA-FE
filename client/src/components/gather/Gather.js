@@ -1,9 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import AddBtn from "components/gather/AddBtn";
 import ContentControlBtn from "components/gather/ContentControlBtn";
+import { hideScrollBar } from "style/common";
+import NavBar from "components/common/NavBar";
 
 const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   .Title {
     margin: 4px 0 2px;
     font-family: "Pretendard-SemiBold";
@@ -28,7 +34,10 @@ const Container = styled.div`
     }
   }
 `;
-const Content = styled.div``;
+const Content = styled.div`
+  ${hideScrollBar}
+  flex: 1;
+`;
 
 function Gather() {
   const userName = "민수";
@@ -87,6 +96,7 @@ function Gather() {
           저축하고 남은 돈을 비상금처럼 따로 보관하세요.
         </AddBtn>
       </Content>
+      <NavBar />
     </Container>
   );
 }
