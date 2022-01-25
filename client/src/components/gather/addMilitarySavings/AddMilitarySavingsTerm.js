@@ -2,9 +2,8 @@ import BackHeader from "components/common/BackHeader";
 import Container from "components/common/Container";
 import ScrollBox from "components/common/ScrollBox";
 import SubmitButton from "components/common/SubmitButton";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect } from "react/cjs/react.development";
 import styled from "styled-components";
 import TermCheckBox from "./TermCheckBox";
 const checkLists = [
