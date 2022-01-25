@@ -37,34 +37,14 @@ const Container = styled.div`
     margin-top: 12px;
   }
 `;
-function AddBtn({ name, children }) {
-  const gatherList = [
-    {
-      category: "군적금",
-      name: "장병내일준비적금 (국민)",
-      currentAmount: 2400000,
-      targetAmount: 6000000,
-    },
-    {
-      category: "목표",
-      goal_category: "전자기기",
-      name: "아이패드 사기",
-      currentAmount: 600000,
-      targetAmount: 1000000,
-    },
-    {
-      category: "비상금",
-      name: "비상금",
-      targetAmount: 2400000,
-    },
-  ];
-
+function AddBtn({ name, gatherList, state, children }) {
   const history = useNavigate();
   const movePages = {
     군적금: "add-militarySaving",
     목표: "add-goal",
     비상금: "add-safebox",
   };
+
   return (
     <Container>
       <div className="btnName">
@@ -78,11 +58,16 @@ function AddBtn({ name, children }) {
         </button>
       </div>
       <div className="adText">{children}</div>
-      {gatherList
-        .filter((x) => x.category === name)
-        .map((x) => (
-          <StateGather key={name} props={x} />
-        ))}
+      {gatherList &&
+        state === "진행중" &&
+        gatherList
+          .filter((x) => !x.isCompleted && x.category === name)
+          .map((x) => <StateGather key={name} props={x} />)}
+      {gatherList &&
+        state === "완료" &&
+        gatherList
+          .filter((x) => x.isCompleted && x.category === name)
+          .map((x) => <StateGather key={name} props={x} />)}
     </Container>
   );
 }
