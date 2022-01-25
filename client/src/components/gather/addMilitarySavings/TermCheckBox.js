@@ -18,7 +18,7 @@ function TermCheckBox({
   }, [checkList]);
 
   useEffect(() => {
-    if (checks) {
+    if (checks.length) {
       setIsAllChecked(checks.reduce((a, b) => a * b));
     }
   }, [checks]);
