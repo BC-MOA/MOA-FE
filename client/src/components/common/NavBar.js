@@ -37,7 +37,7 @@ function NavBar() {
 }
 
 const NavBarBox = styled.div`
-  margin: 0 -20px;
+  margin: 0 -20px -8px;
   height: 49px;
   background: #ffffff;
   display: flex;

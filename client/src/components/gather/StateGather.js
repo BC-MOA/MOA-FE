@@ -3,23 +3,33 @@ import styled, { css } from "styled-components";
 import "react-step-progress-bar/styles.css";
 import { ProgressBar } from "react-step-progress-bar";
 import Tag from "components/common/Tag";
-import StoreSvg from "components/gather/StoreSvg";
+import StoreSvg from "components/gather/addGoal/StoreSvg";
 
 const Container = styled.div`
-  /* position: relative; */
   margin: 0 -4px;
   height: fit-content;
-  /* padding: 20px 20px 12px; */
-  padding: 20px 0px 3px;
+  padding: 20px 0 0;
   ${({ category }) =>
     category === "비상금" &&
     css`
-      padding: 20px 0 12px;
+      padding: 20px 0 10px;
     `}
   box-sizing: border-box;
   background-color: #fff;
-  /* box-shadow: 0px 2px 4px rgba(33, 33, 33, 0.08); */
-  /* border-radius: 20px; */
+
+  ${({ completed }) =>
+    completed === true &&
+    css`
+      /* background-color: #ebebeb; */
+      filter: grayscale(100%);
+      padding: 20px 20px 12px;
+      box-shadow: 0px 2px 4px rgba(33, 33, 33, 0.08);
+      border-radius: 20px;
+    `}
+
+  &+& {
+    margin-top: 12px;
+  }
 `;
 
 const Main = styled.div`
@@ -105,11 +115,11 @@ const State = styled.div`
 
 function StateGather({ props }) {
   return (
-    <Container category={props.category}>
+    <Container category={props.category} completed={props.isCompleted}>
       <Main>
         <Icon category={props.category}>
           {props.goal_category ? (
-            <StoreSvg category="여행" />
+            <StoreSvg category={props.goal_category} />
           ) : props.category === "군적금" ? (
             <StoreSvg category="군적금" />
           ) : (
@@ -122,8 +132,11 @@ function StateGather({ props }) {
           {props.category === "비상금" && (
             <State style={{ marginTop: "2px" }}>
               <div className="amount">
-                <div className="targetAmount">
-                  <span className="blackNum">{props.targetAmount}</span> 원
+                <div className="currentAmount">
+                  <span className="blackNum">
+                    {props.currentAmount.toLocaleString()}
+                  </span>{" "}
+                  원
                 </div>
               </div>
             </State>
@@ -145,10 +158,13 @@ function StateGather({ props }) {
           </div>
           <div className="amount">
             <div className="currentAmount">
-              <span className="blackNum">{props.currentAmount}</span> 원
+              <span className="blackNum">
+                {props.currentAmount.toLocaleString()}
+              </span>{" "}
+              원
             </div>
             <div className="targetAmount">
-              <span>{props.targetAmount}</span> 원
+              <span>{props.targetAmount.toLocaleString()}</span> 원
             </div>
           </div>
         </State>

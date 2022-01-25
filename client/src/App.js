@@ -3,7 +3,7 @@ import styled from "styled-components";
 import AllRoutes from "./route/Routes";
 const MobileBox = styled.div`
   width: 375px;
-  height: 743px;
+  height: 734px;
   padding: 8px 20px;
   box-sizing: border-box;
   margin: 0 auto;
