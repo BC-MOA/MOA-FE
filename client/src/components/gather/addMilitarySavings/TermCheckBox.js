@@ -10,7 +10,7 @@ function TermCheckBox({
   isAllChecked,
   setIsAllChecked,
 }) {
-  const [checks, setChecks] = useState(false);
+  const [checks, setChecks] = useState([]);
   useEffect(() => {
     const checks = checkList.map((item) => {
       return item.isCheck;
@@ -19,7 +19,9 @@ function TermCheckBox({
   }, [checkList]);
 
   useEffect(() => {
-    setIsAllChecked(checks.reduce((a, b) => a * b));
+    if (checks.length) {
+      setIsAllChecked(checks.reduce((a, b) => a * b));
+    }
   }, [checks]);
 
   function funcChangeAllCheck() {
