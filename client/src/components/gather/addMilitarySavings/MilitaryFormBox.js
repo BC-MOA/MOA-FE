@@ -1,5 +1,4 @@
-import React, { Fragment } from "react";
-import { useEffect, useState } from "react/cjs/react.development";
+import React, { Fragment, useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import { v1 as uuid } from "uuid";
 import MilitaryAutoSavingForm from "./MilitaryAutoSavingForm";
