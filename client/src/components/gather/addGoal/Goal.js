@@ -151,10 +151,10 @@ function Goal() {
         targetAmount: calcAmount(inputs),
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputs.howOften, inputs.deadline]);
 
   useEffect(() => {
-    console.log("변경");
     if (inputs.depositMethod === "자동이체") {
       setInputs({
         ...inputs,
@@ -174,6 +174,7 @@ function Goal() {
         account: "",
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputs.depositMethod]);
 
   const onChange = (event) => {
@@ -278,6 +279,7 @@ function Goal() {
               name="account"
               onChange={onChange}
               accounts={accountList}
+              selected={inputs.account}
             ></CustomSelect>
           </InputEl>
         </Content>

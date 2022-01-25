@@ -12,24 +12,43 @@ const Select = styled.select`
   font-size: 16px;
   line-height: 25px;
   color: var(--Title_01);
-
+  background: ${(props) =>
+    `url(${props.bgUrl})no-repeat #fff 97% 50%/16px auto;`};
+  -webkit-appearance: none; /* for chrome */
+  -moz-appearance: none; /*for firefox*/
+  ::-ms-expand {
+    display: none; /*for IE10,11*/
+  }
+  &:not(.selected) {
+    color: var(--Line_01);
+  }
   option {
-    &:first-child {
-      color: var(--Body_01);
-    }
+    color: var(--Title_01);
   }
 `;
 
-function CustomSelect({ name, onChange, accounts }) {
+function CustomSelect({ name, onChange, accounts, selected }) {
+  const bgUrl = require("assets/gather/ic_select_arrow.svg").default;
+
   return (
-    <Select name={name} onChange={onChange}>
-      <option>출금계좌를 선택해주세요</option>
-      {accounts.map((x) => (
-        <option value={x.bank} key={x.accountNumber}>
-          {x.name}
+    <>
+      <Select
+        name={name}
+        className={selected !== "" ? "selected" : ""}
+        onChange={onChange}
+        bgUrl={bgUrl}
+        value={selected}
+      >
+        <option value="" disabled hidden>
+          출금계좌를 선택해주세요
         </option>
-      ))}
-    </Select>
+        {accounts.map((x) => (
+          <option value={x.bank} key={x.accountNumber}>
+            {x.name}
+          </option>
+        ))}
+      </Select>
+    </>
   );
 }
 
