@@ -4,7 +4,7 @@ import ScrollBox from "components/common/ScrollBox";
 import React, { useState } from "react";
 import styled from "styled-components";
 import AvailableSavingList from "./AvailableSavingList";
-import ContentControlBtn from "./ContentControlBtn";
+import ContentControlBtn from "components/gather/ContentControlBtn";
 function AddMilitarySavings() {
   const controlNameList = ["최고금리순", "기본금리순"];
   const [listControl, setListControl] = useState(controlNameList[0]);

@@ -7,20 +7,24 @@ import { ReactComponent as Clothes } from "assets/goal/clothes.svg";
 import { ReactComponent as Vacation } from "assets/goal/vacation.svg";
 import { ReactComponent as Medical } from "assets/goal/medical.svg";
 import { ReactComponent as Etc } from "assets/goal/etc.svg";
+import { ReactComponent as Bankbook } from "assets/goal/bankbook.svg";
+import { ReactComponent as Safebox } from "assets/goal/safebox.svg";
 
-function StoreSvg({ en_Name, name }) {
+function StoreSvg({ category }) {
   const icons = {
-    travel: Travel,
-    electronic: Electronic,
-    gift: Gift,
-    date: Date,
-    clothes: Clothes,
-    vacation: Vacation,
-    medical: Medical,
-    etc: Etc,
+    여행: Travel,
+    전자기기: Electronic,
+    선물: Gift,
+    데이트: Date,
+    의류: Clothes,
+    휴가비: Vacation,
+    의료비: Medical,
+    기타: Etc,
+    군적금: Bankbook,
+    비상금: Safebox,
   };
 
-  const SvgName = icons[en_Name];
+  const SvgName = icons[category];
 
   return (
     <>

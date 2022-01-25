@@ -40,9 +40,9 @@ const ElBox = styled.div`
 `;
 
 function CategoryEl({ El }) {
-  const { en_Name, kr_Name } = El;
+  const category = El;
   const { inputs, setInputs } = useContext(GoalContext);
-  const isSelected = inputs.category === El.kr_Name;
+  const isSelected = inputs.category === category;
 
   return (
     <Container
@@ -53,10 +53,10 @@ function CategoryEl({ El }) {
         });
       }}
     >
-      <ElBox selected={isSelected} name={kr_Name}>
-        <StoreSvg en_Name={en_Name} />
+      <ElBox selected={isSelected}>
+        <StoreSvg category={category} />
       </ElBox>
-      <div className="name">{kr_Name}</div>
+      <div className="name">{category}</div>
     </Container>
   );
 }
