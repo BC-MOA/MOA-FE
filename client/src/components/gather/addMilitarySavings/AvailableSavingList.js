@@ -2,21 +2,22 @@ import React, { useEffect, useState } from "react";
 import AvailableSavingItem from "./AvailableSavingItem";
 import { v1 as uuid } from "uuid";
 import styled from "styled-components";
-import { useMemo } from "react/cjs/react.development";
 
 function AvailableSavingList({ listControl }) {
   const [availableSavingList, setAvailableSavingList] = useState([]);
-  const sortedSavingList = useMemo(() => {
+  const [sortedSavingList, setSortedSavingList] = useState([]);
+  useEffect(() => {
     const copyList = JSON.parse(JSON.stringify(availableSavingList));
     if ("최고금리순" === listControl) {
-      return copyList.sort((a, b) => {
+      copyList.sort((a, b) => {
         return b.최대금리 - a.최대금리;
       });
     } else {
-      return copyList.sort((a, b) => {
+      copyList.sort((a, b) => {
         return b.기본금리 - a.기본금리;
       });
     }
+    setSortedSavingList(copyList);
   }, [listControl, availableSavingList]);
   useEffect(() => {
     getSavingList();
