@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import StyledLink from "components/common/StyledLink";
 
 //임시 data
 const data = {
@@ -27,10 +27,12 @@ const Container = styled.div`
 
 //Key
 const Key = (props) => (
-  <StyledKeyBox>
-    <img src={require("assets/compete/key-simple.svg").default} />
-    <div className="text">{props.count}개</div>
-  </StyledKeyBox>
+  <StyledLink to="/compete">
+    <StyledKeyBox>
+      <img src={require("assets/compete/key-simple.svg").default} />
+      <div className="text">{props.count}개</div>
+    </StyledKeyBox>
+  </StyledLink>
 );
 
 const StyledKeyBox = styled.div`
@@ -51,7 +53,7 @@ const StyledKeyBox = styled.div`
 //Bell
 //Home 컴포넌트로 이동하는 링크로 설정
 const Bell = (props) => (
-  <Link to="/compete">
+  <StyledLink to="/compete">
     <img
       src={
         props.alarm
@@ -59,7 +61,7 @@ const Bell = (props) => (
           : require("assets/compete/alarm-off.svg").default
       }
     />
-  </Link>
+  </StyledLink>
 );
 
 function CompHeader(props) {

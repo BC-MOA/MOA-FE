@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { css } from "styled-components";
 import React from "react";
-import { Link } from "react-router-dom";
 import { Key } from "./KeyBellHeader";
 import { BetButtonBox, StyledBetButton } from "./BetCardButton";
 import formatDate from "./DateChanger";
+import StyledLink from "components/common/StyledLink";
 
 //기본 카드 디자인
 const CardDesign = css`
@@ -43,10 +43,6 @@ const BetEndCard = styled.div`
   ${CardDesign}
 
   filter: grayscale(80%);
-`;
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
 `;
 
 const Date = styled.div`
