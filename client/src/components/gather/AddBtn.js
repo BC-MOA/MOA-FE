@@ -33,12 +33,8 @@ const Container = styled.div`
     line-height: 22px;
     text-align: left;
   }
-
-  /* & + & {
-    
-  } */
 `;
-function AddBtn({ name, gatherList, state, children }) {
+function AddBtn({ name, gatherList, children }) {
   const history = useNavigate();
   const movePages = {
     군적금: "add-militarySaving",
@@ -60,14 +56,8 @@ function AddBtn({ name, gatherList, state, children }) {
       </div>
       <div className="adText">{children}</div>
       {gatherList &&
-        state === "진행중" &&
         gatherList
-          .filter((x) => !x.isCompleted && x.category === name)
-          .map((x) => <StateGather key={name} props={x} />)}
-      {gatherList &&
-        state === "완료" &&
-        gatherList
-          .filter((x) => x.isCompleted && x.category === name)
+          .filter((x) => x.category === name)
           .map((x) => <StateGather key={name} props={x} />)}
     </Container>
   );

@@ -16,6 +16,20 @@ const Container = styled.div`
     `}
   box-sizing: border-box;
   background-color: #fff;
+
+  ${({ completed }) =>
+    completed === true &&
+    css`
+      /* background-color: #ebebeb; */
+      filter: grayscale(100%);
+      padding: 20px 20px 12px;
+      box-shadow: 0px 2px 4px rgba(33, 33, 33, 0.08);
+      border-radius: 20px;
+    `}
+
+  &+& {
+    margin-top: 12px;
+  }
 `;
 
 const Main = styled.div`
@@ -101,7 +115,7 @@ const State = styled.div`
 
 function StateGather({ props }) {
   return (
-    <Container category={props.category}>
+    <Container category={props.category} completed={props.isCompleted}>
       <Main>
         <Icon category={props.category}>
           {props.goal_category ? (
