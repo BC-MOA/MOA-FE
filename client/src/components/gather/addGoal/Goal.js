@@ -260,11 +260,7 @@ function Goal() {
             <CustomInput
               placeholder="모을 금액을 입력해주세요."
               disabled={inputs.depositMethod === "자동이체"}
-              value={
-                inputs.targetAmount
-                  ? Number(inputs.targetAmount).toLocaleString()
-                  : ""
-              }
+              value={inputs.targetAmount}
               onChange={onChange}
               name="targetAmount"
             />
