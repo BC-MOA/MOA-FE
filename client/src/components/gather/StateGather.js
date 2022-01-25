@@ -118,9 +118,9 @@ function StateGather({ props }) {
           {props.category === "비상금" && (
             <State style={{ marginTop: "2px" }}>
               <div className="amount">
-                <div className="targetAmount">
+                <div className="currentAmount">
                   <span className="blackNum">
-                    {props.targetAmount.toLocaleString()}
+                    {props.currentAmount.toLocaleString()}
                   </span>{" "}
                   원
                 </div>
