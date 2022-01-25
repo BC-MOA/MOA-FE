@@ -35,6 +35,13 @@ const Key = (props) => (
   </StyledLink>
 );
 
+const NoLinkKey = (props) => (
+  <StyledKeyBox>
+    <img src={require("assets/compete/key-simple.svg").default} />
+    <div className="text">{props.count}개</div>
+  </StyledKeyBox>
+);
+
 const StyledKeyBox = styled.div`
   width: 70px;
   height: 24px;
@@ -75,4 +82,4 @@ function CompHeader(props) {
   );
 }
 
-export { CompHeader, Key };
+export { CompHeader, Key, NoLinkKey };

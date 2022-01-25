@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { css } from "styled-components";
 import React from "react";
-import { Key } from "./KeyBellHeader";
+import { NoLinkKey } from "./KeyBellHeader";
 import { BetButtonBox, StyledBetButton } from "./BetCardButton";
 import formatDate from "./DateChanger";
 import StyledLink from "components/common/StyledLink";
@@ -146,7 +146,7 @@ function BetCompCard(props) {
           </Versus>
         </TextBox>
         <div>
-          <Key count={obj.bet}></Key>
+          <NoLinkKey count={obj.bet}></NoLinkKey>
           <Count>{obj.total}명 참여</Count>
         </div>
       </ContentBox>
