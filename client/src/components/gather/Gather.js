@@ -71,7 +71,7 @@ function Gather() {
       name: "아이패드 사기",
       currentAmount: 600000,
       targetAmount: 1000000,
-      isCompleted: true,
+      isCompleted: false,
     },
     {
       category: "비상금",
