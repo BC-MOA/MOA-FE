@@ -130,15 +130,33 @@ function Complete() {
                 </div>
               </InfoEl>
               <InfoEl className="Text">
-                <div>{userInfo.depositMethod}</div>
-                <div className="userInfo">{userInfo.howOften}</div>
+                <div>
+                  {userInfo.depositMethod === "자동이체"
+                    ? "자동이체"
+                    : "이체방법"}
+                </div>
+                <div className="userInfo">
+                  {userInfo.howOften !== "-"
+                    ? userInfo.howOften
+                    : userInfo.depositMethod}
+                </div>
               </InfoEl>
             </>
           )}
           <InfoEl className="Text">
-            <div>{name === "목표" ? "" : "보관"}금액</div>
+            <div>
+              {name !== "목표"
+                ? "보관"
+                : userInfo.amount === "-"
+                ? "목표 "
+                : ""}
+              금액
+            </div>
             <div className="userInfo green">
-              {Number(userInfo.amount).toLocaleString()} 원
+              {userInfo.amount !== "-"
+                ? Number(userInfo.amount).toLocaleString()
+                : Number(userInfo.targetAmount).toLocaleString()}{" "}
+              원
             </div>
           </InfoEl>
           <InfoEl className="Text">

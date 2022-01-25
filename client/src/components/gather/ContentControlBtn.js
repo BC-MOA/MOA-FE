@@ -5,7 +5,7 @@ import { v1 as uuid } from "uuid";
 function ContentControlBtn({
   marginBottom,
   controlNameList,
-  listControl,
+  listControl, // 예) ["최고금리순", "기본금리순"]
   setListControl,
   btnGap,
 }) {

@@ -12,39 +12,49 @@ const CategoryBox = styled.div`
 `;
 
 function Category() {
+  // const categories = [
+  //   {
+  //     en_Name: "travel",
+  //     kr_Name: "여행",
+  //   },
+  //   {
+  //     en_Name: "electronic",
+  //     kr_Name: "전자기기",
+  //   },
+  //   {
+  //     en_Name: "gift",
+  //     kr_Name: "선물",
+  //   },
+  //   {
+  //     en_Name: "date",
+  //     kr_Name: "데이트",
+  //   },
+  //   {
+  //     en_Name: "clothes",
+  //     kr_Name: "의류",
+  //   },
+  //   {
+  //     en_Name: "vacation",
+  //     kr_Name: "휴가비",
+  //   },
+  //   {
+  //     en_Name: "medical",
+  //     kr_Name: "의료비",
+  //   },
+  //   {
+  //     en_Name: "etc",
+  //     kr_Name: "기타",
+  //   },
+  // ];
   const categories = [
-    {
-      en_Name: "travel",
-      kr_Name: "여행",
-    },
-    {
-      en_Name: "electronic",
-      kr_Name: "전자기기",
-    },
-    {
-      en_Name: "gift",
-      kr_Name: "선물",
-    },
-    {
-      en_Name: "date",
-      kr_Name: "데이트",
-    },
-    {
-      en_Name: "clothes",
-      kr_Name: "의류",
-    },
-    {
-      en_Name: "vacation",
-      kr_Name: "휴가비",
-    },
-    {
-      en_Name: "medical",
-      kr_Name: "의료비",
-    },
-    {
-      en_Name: "etc",
-      kr_Name: "기타",
-    },
+    "여행",
+    "전자기기",
+    "선물",
+    "데이트",
+    "의류",
+    "휴가비",
+    "의료비",
+    "기타",
   ];
 
   return (
