@@ -23,7 +23,8 @@ const Container = styled.div`
   ${({ completed }) =>
     completed === true &&
     css`
-      /* background-color: #ebebeb; */
+      pointer-events: none;
+      background-color: #ebebeb;
       filter: grayscale(100%);
       padding: 20px 20px 12px;
       box-shadow: 0px 2px 4px rgba(33, 33, 33, 0.08);
