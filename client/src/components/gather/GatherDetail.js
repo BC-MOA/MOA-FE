@@ -73,7 +73,19 @@ const TransZero = styled.div`
 function GatherDetail() {
   const { state: gatherInfo } = useLocation();
 
-  const tr_lists = [];
+  const tr_lists = [
+    {
+      date: "1월 10일",
+      lists: [
+        {
+          name: "국군재정단",
+          time: "20:00",
+          amount: 200000,
+          total: 800000,
+        },
+      ],
+    },
+  ];
   return (
     <Container>
       <BackHeader path={-1} title={gatherInfo.name} isScrolled={true} />
