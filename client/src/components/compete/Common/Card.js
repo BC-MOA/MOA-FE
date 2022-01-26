@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { css } from "styled-components";
-import React from "react";
+import React, { useState } from "react";
 import { NoLinkKey } from "./KeyBellHeader";
-import { BetButtonBox, StyledBetButton } from "./BetCardButton";
+import { StyledBetButtonBox, StyledBetButton } from "./BetCardButton";
 import formatDate from "./DateChanger";
 import StyledLink from "components/common/StyledLink";
 
@@ -85,10 +85,18 @@ const Title = styled.div`
   text-align: left;
 `;
 
+const VersusCSS = css`
+  span:nth-child(${({ pick }) => (pick ? 1 : 3)}) {
+    color: var(--a3);
+  }
+`;
+
 const Versus = styled.div`
   font-size: 14px;
   font-family: "Pretendard-Medium";
   color: var(--Body_01);
+
+  ${VersusCSS};
 `;
 
 const Count = styled.div`
@@ -141,8 +149,10 @@ function BetCompCard(props) {
         <Thumb src={require("assets/compete/" + obj.thumb)} />
         <TextBox>
           <Title>{obj.title}</Title>
-          <Versus>
-            {obj.versus[0]} vs {obj.versus[1]}
+          <Versus pick={obj.pick}>
+            <span>{obj.versus[0]} </span>
+            <span>vs</span>
+            <span> {obj.versus[1]}</span>
           </Versus>
         </TextBox>
         <div>
@@ -150,10 +160,10 @@ function BetCompCard(props) {
           <Count>{obj.total}명 참여</Count>
         </div>
       </ContentBox>
-      <BetButtonBox>
-        <StyledBetButton type={true}></StyledBetButton>
-        <StyledBetButton type={false}></StyledBetButton>
-      </BetButtonBox>
+      <StyledBetButtonBox>
+        <StyledBetButton>배팅 수정</StyledBetButton>
+        <StyledBetButton>배팅 취소</StyledBetButton>
+      </StyledBetButtonBox>
     </BetCard>
   );
 }

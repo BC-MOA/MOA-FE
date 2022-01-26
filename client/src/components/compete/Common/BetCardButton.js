@@ -1,13 +1,6 @@
 import styled from "styled-components";
 
-function BetButton({ className, type }) {
-  //차후에 API 연결
-  return (
-    <button className={className}>{type ? "배칭수정" : "배팅취소"}</button>
-  );
-}
-
-const StyledBetButton = styled(BetButton)`
+const StyledBetButton = styled.button`
   border: none;
   border-radius: 8px;
 
@@ -26,8 +19,7 @@ const StyledBetButton = styled(BetButton)`
     cursor: pointer;
   }
 `;
-
-const BetButtonBox = styled.div`
+const StyledBetButtonBox = styled.div`
   width: 300px;
   height: 40px;
   margin: 5px auto;
@@ -37,4 +29,4 @@ const BetButtonBox = styled.div`
   justify-content: space-between;
 `;
 
-export { BetButtonBox, StyledBetButton };
+export { StyledBetButtonBox, StyledBetButton };

@@ -1,60 +1,23 @@
 import styled from "styled-components";
 import { BasicCompCard, BetEndCompCard } from "./common/Card";
 import { hideScrollBar } from "style/common";
+import CompeteContext from "./context/CompContext";
+import { useContext } from "react";
 
-//전체 챌린지 리스트
-const data = {
-  compList: [
-    {
-      //key
-      key: "A1",
-      due: new Date("2022-01-14T21:00:00"),
-      thumb: "music.png",
-      title: "오늘 뮤직뱅크 1위는?",
-      versus: ["아이유", "BTS"],
-      total: 100,
-    },
-    {
-      key: "A2",
-      due: new Date("2022-01-17T21:00:00"),
-      thumb: "worldsoccer.png",
-      title: "월드컵 예선 승자는?",
-      versus: ["벨기에", "스페인"],
-      total: 400,
-    },
-    {
-      key: "A3",
-      due: new Date("2022-01-11T21:00:00"),
-      thumb: "soccer.png",
-      title: "프리미어리그 경기 승자는?",
-      versus: ["맨시티", "리버풀"],
-      total: 320,
-    },
-    {
-      key: "A4",
-      due: new Date("2022-01-26T21:00:00"),
-      thumb: "game.png",
-      title: "롤챔스 경기 승자는?",
-      versus: ["NS", "DK"],
-      total: 300,
-    },
-  ],
-};
-
-function filterList(cond) {
+function filterList(cond, compList) {
   let filterdList;
   let cardList = [];
 
   if (cond != "done") {
     //popular
     if (cond === "popular") {
-      filterdList = data.compList.sort(
+      filterdList = compList.sort(
         (a, b) => parseInt(b.total) - parseInt(a.total)
       );
     }
     //recent
     else if (cond === "recent") {
-      filterdList = data.compList.sort((a, b) => b.due - a.due);
+      filterdList = compList.sort((a, b) => b.due - a.due);
     }
 
     for (const obj of filterdList) {
@@ -66,7 +29,7 @@ function filterList(cond) {
 
   //done
   const now = new Date();
-  let doneList = data.compList.filter((obj) => obj.due < now);
+  let doneList = compList.filter((obj) => obj.due < now);
   filterdList = doneList.sort((a, b) => b.due - a.due);
 
   for (const obj of filterdList) {
@@ -86,8 +49,10 @@ const StyledAllList = styled.div`
 `;
 
 //리스트-전체
-const AllList = (props) => (
-  <StyledAllList>{filterList(props.cond)}</StyledAllList>
-);
+const AllList = (props) => {
+  const compList = useContext(CompeteContext);
+
+  return <StyledAllList>{filterList(props.cond, compList)}</StyledAllList>;
+};
 
 export default AllList;
