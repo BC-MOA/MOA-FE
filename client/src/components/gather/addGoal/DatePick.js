@@ -60,22 +60,22 @@ const Container = styled.div`
 `;
 
 function DatePick() {
-  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
   const { inputs, setInputs } = useContext(GoalContext);
 
   return (
     <Container>
       <DatePicker
         showPopperArrow={false}
-        selected={startDate}
+        selected={endDate}
         onChange={(date) => {
-          setStartDate(date);
+          setEndDate(date);
           setInputs({
             ...inputs,
-            deadline: date,
+            eDate: date,
           });
         }}
-        minDate={subDays(new Date(), -32)}
+        minDate={subDays(inputs.sDate, -32)}
         placeholderText="목표한 날짜를 선택해주세요."
         dateFormat="yyyy년 MM월 dd일"
         dateFormatCalendar="yyyy년 MM월"

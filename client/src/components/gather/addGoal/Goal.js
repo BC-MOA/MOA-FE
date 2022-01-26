@@ -96,7 +96,8 @@ const SubSelectBox = styled.div`
 export const GoalContext = createContext({
   category: "",
   name: "",
-  deadline: "",
+  sDate: "",
+  eDate: "",
   isAuto: "",
   howOften: "",
   amount: "",
@@ -132,7 +133,8 @@ function Goal() {
   const [inputs, setInputs] = useState({
     category: "여행",
     name: "",
-    deadline: "",
+    sDate: new Date(),
+    eDate: "",
     depositMethod: "자동이체",
     howOften: "매월 10일",
     amount: "",
@@ -142,7 +144,7 @@ function Goal() {
 
   useEffect(() => {
     if (
-      inputs.deadline !== "" &&
+      inputs.eDate !== "" &&
       inputs.depositMethod === "자동이체" &&
       inputs.amount !== ""
     ) {
@@ -152,7 +154,7 @@ function Goal() {
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inputs.howOften, inputs.deadline]);
+  }, [inputs.howOften, inputs.eDate]);
 
   useEffect(() => {
     if (inputs.depositMethod === "자동이체") {
@@ -245,7 +247,7 @@ function Goal() {
                       setInputs({
                         ...inputs,
                         targetAmount:
-                          inputs.deadline !== "" ? calcAmount(inputs) : "",
+                          inputs.eDate !== "" ? calcAmount(inputs) : "",
                       });
                     }}
                     value={inputs.amount}
