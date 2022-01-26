@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { BetCompCard, BetEndCompCard } from "./common/Card";
 import { hideScrollBar } from "style/common";
 
-//전체 챌린지 리스트
+//내 챌린지 리스트
 const data = {
   compList: [
     {

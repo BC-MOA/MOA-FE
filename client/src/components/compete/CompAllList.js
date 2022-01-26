@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BasicCompCard } from "./common/Card";
+import { BasicCompCard, BetEndCompCard } from "./common/Card";
 import { hideScrollBar } from "style/common";
 
 //전체 챌린지 리스트
@@ -43,27 +43,34 @@ const data = {
 
 function filterList(cond) {
   let filterdList;
-
-  //popular
-  if (cond === "popular") {
-    filterdList = data.compList.sort(
-      (a, b) => parseInt(b.total) - parseInt(a.total)
-    );
-  }
-  //recent
-  else if (cond === "recent") {
-    filterdList = data.compList.sort((a, b) => b.due - a.due);
-  }
-  //done
-  else {
-    const now = new Date();
-    filterdList = data.compList.filter((obj) => obj.due < now);
-  }
-
   let cardList = [];
 
+  if (cond != "done") {
+    //popular
+    if (cond === "popular") {
+      filterdList = data.compList.sort(
+        (a, b) => parseInt(b.total) - parseInt(a.total)
+      );
+    }
+    //recent
+    else if (cond === "recent") {
+      filterdList = data.compList.sort((a, b) => b.due - a.due);
+    }
+
+    for (const obj of filterdList) {
+      cardList.push(<BasicCompCard key={obj.key} obj={obj}></BasicCompCard>);
+    }
+
+    return cardList;
+  }
+
+  //done
+  const now = new Date();
+  let doneList = data.compList.filter((obj) => obj.due < now);
+  filterdList = doneList.sort((a, b) => b.due - a.due);
+
   for (const obj of filterdList) {
-    cardList.push(<BasicCompCard key={obj.key} obj={obj}></BasicCompCard>);
+    cardList.push(<BetEndCompCard key={obj.key} obj={obj}></BetEndCompCard>);
   }
 
   return cardList;
