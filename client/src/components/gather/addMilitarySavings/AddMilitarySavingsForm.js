@@ -23,8 +23,6 @@ function AddMilitarySavingsForm() {
     savingType: controlNameList[0],
     formDataMonth: "",
     formDataAmount: "",
-    formDataDay: "",
-    formDataAccount: userAccountList[0],
   };
   const [formData, setFormData] = useState(AutoSavingFormTemp);
   const [isAvildForm, setIsAvildForm] = useState(true);
