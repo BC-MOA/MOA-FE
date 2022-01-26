@@ -31,7 +31,7 @@ function filterList(cond, compList) {
 }
 
 //리스트-참여중
-const MyList = styled.div`
+const StyledMyList = styled.div`
   background-color: var(--Surface);
   height: 550px;
 
@@ -40,10 +40,10 @@ const MyList = styled.div`
   ${hideScrollBar}
 `;
 
-const Result = (props) => {
+const MyList = (props) => {
   const compList = useContext(CompContext);
 
-  return <MyList>{filterList(props.cond, compList)}</MyList>;
+  return <StyledMyList>{filterList(props.cond, compList)}</StyledMyList>;
 };
 
-export default Result;
+export default MyList;

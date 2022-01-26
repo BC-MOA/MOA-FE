@@ -3,6 +3,8 @@ import { CompHeader } from "./common/KeyBellHeader";
 import Body from "./CompBody";
 import CompeteContext from "./context/CompContext";
 
+//전체 챌린지 리스트
+//단 사용자가 참여한 챌린지와 데이터 분리 필요
 const data = {
   compList: [
     {

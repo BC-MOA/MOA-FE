@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Banner from "./Banner";
 
+//Swiper
 const SwiperBox = styled.div`
   width: 335px;
   height: 76px;

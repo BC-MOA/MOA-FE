@@ -2,13 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import StyledLink from "components/common/StyledLink";
 
-//임시 data
+//임시 data-나중에 사용자 정보로 대체
 const data = {
   keyCount: 30,
   alarm: true,
 };
 
-//Header
+//Header-상단공간
 const Header = styled.div`
   height: 44px;
 
@@ -17,7 +17,7 @@ const Header = styled.div`
   align-items: center;
 `;
 
-//Container
+//Container-키,알람 컨테이너
 const Container = styled.div`
   width: 110px;
   display: flex;
@@ -58,7 +58,6 @@ const StyledKeyBox = styled.div`
 `;
 
 //Bell
-//Home 컴포넌트로 이동하는 링크로 설정
 const Bell = (props) => (
   <StyledLink to="/compete">
     <img

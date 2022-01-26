@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+//버튼 컨테이너
 const StyledBetButton = styled.button`
   border: none;
   border-radius: 8px;
@@ -19,6 +20,8 @@ const StyledBetButton = styled.button`
     cursor: pointer;
   }
 `;
+
+//버튼
 const StyledBetButtonBox = styled.div`
   width: 300px;
   height: 40px;

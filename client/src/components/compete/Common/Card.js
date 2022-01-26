@@ -45,6 +45,7 @@ const BetEndCard = styled.div`
   filter: grayscale(80%);
 `;
 
+//공통 요소
 const Date = styled.div`
   width: 108px;
   height: 19px;
@@ -115,10 +116,10 @@ const Count = styled.div`
   color: var(--a2);
 `;
 
+//기본카드 컴포넌트
 function BasicCompCard(props) {
   const obj = props.obj;
 
-  //월 일 요일 시간
   return (
     <StyledLink to={"/compete/" + obj.key} state={{ info: obj }}>
       <Card>
@@ -138,10 +139,10 @@ function BasicCompCard(props) {
   );
 }
 
+//배팅카드 컴포넌트
 function BetCompCard(props) {
   const obj = props.obj;
 
-  //월 일 요일 시간
   return (
     <BetCard>
       <Date>{formatDate(obj.due)} 마감</Date>
@@ -168,6 +169,7 @@ function BetCompCard(props) {
   );
 }
 
+//배팅 종료 카드 컴폰넌트
 function BetEndCompCard(props) {
   const obj = props.obj;
 
