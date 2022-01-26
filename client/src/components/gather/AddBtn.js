@@ -15,6 +15,7 @@ const Container = styled.div`
     font-family: "Pretendard-SemiBold";
     font-size: 18px;
     line-height: 28px;
+    margin-bottom: 2px;
 
     display: flex;
     justify-content: space-between;
