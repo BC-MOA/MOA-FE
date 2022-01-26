@@ -83,7 +83,6 @@ const Icon = styled.div`
 
 const State = styled.div`
   .progressbar {
-    height: 8px;
     margin: 17px 0 8px;
   }
   .amount {

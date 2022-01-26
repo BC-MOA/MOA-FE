@@ -25,13 +25,11 @@ export const calcAmount = (inputs) => {
       }
 
       const calc_eDate = moment(eDate).day(1)._d;
-      const weekCnt = moment(calc_eDate).diff(moment(calc_sDate), "weeks") + 2;
+      const weekCnt = moment(calc_eDate).diff(moment(calc_sDate), "weeks") + 1;
       return weekCnt * amount;
 
     case "매일":
-      const dayCnt = Math.ceil(
-        (eDate.getTime() - sDate.getTime()) / (1000 * 60 * 60 * 24)
-      );
+      const dayCnt = moment(eDate).diff(moment(sDate), "days") + 1;
       return dayCnt * amount;
 
     default:

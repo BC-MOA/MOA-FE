@@ -5,6 +5,7 @@ import { ko } from "date-fns/esm/locale";
 import { subDays } from "date-fns";
 import styled from "styled-components";
 import { GoalContext } from "./Goal";
+import moment from "moment";
 
 const Container = styled.div`
   .react-datepicker-popper {
@@ -72,7 +73,7 @@ function DatePick() {
           setEndDate(date);
           setInputs({
             ...inputs,
-            eDate: date,
+            eDate: moment(date).endOf("day")._d,
           });
         }}
         minDate={subDays(inputs.sDate, -32)}
