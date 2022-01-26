@@ -19,13 +19,13 @@ const TagBox = styled.div`
   ${({ children }) =>
     children === "목표" &&
     css`
-      color: #28a49d;
+      color: var(--subBlue);
       background-color: #28a49d26;
     `}
   ${({ children }) =>
     children === "비상금" &&
     css`
-      color: #e9af16;
+      color: var(--subYellow);
       background-color: #e9af1626;
     `}
 `;

@@ -4,11 +4,14 @@ import "react-step-progress-bar/styles.css";
 import { ProgressBar } from "react-step-progress-bar";
 import Tag from "components/common/Tag";
 import StoreSvg from "components/gather/addGoal/StoreSvg";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   margin: 0 -4px;
   height: fit-content;
   padding: 20px 0 0;
+  cursor: pointer;
+
   ${({ category }) =>
     category === "비상금" &&
     css`
@@ -83,7 +86,6 @@ const Icon = styled.div`
 
 const State = styled.div`
   .progressbar {
-    height: 8px;
     margin: 17px 0 8px;
   }
   .amount {
@@ -114,8 +116,17 @@ const State = styled.div`
 `;
 
 function StateGather({ props }) {
+  const history = useNavigate();
   return (
-    <Container category={props.category} completed={props.isCompleted}>
+    <Container
+      category={props.category}
+      completed={props.isCompleted}
+      onClick={() => {
+        history("detail", {
+          state: props,
+        });
+      }}
+    >
       <Main>
         <Icon category={props.category}>
           {props.goal_category ? (
@@ -150,7 +161,7 @@ function StateGather({ props }) {
             <ProgressBar
               percent={(props.currentAmount / props.targetAmount) * 100}
               filledBackground={
-                props.category === "군적금" ? "#4CAF5B" : "#28A49D"
+                props.category === "군적금" ? "var(--a2)" : "var(--Blue)"
               }
               unfilledBackground="#EBEBEB"
               height="8px"

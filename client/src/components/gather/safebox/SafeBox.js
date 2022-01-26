@@ -131,6 +131,7 @@ function SafeBox() {
             name="account"
             onChange={onChange}
             accounts={accountList}
+            selected={safeInputs.account}
           ></CustomSelect>
         </InputEl>
       </Content>
