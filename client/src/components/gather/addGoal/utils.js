@@ -29,10 +29,18 @@ export const calcAmount = (inputs) => {
       return weekCnt * amount;
 
     case "매일":
-      const dayCnt = moment(eDate).diff(moment(sDate), "days") + 1;
+      const dayCnt = calc_days(sDate, eDate);
       return dayCnt * amount;
 
     default:
       break;
   }
+};
+
+export const calc_dDay = (sDate, eDate) => {
+  return moment(eDate).diff(moment(sDate), "days");
+};
+
+export const calc_days = (sDate, eDate) => {
+  return moment(eDate).diff(moment(sDate), "days") + 1;
 };
