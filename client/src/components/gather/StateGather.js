@@ -149,7 +149,7 @@ function StateGather({ props }) {
             <ProgressBar
               percent={(props.currentAmount / props.targetAmount) * 100}
               filledBackground={
-                props.category === "군적금" ? "#4CAF5B" : "#28A49D"
+                props.category === "군적금" ? "var(--a2)" : "var(--Blue)"
               }
               unfilledBackground="#EBEBEB"
               height="8px"

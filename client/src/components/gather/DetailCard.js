@@ -8,7 +8,7 @@ import { calc_dDay, calc_days } from "components/gather/addGoal/utils";
 import moment from "moment";
 
 const Content = styled.div`
-  margin-top: 12px;
+  margin: 12px 0 32px;
   background-color: #fff;
   padding: 24px 20px;
   box-shadow: 0px 1px 2px rgba(148, 74, 74, 0.08);
@@ -44,7 +44,7 @@ const Content = styled.div`
     }
     &.blue {
       margin-top: 20px;
-      color: var(--blue);
+      color: var(--subBlue);
     }
   }
   .l_space {
@@ -52,9 +52,6 @@ const Content = styled.div`
   }
   .bold {
     font-weight: 500;
-  }
-  .number {
-    font-family: "Roboto";
   }
 
   .progressbar {
@@ -126,7 +123,9 @@ function DetailCard({ gatherInfo }) {
             <ProgressBar
               percent={20}
               filledBackground={
-                gatherInfo.category === "군적금" ? "#4CAF5B" : "#28A49D"
+                gatherInfo.category === "군적금"
+                  ? "var(--a2)"
+                  : "var(--subBlue)"
               }
               unfilledBackground="#EBEBEB"
               height="12px"
@@ -143,14 +142,16 @@ function DetailCard({ gatherInfo }) {
           <CustomBtn
             padding={8}
             active={true}
-            bgcolor={gatherInfo.category === "목표" ? "var(--blue)" : ""}
+            bgcolor={gatherInfo.category === "목표" ? "var(--Blue)" : ""}
           >
             입금하기
           </CustomBtn>
         </>
       ) : (
         <SafeBtns>
-          <CustomBtn padding={8}>모으기</CustomBtn>
+          <CustomBtn padding={8} active={true} bgcolor="#EAAC0B">
+            모으기
+          </CustomBtn>
           <CustomBtn padding={8}>꺼내기</CustomBtn>
         </SafeBtns>
       )}
