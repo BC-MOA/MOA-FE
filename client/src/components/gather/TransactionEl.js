@@ -81,6 +81,10 @@ const Icon = styled.div`
   height: 48px;
   background: #edefed;
   border-radius: 50%;
+
+  path {
+    stroke: #212121;
+  }
 `;
 
 function TransactionEl({ lists, children }) {

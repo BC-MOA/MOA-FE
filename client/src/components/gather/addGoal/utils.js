@@ -37,8 +37,8 @@ export const calcAmount = (inputs) => {
   }
 };
 
-export const calc_dDay = (sDate, eDate) => {
-  return moment(eDate).diff(moment(sDate), "days");
+export const calc_dDay = (eDate) => {
+  return moment(eDate).diff(moment(), "days");
 };
 
 export const calc_days = (sDate, eDate) => {

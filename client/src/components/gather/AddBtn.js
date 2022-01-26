@@ -59,7 +59,7 @@ function AddBtn({ name, gatherList, children }) {
       {gatherList &&
         gatherList
           .filter((x) => x.category === name)
-          .map((x) => <StateGather key={name} props={x} />)}
+          .map((x, idx) => <StateGather key={idx} props={x} />)}
     </Container>
   );
 }

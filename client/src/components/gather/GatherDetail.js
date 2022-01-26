@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import BackHeader from "components/common/BackHeader";
 import DetailCard from "./DetailCard";
 import TransactionEl from "./TransactionEl";
 import { hideScrollBar } from "style/common";
 import { useLocation } from "react-router-dom";
+import Modal from "components/common/Modal";
 
 const Container = styled.div`
   width: 100%;
   height: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
   .title {
@@ -21,6 +23,19 @@ const Container = styled.div`
   }
   .number {
     font-family: "Roboto";
+  }
+  .fixBtn {
+    position: absolute;
+    top: 4px;
+    right: 0;
+    margin: 0;
+    padding: 0 10px;
+    border: none;
+    background: none;
+
+    &.none {
+      display: none;
+    }
   }
 `;
 
@@ -72,11 +87,30 @@ const TransZero = styled.div`
 
 function GatherDetail() {
   const { state: gatherInfo } = useLocation();
+  const [modal, setModal] = useState(false);
 
-  const tr_lists = [];
+  const tr_lists = [
+    {
+      date: "1월 10일",
+      lists: [
+        {
+          name: "국군재정단",
+          time: "20:00",
+          amount: 200000,
+          total: 800000,
+        },
+      ],
+    },
+  ];
   return (
     <Container>
       <BackHeader path={-1} title={gatherInfo.name} isScrolled={true} />
+      <button
+        className={gatherInfo.category === "비상금" ? "fixBtn none" : "fixBtn"}
+        onClick={() => setModal(true)}
+      >
+        <img src={require("assets/ic_fix.svg").default} alt="수정하기" />
+      </button>
       <DetailCard gatherInfo={gatherInfo} />
       <div className="title">거래내역</div>
       <Content className={tr_lists.length ? "" : "zero"}>
@@ -100,6 +134,7 @@ function GatherDetail() {
           </TransZero>
         )}
       </Content>
+      {modal ? <Modal setModal={setModal} /> : <></>}
     </Container>
   );
 }
