@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import StoreSvg from "components/gather/addGoal/StoreSvg";
 
 const Container = styled.div`

@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import Tag from "components/common/Tag";
 import CustomBtn from "./addGoal/CustomBtn";
 import "react-step-progress-bar/styles.css";

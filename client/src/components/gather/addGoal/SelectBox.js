@@ -32,7 +32,7 @@ const BoxEl = styled.div`
     isSelected === true &&
     css`
       color: var(--a2);
-      border: 1.5px solid green;
+      border: 1.5px solid var(--a2);
       z-index: 1;
     `}
 `;

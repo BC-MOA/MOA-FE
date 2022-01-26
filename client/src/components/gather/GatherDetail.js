@@ -4,6 +4,7 @@ import BackHeader from "components/common/BackHeader";
 import DetailCard from "./DetailCard";
 import TransactionEl from "./TransactionEl";
 import { hideScrollBar } from "style/common";
+import { useLocation } from "react-router-dom";
 
 const Container = styled.div`
   width: 100%;
@@ -70,23 +71,7 @@ const TransZero = styled.div`
 `;
 
 function GatherDetail() {
-  const userInfo = {
-    startDate: "2020-01-10",
-    endDate: "2022.12.10",
-  };
-  const gatherInfo = {
-    category: "비상금",
-    name: "320만원 모으기",
-    currentAmount: 800000,
-    targetAmount: 3200000,
-    isCompleted: false,
-    account: {
-      name: "신한",
-      number: "112-0330-0201",
-    },
-    sDate: "Mon Jan 24 2022 15:11:39 GMT+0900",
-    eDate: "Sat Jan 29 2022 23:59:59 GMT+0900",
-  };
+  const { state: gatherInfo } = useLocation();
 
   const tr_lists = [];
   return (
