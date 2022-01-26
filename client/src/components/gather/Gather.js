@@ -60,7 +60,7 @@ function Gather() {
   const gatherList = [
     {
       category: "군적금",
-      name: "장병내일준비적금 (국민)",
+      name: "320만원 모으기",
       currentAmount: 800000,
       targetAmount: 3200000,
       isCompleted: false,
