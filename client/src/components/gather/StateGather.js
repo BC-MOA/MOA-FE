@@ -5,6 +5,7 @@ import { ProgressBar } from "react-step-progress-bar";
 import Tag from "components/common/Tag";
 import StoreSvg from "components/gather/addGoal/StoreSvg";
 import { useNavigate } from "react-router-dom";
+import { calc_dDay, calc_days } from "components/gather/addGoal/utils";
 
 const Container = styled.div`
   margin: 0 -4px;
@@ -24,15 +25,13 @@ const Container = styled.div`
     completed === true &&
     css`
       pointer-events: none;
-      background-color: #ebebeb;
       filter: grayscale(100%);
       padding: 20px 20px 12px;
-      box-shadow: 0px 2px 4px rgba(33, 33, 33, 0.08);
-      border-radius: 20px;
+      border-radius: 12px;
     `}
 
   &+& {
-    margin-top: 12px;
+    margin-top: 16px;
   }
 `;
 
@@ -116,12 +115,12 @@ const State = styled.div`
   }
 `;
 
-function StateGather({ props }) {
+function StateGather({ props, completed }) {
   const history = useNavigate();
   return (
     <Container
       category={props.category}
-      completed={props.isCompleted}
+      completed={completed}
       onClick={() => {
         history("detail", {
           state: props,
@@ -140,7 +139,9 @@ function StateGather({ props }) {
         </Icon>
         <div className="content">
           <div>{props.name}</div>
-          {props.category !== "비상금" && <div className="dDay">D-123</div>}
+          {props.category !== "비상금" && (
+            <div className="dDay">D-{calc_dDay(props.eDate)}</div>
+          )}
           {props.category === "비상금" && (
             <State style={{ marginTop: "2px" }}>
               <div className="amount">
