@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { css } from "styled-components";
-
+import { v1 as uuid } from "uuid";
 function RewardBoxItem({ boxItem }) {
   return (
     <BoxCard>
@@ -14,7 +14,9 @@ function RewardBoxItem({ boxItem }) {
       <BoxDescription>
         <span className="bold">[획득 가능 상품]</span>
         {boxItem.boxDescription &&
-          boxItem.boxDescription.map((item) => <span>{item}</span>)}
+          boxItem.boxDescription.map((item) => (
+            <span key={uuid()}>{item}</span>
+          ))}
       </BoxDescription>
       <BoxPrice>
         <img src={require(`assets/ic_key_small.svg`).default} alt="열쇠개수" />
@@ -64,7 +66,7 @@ const BoxImage = css`
 `;
 const BoxCard = styled.div`
   width: 160px;
-  /* min-height: 258px; */
+  min-height: 254px;
   background: #ffffff;
   box-shadow: 0px 1px 2px rgba(33, 33, 33, 0.08);
   border-radius: 12px;
