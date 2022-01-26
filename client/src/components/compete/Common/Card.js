@@ -5,6 +5,7 @@ import { NoLinkKey } from "./KeyBellHeader";
 import { StyledBetButtonBox, StyledBetButton } from "./BetCardButton";
 import formatDate from "./DateChanger";
 import StyledLink from "components/common/StyledLink";
+import kFormatter from "./kFormatter";
 
 //기본 카드 디자인
 const CardDesign = css`
@@ -47,7 +48,7 @@ const BetEndCard = styled.div`
 
 //공통 요소
 const Date = styled.div`
-  width: 108px;
+  max-width: 120px;
   height: 19px;
   font-size: 12px;
   font-family: "Pretendard-Medium";
@@ -132,7 +133,7 @@ function BasicCompCard(props) {
               {obj.versus[0]} vs {obj.versus[1]}
             </Versus>
           </TextBox>
-          <Count>{obj.total}명 참여</Count>
+          <Count>{kFormatter(obj.total)}명 참여</Count>
         </ContentBox>
       </Card>
     </StyledLink>
@@ -158,7 +159,7 @@ function BetCompCard(props) {
         </TextBox>
         <div>
           <NoLinkKey count={obj.bet}></NoLinkKey>
-          <Count>{obj.total}명 참여</Count>
+          <Count>{kFormatter(obj.total)}명 참여</Count>
         </div>
       </ContentBox>
       <StyledBetButtonBox>
@@ -184,11 +185,11 @@ function BetEndCompCard(props) {
           </Versus>
         </TextBox>
         <div>
-          <Count>{obj.total}명 참여</Count>
+          <Count>{kFormatter(obj.total)}명 참여</Count>
         </div>
       </ContentBox>
     </BetEndCard>
   );
 }
 
-export { BasicCompCard, BetCompCard, BetEndCompCard };
+export { BasicCompCard, BetCompCard, BetEndCompCard, Count, Date };

@@ -71,8 +71,6 @@ const StyledAllList = styled.div`
 const AllList = (props) => {
   const compList = useContext(CompeteContext);
 
-  console.log(compList);
-
   return <StyledAllList>{filterList(props.cond, compList)}</StyledAllList>;
 };
 
