@@ -189,7 +189,7 @@ const InputBox = css`
 const InterestBox = css`
   display: flex;
   justify-content: space-between;
-
+  margin-top: 8px;
   .boxItem {
     display: flex;
     flex-direction: column;
@@ -202,6 +202,12 @@ const InterestBox = css`
       color: var(--Title_01);
       .green {
         color: var(--a2);
+        display: inline-block;
+        text-align: start;
+      }
+      .empty {
+        min-width: 80px;
+        text-align: end;
       }
       .roboto {
         font-family: "Roboto";
