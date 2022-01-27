@@ -22,13 +22,16 @@ function EditSavingTitle({ isSubmit, setIsSubmit }) {
     <EditSavingTitleStyle isSubmit={isSubmit}>
       <Container>
         <Header>
-          <img
-            onClick={() => {
-              setIsSubmit(false);
-            }}
-            src={require("assets/ic_close.svg").default}
-            alt="나가기"
-          />
+          <div>
+            {/* todo 버튼 클릭시 군적금 신청 set api 호출필요 - 호출이후 gather로 이동*/}
+            <span
+              onClick={() => {
+                history("/gather");
+              }}
+            >
+              다음에 하기
+            </span>
+          </div>
         </Header>
         <div className="content">
           <EditTitle
@@ -37,7 +40,7 @@ function EditSavingTitle({ isSubmit, setIsSubmit }) {
             setNewTitle={setNewTitle}
             setIsInputChange={setIsInputChange}
           />
-
+          {/* todo - 버튼 클릭시 군적금 신청 set api 호출필요 - 호출이후 gather로 이동*/}
           <SubmitButton
             title={"목표 설정 완료"}
             onClickFunc={() => {
@@ -55,11 +58,12 @@ const Header = styled.div`
   padding: 5px 4px;
   margin-bottom: calc(13px - 5px);
   text-align: end;
-  img {
-    width: 18px;
-    &:hover {
-      cursor: pointer;
-    }
+  font-family: "Pretendard-Regular";
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--Body_02);
+  span:hover {
+    cursor: pointer;
   }
 `;
 const EditSavingTitleStyle = styled.div`
