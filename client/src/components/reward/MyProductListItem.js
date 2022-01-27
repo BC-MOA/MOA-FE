@@ -14,7 +14,7 @@ function MyProductListItem({ item, listControl }) {
       {/* todo item의 id값을 넣어주는 것으로 변경 id라는 변수 명을 넣어줘야함 */}
       <label
         onClick={() => {
-          history(`${pathname}/${item.id}`, { state: { pathname, item } });
+          history(`${pathname}/${item.id}`, { state: { item } });
         }}
       >
         <img
