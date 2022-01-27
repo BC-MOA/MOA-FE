@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 function RewardUserInfo() {
+  const history = useNavigate();
+  const userId = "1234";
   return (
     <UserInfo>
       <div className="userKeyNum">
@@ -11,7 +14,12 @@ function RewardUserInfo() {
         </div>
         <div className="infoTitle">내 열쇠 개수</div>
       </div>
-      <label className="userRewardNum">
+      <label
+        onClick={() => {
+          history(`/reward/${userId}`);
+        }}
+        className="userRewardNum"
+      >
         <div className="header">
           <span>2</span>
         </div>
