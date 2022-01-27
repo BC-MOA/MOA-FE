@@ -70,20 +70,22 @@ function Gather() {
       },
       sDate: "Sun Oct 10 2021 15:11:39 GMT+0900",
       eDate: "Sat Sep 10 2022 23:59:59 GMT+0900",
+      depositMethod: "자유입금",
     },
-    {
-      category: "목표",
-      goal_category: "전자기기",
-      name: "아이패드 사기",
-      currentAmount: 600000,
-      targetAmount: 1000000,
-      account: {
-        name: "KB국민",
-        number: "113-456-78-910111",
-      },
-      sDate: "Wed Nov 10 2021 15:11:39 GMT+0900",
-      eDate: "Sat Dec 10 2022 23:59:59 GMT+0900",
-    },
+    // {
+    //   category: "목표",
+    //   goal_category: "전자기기",
+    //   name: "아이패드 사기",
+    //   currentAmount: 600000,
+    //   targetAmount: 1000000,
+    //   account: {
+    //     name: "KB국민",
+    //     number: "113-456-78-910111",
+    //   },
+    //   sDate: "Wed Nov 10 2021 15:11:39 GMT+0900",
+    //   eDate: "Sat Dec 10 2022 23:59:59 GMT+0900",
+    //   depositMethod: '자동이체',
+    // },
     {
       category: "비상금",
       name: "비상금",
@@ -104,6 +106,7 @@ function Gather() {
       },
       sDate: "Sun Oct 10 2021 15:11:39 GMT+0900",
       eDate: "Sat Dec 10 2022 23:59:59 GMT+0900",
+      depositMethod: "자동이체",
     },
     {
       category: "목표",
@@ -117,6 +120,20 @@ function Gather() {
       },
       sDate: "Wed Nov 10 2021 15:11:39 GMT+0900",
       eDate: "Wed Jan 26 2022 23:59:59 GMT+0900",
+      depositMethod: "자유입금",
+    },
+    {
+      category: "군적금",
+      name: "100만원 모으기",
+      currentAmount: 60000,
+      targetAmount: 100000,
+      account: {
+        name: "IBK기업",
+        number: "112-0330-0201-55",
+      },
+      sDate: "Sun Oct 10 2021 15:11:39 GMT+0900",
+      eDate: "Sat Jan 15 2022 23:59:59 GMT+0900",
+      depositMethod: "자유입금",
     },
   ];
 
