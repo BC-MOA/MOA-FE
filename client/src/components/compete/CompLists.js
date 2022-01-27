@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SetType, Type } from "./common/SetCategory";
+import { SetType, Type } from "./comp/SetCategory";
 import AllList from "./CompAllList";
 import MyList from "./CompMyList";
 

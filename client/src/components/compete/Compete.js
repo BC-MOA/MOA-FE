@@ -1,5 +1,5 @@
 import React from "react";
-import { CompHeader } from "./common/KeyBellHeader";
+import { Header } from "../common/Header";
 import Body from "./CompBody";
 import CompeteContext from "./context/CompContext";
 import NavBar from "components/common/NavBar";
@@ -89,7 +89,7 @@ function Compete() {
   return (
     <>
       <CompeteContext.Provider value={data.compList}>
-        <CompHeader></CompHeader>
+        <Header title={false} keys={3000} alarm={true}></Header>
         <Body></Body>
       </CompeteContext.Provider>
       <StyledNavBar></StyledNavBar>
