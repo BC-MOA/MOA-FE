@@ -6,6 +6,7 @@ import { hideScrollBar } from "style/common";
 import NavBar from "components/common/NavBar";
 import StateGather from "components/gather/StateGather";
 import { ReactSortable } from "react-sortablejs";
+import moment from "moment";
 
 const Container = styled.div`
   position: relative;
@@ -60,32 +61,88 @@ function Gather() {
   const gatherList = [
     {
       category: "군적금",
-      name: "장병내일준비적금 (국민)",
+      name: "320만원 모으기",
       currentAmount: 800000,
       targetAmount: 3200000,
-      isCompleted: false,
+      account: {
+        name: "신한",
+        number: "112-0330-0201",
+      },
+      sDate: "Sun Oct 10 2021 15:11:39 GMT+0900",
+      eDate: "Sat Sep 10 2022 23:59:59 GMT+0900",
+      depositMethod: "자유입금",
     },
-    {
-      category: "목표",
-      goal_category: "전자기기",
-      name: "아이패드 사기",
-      currentAmount: 600000,
-      targetAmount: 1000000,
-      isCompleted: false,
-    },
+    // {
+    //   category: "목표",
+    //   goal_category: "전자기기",
+    //   name: "아이패드 사기",
+    //   currentAmount: 600000,
+    //   targetAmount: 1000000,
+    //   account: {
+    //     name: "KB국민",
+    //     number: "113-456-78-910111",
+    //   },
+    //   sDate: "Wed Nov 10 2021 15:11:39 GMT+0900",
+    //   eDate: "Sat Dec 10 2022 23:59:59 GMT+0900",
+    //   depositMethod: '자동이체',
+    // },
     {
       category: "비상금",
       name: "비상금",
       currentAmount: 100000,
-      isCompleted: false,
+      account: {
+        name: "NH국민",
+        number: "123-456-78-103556",
+      },
+    },
+    {
+      category: "군적금",
+      name: "100만원 모으기",
+      currentAmount: 100000,
+      targetAmount: 100000,
+      account: {
+        name: "IBK기업",
+        number: "112-0330-0201-55",
+      },
+      sDate: "Sun Oct 10 2021 15:11:39 GMT+0900",
+      eDate: "Sat Dec 10 2022 23:59:59 GMT+0900",
+      depositMethod: "자동이체",
+    },
+    {
+      category: "목표",
+      goal_category: "선물",
+      name: "조카 선물😎",
+      currentAmount: 150000,
+      targetAmount: 150000,
+      account: {
+        name: "NH농협",
+        number: "356-0915-7261-11",
+      },
+      sDate: "Wed Nov 10 2021 15:11:39 GMT+0900",
+      eDate: "Wed Jan 26 2022 23:59:59 GMT+0900",
+      depositMethod: "자유입금",
+    },
+    {
+      category: "군적금",
+      name: "100만원 모으기",
+      currentAmount: 60000,
+      targetAmount: 100000,
+      account: {
+        name: "IBK기업",
+        number: "112-0330-0201-55",
+      },
+      sDate: "Sun Oct 10 2021 15:11:39 GMT+0900",
+      eDate: "Sat Jan 15 2022 23:59:59 GMT+0900",
+      depositMethod: "자유입금",
     },
   ];
 
   const totalAmount = gatherList.reduce((acc, cur) => {
     return (acc += cur.currentAmount);
   }, 0);
-  const inProgressList = gatherList.filter((x) => !x.isCompleted);
-  const completedList = gatherList.filter((x) => x.isCompleted);
+
+  const inProgressList = gatherList.filter((x) => !moment().isAfter(x.eDate));
+  const completedList = gatherList.filter((x) => moment().isAfter(x.eDate));
 
   const controlNameList = ["진행중", "완료"];
   const [listControl, setListControl] = useState(controlNameList[0]);
@@ -137,8 +194,8 @@ function Gather() {
           </ReactSortable>
         ) : (
           <>
-            {completedList.map((x) => (
-              <StateGather key={x.name} props={x} />
+            {completedList.map((x, idx) => (
+              <StateGather key={idx} props={x} completed />
             ))}
           </>
         )}

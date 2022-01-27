@@ -19,24 +19,33 @@ const Btn = styled.button`
       color: #fff;
       background-color: var(--a2);
     `}
+
+  ${({ padding }) => css`
+    padding: ${padding}px 0;
+    font-family: "Pretendard-Regular";
+  `}
+  ${({ bgcolor }) =>
+    css`
+      background-color: ${bgcolor};
+    `}
 `;
 
-function CustomBtn({ path, data, active, children }) {
+function CustomBtn({ path, data, active, children, padding, bgcolor }) {
   const history = useNavigate();
   return (
-    <div>
-      <Btn
-        Active={active}
-        disabled={!active}
-        onClick={() => {
-          history(path, {
-            state: data,
-          });
-        }}
-      >
-        {children}
-      </Btn>
-    </div>
+    <Btn
+      Active={active}
+      disabled={!active}
+      onClick={() => {
+        history(path, {
+          state: data,
+        });
+      }}
+      padding={padding}
+      bgcolor={bgcolor}
+    >
+      {children}
+    </Btn>
   );
 }
 

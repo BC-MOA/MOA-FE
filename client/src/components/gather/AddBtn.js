@@ -15,6 +15,7 @@ const Container = styled.div`
     font-family: "Pretendard-SemiBold";
     font-size: 18px;
     line-height: 28px;
+    margin-bottom: 2px;
 
     display: flex;
     justify-content: space-between;
@@ -58,7 +59,7 @@ function AddBtn({ name, gatherList, children }) {
       {gatherList &&
         gatherList
           .filter((x) => x.category === name)
-          .map((x) => <StateGather key={name} props={x} />)}
+          .map((x, idx) => <StateGather key={idx} props={x} />)}
     </Container>
   );
 }

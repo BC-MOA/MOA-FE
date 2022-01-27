@@ -5,6 +5,7 @@ import { ko } from "date-fns/esm/locale";
 import { subDays } from "date-fns";
 import styled from "styled-components";
 import { GoalContext } from "./Goal";
+import moment from "moment";
 
 const Container = styled.div`
   .react-datepicker-popper {
@@ -60,22 +61,22 @@ const Container = styled.div`
 `;
 
 function DatePick() {
-  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
   const { inputs, setInputs } = useContext(GoalContext);
 
   return (
     <Container>
       <DatePicker
         showPopperArrow={false}
-        selected={startDate}
+        selected={endDate}
         onChange={(date) => {
-          setStartDate(date);
+          setEndDate(date);
           setInputs({
             ...inputs,
-            deadline: date,
+            eDate: moment(date).endOf("day")._d,
           });
         }}
-        minDate={subDays(new Date(), -32)}
+        minDate={subDays(inputs.sDate, -32)}
         placeholderText="목표한 날짜를 선택해주세요."
         dateFormat="yyyy년 MM월 dd일"
         dateFormatCalendar="yyyy년 MM월"
