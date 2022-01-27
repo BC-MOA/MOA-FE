@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { ReactComponent as CloseBtn } from "assets/ic_close.svg";
+import { useNavigate } from "react-router-dom";
 
 const Background = styled.div`
   position: absolute;
@@ -52,14 +53,39 @@ const ModalBox = styled.div`
   }
 `;
 
-function Modal({ setModal }) {
+function Modal({ setModal, props }) {
+  const history = useNavigate();
   return (
     <Background>
       <ModalBox>
         <div>더보기</div>
-        <div>목표 수정</div>
-        <div>자동이체 변경</div>
-        <div>중도해지</div>
+        <div
+          onClick={() => {
+            history("edit-goal", {
+              state: props,
+            });
+          }}
+        >
+          목표 수정
+        </div>
+        <div
+          onClick={() => {
+            history("edit-deposit", {
+              state: props,
+            });
+          }}
+        >
+          자동이체 {props.depositMethod === "자동이체" ? "변경" : "등록"}
+        </div>
+        <div
+          onClick={() => {
+            history("midterm-termination", {
+              state: props,
+            });
+          }}
+        >
+          중도해지
+        </div>
         <CloseBtn className="closeBtn" onClick={() => setModal(false)} />
       </ModalBox>
     </Background>
