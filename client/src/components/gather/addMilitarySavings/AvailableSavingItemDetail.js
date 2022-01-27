@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import ContentControlBtn from "../ContentControlBtn";
-
+import { v1 as uuid } from "uuid";
 function AvailableSavingItemDetail() {
   const controlNameList = ["상품안내", "금리이율", "유의사항"];
   const { state: item } = useLocation();
@@ -70,6 +70,7 @@ function AvailableSavingItemDetail() {
           {controlNameList &&
             controlNameList.map((item, index) => (
               <div
+                key={uuid()}
                 className={
                   controlNameList[index] === listControl ? "isSelect" : ""
                 }
