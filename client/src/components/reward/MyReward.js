@@ -4,9 +4,47 @@ import ScrollBox from "components/common/ScrollBox";
 import React from "react";
 import { useState } from "react/cjs/react.development";
 import styled from "styled-components";
+import MyBoxList from "./MyBoxList";
+import MyRewardList from "./MyRewardList";
 const tabList = ["MOA 박스", "리워드"];
+const userBoxList = [
+  {
+    boxName: "MOA박스",
+    boxPrice: "7",
+    boxDescription: ["다양한 PX 간식", "(냉동 식품 제외)"],
+  },
+  {
+    boxName: "야금야금MOA박스",
+    boxPrice: "12",
+    boxDescription: ["PX 냉동식품", "PC방 2천원 금액권", "카페 기프티콘"],
+  },
+  {
+    boxName: "왕창MOA박스",
+    boxPrice: "20",
+    boxDescription: ["PX 50% 할인권", "PC방 2천원 금액권", "카페 기프티콘"],
+  },
+  {
+    boxName: "영끌MOA박스",
+    boxPrice: "30",
+    boxDescription: [
+      "PX 1만원 금액권",
+      "PC방 1만원 금액권",
+      "치킨, 피자 기프티콘",
+    ],
+  },
+  {
+    boxName: "영끌MOA박스",
+    boxPrice: "30",
+    boxDescription: [
+      "PX 1만원 금액권",
+      "PC방 1만원 금액권",
+      "치킨, 피자 기프티콘",
+    ],
+  },
+];
 function MyReward() {
   const [tabName, setTabName] = useState(tabList[0]);
+
   return (
     <Container>
       <BackHeader
@@ -33,7 +71,14 @@ function MyReward() {
           {tabList[1]}(1)
         </div>
       </TabBox>
-      <ScrollBox paddingValue={"36px 0 0 0"}></ScrollBox>
+      <ScrollBox paddingValue={"36px 0 0 0"}>
+        <MyBoxList
+          userBoxList={userBoxList}
+          tabList={tabList}
+          tabName={tabName}
+        />
+        <MyRewardList tabList={tabList} tabName={tabName} />
+      </ScrollBox>
     </Container>
   );
 }
