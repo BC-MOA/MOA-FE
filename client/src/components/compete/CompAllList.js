@@ -62,7 +62,7 @@ function filterList(cond, compList) {
 
 const StyledAllList = styled.div`
   background-color: var(--Surface);
-  height: 400px;
+  height: 385px;
 
   padding: 0 20px 49px;
 

@@ -35,7 +35,7 @@ function filterList(cond, compList) {
 //리스트-참여중
 const StyledMyList = styled.div`
   background-color: var(--Surface);
-  height: 550px;
+  height: 480px;
 
   padding: 0 20px 49px;
 

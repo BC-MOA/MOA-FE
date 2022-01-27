@@ -15,12 +15,9 @@ import SafeBox from "components/gather/safebox/SafeBox";
 import Goal from "components/gather/addGoal/Goal";
 import Complete from "components/gather/addGoal/Complete";
 import MobileKeypad from "components/gather/addGoal/MobileKeypad";
-<<<<<<< HEAD
 import CompHowTo from "components/compete/CompHowTo";
-=======
 import KeyPopUp from "components/common/KeyPopUp";
 import GatherDetail from "components/gather/GatherDetail";
->>>>>>> dee95631f056fa07b86f5ba88b66b0b6cc9b17b0
 
 function AllRoutes() {
   return (

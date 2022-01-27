@@ -3,15 +3,6 @@ import styled from "styled-components";
 import CompLists from "./CompLists";
 import Banner from "./common/BannerSwiper";
 
-//임시 하단 nav
-const TempNav = styled.div`
-  background-color: gray;
-  height: 49px;
-  width: 375px;
-  position: absolute;
-  top: 695px;
-`;
-
 const IgnorePaddingBox = styled.div`
   margin: 0 -20px;
 `;
@@ -59,7 +50,6 @@ function CompBody() {
       </Navigation>
       {isAll ? <Banner></Banner> : <></>}
       <CompLists category={isAll}></CompLists>
-      <TempNav>임시 내비게이션바 입니다</TempNav>
     </IgnorePaddingBox>
   );
 }
