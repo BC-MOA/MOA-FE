@@ -10,7 +10,7 @@ import { calc_dDay, calc_days } from "components/gather/addGoal/utils";
 const Container = styled.div`
   margin: 0 -4px;
   height: fit-content;
-  padding: 20px 0 0;
+  padding: 20px 0 12px;
   cursor: pointer;
 
   ${({ category }) =>
@@ -27,12 +27,22 @@ const Container = styled.div`
       pointer-events: none;
       filter: grayscale(100%);
       padding: 20px 20px 12px;
+      margin: 0;
       border-radius: 12px;
+      & + & {
+        margin-top: 16px;
+      }
     `}
-
-  &+& {
-    margin-top: 16px;
-  }
+  ${({ completed }) =>
+    completed !== true &&
+    css`
+      & + & {
+        margin-top: 4px;
+      }
+      &:last-child {
+        padding-bottom: 0;
+      }
+    `}
 `;
 
 const Main = styled.div`
@@ -155,7 +165,7 @@ function StateGather({ props, completed }) {
             </State>
           )}
         </div>
-        <Tag className="tag">{props.category}</Tag>
+        {completed ? <Tag className="tag">{props.category}</Tag> : <></>}
       </Main>
       {props.category !== "비상금" && (
         <State>
