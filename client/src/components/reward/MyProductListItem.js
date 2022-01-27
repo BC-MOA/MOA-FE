@@ -1,22 +1,33 @@
 import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 function MyProductListItem({ item, listControl }) {
+  const history = useNavigate();
+  const { pathname } = useLocation();
+
   return (
     <MyRewardListItemStyle>
       {/* todo 이미지 변경 */}
       <img src={require("./example.png")} alt={item.name} />
       <span className="itemName">{item.name}</span>
-      <img
-        className="barcode"
-        src={require("assets/reward/barcode.svg").default}
-        alt="바코드"
-      />
-      <img
-        className="magnify"
-        src={require("assets/reward/ic_magnify.svg").default}
-        alt=""
-      />
+      {/* todo item의 id값을 넣어주는 것으로 변경 id라는 변수 명을 넣어줘야함 */}
+      <label
+        onClick={() => {
+          history(`${pathname}/${item.id}`, { state: { pathname, item } });
+        }}
+      >
+        <img
+          className="barcode"
+          src={require("assets/reward/barcode.svg").default}
+          alt="바코드"
+        />
+        <img
+          className="magnify"
+          src={require("assets/reward/ic_magnify.svg").default}
+          alt=""
+        />
+      </label>
       <span>바코드를 누르면 결제창이</span>
       <span>활성화 됩니다</span>
     </MyRewardListItemStyle>
@@ -42,8 +53,13 @@ const MyRewardListItemStyle = styled.div`
   img {
     margin-bottom: 8px;
   }
+  label {
+    position: relative;
+  }
   .magnify {
-    margin: -22px -42px 6px 0;
+    position: absolute;
+    bottom: -4px;
+    right: -4px;
   }
   .itemName {
     font-family: "Pretendard-SemiBold";

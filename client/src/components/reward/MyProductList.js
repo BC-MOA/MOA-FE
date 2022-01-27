@@ -8,15 +8,15 @@ const controlNameList = ["부대 내", "부대 외"];
 function MyProductList({ tabName, tabList }) {
   const [listControl, setListControl] = useState(controlNameList[0]);
   const [inReward, setInReward] = useState([
-    { name: "불닭볶음면" },
-    { name: "바나나우유" },
+    { id: 1, name: "불닭볶음면" },
+    { id: 2, name: "바나나우유" },
   ]);
   const [outReward, setOutReward] = useState([
-    { name: "불닭볶음면" },
-    { name: "포스틱" },
-    { name: "커피" },
-    { name: "짜파게티" },
-    { name: "아이스크림" },
+    { id: 3, name: "불닭볶음면" },
+    { id: 4, name: "포스틱" },
+    { id: 5, name: "커피" },
+    { id: 6, name: "짜파게티" },
+    { id: 7, name: "아이스크림" },
   ]);
 
   // todo - 사용자 리워드 내역을 받아와 부대내외로 값을 나눠 저장
