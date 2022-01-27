@@ -171,8 +171,15 @@ const BetEndCard = styled.div`
   height: 60px;
 
   ${ContentBox} :not(:last-child) {
-    filter: grayscale(80%);
+    filter: grayscale(1);
   }
+`;
+
+const GrayCover = styled.div`
+  background-color: var(--Line_03);
+  opacity: 0.5;
+
+  border-radius: 12px;
 `;
 
 //결과
@@ -195,26 +202,28 @@ function BetEndCompCard(props) {
   const betResult = obj.pick === obj.win;
 
   return (
-    <BetEndCard>
-      <ContentBox>
-        <Thumb src={require("assets/compete/" + obj.thumb)} />
-        <TextBox>
-          <Title>{obj.title}</Title>
+    <GrayCover>
+      <BetEndCard>
+        <ContentBox>
+          <Thumb src={require("assets/compete/" + obj.thumb)} />
+          <TextBox>
+            <Title>{obj.title}</Title>
+            {props.type ? (
+              <Versus>
+                {obj.versus[0]} vs {obj.versus[1]}
+              </Versus>
+            ) : (
+              <Versus>{betResult ? obj.versus[0] : obj.versus[1]}</Versus>
+            )}
+          </TextBox>
           {props.type ? (
-            <Versus>
-              {obj.versus[0]} vs {obj.versus[1]}
-            </Versus>
+            <Count>{kFormatter(obj.total)}명 참여</Count>
           ) : (
-            <Versus>{betResult ? obj.versus[0] : obj.versus[1]}</Versus>
+            <Result result={betResult}>{betResult ? "성공" : "실패"}</Result>
           )}
-        </TextBox>
-        {props.type ? (
-          <Count>{kFormatter(obj.total)}명 참여</Count>
-        ) : (
-          <Result result={betResult}>{betResult ? "성공" : "실패"}</Result>
-        )}
-      </ContentBox>
-    </BetEndCard>
+        </ContentBox>
+      </BetEndCard>
+    </GrayCover>
   );
 }
 
