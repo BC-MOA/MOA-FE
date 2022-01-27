@@ -1,5 +1,4 @@
-import React, { useMemo } from "react";
-import { useEffect } from "react/cjs/react.development";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import CheckListItem from "./CheckListItem";
 import { v1 as uuid } from "uuid";
@@ -10,13 +9,18 @@ function TermCheckBox({
   isAllChecked,
   setIsAllChecked,
 }) {
-  const checks = useMemo(() => {
-    return checkList.map((item) => {
+  const [checks, setChecks] = useState([]);
+  useEffect(() => {
+    const checksTemp = checkList.map((item) => {
       return item.isCheck;
     });
+    setChecks(checksTemp);
   }, [checkList]);
+
   useEffect(() => {
-    setIsAllChecked(checks.reduce((a, b) => a * b));
+    if (checks.length) {
+      setIsAllChecked(checks.reduce((a, b) => a * b));
+    }
   }, [checks]);
 
   function funcChangeAllCheck() {

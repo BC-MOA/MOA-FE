@@ -2,9 +2,8 @@ import BackHeader from "components/common/BackHeader";
 import Container from "components/common/Container";
 import ScrollBox from "components/common/ScrollBox";
 import SubmitButton from "components/common/SubmitButton";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react/cjs/react.development";
 import styled from "styled-components";
 import MilitaryFormBox from "./MilitaryFormBox";
 const controlNameList = ["자동이체", "자유입금"];
@@ -24,8 +23,6 @@ function AddMilitarySavingsForm() {
     savingType: controlNameList[0],
     formDataMonth: "",
     formDataAmount: "",
-    formDataDay: "",
-    formDataAccount: userAccountList[0],
   };
   const [formData, setFormData] = useState(AutoSavingFormTemp);
   const [isAvildForm, setIsAvildForm] = useState(true);

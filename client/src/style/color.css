@@ -1,7 +1,7 @@
 :root {
   --alert: #ec4f4a;
   --a1: #4a634d;
-  --a2: #329964;
+  --a2: #006c36;
   --a3: #4caf5b;
   --a4: #3a433b;
   --a5: #006c36;
@@ -17,4 +17,8 @@
   --Line_03: #ebebeb;
   --Bar_01: #f4565b;
   --Bar_02: #5ecd29;
+  --Blue: #28a49d;
+  --subBlue: #0c8983;
+  /* --Yellow:  */
+  --subYellow: #cc970d;
 }

@@ -96,7 +96,8 @@ const SubSelectBox = styled.div`
 export const GoalContext = createContext({
   category: "",
   name: "",
-  deadline: "",
+  sDate: "",
+  eDate: "",
   isAuto: "",
   howOften: "",
   amount: "",
@@ -132,7 +133,8 @@ function Goal() {
   const [inputs, setInputs] = useState({
     category: "여행",
     name: "",
-    deadline: "",
+    sDate: new Date(),
+    eDate: "",
     depositMethod: "자동이체",
     howOften: "매월 10일",
     amount: "",
@@ -142,7 +144,7 @@ function Goal() {
 
   useEffect(() => {
     if (
-      inputs.deadline !== "" &&
+      inputs.eDate !== "" &&
       inputs.depositMethod === "자동이체" &&
       inputs.amount !== ""
     ) {
@@ -151,10 +153,10 @@ function Goal() {
         targetAmount: calcAmount(inputs),
       });
     }
-  }, [inputs.howOften, inputs.deadline]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inputs.howOften, inputs.eDate]);
 
   useEffect(() => {
-    console.log("변경");
     if (inputs.depositMethod === "자동이체") {
       setInputs({
         ...inputs,
@@ -174,6 +176,7 @@ function Goal() {
         account: "",
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputs.depositMethod]);
 
   const onChange = (event) => {
@@ -208,7 +211,7 @@ function Goal() {
             <div className="Notice">예) 폰바꾸기</div>
           </GoalName>
           <InputEl>
-            <div className="SubTitle">언제까지</div>
+            <div className="SubTitle">목표 날짜</div>
             <DatePick />
             <div className="Notice">
               <span className="Empasis">1</span>개월 후의 날짜부터 선택이
@@ -216,7 +219,7 @@ function Goal() {
             </div>
           </InputEl>
           <InputEl>
-            <div className="SubTitle">얼마마다</div>
+            <div className="SubTitle">이제 방식</div>
             <SelectBox>
               <div className="depositMethod">자동이체</div>
               <div className="depositMethod">넣고 싶을 때마다</div>
@@ -235,7 +238,7 @@ function Goal() {
                   </SelectBox>
                 </SubSelectBox>
                 <InputEl>
-                  <div className="SubTitle">얼마씩 넣어서</div>
+                  <div className="SubTitle">납입액</div>
                   <CustomInput
                     name="amount"
                     placeholder="정기적으로 넣을 금액을 입력해주세요."
@@ -244,7 +247,7 @@ function Goal() {
                       setInputs({
                         ...inputs,
                         targetAmount:
-                          inputs.deadline !== "" ? calcAmount(inputs) : "",
+                          inputs.eDate !== "" ? calcAmount(inputs) : "",
                       });
                     }}
                     value={inputs.amount}
@@ -255,15 +258,11 @@ function Goal() {
           </InputEl>
 
           <InputEl>
-            <div className="SubTitle">이만큼을 모으겠다</div>
+            <div className="SubTitle">목표 금액</div>
             <CustomInput
               placeholder="모을 금액을 입력해주세요."
               disabled={inputs.depositMethod === "자동이체"}
-              value={
-                inputs.targetAmount
-                  ? Number(inputs.targetAmount).toLocaleString()
-                  : ""
-              }
+              value={inputs.targetAmount}
               onChange={onChange}
               name="targetAmount"
             />
@@ -278,6 +277,7 @@ function Goal() {
               name="account"
               onChange={onChange}
               accounts={accountList}
+              selected={inputs.account}
             ></CustomSelect>
           </InputEl>
         </Content>

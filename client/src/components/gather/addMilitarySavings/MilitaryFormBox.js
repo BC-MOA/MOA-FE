@@ -1,5 +1,4 @@
-import React, { Fragment } from "react";
-import { useEffect, useState } from "react/cjs/react.development";
+import React, { Fragment, useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import { v1 as uuid } from "uuid";
 import MilitaryAutoSavingForm from "./MilitaryAutoSavingForm";
@@ -190,7 +189,7 @@ const InputBox = css`
 const InterestBox = css`
   display: flex;
   justify-content: space-between;
-
+  margin-top: 8px;
   .boxItem {
     display: flex;
     flex-direction: column;
@@ -203,6 +202,12 @@ const InterestBox = css`
       color: var(--Title_01);
       .green {
         color: var(--a2);
+        display: inline-block;
+        text-align: start;
+      }
+      .empty {
+        min-width: 80px;
+        text-align: end;
       }
       .roboto {
         font-family: "Roboto";

@@ -48,5 +48,8 @@ const DropdownBox = styled.select`
   &.isSelect {
     color: var(--Title_02);
   }
+  option {
+    color: var(--Title_02);
+  }
 `;
 export default Dropdown;
