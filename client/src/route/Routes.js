@@ -17,6 +17,7 @@ import MobileKeypad from "components/gather/addGoal/MobileKeypad";
 import KeyPopUp from "components/common/KeyPopUp";
 import Reward from "components/reward/Reward";
 import MyReward from "components/reward/MyReward";
+import MyProducItemDetail from "components/reward/MyProducItemDetail";
 
 function AllRoutes() {
   return (
@@ -54,7 +55,11 @@ function AllRoutes() {
       <Route path="/keypad" element={<MobileKeypad />} />
       <Route path="/key" element={<KeyPopUp />}></Route>
       <Route path="/reward" element={<Reward />} />
-      <Route path="/reward/:id" element={<MyReward />} />
+      <Route path="/reward/:userId" element={<MyReward />} />
+      <Route
+        path="/reward/:userId/:productId"
+        element={<MyProducItemDetail />}
+      />
     </Routes>
   );
 }
