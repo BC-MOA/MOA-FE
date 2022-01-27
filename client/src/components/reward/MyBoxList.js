@@ -13,10 +13,10 @@ function MyBoxList({ tabName, tabList, userBoxList }) {
 
 const MyBoxListStyle = styled.div`
   display: none;
-  gap: 15px;
-  flex-wrap: wrap;
   &.isSelect {
-    display: felx;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
   }
 `;
 export default MyBoxList;
