@@ -118,6 +118,18 @@ function Gather() {
       sDate: "Wed Nov 10 2021 15:11:39 GMT+0900",
       eDate: "Wed Jan 26 2022 23:59:59 GMT+0900",
     },
+    {
+      category: "군적금",
+      name: "100만원 모으기",
+      currentAmount: 100000,
+      targetAmount: 100000,
+      account: {
+        name: "IBK기업",
+        number: "112-0330-0201-55",
+      },
+      sDate: "Sun Oct 10 2021 15:11:39 GMT+0900",
+      eDate: "Sat Jan 15 2022 23:59:59 GMT+0900",
+    },
   ];
 
   const totalAmount = gatherList.reduce((acc, cur) => {
