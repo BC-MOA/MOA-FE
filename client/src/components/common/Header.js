@@ -48,7 +48,7 @@ const LinkedKey = (props) => (
 //링크가 아닌 키
 const NotLinkedKey = (props) => (
   <StyledKeyBox>
-    <img src={require("assets/compete/key-simple.svg").default} />
+    <img src={require("assets/compete/key.svg").default} />
     <div className="text">{props.count}개</div>
   </StyledKeyBox>
 );

@@ -37,7 +37,7 @@ const Swipe = () => {
   );
 };
 
-function CompBanner() {
+function BannerSwiper() {
   return (
     <SwiperBox>
       <Swipe></Swipe>
@@ -45,4 +45,4 @@ function CompBanner() {
   );
 }
 
-export default CompBanner;
+export default BannerSwiper;

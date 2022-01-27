@@ -71,22 +71,22 @@ const StyledPopUpCard = styled.div`
 `;
 
 export default function PopUp(props) {
-  const data = props.data;
+  const obj = props.obj;
 
   const clickYes = () => {
-    data.onclick();
+    obj.onclick();
     //추가 API 작업
   };
 
   const clickNo = () => {
-    data.onclick();
+    obj.onclick();
   };
 
   return (
     <StyledPopUpBox>
       <StyledPopUpCard>
         <p className="text">베팅을 정말 취소하시겠어요?</p>
-        <p className="title">{data.title}</p>
+        <p className="title">{obj.title}</p>
         <div className="buttonbox">
           <button onClick={clickNo}>아니요</button>
           <button onClick={clickYes}>예</button>

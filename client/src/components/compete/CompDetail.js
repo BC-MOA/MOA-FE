@@ -166,9 +166,9 @@ const Button = styled.button`
   }
 `;
 
-function CompDetail(props) {
+function CompDetail() {
   const { state } = useLocation();
-  const comp = state.info;
+  const comp = state;
 
   const options = {
     number: [
@@ -235,7 +235,7 @@ function CompDetail(props) {
               func={pickup}
             ></PickUp>
           </PickupSection>
-          <PercentBar totalKey={[12, 37]}></PercentBar>
+          <PercentBar totalkey={comp.totalkey}></PercentBar>
         </BetCard>
         {true && (
           <>

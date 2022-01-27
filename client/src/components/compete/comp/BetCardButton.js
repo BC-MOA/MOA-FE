@@ -4,17 +4,13 @@ import styled from "styled-components";
 const StyledBetButton = styled.button`
   border: none;
   border-radius: 8px;
-
   width: 142px;
   height: 28px;
-
   font-size: 14px;
   font-family: "Pretendard-SemiBold";
-
   background-color: var(--Surface);
 
   transition: 0.5s all;
-
   :hover {
     opacity: 0.5;
     cursor: pointer;
