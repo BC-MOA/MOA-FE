@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { BasicCompCard, BetEndCompCard } from "./comp/Card";
 import { hideScrollBar } from "style/common";
-import CompeteContext from "./context/CompContext";
+import AllCompContext from "./context/AllCompContext";
 import { useContext } from "react";
 
 //만료된 챌린지 분류
@@ -71,7 +71,7 @@ const StyledAllList = styled.div`
 
 //리스트-전체
 const AllList = (props) => {
-  const compList = useContext(CompeteContext);
+  const compList = useContext(AllCompContext);
 
   return <StyledAllList>{filterList(props.cond, compList)}</StyledAllList>;
 };

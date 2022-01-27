@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 const PercentBar = (props) => {
-  const A = props.totalKey[0];
-  const B = props.totalKey[1];
+  const A = props.totalkey[0];
+  const B = props.totalkey[1];
   const ratioA = ((A / (A + B)) * 100).toFixed(2);
+  const ratioB = ((B / (A + B)) * 100).toFixed(2);
 
   return (
     <StyledPercentBar ratio={ratioA}>
@@ -13,7 +14,7 @@ const PercentBar = (props) => {
       </>
       <div className="textbox">
         <span className="a-text">{ratioA}%</span>
-        <span className="b-text">{100 - ratioA}%</span>
+        <span className="b-text">{ratioB}%</span>
       </div>
     </StyledPercentBar>
   );
