@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
-import { GoalContext } from "./Goal";
 
 const Box = styled.div`
   display: flex;
@@ -37,9 +36,7 @@ const BoxEl = styled.div`
     `}
 `;
 
-function SelectBoxEl({ children }) {
-  const { inputs, setInputs } = useContext(GoalContext);
-
+function SelectBox({ name, inputs, setInputs, children }) {
   return (
     <Box>
       {children.map((x, idx) => (
@@ -47,11 +44,11 @@ function SelectBoxEl({ children }) {
           onClick={(e) =>
             setInputs({
               ...inputs,
-              [e.target.className]: e.target.innerText,
+              [name]: e.target.innerText,
             })
           }
           key={idx}
-          isSelected={inputs[x.props.className] === x.props.children}
+          isSelected={inputs[name] === x.props.children}
         >
           {x}
         </BoxEl>
@@ -60,4 +57,4 @@ function SelectBoxEl({ children }) {
   );
 }
 
-export default SelectBoxEl;
+export default SelectBox;
