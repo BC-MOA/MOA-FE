@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import CompLists from "./CompLists";
-import Banner from "./Common/BannerSwiper";
+import Banner from "./comp/BannerSwiper";
 
 const IgnorePaddingBox = styled.div`
   margin: 0 -20px;
