@@ -36,8 +36,7 @@ const StyledKeyBox = styled.div`
 
 //링크인 키
 const LinkedKey = (props) => (
-  //리워드로 경로 수정 필요
-  <StyledLink to="/compete">
+  <StyledLink to="/reward">
     <StyledKeyBox>
       <img src={require("assets/compete/key.svg").default} />
       <div className="text">{props.count}개</div>
