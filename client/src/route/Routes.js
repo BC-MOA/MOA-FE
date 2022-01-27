@@ -17,6 +17,9 @@ import Complete from "components/gather/addGoal/Complete";
 import MobileKeypad from "components/gather/addGoal/MobileKeypad";
 import CompHowTo from "components/compete/CompHowTo";
 import KeyPopUp from "components/common/KeyPopUp";
+import Reward from "components/reward/Reward";
+import MyReward from "components/reward/MyReward";
+import MyProducItemDetail from "components/reward/MyProducItemDetail";
 import GatherDetail from "components/gather/GatherDetail";
 import EditGoal from "components/gather/EditGoal";
 import EditDeposit from "components/gather/EditDeposit";
@@ -65,6 +68,12 @@ function AllRoutes() {
       <Route path="/profile" element={<Profile />} />
       <Route path="/keypad" element={<MobileKeypad />} />
       <Route path="/key" element={<KeyPopUp />}></Route>
+      <Route path="/reward" element={<Reward />} />
+      <Route path="/reward/:userId" element={<MyReward />} />
+      <Route
+        path="/reward/:userId/:productId"
+        element={<MyProducItemDetail />}
+      />
     </Routes>
   );
 }
