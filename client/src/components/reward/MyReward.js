@@ -71,7 +71,7 @@ function MyReward() {
           {tabList[1]}(1)
         </div>
       </TabBox>
-      <ScrollBox paddingValue={"36px 0 0 0"}>
+      <ScrollBox paddingValue={"36px 0 "}>
         <MyBoxList
           userBoxList={userBoxList}
           tabList={tabList}
