@@ -1,10 +1,10 @@
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import BackHeader from "components/common/BackHeader";
-import { Count, Date } from "./common/Card";
-import kFormatter from "./common/kFormatter";
-import formatDate from "./common/DateChanger";
-import PercentBar from "./common/PercentBar";
+import { Count, Date } from "./Common/Card";
+import kFormatter from "./Common/kFormatter";
+import formatDate from "./Common/DateChanger";
+import PercentBar from "./Common/PercentBar";
 import React, { useContext, useState } from "react";
 import Picker from "react-scrollable-picker";
 import Countdown from "react-countdown";

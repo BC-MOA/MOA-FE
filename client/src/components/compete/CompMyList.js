@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BetCompCard, BetEndCompCard } from "./common/Card";
+import { BetCompCard, BetEndCompCard } from "./Common/Card";
 import { hideScrollBar } from "style/common";
 import CompContext from "./context/CompContext";
 import React, { useContext } from "react";

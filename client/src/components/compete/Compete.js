@@ -1,5 +1,5 @@
 import React from "react";
-import { CompHeader } from "./common/KeyBellHeader";
+import { CompHeader } from "./Common/KeyBellHeader";
 import Body from "./CompBody";
 import CompeteContext from "./context/CompContext";
 import NavBar from "components/common/NavBar";
