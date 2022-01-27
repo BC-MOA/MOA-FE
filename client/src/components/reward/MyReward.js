@@ -46,11 +46,7 @@ function MyReward() {
 
   return (
     <Container>
-      <BackHeader
-        path={"/reward"}
-        title={"내 보관함"}
-        isScrolled={true}
-      ></BackHeader>
+      <BackHeader path={-1} title={"내 보관함"} isScrolled={true}></BackHeader>
       {/* todo 박스 개수 및 리워드 총 개수 표시하기 */}
       <TabBox>
         <div
