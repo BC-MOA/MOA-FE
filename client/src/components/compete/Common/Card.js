@@ -6,6 +6,7 @@ import { StyledBetButtonBox, StyledBetButton } from "./BetCardButton";
 import formatDate from "./DateChanger";
 import StyledLink from "components/common/StyledLink";
 import kFormatter from "./kFormatter";
+import PopUp from "./PopUp";
 
 //기본 카드 디자인
 const CardDesign = css`
@@ -137,6 +138,17 @@ const BetCard = styled.div`
 function BetCompCard(props) {
   const obj = props.obj;
 
+  const [pop, setPop] = useState(false);
+
+  const togglePop = () => {
+    setPop(!pop);
+  };
+
+  const popupProp = {
+    onclick: togglePop,
+    title: obj.title,
+  };
+
   return (
     <BetCard>
       <Date>{formatDate(obj.due)} 마감</Date>
@@ -155,8 +167,9 @@ function BetCompCard(props) {
           <Count>{kFormatter(obj.total)}명 참여</Count>
         </div>
       </ContentBox>
+      {pop && <PopUp data={popupProp}></PopUp>}
       <StyledBetButtonBox>
-        <StyledBetButton>배팅 수정</StyledBetButton>
+        <StyledBetButton onClick={togglePop}>배팅 수정</StyledBetButton>
         <StyledBetButton>배팅 취소</StyledBetButton>
       </StyledBetButtonBox>
     </BetCard>
