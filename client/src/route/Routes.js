@@ -1,11 +1,12 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "../components/home/Home";
-import Gather from "../components/gather/Gather";
-import Save from "../components/save/Save";
-import Compete from "../components/compete/Compete";
-import Profile from "../components/profile/Profile";
-import AddMilitarySavings from "../components/gather/addMilitarySavings/AddMilitarySavings";
+import Home from "components/home/Home";
+import Gather from "components/gather/Gather";
+import Save from "components/save/Save";
+import Compete from "components/compete/Compete";
+import Profile from "components/profile/Profile";
+import CompeteDetail from "components/compete/CompDetail";
+import AddMilitarySavings from "components/gather/addMilitarySavings/AddMilitarySavings";
 import AvailableSavingItemDetail from "components/gather/addMilitarySavings/AvailableSavingItemDetail";
 import AddMilitarySavingsTerm from "components/gather/addMilitarySavings/AddMilitarySavingsTerm";
 import AddMilitarySavingsForm from "components/gather/addMilitarySavings/AddMilitarySavingsForm";
@@ -14,6 +15,7 @@ import SafeBox from "components/gather/safebox/SafeBox";
 import Goal from "components/gather/addGoal/Goal";
 import Complete from "components/gather/addGoal/Complete";
 import MobileKeypad from "components/gather/addGoal/MobileKeypad";
+import CompHowTo from "components/compete/CompHowTo";
 import KeyPopUp from "components/common/KeyPopUp";
 import GatherDetail from "components/gather/GatherDetail";
 import EditGoal from "components/gather/EditGoal";
@@ -58,6 +60,8 @@ function AllRoutes() {
       />
       <Route path="/save" element={<Save />} />
       <Route path="/compete" element={<Compete />} />
+      <Route path="/compete/howto" element={<CompHowTo />} />
+      <Route path="/compete/:id" element={<CompeteDetail />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/keypad" element={<MobileKeypad />} />
       <Route path="/key" element={<KeyPopUp />}></Route>

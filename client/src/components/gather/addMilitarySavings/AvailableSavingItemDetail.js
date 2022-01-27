@@ -6,9 +6,9 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import ContentControlBtn from "../ContentControlBtn";
-
+import { v1 as uuid } from "uuid";
 function AvailableSavingItemDetail() {
-  const controlNameList = ["상품안내", "금리이율", "안내사항"];
+  const controlNameList = ["상품안내", "금리이율", "유의사항"];
   const { state: item } = useLocation();
   const [listControl, setListControl] = useState(controlNameList[0]);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -67,17 +67,17 @@ function AvailableSavingItemDetail() {
           controlNameList={controlNameList}
         ></ContentControlBtn>
         <Content>
-          {/* todo - text 추가할 것 */}
-          <div className={controlNameList[0] === listControl ? "isSelect" : ""}>
-            {controlNameList[0]}
-          </div>
-          <div className={controlNameList[1] === listControl ? "isSelect" : ""}>
-            {controlNameList[1]}
-          </div>
-          <div className={controlNameList[2] === listControl ? "isSelect" : ""}>
-            {controlNameList[2]}
-          </div>
-          {/* </div> */}
+          {controlNameList &&
+            controlNameList.map((item, index) => (
+              <div
+                key={uuid()}
+                className={
+                  controlNameList[index] === listControl ? "isSelect" : ""
+                }
+              >
+                <img src={require(`assets/gather/${item}.png`)} alt={item} />{" "}
+              </div>
+            ))}
         </Content>
       </ScrollBox>
       <SubmitButton
@@ -95,9 +95,6 @@ function AvailableSavingItemDetail() {
 const Content = styled.div`
   width: 100%;
   min-height: 100%;
-  background: #fff;
-  box-shadow: 0px 1px 2px rgba(33, 33, 33, 0.08);
-  border-radius: 12px;
   div {
     display: none;
   }

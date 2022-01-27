@@ -11,22 +11,28 @@ function CheckListItem({ index, checkList, setCheckList, item }) {
           setCheckList(temp);
         }}
       >
-        <div className="checkIcBox">
-          <img
-            src={require(`assets/gather/ic_term_check${
-              item.isCheck ? "_active" : ""
-            }.svg`)}
-            alt={`${item.name}+동의`}
-          />
-        </div>
+        <img
+          src={require(`assets/gather/ic_term_check${
+            item.isCheck ? "_active" : ""
+          }.svg`)}
+          alt={`${item.name}+동의`}
+        />
         <span className="itemName">{item.name}</span>
         <span>{item.necessary ? "[필수]" : "[선택]"}</span>
       </label>
+      <img
+        className="nextIcon"
+        src={require("assets/gather/ic_term_next.svg").default}
+        alt="약관이동"
+      />
     </CheckListItemStyle>
   );
 }
 
 const CheckListItemStyle = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 6px 0;
   font-family: "Pretendard-Regular";
   font-size: 14px;
@@ -40,13 +46,16 @@ const CheckListItemStyle = styled.div`
   label {
     display: flex;
     align-items: flex-end;
-  }
-  label:hover {
-    cursor: pointer;
+    &:hover {
+      cursor: pointer;
+    }
   }
   .itemName {
     margin-left: 4px;
     margin-right: 6px;
+  }
+  .nextIcon {
+    cursor: pointer;
   }
 `;
 export default CheckListItem;

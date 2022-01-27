@@ -10,17 +10,20 @@
     "moment": "^2.29.1",
     "node-sass": "^7.0.1",
     "react": "^17.0.2",
+    "react-countdown": "^2.3.2",
     "react-datepicker": "^4.6.0",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
+    "react-scrollable-picker": "^1.0.2",
     "react-slide-rule": "^1.0.5",
     "react-sortablejs": "^6.0.3",
     "react-step-progress-bar": "^1.0.3",
     "sortablejs": "^1.14.0",
     "styled-components": "^5.3.3",
+    "swiper": "^7.4.1",
     "uuid": "^8.3.2",
-    "web-vitals": "^2.1.3"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "cross-env HOST=localhost DANGEROUSLY_DISABLE_HOST_CHECK=true NODE_PATH=src react-scripts start",
