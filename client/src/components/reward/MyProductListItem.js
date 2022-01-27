@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-function MyRewardListItem({ item, listControl }) {
+function MyProductListItem({ item, listControl }) {
   return (
     <MyRewardListItemStyle>
       {/* todo 이미지 변경 */}
@@ -57,4 +57,4 @@ const MyRewardListItemStyle = styled.div`
     width: 52px;
   }
 `;
-export default MyRewardListItem;
+export default MyProductListItem;

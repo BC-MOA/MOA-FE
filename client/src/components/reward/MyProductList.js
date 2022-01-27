@@ -1,11 +1,11 @@
 import ContentControlBtn from "components/common/ContentControlBtn";
 import ScrollBox from "components/common/ScrollBox";
-import MyRewardListItem from "components/reward/MyRewardListItem";
+import MyProductListItem from "./MyProductListItem";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { v1 as uuid } from "uuid";
 const controlNameList = ["부대 내", "부대 외"];
-function MyRewardList({ tabName, tabList }) {
+function MyProductList({ tabName, tabList }) {
   const [listControl, setListControl] = useState(controlNameList[0]);
   const [inReward, setInReward] = useState([
     { name: "불닭볶음면" },
@@ -34,22 +34,22 @@ function MyRewardList({ tabName, tabList }) {
           {controlNameList[0] === listControl &&
             inReward &&
             inReward.map((item) => (
-              <MyRewardListItem
+              <MyProductListItem
                 key={uuid()}
                 item={item}
                 listControl={listControl}
-              ></MyRewardListItem>
+              ></MyProductListItem>
             ))}
         </div>
         <div className="itemList">
           {controlNameList[1] === listControl &&
             outReward &&
             outReward.map((item) => (
-              <MyRewardListItem
+              <MyProductListItem
                 key={uuid()}
                 item={item}
                 listControl={listControl}
-              ></MyRewardListItem>
+              ></MyProductListItem>
             ))}
         </div>
       </ScrollBox>
@@ -68,4 +68,4 @@ const MyRewardListStyle = styled.div`
   }
 `;
 
-export default MyRewardList;
+export default MyProductList;

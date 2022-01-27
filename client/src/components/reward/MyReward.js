@@ -1,11 +1,10 @@
 import BackHeader from "components/common/BackHeader";
 import Container from "components/common/Container";
 import ScrollBox from "components/common/ScrollBox";
-import React from "react";
-import { useState } from "react/cjs/react.development";
+import React, { useState } from "react";
 import styled from "styled-components";
 import MyBoxList from "./MyBoxList";
-import MyRewardList from "./MyRewardList";
+import MyProductList from "./MyProductList";
 const tabList = ["MOA 박스", "리워드"];
 const userBoxList = [
   {
@@ -77,7 +76,7 @@ function MyReward() {
           tabList={tabList}
           tabName={tabName}
         />
-        <MyRewardList tabList={tabList} tabName={tabName} />
+        <MyProductList tabList={tabList} tabName={tabName} />
       </ScrollBox>
     </Container>
   );
