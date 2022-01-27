@@ -169,7 +169,7 @@ function Goal() {
     } else {
       setInputs({
         ...inputs,
-        depositMethod: "넣고 싶을 때마다",
+        depositMethod: "자유입금",
         howOften: "-",
         amount: "-",
         targetAmount: "",
@@ -222,7 +222,7 @@ function Goal() {
             <div className="SubTitle">이제 방식</div>
             <SelectBox>
               <div className="depositMethod">자동이체</div>
-              <div className="depositMethod">넣고 싶을 때마다</div>
+              <div className="depositMethod">자유입금</div>
             </SelectBox>
             <div className="Notice">
               <span className="Empasis r_space">자동이체</span> 하시면, 더 많은
