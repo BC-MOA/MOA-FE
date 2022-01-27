@@ -17,7 +17,7 @@ const Container = styled.div`
   ${({ category }) =>
     category === "비상금" &&
     css`
-      padding: 20px 0 px;
+      padding: 20px 0;
     `}
   box-sizing: border-box;
   background-color: #fff;
@@ -34,15 +34,20 @@ const Container = styled.div`
       }
     `}
   ${({ completed, category }) =>
-    completed !== true &&
-    css`
-      & + & {
-        margin-top: 4px;
-      }
-      &:last-child {
-        padding-bottom: 0;
-      }
-    `};
+    completed !== true && category !== "비상금"
+      ? css`
+          & + & {
+            margin-top: 4px;
+          }
+          &:last-child {
+            padding-bottom: 0;
+          }
+        `
+      : css`
+          &:last-child {
+            padding-bottom: 4px;
+          }
+        `};
 `;
 const CompleteState = styled.div`
   font-family: "Pretendard-Medium";
