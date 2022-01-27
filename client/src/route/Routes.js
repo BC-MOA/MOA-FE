@@ -16,7 +16,9 @@ import Complete from "components/gather/addGoal/Complete";
 import MobileKeypad from "components/gather/addGoal/MobileKeypad";
 import KeyPopUp from "components/common/KeyPopUp";
 import GatherDetail from "components/gather/GatherDetail";
-
+import EditGoal from "components/gather/EditGoal";
+import EditDeposit from "components/gather/EditDeposit";
+import MidTermTermination from "components/gather/MidTermTermination";
 function AllRoutes() {
   return (
     <Routes>
@@ -48,6 +50,12 @@ function AllRoutes() {
       <Route path="/gather/add-safebox" element={<SafeBox />} />
       <Route path="/gather/add-safebox/complete" element={<Complete />} />
       <Route path="/gather/detail" element={<GatherDetail />} />
+      <Route path="/gather/detail/edit-goal" element={<EditGoal />} />
+      <Route path="/gather/detail/edit-deposit" element={<EditDeposit />} />
+      <Route
+        path="/gather/detail/midterm-termination"
+        element={<MidTermTermination />}
+      />
       <Route path="/save" element={<Save />} />
       <Route path="/compete" element={<Compete />} />
       <Route path="/profile" element={<Profile />} />
