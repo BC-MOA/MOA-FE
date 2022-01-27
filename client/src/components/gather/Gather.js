@@ -121,7 +121,7 @@ function Gather() {
     {
       category: "군적금",
       name: "100만원 모으기",
-      currentAmount: 100000,
+      currentAmount: 60000,
       targetAmount: 100000,
       account: {
         name: "IBK기업",
