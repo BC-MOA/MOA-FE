@@ -51,7 +51,9 @@ function filterList(cond, compList) {
     filterdList = filterdList.sort((a, b) => b.due - a.due);
 
     for (const obj of filterdList) {
-      cardList.push(<BetEndCompCard key={obj.key} obj={obj}></BetEndCompCard>);
+      cardList.push(
+        <BetEndCompCard type={true} key={obj.key} obj={obj}></BetEndCompCard>
+      );
     }
   }
 

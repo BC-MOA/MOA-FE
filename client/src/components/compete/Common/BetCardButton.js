@@ -11,7 +11,7 @@ const StyledBetButton = styled.button`
   font-size: 14px;
   font-family: "Pretendard-SemiBold";
 
-  background-color: var(--Line_02);
+  background-color: var(--Surface);
 
   transition: 0.5s all;
 
@@ -30,6 +30,14 @@ const StyledBetButtonBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  ${StyledBetButton}:nth-child(1) {
+    color: var(--a5);
+  }
+
+  ${StyledBetButton}:nth-child(2) {
+    color: var(--alert);
+  }
 `;
 
 export { StyledBetButtonBox, StyledBetButton };

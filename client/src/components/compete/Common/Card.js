@@ -21,31 +21,6 @@ const CardDesign = css`
   justify-content: center;
 `;
 
-//기본 카드
-const Card = styled.div`
-  ${CardDesign}
-  transition: 0.1s all;
-
-  :hover {
-    opacity: 0.5;
-    text-decoration: none;
-  }
-`;
-
-//배팅 카드
-const BetCard = styled.div`
-  ${CardDesign}
-
-  height: 124px;
-`;
-
-//배팅 종료 카드
-const BetEndCard = styled.div`
-  ${CardDesign}
-
-  filter: grayscale(80%);
-`;
-
 //공통 요소
 const Date = styled.div`
   max-width: 120px;
@@ -117,7 +92,18 @@ const Count = styled.div`
   color: var(--a2);
 `;
 
-//기본카드 컴포넌트
+//기본 카드 컨테이너
+const Card = styled.div`
+  ${CardDesign}
+  transition: 0.1s all;
+
+  :hover {
+    opacity: 0.5;
+    text-decoration: none;
+  }
+`;
+
+//기본 카드
 function BasicCompCard(props) {
   const obj = props.obj;
 
@@ -140,7 +126,14 @@ function BasicCompCard(props) {
   );
 }
 
-//배팅카드 컴포넌트
+//배팅 카드 컨테이너
+const BetCard = styled.div`
+  ${CardDesign}
+
+  height: 124px;
+`;
+
+//배팅 카드
 function BetCompCard(props) {
   const obj = props.obj;
 
@@ -170,9 +163,36 @@ function BetCompCard(props) {
   );
 }
 
-//배팅 종료 카드 컴폰넌트
+//배팅 종료 카드 컨테이너
+const BetEndCard = styled.div`
+  ${CardDesign}
+
+  background-color: var(--Line_03);
+  height: 60px;
+
+  ${ContentBox} :not(:last-child) {
+    filter: grayscale(80%);
+  }
+`;
+
+//결과
+const Result = styled.div`
+  width: 21px;
+  height: 19px;
+  color: white;
+  border-radius: 8px;
+  padding: 0 8px;
+  font-family: "Pretendard-Regular";
+  font-size: 12px;
+  line-height: 19px;
+  background-color: ${({ result }) => (result ? "var(--a2)" : "var(--alert)")};
+`;
+
+//배팅 종료 카드
 function BetEndCompCard(props) {
   const obj = props.obj;
+
+  const betResult = obj.pick === obj.win;
 
   return (
     <BetEndCard>
@@ -180,13 +200,19 @@ function BetEndCompCard(props) {
         <Thumb src={require("assets/compete/" + obj.thumb)} />
         <TextBox>
           <Title>{obj.title}</Title>
-          <Versus>
-            {obj.versus[0]} vs {obj.versus[1]}
-          </Versus>
+          {props.type ? (
+            <Versus>
+              {obj.versus[0]} vs {obj.versus[1]}
+            </Versus>
+          ) : (
+            <Versus>{betResult ? obj.versus[0] : obj.versus[1]}</Versus>
+          )}
         </TextBox>
-        <div>
+        {props.type ? (
           <Count>{kFormatter(obj.total)}명 참여</Count>
-        </div>
+        ) : (
+          <Result result={betResult}>{betResult ? "성공" : "실패"}</Result>
+        )}
       </ContentBox>
     </BetEndCard>
   );

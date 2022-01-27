@@ -23,7 +23,9 @@ function filterList(cond, compList) {
     filterdList = compList.filter((obj) => obj.due < now);
 
     for (const obj of filterdList) {
-      cardList.push(<BetEndCompCard key={obj.key} obj={obj}></BetEndCompCard>);
+      cardList.push(
+        <BetEndCompCard type={false} key={obj.key} obj={obj}></BetEndCompCard>
+      );
     }
   }
 

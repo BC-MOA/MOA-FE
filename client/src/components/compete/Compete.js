@@ -17,7 +17,7 @@ const data = {
       total: 100,
       bet: 3,
       pick: true,
-      win: false,
+      win: true,
     },
     {
       key: "A2",
