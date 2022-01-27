@@ -9,7 +9,7 @@ const Background = styled.div`
   bottom: -8px;
   left: -20px;
   right: -20px;
-  background-color: #212121e5;
+  background-color: #212121d9;
 `;
 const ModalBox = styled.div`
   position: absolute;
@@ -17,7 +17,7 @@ const ModalBox = styled.div`
   left: 0;
   right: 0;
   background: #ffffff;
-  border-radius: 12px 12px 0px 0px;
+  border-radius: 24px 24px 0px 0px;
   padding: 40px 24px;
 
   div {
