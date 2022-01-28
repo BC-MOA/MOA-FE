@@ -24,6 +24,7 @@ import GatherDetail from "components/gather/GatherDetail";
 import EditGoal from "components/gather/EditGoal";
 import EditDeposit from "components/gather/EditDeposit";
 import MidTermTermination from "components/gather/MidTermTermination";
+import MyBoxOpen from "components/reward/MyBoxOpen";
 function AllRoutes() {
   return (
     <Routes>
@@ -74,6 +75,7 @@ function AllRoutes() {
         path="/reward/:userId/:productId"
         element={<MyProducItemDetail />}
       />
+      <Route path="/reward/:userId/select/:boxId" element={<MyBoxOpen />} />
     </Routes>
   );
 }
