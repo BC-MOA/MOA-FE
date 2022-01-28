@@ -124,7 +124,7 @@ function Complete() {
                 <div className="userInfo">{userInfo.name}</div>
               </InfoEl>
               <InfoEl className="Text">
-                <div>목표 이루는 날</div>
+                <div>목표 날짜</div>
                 <div className="userInfo">
                   {moment(userInfo.deadline).format("YYYY년 MM월 DD일")}
                 </div>
@@ -133,7 +133,7 @@ function Complete() {
                 <div>
                   {userInfo.depositMethod === "자동이체"
                     ? "자동이체"
-                    : "이체방법"}
+                    : "이체 방식"}
                 </div>
                 <div className="userInfo">
                   {userInfo.howOften !== "-"
