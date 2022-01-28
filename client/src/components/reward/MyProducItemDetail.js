@@ -1,6 +1,6 @@
 import Container from "components/common/Container";
 import SubmitButton from "components/common/SubmitButton";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import html2canvas from "html2canvas";
@@ -9,6 +9,7 @@ import JsBarcode from "jsbarcode";
 function MyProducItemDetail() {
   const { state } = useLocation();
   const history = useNavigate();
+  const [isSaveClick, setIsSaveClick] = useState(false);
   const item = state.item;
   const barCodeNum = "1234 5678 9012";
   function copy() {
@@ -16,22 +17,25 @@ function MyProducItemDetail() {
   }
   // todo - 사진 저장 파일명 포맷 변경
   function SaveProductImg() {
-    html2canvas(document.getElementById("exportImgBox")).then((canvas) => {
-      const imgUrl = canvas.toDataURL("image/jpg");
-      const imgFileName = "image.jpg";
-      const link = document.createElement("a");
-      console.log(link);
-      document.body.appendChild(link);
-      link.href = imgUrl;
-      link.download = imgFileName;
-      link.click();
-      document.body.removeChild(link);
-    });
+    setTimeout(() => {
+      html2canvas(document.getElementById("exportImgBox")).then((canvas) => {
+        const imgUrl = canvas.toDataURL("image/jpg");
+        const imgFileName = "image.jpg";
+        const link = document.createElement("a");
+        document.body.appendChild(link);
+        link.href = imgUrl;
+        link.download = imgFileName;
+        link.click();
+        document.body.removeChild(link);
+      });
+      setIsSaveClick(false);
+    }, 1);
   }
   useEffect(() => {
     JsBarcode("#barcode", barCodeNum, {
       displayValue: false,
       background: "transparent",
+      margin: 0,
     });
   }, []);
   return (
@@ -57,7 +61,9 @@ function MyProducItemDetail() {
           <img id="barcode" alt="barcode" />
           <div className="barcodeDetail">
             <p>{barCodeNum}</p>
-            <button onClick={copy}>번호복사</button>
+            <button className={isSaveClick ? "isSaveClick" : ""} onClick={copy}>
+              번호복사
+            </button>
           </div>
         </BarCode>
         <Detail>
@@ -72,6 +78,7 @@ function MyProducItemDetail() {
       <SubmitButton
         title={"교환권 저장"}
         onClickFunc={() => {
+          setIsSaveClick(true);
           SaveProductImg();
         }}
         isActive={true}
@@ -123,7 +130,7 @@ const BarCode = styled.div`
   .barcodeDetail {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     width: 236px;
     margin: 0 auto;
     p {
@@ -143,6 +150,9 @@ const BarCode = styled.div`
       font-family: "Pretendard-SemiBold";
       font-size: 14px;
       line-height: 22px;
+      &.isSaveClick {
+        display: none;
+      }
     }
   }
 `;
