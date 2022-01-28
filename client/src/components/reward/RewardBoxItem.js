@@ -78,5 +78,8 @@ const BoxCard = styled.div`
   .boxImage {
     ${BoxImage}
   }
+  &:hover {
+    cursor: pointer;
+  }
 `;
 export default RewardBoxItem;
