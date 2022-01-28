@@ -58,7 +58,7 @@ const InputEl = styled.div`
 function EditDeposit() {
   const { state: props } = useLocation();
   const prev = props;
-  console.log(props);
+
   const [newInputs, setNewInputs] = useState({
     ...props,
     amount: "",
@@ -132,6 +132,7 @@ function EditDeposit() {
           </div>
           <CustomInput
             name="amount"
+            pBlack={true}
             placeholder={prev.amount}
             value={newInputs.amount}
             onChange={onChange}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { styleTitle, styleSubTitle, styleNotice } from "style/common";
 import BackHeader from "components/common/BackHeader";
 import { useLocation } from "react-router-dom";
@@ -49,6 +49,7 @@ const Content = styled.div`
 const InputEl = styled.div`
   margin-bottom: 24px;
 `;
+
 function EditGoal() {
   const userInfo = {
     name: "김민수",
@@ -69,6 +70,7 @@ function EditGoal() {
       [name]: value,
     });
   };
+
   const isEdited = () => {
     const editableEls =
       props.category === "군적금"
@@ -92,6 +94,7 @@ function EditGoal() {
 
           <CustomInput
             name="name"
+            pBlack={true}
             placeholder={prev.name}
             value={newInputs.name}
             onChange={onChange}
@@ -111,6 +114,7 @@ function EditGoal() {
             <div className="subTitle">목표 이름</div>
             <CustomInput
               name="name"
+              pBlack={true}
               placeholder={prev.name}
               value={newInputs.name}
               onChange={onChange}
