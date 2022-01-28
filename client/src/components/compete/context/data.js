@@ -65,7 +65,7 @@ const myCompList = {
       versus: ["벨기에", "스페인"],
       totalkey: [13, 29],
       total: 50,
-      bet: 1,
+      bet: 3,
       pick: false,
       win: false,
     },

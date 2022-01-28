@@ -169,7 +169,9 @@ function BetCompCard(props) {
       </ContentBox>
       {pop && <PopUp obj={popupProp}></PopUp>}
       <StyledBetButtonBox>
-        <StyledBetButton>배팅 수정</StyledBetButton>
+        <StyledLink to={"/compete/" + obj.key} state={obj}>
+          <StyledBetButton>배팅 수정</StyledBetButton>
+        </StyledLink>
         <StyledBetButton onClick={togglePop}>배팅 취소</StyledBetButton>
       </StyledBetButtonBox>
     </BetCard>
