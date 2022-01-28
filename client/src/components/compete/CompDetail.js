@@ -5,13 +5,14 @@ import { Count, Date } from "./comp/Card";
 import kFormatter from "./comp/kFormatter";
 import formatDate from "./comp/DateChanger";
 import PercentBar from "./comp/PercentBar";
-import React, { useContext, useState } from "react";
-import Picker from "react-scrollable-picker";
-import Countdown from "react-countdown";
-import moment from "moment";
+import React, { useState } from "react";
+import { Timer, TimerBox } from "./comp/Timer";
+import { PickUp, PickupSection, Pickupbox } from "./comp/DetailPickup";
+import { KeyPicker, options } from "./comp/Picker";
+import ExpectKey from "./comp/KeyExpect";
 
 const Detail = styled.div`
-  height: 680px;
+  height: 650px;
 
   display: flex;
   flex-direction: column;
@@ -44,112 +45,6 @@ const BetCard = styled.div`
   }
 `;
 
-const PickupSection = styled.div`
-  display: flex;
-  height: 75px;
-  margin: 15px auto;
-  justify-content: space-around;
-`;
-
-const Pickupbox = styled.div`
-  display: flex;
-  align-items: flex-start;
-
-  .info p {
-    margin-top: 5px;
-    font-family: "Pretendard-Medium";
-    font-size: 14px;
-  }
-`;
-
-const PickUp = (props) => {
-  const obj = props.info;
-
-  const clickHandle = () => {
-    props.func();
-  };
-
-  return (
-    <Pickupbox>
-      <div onClick={clickHandle}>
-        <img
-          src={
-            obj.pick
-              ? require("assets/compete/checked.svg").default
-              : require("assets/compete/check.svg").default
-          }
-        ></img>
-      </div>
-      <div className="info">
-        <img
-          src={
-            obj.first
-              ? require("assets/compete/v2.png")
-              : require("assets/compete/v1.png")
-          }
-        ></img>
-        <p>{obj.first ? obj.versus[0] : obj.versus[1]}</p>
-      </div>
-    </Pickupbox>
-  );
-};
-
-const KeySelctor = styled.div`
-  height: 130px;
-  padding: 15px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  font-family: "Pretendard-SemiBold";
-  font-size: 18px;
-
-  img {
-    width: 28px;
-    margin-left: 20px;
-    margin-right: -20px;
-  }
-
-  .pickerWrapper {
-    width: 66px;
-  }
-`;
-
-const TimerBox = styled.div`
-  height: 25px;
-
-  * {
-    color: var(--a3);
-    font-family: "Pretendard-Medium";
-    font-size: 16px;
-  }
-`;
-
-const renderer = ({ days, hours, minutes, seconds, completed }) => {
-  if (completed) {
-    // Render a completed state
-    return <>done!</>;
-  } else {
-    // Render a countdown
-    return (
-      <span>
-        {days != 0 && days + "일 "}
-        {hours < 10 ? "0" + hours : hours}:
-        {minutes < 10 ? "0" + minutes : minutes}:
-        {seconds < 10 ? "0" + seconds : seconds} 후 종료
-      </span>
-    );
-  }
-};
-
-const Timer = (props) => {
-  const now = moment();
-  const goal = moment();
-
-  return <Countdown date={now + (props.due - now)} renderer={renderer} />;
-};
-
 const Button = styled.button`
   height: 49px;
   width: 100%;
@@ -164,50 +59,53 @@ const Button = styled.button`
   :hover {
     opacity: 0.8;
   }
+
+  :disabled {
+    background-color: var(--Line_02);
+    color: var(--Body_03);
+  }
 `;
 
 function CompDetail() {
+  //챌린지 정보 state
   const { state } = useLocation();
   const comp = state;
 
-  const options = {
-    number: [
-      { value: 1, label: "1" },
-      { value: 2, label: "2" },
-      { value: 3, label: "3" },
-      { value: 4, label: "4" },
-      { value: 5, label: "5" },
-    ],
+  //베팅 선택용 state - true면 왼쪽, false 면 오른쪽 선택
+  const [isBetted, setIsBetted] = useState(comp.bet != undefined);
+  const [pickUped, setPickUped] = useState(isBetted ? comp.pick : false);
+
+  const pickup = (input) => {
+    setIsBetted(true);
+    setPickUped(input);
   };
 
-  const [count, setCount] = useState({
+  const pickupProps = {
+    pick: pickUped,
+    func: pickup,
+    isbet: isBetted,
+  };
+
+  //베팅 열쇠 개수 관련 state
+  const [keyCount, setKeyCount] = useState({
     valueGroups: {
-      number: 1,
+      number: comp.bet == undefined ? 1 : comp.bet,
     },
     optionGroups: options,
   });
 
   const handleChange = (name, value) => {
-    setCount(() => ({
+    setKeyCount(() => ({
       valueGroups: {
         [name]: value,
       },
       optionGroups: options,
     }));
-
-    console.log(count.valueGroups);
-  };
-
-  //true면 왼쪽, false 면 오른쪽
-  const [pickUped, setPickUped] = useState(comp.pick);
-
-  const pickup = () => {
-    setPickUped(!pickUped);
   };
 
   return (
     <>
-      <BackHeader isScrolled={false} title={""} path={-1}></BackHeader>
+      <BackHeader isScrolled={false} title={false} path={-1}></BackHeader>
       <Detail>
         <BetCard>
           <div className="top">
@@ -217,49 +115,33 @@ function CompDetail() {
           </div>
           <PickupSection>
             <PickUp
-              disabled={pickUped}
-              info={{
-                versus: comp.versus,
-                pick: pickUped,
-                first: true,
-              }}
-              func={pickup}
+              versus={comp.versus[0]}
+              type={true}
+              info={pickupProps}
             ></PickUp>
             <PickUp
-              disabled={!pickUped}
-              info={{
-                versus: comp.versus,
-                pick: !pickUped,
-                first: false,
-              }}
-              func={pickup}
+              versus={comp.versus[1]}
+              type={false}
+              info={pickupProps}
             ></PickUp>
           </PickupSection>
           <PercentBar totalkey={comp.totalkey}></PercentBar>
         </BetCard>
-        {true && (
+        {isBetted && (
           <>
-            <KeySelctor>
-              <img src={require("assets/compete/key.svg").default}></img>
-              <p>베팅할 열쇠개수</p>
-              <div className="pickerWrapper">
-                <Picker
-                  optionGroups={count.optionGroups}
-                  valueGroups={count.valueGroups}
-                  onChange={handleChange}
-                  height={150}
-                />
-              </div>
-              <p>개</p>
-            </KeySelctor>
-            <div>예상 획득 열쇠</div>
+            <ExpectKey
+              bet={keyCount.valueGroups.number}
+              pick={pickUped}
+              keys={comp.totalkey}
+            ></ExpectKey>
+            <KeyPicker onchange={handleChange} count={keyCount}></KeyPicker>
           </>
         )}
         <div>
           <TimerBox>
             <Timer due={comp.due}></Timer>
           </TimerBox>
-          <Button>배팅하기</Button>
+          <Button disabled={!isBetted}>배팅하기</Button>
         </div>
       </Detail>
     </>
