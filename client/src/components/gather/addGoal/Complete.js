@@ -53,8 +53,8 @@ const CheckInfo = styled.div`
 
   .character {
     position: absolute;
-    top: -64px;
-    right: 6px;
+    top: -62px;
+    right: 16px;
     z-index: -1;
   }
 
@@ -124,7 +124,7 @@ function Complete() {
                 <div className="userInfo">{userInfo.name}</div>
               </InfoEl>
               <InfoEl className="Text">
-                <div>목표 이루는 날</div>
+                <div>목표 날짜</div>
                 <div className="userInfo">
                   {moment(userInfo.deadline).format("YYYY년 MM월 DD일")}
                 </div>
@@ -133,7 +133,7 @@ function Complete() {
                 <div>
                   {userInfo.depositMethod === "자동이체"
                     ? "자동이체"
-                    : "이체방법"}
+                    : "이체 방식"}
                 </div>
                 <div className="userInfo">
                   {userInfo.howOften !== "-"
@@ -173,7 +173,7 @@ function Complete() {
           )}
           <img
             className="character"
-            src={require("assets/goal/army_character.svg").default}
+            src={require("assets/goal/army_character.png")}
             alt="character"
           />
         </CheckInfo>

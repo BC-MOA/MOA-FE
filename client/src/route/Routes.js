@@ -14,7 +14,7 @@ import AddMilitarySavingSuccess from "components/gather/addMilitarySavings/AddMi
 import SafeBox from "components/gather/safebox/SafeBox";
 import Goal from "components/gather/addGoal/Goal";
 import Complete from "components/gather/addGoal/Complete";
-import MobileKeypad from "components/gather/addGoal/MobileKeypad";
+import MobileKeypad from "components/gather/safebox/MobileKeypad";
 import CompHowTo from "components/compete/CompHowTo";
 import KeyPopUp from "components/common/KeyPopUp";
 import Reward from "components/reward/Reward";
@@ -25,6 +25,7 @@ import EditGoal from "components/gather/EditGoal";
 import EditDeposit from "components/gather/EditDeposit";
 import MidTermTermination from "components/gather/MidTermTermination";
 import RegisterDeposit from "components/gather/RegisterDeposit";
+import AdditionalSafebox from "components/gather/AdditionalSafebox";
 function AllRoutes() {
   return (
     <Routes>
@@ -58,6 +59,10 @@ function AllRoutes() {
       <Route path="/gather/detail" element={<GatherDetail />} />
       <Route path="/gather/detail/edit-goal" element={<EditGoal />} />
       <Route path="/gather/detail/edit-deposit" element={<EditDeposit />} />
+      <Route
+        path="/gather/detail/additional-safebox"
+        element={<AdditionalSafebox />}
+      />
       <Route
         path="/gather/detail/register-deposit"
         element={<RegisterDeposit />}

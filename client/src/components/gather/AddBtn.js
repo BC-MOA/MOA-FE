@@ -43,23 +43,36 @@ function AddBtn({ name, gatherList, children }) {
     비상금: "add-safebox",
   };
 
+  const filterdLists = gatherList.filter((x) => x.category === name);
+
   return (
     <Container>
       <div className="btnName">
         <div>{name}</div>
-        <button
-          onClick={() => {
-            history(movePages[name]);
-          }}
-        >
-          <img src={require("assets/gather/ic_add.svg").default} alt="" />
-        </button>
+        {name === "군적금" && filterdLists.length < 2 ? (
+          <button
+            onClick={() => {
+              history(movePages[name]);
+            }}
+          >
+            <img src={require("assets/gather/ic_add.svg").default} alt="" />
+          </button>
+        ) : (
+          <></>
+        )}
+        {name !== "군적금" && (
+          <button
+            onClick={() => {
+              history(movePages[name]);
+            }}
+          >
+            <img src={require("assets/gather/ic_add.svg").default} alt="" />
+          </button>
+        )}
       </div>
       <div className="adText">{children}</div>
-      {gatherList &&
-        gatherList
-          .filter((x) => x.category === name)
-          .map((x, idx) => <StateGather key={idx} props={x} />)}
+      {filterdLists &&
+        filterdLists.map((x, idx) => <StateGather key={idx} props={x} />)}
     </Container>
   );
 }

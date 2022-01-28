@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import CustomBtn from "components/gather/addGoal/CustomBtn";
+import BackHeader from "components/common/BackHeader";
 
 const Container = styled.div`
   width: 100%;
@@ -66,7 +67,7 @@ const NumBtn = styled.button`
   }
 `;
 
-function MobileKeypad() {
+function MobileKeypad({ path }) {
   const [input, setInput] = useState("");
 
   const onClick = (event) => {
@@ -79,15 +80,16 @@ function MobileKeypad() {
 
   return (
     <Container>
+      <BackHeader path={-1} />
       <Content>
         <input
           disabled
           placeholder="얼마를 입력할까요?"
-          value={Number(input).toLocaleString() + " 원"}
+          value={input ? Number(input).toLocaleString() + " 원" : ""}
         />
       </Content>
       <CustomBtn
-        path={"/gather/add-safebox"}
+        path={path ? path : "/gather/add-safebox"}
         active={input !== ""}
         data={input}
       >

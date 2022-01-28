@@ -149,7 +149,12 @@ function DetailCard({ gatherInfo }) {
         </>
       ) : (
         <SafeBtns>
-          <CustomBtn padding={8} active={true} bgcolor="#EAAC0B">
+          <CustomBtn
+            padding={8}
+            active={true}
+            bgcolor="#EAAC0B"
+            path="additional-safebox"
+          >
             모으기
           </CustomBtn>
           <CustomBtn padding={8}>꺼내기</CustomBtn>

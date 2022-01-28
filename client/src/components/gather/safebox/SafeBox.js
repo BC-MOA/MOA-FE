@@ -110,7 +110,7 @@ function SafeBox() {
 
   return (
     <Container>
-      <BackHeader path={-1} />
+      <BackHeader path={"/gather"} />
       <Content>
         <div className="Title">비상금 만들기</div>
         <div className="Text">
