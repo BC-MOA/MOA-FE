@@ -21,6 +21,7 @@ import GatherDetail from "components/gather/GatherDetail";
 import EditGoal from "components/gather/EditGoal";
 import EditDeposit from "components/gather/EditDeposit";
 import MidTermTermination from "components/gather/MidTermTermination";
+import RegisterDeposit from "components/gather/RegisterDeposit";
 function AllRoutes() {
   return (
     <Routes>
@@ -54,6 +55,10 @@ function AllRoutes() {
       <Route path="/gather/detail" element={<GatherDetail />} />
       <Route path="/gather/detail/edit-goal" element={<EditGoal />} />
       <Route path="/gather/detail/edit-deposit" element={<EditDeposit />} />
+      <Route
+        path="/gather/detail/register-deposit"
+        element={<RegisterDeposit />}
+      />
       <Route
         path="/gather/detail/midterm-termination"
         element={<MidTermTermination />}

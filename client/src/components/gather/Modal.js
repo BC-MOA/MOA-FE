@@ -68,15 +68,28 @@ function Modal({ setModal, props }) {
         >
           목표 수정
         </div>
-        <div
-          onClick={() => {
-            history("edit-deposit", {
-              state: props,
-            });
-          }}
-        >
-          자동이체 {props.depositMethod === "자동이체" ? "변경" : "등록"}
-        </div>
+
+        {props.depositMethod === "자동이체" ? (
+          <div
+            onClick={() => {
+              history("edit-deposit", {
+                state: props,
+              });
+            }}
+          >
+            자동이체 변경
+          </div>
+        ) : (
+          <div
+            onClick={() => {
+              history("register-deposit", {
+                state: props,
+              });
+            }}
+          >
+            자동이체 등록
+          </div>
+        )}
         <div
           onClick={() => {
             history("midterm-termination", {
