@@ -5,7 +5,7 @@ import DetailCard from "./DetailCard";
 import TransactionEl from "./TransactionEl";
 import { hideScrollBar } from "style/common";
 import { useLocation } from "react-router-dom";
-import Modal from "components/gather/Modal";
+import FixModal from "components/gather/FixModal";
 
 const Container = styled.div`
   width: 100%;
@@ -134,7 +134,7 @@ function GatherDetail() {
           </TransZero>
         )}
       </Content>
-      {modal ? <Modal setModal={setModal} props={gatherInfo} /> : <></>}
+      {modal ? <FixModal setModal={setModal} props={gatherInfo} /> : <></>}
     </Container>
   );
 }
