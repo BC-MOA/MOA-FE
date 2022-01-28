@@ -95,6 +95,7 @@ const SubSelectBox = styled.div`
 // contextAPI 사용
 export const GoalContext = createContext({
   category: "",
+  goal_category: "",
   name: "",
   sDate: "",
   eDate: "",
@@ -131,7 +132,8 @@ function Goal() {
   ];
 
   const [inputs, setInputs] = useState({
-    category: "여행",
+    category: "목표",
+    goal_category: "",
     name: "",
     sDate: new Date(),
     eDate: "",
@@ -198,7 +200,8 @@ function Goal() {
             목표를 세웠어요.
           </div>
           <InputEl>
-            <Category />
+            <div className="SubTitle">목표 종류</div>
+            <Category inputs={inputs} setInputs={setInputs} />
           </InputEl>
           <GoalName>
             <div className="SubTitle">목표 이름</div>
@@ -212,7 +215,7 @@ function Goal() {
           </GoalName>
           <InputEl>
             <div className="SubTitle">목표 날짜</div>
-            <DatePick />
+            <DatePick inputs={inputs} setInputs={setInputs} />
             <div className="Notice">
               <span className="Empasis">1</span>개월 후의 날짜부터 선택이
               가능합니다.
@@ -220,9 +223,13 @@ function Goal() {
           </InputEl>
           <InputEl>
             <div className="SubTitle">이제 방식</div>
-            <SelectBox>
-              <div className="depositMethod">자동이체</div>
-              <div className="depositMethod">자유입금</div>
+            <SelectBox
+              name="depositMethod"
+              inputs={inputs}
+              setInputs={setInputs}
+            >
+              <div>자동이체</div>
+              <div>자유입금</div>
             </SelectBox>
             <div className="Notice">
               <span className="Empasis r_space">자동이체</span> 하시면, 더 많은
