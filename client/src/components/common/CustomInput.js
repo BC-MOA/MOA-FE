@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const InputBox = styled.div`
   position: relative;
@@ -18,11 +18,14 @@ const InputBox = styled.div`
     padding: 10px 30px 10px 16px;
     color: var(--Title_01);
 
-    &::placeholder {
-      color: var(--Title_01);
-    }
     &:disabled {
       background-color: #ebebeb;
+    }
+
+    &.pBlack {
+      &::placeholder {
+        color: var(--Title_01);
+      }
     }
   }
   .unit {
@@ -32,10 +35,19 @@ const InputBox = styled.div`
   }
 `;
 
-function CustomInput({ name, placeholder, value, unit, disabled, onChange }) {
+function CustomInput({
+  name,
+  placeholder,
+  pBlack,
+  value,
+  unit,
+  disabled,
+  onChange,
+}) {
   return (
     <InputBox>
       <input
+        className={pBlack ? "pBlack" : ""}
         name={name}
         placeholder={placeholder}
         disabled={disabled}
