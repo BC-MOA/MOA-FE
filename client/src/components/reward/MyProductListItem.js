@@ -55,6 +55,9 @@ const MyRewardListItemStyle = styled.div`
   }
   label {
     position: relative;
+    &:hover {
+      cursor: pointer;
+    }
   }
   .magnify {
     position: absolute;
