@@ -12,6 +12,20 @@ const KeySelctor = styled.div`
   font-family: "Pretendard-SemiBold";
   font-size: 18px;
 
+  .textbox {
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    .mini {
+      color: var(--Title_02);
+      font-size: 12px;
+      font-family: "Pretendard-Regular";
+    }
+  }
+
   img {
     width: 28px;
     margin-left: 20px;
@@ -36,7 +50,10 @@ const options = {
 const KeyPicker = (props) => (
   <KeySelctor>
     <img src={require("assets/compete/key.svg").default}></img>
-    <p>베팅할 열쇠개수</p>
+    <div className="textbox">
+      <p>베팅할 열쇠개수</p>
+      <p className="mini">(최대 5개)</p>
+    </div>
     <div className="pickerWrapper">
       <Picker
         optionGroups={props.keyCount.optionGroups}
