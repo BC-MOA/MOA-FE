@@ -70,7 +70,9 @@ function Gather() {
       },
       sDate: "Sun Oct 10 2021 15:11:39 GMT+0900",
       eDate: "Sat Sep 10 2022 23:59:59 GMT+0900",
-      depositMethod: "자유입금",
+      depositMethod: "자동이체",
+      howOften: "매월 10일",
+      amount: "50000",
     },
     {
       category: "목표",
@@ -84,7 +86,9 @@ function Gather() {
       },
       sDate: "Wed Nov 10 2021 15:11:39 GMT+0900",
       eDate: "Sat Dec 10 2022 23:59:59 GMT+0900",
-      depositMethod: "자동이체",
+      depositMethod: "자유입금",
+      howOften: "",
+      amount: "",
     },
     {
       category: "비상금",
@@ -116,6 +120,8 @@ function Gather() {
     //   sDate: "Sun Oct 10 2021 15:11:39 GMT+0900",
     //   eDate: "Sat Dec 10 2022 23:59:59 GMT+0900",
     //   depositMethod: "자동이체",
+    // howOften: "매월 10일",
+    //   amount: "200000",
     // },
     {
       category: "목표",
@@ -130,6 +136,8 @@ function Gather() {
       sDate: "Wed Nov 10 2021 15:11:39 GMT+0900",
       eDate: "Wed Jan 26 2022 23:59:59 GMT+0900",
       depositMethod: "자유입금",
+      howOften: "",
+      amount: "50000",
     },
     {
       category: "군적금",
@@ -143,6 +151,8 @@ function Gather() {
       sDate: "Sun Oct 10 2021 15:11:39 GMT+0900",
       eDate: "Sat Jan 15 2022 23:59:59 GMT+0900",
       depositMethod: "자유입금",
+      howOften: "",
+      amount: "200000",
     },
   ];
 
