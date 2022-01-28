@@ -174,6 +174,7 @@ function StateGather({ props, completed }) {
             {props.goal_category ? (
               <StoreSvg category={props.goal_category} />
             ) : props.category === "군적금" ? (
+              // Todo: 군적금 - 은행 로고로 이미지 바꾸기
               <StoreSvg category="군적금" />
             ) : (
               <StoreSvg category="비상금" />
