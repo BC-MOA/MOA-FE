@@ -8,21 +8,25 @@ import MyProductList from "./MyProductList";
 const tabList = ["MOA 박스", "리워드"];
 const userBoxList = [
   {
+    boxId: "a123",
     boxName: "MOA박스",
     boxPrice: "7",
     boxDescription: ["다양한 PX 간식", "(냉동 식품 제외)"],
   },
   {
+    boxId: "a456",
     boxName: "야금야금MOA박스",
     boxPrice: "12",
     boxDescription: ["PX 냉동식품", "PC방 2천원 금액권", "카페 기프티콘"],
   },
   {
+    boxId: "a789",
     boxName: "왕창MOA박스",
     boxPrice: "20",
     boxDescription: ["PX 50% 할인권", "PC방 2천원 금액권", "카페 기프티콘"],
   },
   {
+    boxId: "a012",
     boxName: "영끌MOA박스",
     boxPrice: "30",
     boxDescription: [
@@ -32,6 +36,7 @@ const userBoxList = [
     ],
   },
   {
+    boxId: "a345",
     boxName: "영끌MOA박스",
     boxPrice: "30",
     boxDescription: [

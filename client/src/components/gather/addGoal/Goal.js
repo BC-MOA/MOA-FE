@@ -133,7 +133,7 @@ function Goal() {
 
   const [inputs, setInputs] = useState({
     category: "목표",
-    goal_category: "",
+    goal_category: "여행",
     name: "",
     sDate: new Date(),
     eDate: "",
@@ -238,10 +238,14 @@ function Goal() {
             {inputs.depositMethod === "자동이체" && (
               <>
                 <SubSelectBox>
-                  <SelectBox>
-                    <div className="howOften">매월 10일</div>
-                    <div className="howOften">매주 월요일</div>
-                    <div className="howOften">매일</div>
+                  <SelectBox
+                    name="howOften"
+                    inputs={inputs}
+                    setInputs={setInputs}
+                  >
+                    <div>매월 10일</div>
+                    <div>매주 월요일</div>
+                    <div>매일</div>
                   </SelectBox>
                 </SubSelectBox>
                 <InputEl>

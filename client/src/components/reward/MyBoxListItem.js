@@ -1,8 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { v1 as uuid } from "uuid";
 
 function MyBoxListItem({ itme }) {
+  const history = useNavigate();
   return (
     <MyBoxListItemStyle>
       <img
@@ -16,7 +18,13 @@ function MyBoxListItem({ itme }) {
         {itme.boxDescription &&
           itme.boxDescription.map((item) => <span key={uuid()}>{item}</span>)}
       </BoxDescription>
-      <button>열기</button>
+      <button
+        onClick={() => {
+          history(`select/${itme.boxId}`);
+        }}
+      >
+        열기
+      </button>
     </MyBoxListItemStyle>
   );
 }
