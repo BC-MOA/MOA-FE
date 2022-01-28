@@ -168,13 +168,11 @@ function Gather() {
     },
   ];
 
-  const totalAmount = gatherList.reduce((acc, cur) => {
-    return (acc += cur.currentAmount);
-  }, 0);
-
   const inProgressList = gatherList.filter((x) => !moment().isAfter(x.eDate));
   const completedList = gatherList.filter((x) => moment().isAfter(x.eDate));
-
+  const totalAmount = inProgressList.reduce((acc, cur) => {
+    return (acc += cur.currentAmount);
+  }, 0);
   const controlNameList = ["진행중", "완료"];
   const [listControl, setListControl] = useState(controlNameList[0]);
   const [editToggle, setEditToggle] = useState(true);
