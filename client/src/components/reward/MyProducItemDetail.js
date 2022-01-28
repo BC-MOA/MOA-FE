@@ -2,11 +2,16 @@ import Container from "components/common/Container";
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+const BARCODE_URL = process.env.REACT_APP_BARCODE;
 
 function MyProducItemDetail() {
   const { state } = useLocation();
   const history = useNavigate();
   const item = state.item;
+  const barCodeNum = 1234567890;
+  function copy() {
+    navigator.clipboard.writeText(barCodeNum);
+  }
   return (
     <Container>
       <Header>
@@ -24,7 +29,17 @@ function MyProducItemDetail() {
         <div>px 간식</div>
         <div className="itemName">{item.name}</div>
       </ImgCard>
-      {/* 바코드 */}
+      {/* todo 바코드 text변경하기*/}
+      <BarCode>
+        <img
+          src={`${BARCODE_URL}?bcid=code128&text=${barCodeNum}`}
+          alt="barcode"
+        />
+        <div className="barcodeDetail">
+          <p>{barCodeNum}</p>
+          <button onClick={copy}>번호복사</button>
+        </div>
+      </BarCode>
       {/* 교환처 */}
       {/*  유효기간*/}
       {/* 버튼 */}
@@ -56,7 +71,6 @@ const ImgCard = styled.div`
   padding: 28px 40px;
   box-sizing: border-box;
   img {
-    /* display: inline-block; */
     width: 200px;
     margin-bottom: 12px;
   }
@@ -65,6 +79,36 @@ const ImgCard = styled.div`
     font-size: 24px;
     line-height: 38px;
     color: var(--Title_01);
+  }
+`;
+const BarCode = styled.div`
+  margin: 0 auto;
+  img {
+    width: 232px;
+    height: 100px;
+    margin-bottom: 12px;
+  }
+  .barcodeDetail {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    p {
+      font-family: "Roboto";
+      font-weight: 700;
+      font-size: 21px;
+      line-height: 33px;
+      color: var(--Title_01);
+    }
+    button {
+      border: none;
+      border-radius: 10px;
+      padding: 3px 12px;
+      background-color: var(--Body_01);
+      color: #ffffff;
+      font-family: "Pretendard-SemiBold";
+      font-size: 14px;
+      line-height: 22px;
+    }
   }
 `;
 export default MyProducItemDetail;
