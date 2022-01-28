@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import prediction from "./PredictKey";
 
 const Expect = styled.div`
   width: 244px;
@@ -44,17 +45,19 @@ const Expect = styled.div`
   }
 `;
 
-const ExpectKey = () => {
+const ExpectKey = (props) => {
   const [pop, setPop] = useState(false);
 
   const handleClick = () => {
     setPop(!pop);
   };
 
+  const expect = prediction(props.keys, props.pick, props.bet);
+
   return (
     <Expect>
       <div className="text">
-        배팅 성공 시 열쇠 <p className="num"> {7} </p> 개 획득
+        배팅 성공 시 열쇠 <p className="num"> {expect} </p> 개 획득
       </div>
       <img
         className="button"

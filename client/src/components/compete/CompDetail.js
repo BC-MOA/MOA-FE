@@ -5,7 +5,7 @@ import { Count, Date } from "./comp/Card";
 import kFormatter from "./comp/kFormatter";
 import formatDate from "./comp/DateChanger";
 import PercentBar from "./comp/PercentBar";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Timer, TimerBox } from "./comp/Timer";
 import { PickUp, PickupSection, Pickupbox } from "./comp/DetailPickup";
 import { KeyPicker, options } from "./comp/Picker";
@@ -129,11 +129,12 @@ function CompDetail() {
         </BetCard>
         {isBetted && (
           <>
-            <ExpectKey>예상 획득 열쇠</ExpectKey>
-            <KeyPicker
-              keyCount={keyCount}
-              handleChange={handleChange}
-            ></KeyPicker>
+            <ExpectKey
+              bet={keyCount.valueGroups.number}
+              pick={pickUped}
+              keys={comp.totalkey}
+            ></ExpectKey>
+            <KeyPicker onchange={handleChange} count={keyCount}></KeyPicker>
           </>
         )}
         <div>

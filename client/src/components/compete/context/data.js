@@ -63,7 +63,7 @@ const myCompList = {
       thumb: "worldsoccer.png",
       title: "월드컵 예선 승자는?",
       versus: ["벨기에", "스페인"],
-      totalkey: [13, 29],
+      totalkey: [4, 29],
       total: 50,
       bet: 3,
       pick: false,

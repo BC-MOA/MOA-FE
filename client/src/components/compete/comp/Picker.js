@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Picker from "react-scrollable-picker";
+import React, { useState } from "react";
 
 const KeySelctor = styled.div`
   height: 130px;
@@ -11,6 +12,10 @@ const KeySelctor = styled.div`
 
   font-family: "Pretendard-SemiBold";
   font-size: 18px;
+
+  .logo {
+    margin-bottom: 20px;
+  }
 
   .textbox {
     height: 40px;
@@ -47,23 +52,28 @@ const options = {
   ],
 };
 
-const KeyPicker = (props) => (
-  <KeySelctor>
-    <img src={require("assets/compete/key.svg").default}></img>
-    <div className="textbox">
-      <p>베팅할 열쇠개수</p>
-      <p className="mini">(최대 5개)</p>
-    </div>
-    <div className="pickerWrapper">
-      <Picker
-        optionGroups={props.keyCount.optionGroups}
-        valueGroups={props.keyCount.valueGroups}
-        onChange={props.handleChange}
-        height={150}
-      />
-    </div>
-    <p>개</p>
-  </KeySelctor>
-);
+const KeyPicker = (props) => {
+  return (
+    <KeySelctor>
+      <img
+        className="logo"
+        src={require("assets/compete/key.svg").default}
+      ></img>
+      <div className="textbox">
+        <p>베팅할 열쇠개수</p>
+        <p className="mini">(최대 5개)</p>
+      </div>
+      <div className="pickerWrapper">
+        <Picker
+          optionGroups={props.count.optionGroups}
+          valueGroups={props.count.valueGroups}
+          onChange={props.onchange}
+          height={150}
+        />
+      </div>
+      <p>개</p>
+    </KeySelctor>
+  );
+};
 
 export { KeyPicker, options };
