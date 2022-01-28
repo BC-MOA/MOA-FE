@@ -14,13 +14,12 @@ const Container = styled.div`
   padding: 20px 0 12px;
   cursor: pointer;
 
-  ${({ category }) =>
-    category === "비상금" &&
-    css`
-      padding: 20px 0;
-    `}
   box-sizing: border-box;
   background-color: #fff;
+
+  .safebox {
+    padding: 20px 0;
+  }
 
   ${({ completed }) =>
     completed === true &&
@@ -33,22 +32,21 @@ const Container = styled.div`
         margin-top: 16px;
       }
     `}
-  ${({ completed, category }) =>
-    completed !== true && category !== "비상금"
-      ? css`
-          & + & {
-            margin-top: 4px;
-          }
-          &:last-child {
-            padding-bottom: 0;
-          }
-        `
-      : css`
-          &:last-child {
-            padding-bottom: 4px;
-          }
-        `};
+  ${({ completed }) =>
+    completed !== true &&
+    css`
+      & + & {
+        margin-top: 4px;
+      }
+      &:last-child {
+        padding-bottom: 0;
+        &.safebox {
+          padding-bottom: 4px;
+        }
+      }
+    `};
 `;
+
 const CompleteState = styled.div`
   font-family: "Pretendard-Medium";
   font-size: 12px;
@@ -161,6 +159,7 @@ function StateGather({ props, completed }) {
   const history = useNavigate();
   return (
     <Container
+      className={props.category === "비상금" ? "safebox" : ""}
       category={props.category}
       completed={completed}
       onClick={() => {
@@ -175,6 +174,7 @@ function StateGather({ props, completed }) {
             {props.goal_category ? (
               <StoreSvg category={props.goal_category} />
             ) : props.category === "군적금" ? (
+              // Todo: 군적금 - 은행 로고로 이미지 바꾸기
               <StoreSvg category="군적금" />
             ) : (
               <StoreSvg category="비상금" />

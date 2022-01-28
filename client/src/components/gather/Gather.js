@@ -44,16 +44,28 @@ const Content = styled.div`
 `;
 const EditBtn = styled.button`
   position: absolute;
-  top: 90px;
+  top: 93px;
   right: 0;
   font-family: "Pretendard-Medium";
-  font-size: 13px;
-  line-height: 25px;
-  padding: 0 10px;
+  font-size: 12px;
+  line-height: 19px;
+  padding: 3px 8px;
   border: none;
-  border-radius: 8px;
-  background-color: #f8cb57;
-  color: var(--Title_01);
+  border-radius: 12px;
+  background-color: var(--Line_03);
+  color: var(--Body_02);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  &.Active {
+    padding: 3px 12px;
+    color: #fff;
+    background-color: #4caf5b;
+    img {
+      display: none;
+    }
+  }
 `;
 
 function Gather() {
@@ -65,49 +77,64 @@ function Gather() {
       currentAmount: 800000,
       targetAmount: 3200000,
       account: {
-        name: "신한",
+        name: "KB국민",
         number: "112-0330-0201",
       },
       sDate: "Sun Oct 10 2021 15:11:39 GMT+0900",
-      eDate: "Sat Sep 10 2022 23:59:59 GMT+0900",
-      depositMethod: "자유입금",
+      eDate: "Fri Mar 10 2023 23:59:59 GMT+0900",
+      depositMethod: "자동이체",
+      howOften: "매월 10일",
+      amount: "200000",
     },
-    // {
-    //   category: "목표",
-    //   goal_category: "전자기기",
-    //   name: "아이패드 사기",
-    //   currentAmount: 600000,
-    //   targetAmount: 1000000,
-    //   account: {
-    //     name: "KB국민",
-    //     number: "113-456-78-910111",
-    //   },
-    //   sDate: "Wed Nov 10 2021 15:11:39 GMT+0900",
-    //   eDate: "Sat Dec 10 2022 23:59:59 GMT+0900",
-    //   depositMethod: '자동이체',
-    // },
+    {
+      category: "목표",
+      goal_category: "여행",
+      name: "유럽여행 준비",
+      currentAmount: 170000,
+      targetAmount: 1000000,
+      account: {
+        name: "하나은행",
+        number: "123-456-78-910111",
+      },
+      sDate: "Wed Nov 10 2021 15:11:39 GMT+0900",
+      eDate: "Sat Dec 10 2022 23:59:59 GMT+0900",
+      depositMethod: "자동이체",
+      howOften: "매월 10일",
+      amount: "50000",
+    },
     {
       category: "비상금",
       name: "비상금",
       currentAmount: 100000,
       account: {
-        name: "NH국민",
+        name: "하나은행",
         number: "123-456-78-103556",
       },
     },
-    {
-      category: "군적금",
-      name: "100만원 모으기",
-      currentAmount: 100000,
-      targetAmount: 100000,
-      account: {
-        name: "IBK기업",
-        number: "112-0330-0201-55",
-      },
-      sDate: "Sun Oct 10 2021 15:11:39 GMT+0900",
-      eDate: "Sat Dec 10 2022 23:59:59 GMT+0900",
-      depositMethod: "자동이체",
-    },
+    // {
+    //   category: "비상금",
+    //   name: "비상금",
+    //   currentAmount: 300000,
+    //   account: {
+    //     name: "NH국민",
+    //     number: "123-456-78-103556",
+    //   },
+    // },
+    // {
+    //   category: "군적금",
+    //   name: "100만원 모으기",
+    //   currentAmount: 100000,
+    //   targetAmount: 100000,
+    //   account: {
+    //     name: "IBK기업",
+    //     number: "112-0330-0201-55",
+    //   },
+    //   sDate: "Sun Oct 10 2021 15:11:39 GMT+0900",
+    //   eDate: "Sat Dec 10 2022 23:59:59 GMT+0900",
+    //   depositMethod: "자동이체",
+    // howOften: "매월 10일",
+    //   amount: "200000",
+    // },
     {
       category: "목표",
       goal_category: "선물",
@@ -121,29 +148,31 @@ function Gather() {
       sDate: "Wed Nov 10 2021 15:11:39 GMT+0900",
       eDate: "Wed Jan 26 2022 23:59:59 GMT+0900",
       depositMethod: "자유입금",
+      howOften: "",
+      amount: "50000",
     },
     {
       category: "군적금",
-      name: "100만원 모으기",
-      currentAmount: 60000,
-      targetAmount: 100000,
+      name: "1000만원 모으기",
+      currentAmount: 0,
+      targetAmount: 2400000,
       account: {
-        name: "IBK기업",
-        number: "112-0330-0201-55",
+        name: "신한",
+        number: "112-0650-0987",
       },
-      sDate: "Sun Oct 10 2021 15:11:39 GMT+0900",
-      eDate: "Sat Jan 15 2022 23:59:59 GMT+0900",
+      sDate: "Mon Jan 10 2022 15:11:39 GMT+0900",
+      eDate: "Fri Mar 10 2023 23:59:59 GMT+0900",
       depositMethod: "자유입금",
+      howOften: "",
+      amount: "",
     },
   ];
 
-  const totalAmount = gatherList.reduce((acc, cur) => {
-    return (acc += cur.currentAmount);
-  }, 0);
-
   const inProgressList = gatherList.filter((x) => !moment().isAfter(x.eDate));
   const completedList = gatherList.filter((x) => moment().isAfter(x.eDate));
-
+  const totalAmount = inProgressList.reduce((acc, cur) => {
+    return (acc += cur.currentAmount);
+  }, 0);
   const controlNameList = ["진행중", "완료"];
   const [listControl, setListControl] = useState(controlNameList[0]);
   const [editToggle, setEditToggle] = useState(true);
@@ -167,7 +196,7 @@ function Gather() {
   ]);
   return (
     <Container>
-      <div className="Title">{userName}님이 지금까지 모은 금액은?</div>
+      <div className="Title">{userName}님이 현재 모으고 있는 금액은?</div>
       <div className="TotalAmount">
         <span className="green">{totalAmount.toLocaleString()}</span> 원
       </div>
@@ -204,8 +233,13 @@ function Gather() {
         onClick={() => {
           setEditToggle(!editToggle);
         }}
+        className={editToggle ? "" : "Active"}
       >
-        {editToggle ? "순서 변경" : "순서 저장"}
+        <img
+          src={require("assets/gather/Sort_arrow_light.svg").default}
+          alt="순서변경 아이콘"
+        />
+        {editToggle ? "순서 편집하기" : "편집완료"}
       </EditBtn>
       <NavBar />
     </Container>

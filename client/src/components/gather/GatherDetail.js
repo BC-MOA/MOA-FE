@@ -5,7 +5,7 @@ import DetailCard from "./DetailCard";
 import TransactionEl from "./TransactionEl";
 import { hideScrollBar } from "style/common";
 import { useLocation } from "react-router-dom";
-import Modal from "components/gather/Modal";
+import FixModal from "components/gather/FixModal";
 
 const Container = styled.div`
   width: 100%;
@@ -90,21 +90,21 @@ function GatherDetail() {
   const [modal, setModal] = useState(false);
 
   const tr_lists = [
-    {
-      date: "1월 10일",
-      lists: [
-        {
-          name: "국군재정단",
-          time: "20:00",
-          amount: 200000,
-          total: 800000,
-        },
-      ],
-    },
+    // {
+    //   date: "1월 10일",
+    //   lists: [
+    //     {
+    //       name: "국군재정단",
+    //       time: "20:00",
+    //       amount: 200000,
+    //       total: 800000,
+    //     },
+    //   ],
+    // },
   ];
   return (
     <Container>
-      <BackHeader path={-1} title={gatherInfo.name} isScrolled={true} />
+      <BackHeader path={"/gather"} title={gatherInfo.name} isScrolled={true} />
       <button
         className={gatherInfo.category === "비상금" ? "fixBtn none" : "fixBtn"}
         onClick={() => setModal(true)}
@@ -134,7 +134,7 @@ function GatherDetail() {
           </TransZero>
         )}
       </Content>
-      {modal ? <Modal setModal={setModal} props={gatherInfo} /> : <></>}
+      {modal ? <FixModal setModal={setModal} props={gatherInfo} /> : <></>}
     </Container>
   );
 }

@@ -2,23 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { ReactComponent as CloseBtn } from "assets/ic_close.svg";
 import { useNavigate } from "react-router-dom";
+import { styleModal, styleModalBackground } from "style/common";
 
 const Background = styled.div`
-  position: absolute;
-  top: -8px;
-  bottom: -8px;
-  left: -20px;
-  right: -20px;
-  background-color: #212121e5;
+  ${styleModalBackground}
 `;
 const ModalBox = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #ffffff;
-  border-radius: 12px 12px 0px 0px;
-  padding: 40px 24px;
+  ${styleModal}
 
   div {
     text-align: left;
@@ -39,21 +29,9 @@ const ModalBox = styled.div`
     line-height: 25px;
     color: var(--Title_02);
   }
-
-  .closeBtn {
-    width: 18px;
-    position: absolute;
-    top: 24px;
-    right: 30px;
-    cursor: pointer;
-
-    path {
-      stroke: var(--Body_01);
-    }
-  }
 `;
 
-function Modal({ setModal, props }) {
+function FixModal({ setModal, props }) {
   const history = useNavigate();
   return (
     <Background>
@@ -68,15 +46,28 @@ function Modal({ setModal, props }) {
         >
           목표 수정
         </div>
-        <div
-          onClick={() => {
-            history("edit-deposit", {
-              state: props,
-            });
-          }}
-        >
-          자동이체 {props.depositMethod === "자동이체" ? "변경" : "등록"}
-        </div>
+
+        {props.depositMethod === "자동이체" ? (
+          <div
+            onClick={() => {
+              history("edit-deposit", {
+                state: props,
+              });
+            }}
+          >
+            자동이체 변경
+          </div>
+        ) : (
+          <div
+            onClick={() => {
+              history("register-deposit", {
+                state: props,
+              });
+            }}
+          >
+            자동이체 등록
+          </div>
+        )}
         <div
           onClick={() => {
             history("midterm-termination", {
@@ -92,4 +83,4 @@ function Modal({ setModal, props }) {
   );
 }
 
-export default Modal;
+export default FixModal;
