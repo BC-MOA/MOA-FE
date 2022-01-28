@@ -6,13 +6,13 @@ import kFormatter from "./comp/kFormatter";
 import formatDate from "./comp/DateChanger";
 import PercentBar from "./comp/PercentBar";
 import React, { useContext, useState } from "react";
-import Picker from "react-scrollable-picker";
-import Countdown from "react-countdown";
-import moment from "moment";
+import { Timer, TimerBox } from "./comp/Timer";
 import { PickUp, PickupSection, Pickupbox } from "./comp/DetailPickup";
+import { KeyPicker, options } from "./comp/Picker";
+import ExpectKey from "./comp/KeyExpect";
 
 const Detail = styled.div`
-  height: 680px;
+  height: 650px;
 
   display: flex;
   flex-direction: column;
@@ -45,62 +45,6 @@ const BetCard = styled.div`
   }
 `;
 
-const KeySelctor = styled.div`
-  height: 130px;
-  padding: 15px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  font-family: "Pretendard-SemiBold";
-  font-size: 18px;
-
-  img {
-    width: 28px;
-    margin-left: 20px;
-    margin-right: -20px;
-  }
-
-  .pickerWrapper {
-    width: 66px;
-  }
-`;
-
-const TimerBox = styled.div`
-  height: 25px;
-
-  * {
-    color: var(--a3);
-    font-family: "Pretendard-Medium";
-    font-size: 16px;
-  }
-`;
-
-const renderer = ({ days, hours, minutes, seconds, completed }) => {
-  if (completed) {
-    // Render a completed state
-    return <>done!</>;
-  } else {
-    // Render a countdown
-    return (
-      <span>
-        {days != 0 && days + "일 "}
-        {hours < 10 ? "0" + hours : hours}:
-        {minutes < 10 ? "0" + minutes : minutes}:
-        {seconds < 10 ? "0" + seconds : seconds} 후 종료
-      </span>
-    );
-  }
-};
-
-const Timer = (props) => {
-  const now = moment();
-  const goal = moment();
-
-  return <Countdown date={now + (props.due - now)} renderer={renderer} />;
-};
-
 const Button = styled.button`
   height: 49px;
   width: 100%;
@@ -122,17 +66,8 @@ const Button = styled.button`
   }
 `;
 
-const options = {
-  number: [
-    { value: 1, label: "1" },
-    { value: 2, label: "2" },
-    { value: 3, label: "3" },
-    { value: 4, label: "4" },
-    { value: 5, label: "5" },
-  ],
-};
-
 function CompDetail() {
+  //챌린지 정보 state
   const { state } = useLocation();
   const comp = state;
 
@@ -194,20 +129,11 @@ function CompDetail() {
         </BetCard>
         {isBetted && (
           <>
-            <KeySelctor>
-              <img src={require("assets/compete/key.svg").default}></img>
-              <p>베팅할 열쇠개수</p>
-              <div className="pickerWrapper">
-                <Picker
-                  optionGroups={keyCount.optionGroups}
-                  valueGroups={keyCount.valueGroups}
-                  onChange={handleChange}
-                  height={150}
-                />
-              </div>
-              <p>개</p>
-            </KeySelctor>
-            <div>예상 획득 열쇠</div>
+            <ExpectKey>예상 획득 열쇠</ExpectKey>
+            <KeyPicker
+              keyCount={keyCount}
+              handleChange={handleChange}
+            ></KeyPicker>
           </>
         )}
         <div>

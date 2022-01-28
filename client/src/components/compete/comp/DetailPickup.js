@@ -55,7 +55,7 @@ const PickUp = (props) => {
         <img
           src={
             props.type
-              ? require("assets/compete/v2.png")
+              ? "https://cdn.jsdelivr.net/gh/BuenCamino3rd/test/image/맨시티.png"
               : require("assets/compete/v1.png")
           }
         ></img>
