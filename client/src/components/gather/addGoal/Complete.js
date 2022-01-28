@@ -53,8 +53,8 @@ const CheckInfo = styled.div`
 
   .character {
     position: absolute;
-    top: -64px;
-    right: 6px;
+    top: -62px;
+    right: 16px;
     z-index: -1;
   }
 
@@ -173,7 +173,7 @@ function Complete() {
           )}
           <img
             className="character"
-            src={require("assets/goal/army_character.svg").default}
+            src={require("assets/goal/army_character.png")}
             alt="character"
           />
         </CheckInfo>
