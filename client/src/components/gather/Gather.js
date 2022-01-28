@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import AddBtn from "components/gather/AddBtn";
-import ContentControlBtn from "components/gather/ContentControlBtn";
+import ContentControlBtn from "components/common/ContentControlBtn";
 import { hideScrollBar } from "style/common";
 import NavBar from "components/common/NavBar";
 import StateGather from "components/gather/StateGather";

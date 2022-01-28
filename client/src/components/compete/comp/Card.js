@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { css } from "styled-components";
 import React, { useState } from "react";
-import { NoLinkKey } from "./KeyBellHeader";
+import { NotLinkedKey } from "../../common/Header";
 import { StyledBetButtonBox, StyledBetButton } from "./BetCardButton";
 import formatDate from "./DateChanger";
 import StyledLink from "components/common/StyledLink";
@@ -109,7 +109,7 @@ function BasicCompCard(props) {
   const obj = props.obj;
 
   return (
-    <StyledLink to={"/compete/" + obj.key} state={{ info: obj }}>
+    <StyledLink to={"/compete/" + obj.key} state={obj}>
       <Card>
         <Date>{formatDate(obj.due)} 마감</Date>
         <ContentBox>
@@ -163,14 +163,14 @@ function BetCompCard(props) {
           </Versus>
         </TextBox>
         <div>
-          <NoLinkKey count={obj.bet}></NoLinkKey>
+          <NotLinkedKey count={obj.bet}></NotLinkedKey>
           <Count>{kFormatter(obj.total)}명 참여</Count>
         </div>
       </ContentBox>
-      {pop && <PopUp data={popupProp}></PopUp>}
+      {pop && <PopUp obj={popupProp}></PopUp>}
       <StyledBetButtonBox>
-        <StyledBetButton onClick={togglePop}>배팅 수정</StyledBetButton>
-        <StyledBetButton>배팅 취소</StyledBetButton>
+        <StyledBetButton>배팅 수정</StyledBetButton>
+        <StyledBetButton onClick={togglePop}>배팅 취소</StyledBetButton>
       </StyledBetButtonBox>
     </BetCard>
   );
@@ -221,13 +221,8 @@ function BetEndCompCard(props) {
           <Thumb src={require("assets/compete/" + obj.thumb)} />
           <TextBox>
             <Title>{obj.title}</Title>
-            {props.type ? (
-              <Versus>
-                {obj.versus[0]} vs {obj.versus[1]}
-              </Versus>
-            ) : (
-              <Versus>{betResult ? obj.versus[0] : obj.versus[1]}</Versus>
-            )}
+
+            <Versus>{betResult ? obj.versus[0] : obj.versus[1]}</Versus>
           </TextBox>
           {props.type ? (
             <Count>{kFormatter(obj.total)}명 참여</Count>

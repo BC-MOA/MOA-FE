@@ -1,10 +1,10 @@
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import BackHeader from "components/common/BackHeader";
-import { Count, Date } from "./Common/Card";
-import kFormatter from "./Common/kFormatter";
-import formatDate from "./Common/DateChanger";
-import PercentBar from "./Common/PercentBar";
+import { Count, Date } from "./comp/Card";
+import kFormatter from "./comp/kFormatter";
+import formatDate from "./comp/DateChanger";
+import PercentBar from "./comp/PercentBar";
 import React, { useContext, useState } from "react";
 import Picker from "react-scrollable-picker";
 import Countdown from "react-countdown";
@@ -166,9 +166,9 @@ const Button = styled.button`
   }
 `;
 
-function CompDetail(props) {
+function CompDetail() {
   const { state } = useLocation();
-  const comp = state.info;
+  const comp = state;
 
   const options = {
     number: [
@@ -235,7 +235,7 @@ function CompDetail(props) {
               func={pickup}
             ></PickUp>
           </PickupSection>
-          <PercentBar totalKey={[12, 37]}></PercentBar>
+          <PercentBar totalkey={comp.totalkey}></PercentBar>
         </BetCard>
         {true && (
           <>

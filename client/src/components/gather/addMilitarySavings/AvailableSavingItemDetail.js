@@ -5,7 +5,7 @@ import SubmitButton from "components/common/SubmitButton";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import ContentControlBtn from "../ContentControlBtn";
+import ContentControlBtn from "../../common/ContentControlBtn";
 import { v1 as uuid } from "uuid";
 function AvailableSavingItemDetail() {
   const controlNameList = ["상품안내", "금리이율", "유의사항"];

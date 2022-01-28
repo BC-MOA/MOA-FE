@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { BetCompCard, BetEndCompCard } from "./Common/Card";
+import { BetCompCard, BetEndCompCard } from "./comp/Card";
 import { hideScrollBar } from "style/common";
-import CompContext from "./context/CompContext";
+import MyCompContext from "./context/MyCompContext";
 import React, { useContext } from "react";
 
 function filterList(cond, compList) {
@@ -43,7 +43,7 @@ const StyledMyList = styled.div`
 `;
 
 const MyList = (props) => {
-  const compList = useContext(CompContext);
+  const compList = useContext(MyCompContext);
 
   return <StyledMyList>{filterList(props.cond, compList)}</StyledMyList>;
 };
