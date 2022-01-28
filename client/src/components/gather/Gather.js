@@ -9,7 +9,6 @@ import { ReactSortable } from "react-sortablejs";
 import moment from "moment";
 
 const Container = styled.div`
-  position: relative;
   width: 100%;
   height: 100%;
   display: flex;
@@ -37,6 +36,9 @@ const Container = styled.div`
       color: var(--a2);
     }
   }
+  .editBtnPosition {
+    position: relative;
+  }
 `;
 const Content = styled.div`
   ${hideScrollBar}
@@ -44,7 +46,7 @@ const Content = styled.div`
 `;
 const EditBtn = styled.button`
   position: absolute;
-  top: 93px;
+  top: 0;
   right: 0;
   font-family: "Pretendard-Medium";
   font-size: 12px;
@@ -89,7 +91,7 @@ function Gather() {
     {
       category: "목표",
       goal_category: "여행",
-      name: "유럽여행 준비",
+      name: "나도 여행한번 가보자 유럽 전역으로!",
       currentAmount: 170000,
       targetAmount: 1000000,
       account: {
@@ -200,13 +202,27 @@ function Gather() {
       <div className="TotalAmount">
         <span className="green">{totalAmount.toLocaleString()}</span> 원
       </div>
-      <ContentControlBtn
-        btnGap="24px"
-        marginBottom="16px"
-        listControl={listControl}
-        setListControl={setListControl}
-        controlNameList={controlNameList}
-      />
+      <div className="editBtnPosition">
+        <ContentControlBtn
+          btnGap="24px"
+          marginBottom="16px"
+          listControl={listControl}
+          setListControl={setListControl}
+          controlNameList={controlNameList}
+        />
+        <EditBtn
+          onClick={() => {
+            setEditToggle(!editToggle);
+          }}
+          className={editToggle ? "" : "Active"}
+        >
+          <img
+            src={require("assets/gather/Sort_arrow_light.svg").default}
+            alt="순서변경 아이콘"
+          />
+          {editToggle ? "순서 편집하기" : "편집완료"}
+        </EditBtn>
+      </div>
       <Content>
         {listControl === "진행중" ? (
           <ReactSortable
@@ -229,7 +245,7 @@ function Gather() {
           </>
         )}
       </Content>
-      <EditBtn
+      {/* <EditBtn
         onClick={() => {
           setEditToggle(!editToggle);
         }}
@@ -240,7 +256,7 @@ function Gather() {
           alt="순서변경 아이콘"
         />
         {editToggle ? "순서 편집하기" : "편집완료"}
-      </EditBtn>
+      </EditBtn> */}
       <NavBar />
     </Container>
   );
