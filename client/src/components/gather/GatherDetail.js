@@ -104,7 +104,7 @@ function GatherDetail() {
   ];
   return (
     <Container>
-      <BackHeader path={-1} title={gatherInfo.name} isScrolled={true} />
+      <BackHeader path={"/gather"} title={gatherInfo.name} isScrolled={true} />
       <button
         className={gatherInfo.category === "비상금" ? "fixBtn none" : "fixBtn"}
         onClick={() => setModal(true)}

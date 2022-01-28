@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
-import { GoalContext } from "./Goal";
 import StoreSvg from "./StoreSvg";
 
 const Container = styled.div`
@@ -39,21 +38,19 @@ const ElBox = styled.div`
     `}
 `;
 
-function CategoryEl({ El }) {
+function CategoryEl({ El, inputs, setInputs }) {
   const category = El;
-  const { inputs, setInputs } = useContext(GoalContext);
-  const isSelected = inputs.category === category;
 
   return (
     <Container
       onClick={(e) => {
         setInputs({
           ...inputs,
-          category: e.currentTarget.children[1].innerText,
+          goal_category: e.currentTarget.children[1].innerText,
         });
       }}
     >
-      <ElBox selected={isSelected}>
+      <ElBox selected={inputs.goal_category === category}>
         <StoreSvg category={category} />
       </ElBox>
       <div className="name">{category}</div>

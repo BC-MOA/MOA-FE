@@ -1,10 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
 import { subDays } from "date-fns";
 import styled from "styled-components";
-import { GoalContext } from "./Goal";
 import moment from "moment";
 
 const Container = styled.div`
@@ -60,9 +59,8 @@ const Container = styled.div`
   }
 `;
 
-function DatePick() {
+function DatePick({ inputs, setInputs, placeholder }) {
   const [endDate, setEndDate] = useState(null);
-  const { inputs, setInputs } = useContext(GoalContext);
 
   return (
     <Container>
@@ -76,8 +74,10 @@ function DatePick() {
             eDate: moment(date).endOf("day")._d,
           });
         }}
-        minDate={subDays(inputs.sDate, -32)}
-        placeholderText="목표한 날짜를 선택해주세요."
+        minDate={subDays(Date.parse(inputs.sDate), -32)}
+        placeholderText={
+          placeholder ? placeholder : "목표한 날짜를 선택해주세요."
+        }
         dateFormat="yyyy년 MM월 dd일"
         dateFormatCalendar="yyyy년 MM월"
         locale={ko}
