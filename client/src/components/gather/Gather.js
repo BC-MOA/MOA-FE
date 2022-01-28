@@ -44,16 +44,28 @@ const Content = styled.div`
 `;
 const EditBtn = styled.button`
   position: absolute;
-  top: 90px;
+  top: 93px;
   right: 0;
   font-family: "Pretendard-Medium";
-  font-size: 13px;
-  line-height: 25px;
-  padding: 0 10px;
+  font-size: 12px;
+  line-height: 19px;
+  padding: 3px 8px;
   border: none;
-  border-radius: 8px;
-  background-color: #f8cb57;
-  color: var(--Title_01);
+  border-radius: 12px;
+  background-color: var(--Line_03);
+  color: var(--Body_02);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  &.Active {
+    padding: 3px 12px;
+    color: #fff;
+    background-color: #4caf5b;
+    img {
+      display: none;
+    }
+  }
 `;
 
 function Gather() {
@@ -186,7 +198,7 @@ function Gather() {
   ]);
   return (
     <Container>
-      <div className="Title">{userName}님이 지금까지 모은 금액은?</div>
+      <div className="Title">{userName}님이 현재 모으고 있는 금액은?</div>
       <div className="TotalAmount">
         <span className="green">{totalAmount.toLocaleString()}</span> 원
       </div>
@@ -223,8 +235,13 @@ function Gather() {
         onClick={() => {
           setEditToggle(!editToggle);
         }}
+        className={editToggle ? "" : "Active"}
       >
-        {editToggle ? "순서 변경" : "순서 저장"}
+        <img
+          src={require("assets/gather/Sort_arrow_light.svg").default}
+          alt="순서변경 아이콘"
+        />
+        {editToggle ? "순서 편집하기" : "편집완료"}
       </EditBtn>
       <NavBar />
     </Container>
