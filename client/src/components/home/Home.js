@@ -6,6 +6,8 @@ import React, { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { v1 as uuid } from "uuid";
+import BubbleContent from "./BubbleContent";
+
 function Home() {
   // const history = useNavigate();
   const [challengeList, setChallengeList] = useState([]);
@@ -19,17 +21,21 @@ function Home() {
   }, []);
   return (
     <Container>
-      <Header title={true} keys={3000} alarm={false}></Header>
+      <Header title={true} keys={30} alarm={false}></Header>
       <ScrollBox paddingValue={"24px 0 "}>
-        {/* 군적금 계좌,적금 연결 안 했을 때 */}
-        <div>
-          <AboutMoa
+        <UserAmountMsg>
+          <p>{"민수"}님이 지금까지 모은 금액은?</p>
+          <div className="num">
+            <span className="roboto">{Number(200000).toLocaleString()}</span>
+            <span>원</span>
+            <div className="highlight"></div>
+          </div>
+        </UserAmountMsg>
+        <BubbleContent savingNum={0} />
+        {/* <AboutMoa
             src={require("assets/about_moa.png")}
             alt={"모아이용방법확인하기"}
-          />
-        </div>
-        {/* 군적금 계좌,적금 연결 했을 때 */}
-        <div></div>
+          /> */}
         {/* 공통 */}
         <AboutChallenge>
           <div className="mainTitle">
@@ -68,10 +74,10 @@ function Home() {
 }
 // style
 
-const AboutMoa = styled.img`
-  display: block;
-  margin-bottom: 54px;
-`;
+// const AboutMoa = styled.img`
+//   display: block;
+//   margin-bottom: 54px;
+// `;
 const AboutChallenge = styled.div`
   margin-bottom: 40px;
   .mainTitle {
@@ -148,4 +154,32 @@ const AboutChallenge = styled.div`
     background-color: var(--Line_03);
   }
 `;
+const UserAmountMsg = styled.div`
+  color: var(--Title_01);
+  text-align: start;
+  font-family: "Pretendard-SemiBold";
+  line-height: 28px;
+  margin-bottom: 20px;
+  p {
+    font-size: 18px;
+  }
+  .num {
+    width: fit-content;
+    font-size: 24px;
+    margin-left: 4px;
+    font-size: 24px;
+    .highlight {
+      height: 10px;
+      background: #4caf5b;
+      opacity: 0.3;
+      border-radius: 2px;
+      margin-top: -14px;
+    }
+    .roboto {
+      font-family: "Roboto";
+      font-weight: bold;
+    }
+  }
+`;
+
 export default Home;
