@@ -7,7 +7,6 @@ import NavBar from "components/common/NavBar";
 import StateGather from "components/gather/StateGather";
 import { ReactSortable } from "react-sortablejs";
 import moment from "moment";
-import { gatherList } from "components/common/dummyData";
 
 const Container = styled.div`
   width: 100%;
