@@ -26,7 +26,7 @@ import EditDeposit from "components/gather/EditDeposit";
 import MidTermTermination from "components/gather/MidTermTermination";
 import MyBoxOpen from "components/reward/MyBoxOpen";
 import RegisterDeposit from "components/gather/RegisterDeposit";
-import AdditionalSafebox from "components/gather/AdditionalSafebox";
+import AdditionalDeposit from "components/gather/AdditionalDeposit";
 function AllRoutes() {
   return (
     <Routes>
@@ -61,8 +61,8 @@ function AllRoutes() {
       <Route path="/gather/detail/edit-goal" element={<EditGoal />} />
       <Route path="/gather/detail/edit-deposit" element={<EditDeposit />} />
       <Route
-        path="/gather/detail/additional-safebox"
-        element={<AdditionalSafebox />}
+        path="/gather/detail/additional-deposit"
+        element={<AdditionalDeposit />}
       />
       <Route
         path="/gather/detail/register-deposit"

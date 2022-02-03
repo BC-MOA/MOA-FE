@@ -136,7 +136,21 @@ function RegisterDeposit() {
         </InputEl>
       </Content>
 
-      <CustomBtn path={"/gather/detail"} data={newInputs} active={isEdited()}>
+      <CustomBtn
+        addFunc={() => {
+          localStorage.setItem(
+            "gatherList",
+            JSON.stringify(
+              [...JSON.parse(localStorage.getItem("gatherList"))].map((x) =>
+                x.name === prev.name ? newInputs : x
+              )
+            )
+          );
+        }}
+        path={"/gather/detail"}
+        data={newInputs}
+        active={isEdited()}
+      >
         자동이체 등록
       </CustomBtn>
     </Container>

@@ -141,7 +141,9 @@ function Goal() {
     howOften: "매월 10일",
     amount: "",
     targetAmount: "",
+    currentAmount: "0",
     account: "",
+    transactions: [],
   });
 
   useEffect(() => {
@@ -294,6 +296,15 @@ function Goal() {
         </Content>
 
         <CustomBtn
+          addFunc={() => {
+            const getted = JSON.parse(localStorage.getItem("gatherList"));
+            localStorage.setItem(
+              "gatherList",
+              getted
+                ? JSON.stringify([...getted, inputs])
+                : JSON.stringify([inputs])
+            );
+          }}
           path={"complete"}
           data={{ inputs: inputs, name: "목표" }}
           active={!Object.values(inputs).filter((x) => x === "").length}
