@@ -3,9 +3,9 @@ import { css } from "styled-components";
 import React, { useState } from "react";
 import { NotLinkedKey } from "../../common/Header";
 import { StyledBetButtonBox, StyledBetButton } from "./BetCardButton";
-import formatDate from "./DateChanger";
+import formatDate from "../function/DateChanger";
 import StyledLink from "components/common/StyledLink";
-import kFormatter from "./kFormatter";
+import kFormatter from "../function/kFormatter";
 import PopUp from "./PopUp";
 
 //기본 카드 디자인

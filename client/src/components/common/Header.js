@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import StyledLink from "components/common/StyledLink";
-import kFormatter from "../compete/comp/kFormatter";
+import kFormatter from "../compete/function/kFormatter";
 
 //Header-상단공간
 const StyledHeader = styled.div`

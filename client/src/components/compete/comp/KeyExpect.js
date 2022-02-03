@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import prediction from "./PredictKey";
+import prediction from "../function/PredictKey";
 
 const Expect = styled.div`
   width: 244px;
