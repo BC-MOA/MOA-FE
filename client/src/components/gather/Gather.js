@@ -73,7 +73,7 @@ const EditBtn = styled.button`
 
 function Gather() {
   const userName = "민수";
-  //  dummyData 에서 gatherlist 정보 가지고 오기!
+  const gatherList = JSON.parse(localStorage.getItem("gatherList")) || [];
   const inProgressList = gatherList.filter((x) => !moment().isAfter(x.eDate));
   const completedList = gatherList.filter((x) => moment().isAfter(x.eDate));
   const totalAmount = inProgressList.reduce((acc, cur) => {
