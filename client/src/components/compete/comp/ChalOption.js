@@ -12,7 +12,7 @@ const Pickupbox = styled.div`
   }
 
   .thumb {
-    filter: ${({ filter }) => (filter ? "none" : "grayscale(80%)")};
+    $filter: ${({ $filter }) => ($filter ? "none" : "grayscale(80%)")};
   }
 
   transition: 1s all;
@@ -48,7 +48,7 @@ const PickUp = (props) => {
 
   return (
     //조건에 따라 grayscale 필터 설정
-    <Pickupbox filter={!props.isbet || buttonState ? true : false}>
+    <Pickupbox $filter={!props.isbet || buttonState ? true : false}>
       <div className="img">
         <img
           alt="none"

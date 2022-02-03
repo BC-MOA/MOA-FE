@@ -7,7 +7,7 @@ import formatDate from "../function/DateChanger";
 import PercentBar from "../comp/PercentBar";
 import React, { useState } from "react";
 import { Timer, TimerBox } from "../comp/Timer";
-import { PickUp, PickupSection } from "../comp/ChalOption";
+import { PickUp } from "../comp/ChalOption";
 import { KeyPicker, options } from "../comp/KeyPicker";
 import ExpectedKey from "../comp/KeyExpect";
 

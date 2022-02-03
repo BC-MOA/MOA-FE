@@ -41,7 +41,7 @@ function Compete() {
     <>
       <MyCompeteContext.Provider value={myCompList.compList}>
         <AllCompContext.Provider value={allCompList.compList}>
-          <Header title={false} keys={3000} alarm={true}></Header>
+          <Header $title={false} keys={3000} alarm={true}></Header>
           <IgnorePaddingBox>
             <div>
               <CategoryButton
