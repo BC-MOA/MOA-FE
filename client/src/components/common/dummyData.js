@@ -1,4 +1,4 @@
-export const gatherList = [
+export let gatherList = [
   {
     id: 1,
     category: "군적금",
@@ -14,24 +14,25 @@ export const gatherList = [
     depositMethod: "자동이체",
     howOften: "매월 10일",
     amount: "200000",
+    transactions: [],
   },
-  {
-    id: 2,
-    category: "목표",
-    goal_category: "여행",
-    name: "나도 여행한번 가보자 유럽 전역으로!",
-    currentAmount: 170000,
-    targetAmount: 1000000,
-    account: {
-      name: "하나은행",
-      number: "123-456-78-910111",
-    },
-    sDate: "Wed Nov 10 2021 15:11:39 GMT+0900",
-    eDate: "Sat Dec 10 2022 23:59:59 GMT+0900",
-    depositMethod: "자동이체",
-    howOften: "매월 10일",
-    amount: "50000",
-  },
+  //   {
+  //     id: 2,
+  //     category: "목표",
+  //     goal_category: "여행",
+  //     name: "유럽여행 준비",
+  //     currentAmount: 170000,
+  //     targetAmount: 1000000,
+  //     account: {
+  //       name: "하나은행",
+  //       number: "123-456-78-910111",
+  //     },
+  //     sDate: "Wed Nov 10 2021 15:11:39 GMT+0900",
+  //     eDate: "Sat Dec 10 2022 23:59:59 GMT+0900",
+  //     depositMethod: "자동이체",
+  //     howOften: "매월 10일",
+  //     amount: "50000",
+  //   },
   {
     id: 3,
     category: "비상금",
@@ -41,9 +42,23 @@ export const gatherList = [
       name: "하나은행",
       number: "123-456-78-103556",
     },
+    amount: 5000,
+    balance: 0,
+    transactions: [
+      {
+        date: "1월 10일",
+        lists: [
+          {
+            name: "국군재정단",
+            time: "20:00",
+            amount: 200000,
+            total: 800000,
+          },
+        ],
+      },
+    ],
   },
   // {
-  // id: 4,
   //   category: "비상금",
   //   name: "비상금",
   //   currentAmount: 300000,
@@ -53,7 +68,6 @@ export const gatherList = [
   //   },
   // },
   // {
-  // id: 5,
   //   category: "군적금",
   //   name: "100만원 모으기",
   //   currentAmount: 100000,
@@ -69,7 +83,7 @@ export const gatherList = [
   //   amount: "200000",
   // },
   {
-    id: 6,
+    id: 4,
     category: "목표",
     goal_category: "선물",
     name: "조카 선물😎",
@@ -84,21 +98,36 @@ export const gatherList = [
     depositMethod: "자유입금",
     howOften: "",
     amount: "50000",
+    transactions: [],
   },
-  // {
-  //   id: 7,
-  //   category: "군적금",
-  //   name: "1000만원 모으기",
-  //   currentAmount: 0,
-  //   targetAmount: 2400000,
-  //   account: {
-  //     name: "신한",
-  //     number: "112-0650-0987",
+  //   {
+  //     category: "군적금",
+  //     name: "1000만원 모으기",
+  //     currentAmount: 0,
+  //     targetAmount: 2400000,
+  //     account: {
+  //       name: "신한",
+  //       number: "112-0650-0987",
+  //     },
+  //     sDate: "Mon Jan 10 2022 15:11:39 GMT+0900",
+  //     eDate: "Fri Mar 10 2023 23:59:59 GMT+0900",
+  //     depositMethod: "자유입금",
+  //     howOften: "",
+  //     amount: "",
   //   },
-  //   sDate: "Mon Jan 10 2022 15:11:39 GMT+0900",
-  //   eDate: "Fri Mar 10 2023 23:59:59 GMT+0900",
-  //   depositMethod: "자유입금",
-  //   howOften: "",
-  //   amount: "",
-  // },
+];
+
+export const accountList = [
+  {
+    bank: "KB국민",
+    accountName: "KB나라사랑우대통장",
+    accountNumber: "112-0330-0201",
+    balance: 500000,
+  },
+  {
+    bank: "하나은행",
+    accountName: "하나장병내일준비적금",
+    accountNumber: "110-0551-0031",
+    balance: 100000,
+  },
 ];
