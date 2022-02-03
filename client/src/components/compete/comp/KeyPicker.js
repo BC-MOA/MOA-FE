@@ -69,6 +69,7 @@ const KeyPicker = (props) => {
   return (
     <KeySelctor>
       <img
+        alt="none"
         className="logo"
         src={require("assets/compete/key.svg").default}
       ></img>

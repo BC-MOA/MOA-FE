@@ -51,6 +51,7 @@ const PickUp = (props) => {
     <Pickupbox filter={!props.isbet || buttonState ? true : false}>
       <div className="img">
         <img
+          alt="none"
           src={
             buttonState
               ? require("assets/compete/checked.svg").default
@@ -60,6 +61,7 @@ const PickUp = (props) => {
       </div>
       <div className="thumb">
         <img
+          alt="none"
           src={
             //챌린지 대상 이미지 url 적용해야함
             props.type

@@ -120,7 +120,7 @@ function CompHowTo() {
       <BackHeader isScrolled={false} title={""} path={-1}></BackHeader>
       <Page>
         <LogoBox>
-          <img src={require("assets/compete/moa.svg").default}></img>
+          <img alt="none" src={require("assets/compete/moa.svg").default}></img>
           <p>챌린지 참여 방법</p>
         </LogoBox>
         <StepBox>

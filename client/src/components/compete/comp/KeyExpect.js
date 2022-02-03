@@ -73,12 +73,17 @@ const ExpectedKey = (props) => {
         배팅 성공 시 열쇠 <p className="num"> {expect} </p> 개 획득
       </div>
       <img
+        alt="none"
         className="button"
         onClick={handleClick}
         src={require("assets/compete/Question_fill.svg").default}
       ></img>
       {pop && (
-        <img src={require("assets/compete/popup.png")} className="pop"></img>
+        <img
+          alt="none"
+          src={require("assets/compete/popup.png")}
+          className="pop"
+        ></img>
       )}
     </Expect>
   );
