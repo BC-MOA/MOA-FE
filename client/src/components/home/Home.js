@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { v1 as uuid } from "uuid";
 import BubbleContent from "./BubbleContent";
+import axios from "axios";
 
 function Home() {
   const history = useNavigate();
