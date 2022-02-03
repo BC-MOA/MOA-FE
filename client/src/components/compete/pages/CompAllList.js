@@ -8,9 +8,9 @@ import createCardList from "../function/FilterList";
 //[styled comp] : 리스트 컨테이너
 const StyledAllList = styled.div`
   background-color: var(--Surface);
-  height: 380px;
+  height: 450px;
 
-  padding: 0 20px 49px;
+  padding: 0 20px;
 
   ${hideScrollBar}
 `;

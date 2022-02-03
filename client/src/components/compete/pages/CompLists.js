@@ -10,7 +10,7 @@ const myControlNameList = ["참가중", "참가완료"];
 
 //[styled comp] : 세부 카테고리 설정 옵션 박스
 const SetTypeStyle = styled.div`
-  margin: 24px 28px 0;
+  margin: 24px 28px 0px;
 `;
 
 /**

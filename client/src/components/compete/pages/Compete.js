@@ -9,15 +9,15 @@ import CompLists from "./CompLists";
 import Banner from "../comp/BannerSwiper";
 import CategoryButton from "../comp/CategoryButton";
 
-//[styled comp] : 임시 하단 nav
-const StyledNavBar = styled(NavBar)`
-  position: fixed;
-  bottom: 0;
-`;
-
 //[styled comp]: 상위 패딩 무시용 박스
 const IgnorePaddingBox = styled.div`
-  margin: 0 -20px;
+  margin: -8px -20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: calc(734px - 52px);
 `;
 
 /**
@@ -43,24 +43,27 @@ function Compete() {
         <AllCompContext.Provider value={allCompList.compList}>
           <Header title={false} keys={3000} alarm={true}></Header>
           <IgnorePaddingBox>
-            <CategoryButton
-              disabled={isAll}
-              onClick={() => setCategoryWrapper(true)}
-            >
-              전체 챌린지
-            </CategoryButton>
-            <CategoryButton
-              disabled={!isAll}
-              onClick={() => setCategoryWrapper(false)}
-            >
-              내 챌린지
-            </CategoryButton>
-            {isAll ? <Banner></Banner> : <></>}
-            <CompLists category={isAll}></CompLists>
+            <div>
+              <CategoryButton
+                disabled={isAll}
+                onClick={() => setCategoryWrapper(true)}
+              >
+                전체 챌린지
+              </CategoryButton>
+              <CategoryButton
+                disabled={!isAll}
+                onClick={() => setCategoryWrapper(false)}
+              >
+                내 챌린지
+              </CategoryButton>
+
+              {isAll ? <Banner></Banner> : <></>}
+              <CompLists category={isAll}></CompLists>
+            </div>
+            <NavBar></NavBar>
           </IgnorePaddingBox>
         </AllCompContext.Provider>
       </MyCompeteContext.Provider>
-      <StyledNavBar></StyledNavBar>
     </>
   );
 }
