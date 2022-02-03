@@ -97,8 +97,13 @@ function SafeBox() {
 
   const [safeInputs, setSafeInputs] = useState({
     amount: 0,
+    category: "비상금",
+    name: "비상금",
+    amount: "",
+    currentAmount: 0,
     account: "",
     balance: 0,
+    transactions: [],
   });
   const onChange = (event) => {
     const { name, value } = event.target;
@@ -136,6 +141,16 @@ function SafeBox() {
         </InputEl>
       </Content>
       <CustomBtn
+        addFunc={() => {
+          const getted = JSON.parse(localStorage.getItem("gatherList"));
+          safeInputs.currentAmount = safeInputs.amount;
+          localStorage.setItem(
+            "gatherList",
+            getted
+              ? JSON.stringify([...getted, safeInputs])
+              : JSON.stringify([safeInputs])
+          );
+        }}
         path={"complete"}
         data={{ inputs: safeInputs, name: "비상금" }}
         active={!Object.values(safeInputs).filter((x) => x === "").length}

@@ -21,16 +21,13 @@ const InputBox = styled.div`
     &:disabled {
       background-color: #ebebeb;
     }
-
-    &.pBlack {
-      &::placeholder {
-        color: var(--Title_01);
-      }
-    }
   }
   .unit {
     position: absolute;
     right: 16px;
+    font-family: "Pretendard-Regular";
+    font-size: 16px;
+    line-height: 25px;
     color: var(--Body_01);
   }
 `;

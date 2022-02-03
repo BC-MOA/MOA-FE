@@ -19,6 +19,17 @@ function Home() {
       { name: "3", type1: "A", type2: "B", 참여자: "300" },
     ]);
   }, []);
+  useEffect(() => {
+    axios
+      .get("/v1/hello")
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <Container>
       <Header title={true} keys={30} alarm={false}></Header>

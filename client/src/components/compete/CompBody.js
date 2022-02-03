@@ -5,6 +5,7 @@ import Banner from "./comp/BannerSwiper";
 
 const IgnorePaddingBox = styled.div`
   margin: 0 -20px;
+  flex: 1;
 `;
 
 //버튼-전체 챌린지, 내 챌린지
