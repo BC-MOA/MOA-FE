@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import CustomBtn from "components/gather/addGoal/CustomBtn";
 import BackHeader from "components/common/BackHeader";
+import moment from "moment";
 
 const Container = styled.div`
   width: 100%;
@@ -67,7 +68,7 @@ const NumBtn = styled.button`
   }
 `;
 
-function MobileKeypad({ path }) {
+function MobileKeypad({ path, props }) {
   const [input, setInput] = useState("");
 
   const onClick = (event) => {
@@ -76,6 +77,23 @@ function MobileKeypad({ path }) {
 
   const cancel = () => {
     setInput(input.slice(0, -1));
+  };
+
+  const trFormat = (input) => {
+    const formatted = {
+      date: moment(new Date()).format("MM월 DD일"),
+      lists: [
+        {
+          name: "국군재정단",
+          time: moment(new Date()).format("hh:mm"),
+          amount: input,
+          // Todo: 추가 입금 시, 잔액 처리
+          total: 10000,
+        },
+      ],
+    };
+
+    return formatted;
   };
 
   return (
@@ -89,9 +107,22 @@ function MobileKeypad({ path }) {
         />
       </Content>
       <CustomBtn
+        addFunc={() => {
+          props.transactions.push(trFormat(input));
+          localStorage.setItem(
+            "gatherList",
+            JSON.stringify([
+              ...JSON.parse(localStorage.getItem("gatherList")).map((x) =>
+                x.name === props.name
+                  ? { ...x, transactions: [...x.transactions, trFormat(input)] }
+                  : x
+              ),
+            ])
+          );
+        }}
         path={path ? path : "/gather/add-safebox"}
         active={input !== ""}
-        data={input}
+        data={path ? props : input}
       >
         입력 완료
       </CustomBtn>
