@@ -151,21 +151,21 @@ function Gather() {
       howOften: "",
       amount: "50000",
     },
-    {
-      category: "군적금",
-      name: "1000만원 모으기",
-      currentAmount: 0,
-      targetAmount: 2400000,
-      account: {
-        name: "신한",
-        number: "112-0650-0987",
-      },
-      sDate: "Mon Jan 10 2022 15:11:39 GMT+0900",
-      eDate: "Fri Mar 10 2023 23:59:59 GMT+0900",
-      depositMethod: "자유입금",
-      howOften: "",
-      amount: "",
-    },
+    // {
+    //   category: "군적금",
+    //   name: "1000만원 모으기",
+    //   currentAmount: 0,
+    //   targetAmount: 2400000,
+    //   account: {
+    //     name: "신한",
+    //     number: "112-0650-0987",
+    //   },
+    //   sDate: "Mon Jan 10 2022 15:11:39 GMT+0900",
+    //   eDate: "Fri Mar 10 2023 23:59:59 GMT+0900",
+    //   depositMethod: "자유입금",
+    //   howOften: "",
+    //   amount: "",
+    // },
   ];
 
   const inProgressList = gatherList.filter((x) => !moment().isAfter(x.eDate));
