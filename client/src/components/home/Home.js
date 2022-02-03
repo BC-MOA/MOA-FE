@@ -8,7 +8,7 @@ function Home() {
     axios
       .get("/v1/hello")
       .then((res) => {
-        console.log(res.data.json);
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
