@@ -3,12 +3,40 @@ import styled from "styled-components";
 import CustomBtn from "components/gather/addGoal/CustomBtn";
 import BackHeader from "components/common/BackHeader";
 import moment from "moment";
+import { accountList } from "components/common/dummyData";
+import AccountModal from "./AccountModal";
 
 const Container = styled.div`
   width: 100%;
   height: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
+`;
+
+const SelectAccount = styled.div`
+  position: absolute;
+  top: 56px;
+  text-align: left;
+  .title {
+    font-family: "Pretendard-Regular";
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--Body_02);
+  }
+  .inputBox {
+    display: flex;
+    gap: 4px;
+  }
+  input {
+    margin-top: 2px;
+    border: none;
+    background: none;
+    font-family: "Pretendard-Regular";
+    font-size: 16px;
+    line-height: 25px;
+    padding: 0;
+  }
 `;
 
 const Content = styled.div`
@@ -70,6 +98,8 @@ const NumBtn = styled.button`
 
 function MobileKeypad({ path, props }) {
   const [input, setInput] = useState("");
+  const [modal, setModal] = useState(false);
+  const [selectedAccount, setSelectedAccount] = useState(accountList[0]);
 
   const onClick = (event) => {
     setInput(input + event.target.innerText);
@@ -99,6 +129,26 @@ function MobileKeypad({ path, props }) {
   return (
     <Container>
       <BackHeader path={-1} />
+      {path ? (
+        <SelectAccount>
+          <div className="title">출금계좌</div>
+          <div className="inputBox">
+            <input
+              type="button"
+              value={selectedAccount.accountName}
+              onClick={() => {
+                setModal(true);
+              }}
+            />
+            <img
+              src={require("assets/gather/ic_select_arrow.svg").default}
+              alt="드롭다운 아이콘"
+            />
+          </div>
+        </SelectAccount>
+      ) : (
+        <></>
+      )}
       <Content>
         <input
           disabled
@@ -107,19 +157,26 @@ function MobileKeypad({ path, props }) {
         />
       </Content>
       <CustomBtn
-        addFunc={() => {
-          props.transactions.push(trFormat(input));
-          localStorage.setItem(
-            "gatherList",
-            JSON.stringify([
-              ...JSON.parse(localStorage.getItem("gatherList")).map((x) =>
-                x.name === props.name
-                  ? { ...x, transactions: [...x.transactions, trFormat(input)] }
-                  : x
-              ),
-            ])
-          );
-        }}
+        addFunc={
+          path
+            ? () => {
+                props.transactions.push(trFormat(input));
+                localStorage.setItem(
+                  "gatherList",
+                  JSON.stringify([
+                    ...JSON.parse(localStorage.getItem("gatherList")).map((x) =>
+                      x.name === props.name
+                        ? {
+                            ...x,
+                            transactions: [...x.transactions, trFormat(input)],
+                          }
+                        : x
+                    ),
+                  ])
+                );
+              }
+            : ""
+        }
         path={path ? path : "/gather/add-safebox"}
         active={input !== ""}
         data={path ? props : input}
@@ -155,6 +212,15 @@ function MobileKeypad({ path, props }) {
           <img src={require("assets/goal/cancel.svg").default} alt="cancel" />
         </NumBtn>
       </Box>
+      {modal ? (
+        <AccountModal
+          setModal={setModal}
+          props={accountList}
+          setAccount={setSelectedAccount}
+        />
+      ) : (
+        <></>
+      )}
     </Container>
   );
 }
