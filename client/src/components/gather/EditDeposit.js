@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import BackHeader from "components/common/BackHeader";
 import { styleTitle, styleSubTitle, styleNotice } from "style/common";
@@ -64,6 +64,16 @@ function EditDeposit() {
     amount: "",
   });
 
+  useEffect(() => {
+    if (newInputs.depositMethod === "자유입금") {
+      setNewInputs({
+        ...newInputs,
+        howOften: "-",
+        amount: "",
+      });
+    }
+  }, [newInputs.depositMethod]);
+
   const onChange = (event) => {
     const { name, value } = event.target;
     setNewInputs({
@@ -100,30 +110,34 @@ function EditDeposit() {
             <div>자동이체</div>
             <div>자유입금</div>
           </SelectBox>
-          {props.category === "군적금" ? (
-            <div className="subNotice">
-              <span>자동이체</span>하시면,{" "}
-              <span className="l_space">국군재정단</span>이 적금 통장에{" "}
-              <span className="l_space">매달 이체</span>를 해주고{" "}
-              <span className="l_space">차액</span>은
-              <span className="l_space">월급으로 입금</span>됩니다.
-            </div>
-          ) : (
-            <>
-              <div className="subNotice bottomMargin">
-                <span>자동이체</span>하시면, 더 많은 <span>리워드</span>를 받을
-                수 있어요!
+          {newInputs.depositMethod === "자동이체" ? (
+            props.category === "군적금" ? (
+              <div className="subNotice">
+                <span>자동이체</span>하시면,{" "}
+                <span className="l_space">국군재정단</span>이 적금 통장에{" "}
+                <span className="l_space">매달 이체</span>를 해주고{" "}
+                <span className="l_space">차액</span>은
+                <span className="l_space">월급으로 입금</span>됩니다.
               </div>
-              <SelectBox
-                name="howOften"
-                inputs={newInputs}
-                setInputs={setNewInputs}
-              >
-                <div>매월 10일</div>
-                <div>매주 월요일</div>
-                <div>매일</div>
-              </SelectBox>
-            </>
+            ) : (
+              <>
+                <div className="subNotice bottomMargin">
+                  <span>자동이체</span>하시면, 더 많은 <span>리워드</span>를
+                  받을 수 있어요!
+                </div>
+                <SelectBox
+                  name="howOften"
+                  inputs={newInputs}
+                  setInputs={setNewInputs}
+                >
+                  <div>매월 10일</div>
+                  <div>매주 월요일</div>
+                  <div>매일</div>
+                </SelectBox>
+              </>
+            )
+          ) : (
+            <></>
           )}
         </InputEl>
         <InputEl>
@@ -132,7 +146,6 @@ function EditDeposit() {
           </div>
           <CustomInput
             name="amount"
-            pBlack={true}
             placeholder={prev.amount}
             value={newInputs.amount}
             onChange={onChange}
@@ -149,7 +162,21 @@ function EditDeposit() {
         </InputEl>
       </Content>
 
-      <CustomBtn path={"/gather/detail"} data={newInputs} active={isEdited()}>
+      <CustomBtn
+        addFunc={() =>
+          localStorage.setItem(
+            "gatherList",
+            JSON.stringify(
+              [...JSON.parse(localStorage.getItem("gatherList"))].map((x) =>
+                x.name === prev.name ? newInputs : x
+              )
+            )
+          )
+        }
+        path={"/gather/detail"}
+        data={newInputs}
+        active={isEdited()}
+      >
         자동이체 변경
       </CustomBtn>
     </Container>
