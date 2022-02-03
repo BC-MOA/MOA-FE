@@ -12,12 +12,23 @@ function EditSavingTitle({ isSubmit, setIsSubmit }) {
   useEffect(() => {
     if (newTitle === "") {
       setIsInputChange(false);
-    } else if (newTitle !== startTitle) {
-      setIsInputChange(true);
     } else {
-      setIsInputChange(false);
+      checkByte(newTitle);
     }
   }, [newTitle]);
+  function checkByte(value) {
+    const data = [...value];
+    const totalByte = data.reduce((acc, cur) => {
+      const uni_char = escape(cur);
+      if (uni_char.length > 4) return acc + 2;
+      else return acc + 1;
+    }, 0);
+    if (totalByte > 40) {
+      setIsInputChange(false);
+    } else {
+      setIsInputChange(true);
+    }
+  }
   return (
     <EditSavingTitleStyle isSubmit={isSubmit}>
       <Container>
