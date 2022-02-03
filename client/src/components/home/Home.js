@@ -3,13 +3,13 @@ import { Header } from "components/common/Header";
 import NavBar from "components/common/NavBar";
 import ScrollBox from "components/common/ScrollBox";
 import React, { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { v1 as uuid } from "uuid";
 import BubbleContent from "./BubbleContent";
 
 function Home() {
-  // const history = useNavigate();
+  const history = useNavigate();
   const [challengeList, setChallengeList] = useState([]);
   useEffect(() => {
     // todo 인기 챌린지 받아오기
@@ -61,9 +61,18 @@ function Home() {
                 </div>
               ))}
           </div>
-          <button>더보기</button>
+          <button
+            onClick={() => {
+              history("/compete");
+            }}
+          >
+            더보기
+          </button>
         </AboutChallenge>
-        <img
+        <AboutReward
+          onClick={() => {
+            history("/reward");
+          }}
           src={require("assets/about_reward.png")}
           alt={"모아박스구경가기"}
         />
@@ -181,5 +190,7 @@ const UserAmountMsg = styled.div`
     }
   }
 `;
-
+const AboutReward = styled.img`
+  cursor: pointer;
+`;
 export default Home;
