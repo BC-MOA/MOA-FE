@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import Picker from "react-scrollable-picker";
-import React, { useState } from "react";
+import React from "react";
 
+//[styled comp] : 배팅 키 개수 선택용 디자인
 const KeySelctor = styled.div`
   height: 130px;
   padding: 15px;
@@ -42,6 +43,7 @@ const KeySelctor = styled.div`
   }
 `;
 
+//가능한 옵션 객체
 const options = {
   number: [
     { value: 1, label: "1" },
@@ -52,10 +54,22 @@ const options = {
   ],
 };
 
+/**
+ * [comp]
+ * KeyPicker
+ *
+ * [state]
+ * none
+ *
+ * [props]
+ * onchange : state 변경용 함수
+ * count : keyCount = optionGroups, valueGroups을 가지는 객체
+ */
 const KeyPicker = (props) => {
   return (
     <KeySelctor>
       <img
+        alt="none"
         className="logo"
         src={require("assets/compete/key.svg").default}
       ></img>

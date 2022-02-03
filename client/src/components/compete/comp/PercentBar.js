@@ -1,25 +1,6 @@
 import styled from "styled-components";
 
-const PercentBar = (props) => {
-  const A = props.totalkey[0];
-  const B = props.totalkey[1];
-  const ratioA = ((A / (A + B)) * 100).toFixed(2);
-  const ratioB = ((B / (A + B)) * 100).toFixed(2);
-
-  return (
-    <StyledPercentBar ratio={ratioA}>
-      <>
-        <div className="a"></div>
-        <div className="b"></div>
-      </>
-      <div className="textbox">
-        <span className="a-text">{ratioA}%</span>
-        <span className="b-text">{ratioB}%</span>
-      </div>
-    </StyledPercentBar>
-  );
-};
-
+//[styled comp] : 퍼센티지 bar 디자인 컴포넌트
 const StyledPercentBar = styled.div`
   padding-top: 15px;
   height: 50px;
@@ -60,5 +41,36 @@ const StyledPercentBar = styled.div`
     float: right;
   }
 `;
+
+/**
+ * [comp]
+ * PercentBar
+ *
+ * [state]
+ * none
+ *
+ * [props]
+ * totalkey : 베팅된 키의 개수 리스트
+ */
+
+const PercentBar = (props) => {
+  const A = props.totalkey[0];
+  const B = props.totalkey[1];
+  const ratioA = ((A / (A + B)) * 100).toFixed(2);
+  const ratioB = ((B / (A + B)) * 100).toFixed(2);
+
+  return (
+    <StyledPercentBar ratio={ratioA}>
+      <>
+        <div className="a"></div>
+        <div className="b"></div>
+      </>
+      <div className="textbox">
+        <span className="a-text">{ratioA}%</span>
+        <span className="b-text">{ratioB}%</span>
+      </div>
+    </StyledPercentBar>
+  );
+};
 
 export default PercentBar;
