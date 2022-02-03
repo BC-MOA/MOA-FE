@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+//[styled comp] : 팝업 카드 배경
 const StyledPopUpBox = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
   width: 375px;
@@ -16,6 +17,7 @@ const StyledPopUpBox = styled.div`
   z-index: 1;
 `;
 
+//[styled comp] : 팝업 카드
 const StyledPopUpCard = styled.div`
   width: 90%;
   height: 168px;
@@ -70,7 +72,19 @@ const StyledPopUpCard = styled.div`
   }
 `;
 
-export default function PopUp(props) {
+/**
+ * [comp]
+ * PopUp
+ *
+ * [state]
+ * none
+ *
+ * [props]
+ * 챌린지 정보
+ * state 변경용 함수
+ */
+
+function PopUp(props) {
   const obj = props.obj;
 
   const clickYes = () => {
@@ -95,3 +109,5 @@ export default function PopUp(props) {
     </StyledPopUpBox>
   );
 }
+
+export default PopUp;

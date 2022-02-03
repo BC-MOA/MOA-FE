@@ -22,7 +22,7 @@ const allCompList = {
     },
     {
       key: "A3",
-      due: new Date("2022-01-28T21:00:00"),
+      due: new Date("2022-04-28T21:00:00"),
       thumb: "soccer.png",
       title: "프리미어리그 경기 승자는1?",
       versus: ["맨시티", "리버풀"],
@@ -32,7 +32,7 @@ const allCompList = {
     },
     {
       key: "A4",
-      due: new Date("2022-01-26T21:00:00"),
+      due: new Date("2022-05-26T21:00:00"),
       thumb: "game.png",
       title: "롤챔스 경기 승자는?",
       versus: ["NS", "DK"],
@@ -71,7 +71,7 @@ const myCompList = {
     },
     {
       key: "B3",
-      due: new Date("2022-01-28T21:00:00"),
+      due: new Date("2022-04-28T21:00:00"),
       thumb: "soccer.png",
       title: "프리미어리그 경기 승자는?",
       versus: ["맨시티", "리버풀"],
@@ -83,7 +83,7 @@ const myCompList = {
     },
     {
       key: "B4",
-      due: new Date("2022-01-26T21:00:00"),
+      due: new Date("2022-05-26T21:00:00"),
       thumb: "game.png",
       title: "롤챔스 경기 승자는?",
       versus: ["NS", "DK"],

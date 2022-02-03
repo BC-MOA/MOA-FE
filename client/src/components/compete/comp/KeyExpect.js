@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import prediction from "../function/PredictKey";
 
+//[styled comp] : 배팅 결과
 const Expect = styled.div`
   width: 244px;
   height: 33px;
@@ -45,7 +46,19 @@ const Expect = styled.div`
   }
 `;
 
-const ExpectKey = (props) => {
+/**
+ * [comp]
+ * ExpectKey
+ *
+ * [state]
+ * pop : 팝업 관련 state
+ *
+ * [props]
+ * bet : int/ 베팅한 개수
+ * pick : bool/선택한 대상
+ * keys: 전체 베팅된 키 리스트
+ */
+const ExpectedKey = (props) => {
   const [pop, setPop] = useState(false);
 
   const handleClick = () => {
@@ -71,4 +84,4 @@ const ExpectKey = (props) => {
   );
 };
 
-export default ExpectKey;
+export default ExpectedKey;

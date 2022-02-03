@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import BackHeader from "components/common/BackHeader";
 
+//챌린지 안내 페이지 - 이미지로 대체도 고려
+
 const Page = styled.div`
   background-color: white;
   border-radius: 2px;

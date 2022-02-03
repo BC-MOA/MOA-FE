@@ -1,4 +1,13 @@
-//날짜 형식을 지정해주는 함수
+/**
+ * [function] : formatDate
+ * 날짜 형식을 지정
+ *
+ * [args]
+ * dateobj : 날짜 객체
+ *
+ * [return]
+ * 변환된 날짜 string
+ */
 function formatDate(dateobj) {
   const month = dateobj.getMonth() + 1;
   const date = dateobj.getDate();

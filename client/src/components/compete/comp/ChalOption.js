@@ -1,12 +1,6 @@
 import styled from "styled-components";
 
-const PickupSection = styled.div`
-  display: flex;
-  height: 75px;
-  margin: 15px auto;
-  justify-content: space-around;
-`;
-
+//[styled comp] : 개별 선택 항목 컨테이너
 const Pickupbox = styled.div`
   display: flex;
   align-items: flex-start;
@@ -20,29 +14,42 @@ const Pickupbox = styled.div`
   .thumb {
     filter: ${({ filter }) => (filter ? "none" : "grayscale(80%)")};
   }
+
+  transition: 1s all;
+
+  .thumb:hover {
+    transform: scale(1.1);
+  }
 `;
 
+/**
+ * [comp]
+ * PickUp
+ *
+ * [state]
+ * none
+ *
+ * [props]
+ * versus : list of string / 챌린지 대상
+ * type: bool/ 선택지 순서 구분
+ * pick : bool/ 선택한 대상
+ * bet : bool/ 베팅 여부
+ */
 const PickUp = (props) => {
-  const clickHandle = () => {
-    props.info.func(props.type);
-  };
+  let buttonState = false;
 
-  //버튼 상태 설정
-  let buttonState;
-
-  if (props.info.isbet) {
-    if (props.type) {
-      buttonState = props.info.pick;
-    } else {
-      buttonState = !props.info.pick;
-    }
-  } else {
-    buttonState = false;
+  /**
+   * 베팅 되있을 때
+   * 순서에 따라서 pick값에 따른 버튼 활성화 조건 설정
+   * */
+  if (props.isbet) {
+    buttonState = props.type ? props.pick : !props.pick;
   }
 
   return (
-    <Pickupbox filter={!props.info.isbet || buttonState ? 1 : 0}>
-      <div className="img" onClick={clickHandle}>
+    //조건에 따라 grayscale 필터 설정
+    <Pickupbox filter={!props.isbet || buttonState ? true : false}>
+      <div className="img">
         <img
           src={
             buttonState
@@ -54,6 +61,7 @@ const PickUp = (props) => {
       <div className="thumb">
         <img
           src={
+            //챌린지 대상 이미지 url 적용해야함
             props.type
               ? "https://cdn.jsdelivr.net/gh/BuenCamino3rd/test/image/맨시티.png"
               : require("assets/compete/v1.png")
@@ -65,4 +73,4 @@ const PickUp = (props) => {
   );
 };
 
-export { PickUp, PickupSection, Pickupbox };
+export { PickUp };

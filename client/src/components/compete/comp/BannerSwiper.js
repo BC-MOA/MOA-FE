@@ -1,9 +1,40 @@
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Link } from "react-router-dom";
 import "swiper/css";
-import Banner from "./Banner";
 
-//Swiper
+/**
+ * [comp]
+ * Banner
+ *
+ * [state]
+ * none
+ *
+ * [props]
+ * to : 이동할 router 주소/url
+ * src : 이미지 src 주소
+ */
+
+function Banner(props) {
+  return (
+    <Link to={props.to}>
+      <img alt="none" src={props.src} />
+    </Link>
+  );
+}
+
+/**
+ * [comp]
+ * BannerSwiper
+ *
+ * [state]
+ * none
+ *
+ * [props]
+ * none
+ */
+
+//Swiper 컨테이너
 const SwiperBox = styled.div`
   width: 335px;
   height: 76px;
@@ -12,35 +43,29 @@ const SwiperBox = styled.div`
   background-color: var(--Surface);
 `;
 
-const Swipe = () => {
-  return (
-    <Swiper spaceBetween={50} slidesPerView={1}>
-      <SwiperSlide>
-        <Banner
-          to="/compete/howto"
-          src={require("assets/compete/banner.png")}
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <Banner
-          to="/compete/howto"
-          src={require("assets/compete/banner.png")}
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <Banner
-          to="/compete/howto"
-          src={require("assets/compete/banner.png")}
-        />
-      </SwiperSlide>
-    </Swiper>
-  );
-};
-
 function BannerSwiper() {
   return (
     <SwiperBox>
-      <Swipe></Swipe>
+      <Swiper spaceBetween={50} slidesPerView={1}>
+        <SwiperSlide>
+          <Banner
+            to="/compete/howto"
+            src={require("assets/compete/banner.png")}
+          />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Banner
+            to="/compete/howto"
+            src={require("assets/compete/banner.png")}
+          />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Banner
+            to="/compete/howto"
+            src={require("assets/compete/banner.png")}
+          />
+        </SwiperSlide>
+      </Swiper>
     </SwiperBox>
   );
 }
