@@ -19,6 +19,7 @@ const ScrollBoxStyle = styled.div`
     return props.paddingValue;
   }};
   box-sizing: border-box;
+  flex: 1;
 `;
 
 export default ScrollBox;
