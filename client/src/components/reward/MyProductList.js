@@ -1,7 +1,7 @@
 import ContentControlBtn from "components/common/ContentControlBtn";
 import ScrollBox from "components/common/ScrollBox";
 import MyProductListItem from "./MyProductListItem";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import styled from "styled-components";
 import { v1 as uuid } from "uuid";
 const controlNameList = ["부대 내", "부대 외"];
@@ -32,7 +32,7 @@ function MyProductList({ tabName, tabList }) {
       />
       <ScrollBox paddingValue={"20px 0"}>
         {[inReward, outReward].map((rewardList, index) => (
-          <>
+          <Fragment key={uuid()}>
             <div className="itemList">
               {controlNameList[index] === listControl &&
                 0 < rewardList.length &&
@@ -53,7 +53,7 @@ function MyProductList({ tabName, tabList }) {
                 <div>아직 받은 상품이 없어요</div>
               </div>
             )}
-          </>
+          </Fragment>
         ))}
       </ScrollBox>
     </MyRewardListStyle>
