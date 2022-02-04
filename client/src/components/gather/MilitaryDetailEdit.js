@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Container from "components/common/Container";
 import SubmitButton from "components/common/SubmitButton";
+import EditTitle from "./EditTitle";
 import ScrollBox from "components/common/ScrollBox";
-import EditTitle from "../EditTitle";
-function EditSavingTitle() {
+function MilitaryDetailEdit() {
   const history = useNavigate();
   const startTitle = "";
   const [isInputChange, setIsInputChange] = useState(false);
@@ -36,7 +36,7 @@ function EditSavingTitle() {
         <div>
           <span
             onClick={() => {
-              history("/gather");
+              history(-1);
             }}
           >
             다음에 하기
@@ -46,7 +46,7 @@ function EditSavingTitle() {
       <ScrollBox>
         <Content>
           <EditTitle
-            startTitle={""}
+            startTitle={"zz"}
             newTitle={newTitle}
             setNewTitle={setNewTitle}
             setIsInputChange={setIsInputChange}
@@ -55,7 +55,7 @@ function EditSavingTitle() {
           <SubmitButton
             title={"목표 설정 완료"}
             onClickFunc={() => {
-              history("/gather");
+              history(-1);
             }}
             isActive={isInputChange}
           />
@@ -86,4 +86,4 @@ const Content = styled.div`
   justify-content: space-between;
 `;
 
-export default EditSavingTitle;
+export default MilitaryDetailEdit;
