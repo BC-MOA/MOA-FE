@@ -4,12 +4,22 @@ import ScrollBox from "components/common/ScrollBox";
 import React, { useState } from "react";
 import styled from "styled-components";
 import ProcessStateBox from "./ProcessStateBox";
+import SetGoalModal from "./SetGoalModal";
 const stateList = ["신청 접수", "군 정보 확인", "은행 심사", "개설 완료"];
 
 function MilitaryDetail() {
   const [toggleClick, setToggleClick] = useState(false);
+  const [isEmptyName, setIsEmptyName] = useState(true);
+  // todo - 받아온 데이터의 목표명이 없을때 isEmptyName은 true/ 아니며 false
   return (
     <Container>
+      {isEmptyName && (
+        <SetGoalModal
+          path={"/gather/mili-detail/edit"}
+          props={""}
+          setModal={setIsEmptyName}
+        />
+      )}
       {/* todo - title 변경하기 - 목표명 있을 때는 목표명 / 없을 때는 ''  */}
       <BackHeader
         path={"/gather"}
