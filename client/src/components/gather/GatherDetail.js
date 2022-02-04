@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import BackHeader from "components/common/BackHeader";
 import DetailCard from "./DetailCard";
@@ -6,6 +6,7 @@ import TransactionEl from "./TransactionEl";
 import { hideScrollBar } from "style/common";
 import { useLocation } from "react-router-dom";
 import FixModal from "components/gather/FixModal";
+import SetGoalModal from "./SetGoalModal";
 
 const Container = styled.div`
   width: 100%;
@@ -88,12 +89,21 @@ const TransZero = styled.div`
 function GatherDetail() {
   const { state: gatherInfo } = useLocation();
   const [modal, setModal] = useState(false);
-
+  const [goalModal, setGoalModal] = useState(false);
   const tr_lists = gatherInfo.transactions;
 
+  useEffect(() => {
+    if (gatherInfo.name === "") {
+      setGoalModal(true);
+    }
+  }, []);
   return (
     <Container>
-      <BackHeader path={"/gather"} title={gatherInfo.name} isScrolled={true} />
+      <BackHeader
+        path={"/gather"}
+        title={gatherInfo.name ? gatherInfo.name : gatherInfo.account.name}
+        isScrolled={true}
+      />
       <button
         className={gatherInfo.category === "비상금" ? "fixBtn none" : "fixBtn"}
         onClick={() => setModal(true)}
@@ -123,6 +133,15 @@ function GatherDetail() {
           </TransZero>
         )}
       </Content>
+      {goalModal ? (
+        <SetGoalModal
+          setModal={setGoalModal}
+          props={gatherInfo}
+          path={"edit-goal"}
+        />
+      ) : (
+        <></>
+      )}
       {modal ? <FixModal setModal={setModal} props={gatherInfo} /> : <></>}
     </Container>
   );
