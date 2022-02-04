@@ -56,28 +56,6 @@ const BetCard = styled.div`
   }
 `;
 
-//[styled comp] : 배팅하기 버튼
-const Button = styled.button`
-  height: 49px;
-  width: 100%;
-  border: none;
-  border-radius: 12px;
-
-  background-color: var(--a5);
-  font-family: "Pretendard-SemiBold";
-  color: white;
-
-  transition: 1s all;
-  :hover {
-    opacity: 0.8;
-  }
-
-  :disabled {
-    background-color: var(--Line_02);
-    color: var(--Body_03);
-  }
-`;
-
 /**
  * [comp]
  * CompDetail

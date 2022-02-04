@@ -1,4 +1,4 @@
-import { Header } from "../../common/Header";
+import { Header } from "components/common/Header";
 import AllCompContext from "../context/AllCompContext";
 import MyCompeteContext from "../context/MyCompContext";
 import NavBar from "components/common/NavBar";

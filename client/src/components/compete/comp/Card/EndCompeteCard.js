@@ -42,7 +42,8 @@ const Result = styled.div`
   font-family: "Pretendard-Regular";
   font-size: 12px;
   line-height: 19px;
-  background-color: ${({ result }) => (result ? "var(--a2)" : "var(--alert)")};
+  background-color: ${({ $result }) =>
+    $result ? "var(--a2)" : "var(--alert)"};
 `;
 
 /**
@@ -74,7 +75,7 @@ function EndCompeteCard(props) {
           {props.type ? (
             <Count>{kFormatter(obj.total)}명 참여</Count>
           ) : (
-            <Result result={betResult}>{betResult ? "성공" : "실패"}</Result>
+            <Result $result={betResult}>{betResult ? "성공" : "실패"}</Result>
           )}
         </ContentBox>
       </BetEndCard>
