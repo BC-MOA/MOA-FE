@@ -10,6 +10,7 @@ import { Timer, TimerBox } from "../comp/Timer";
 import { PickUp } from "../comp/ChalOption";
 import { KeyPicker, options } from "../comp/KeyPicker";
 import ExpectedKey from "../comp/KeyExpect";
+import SubmitButton from "components/common/SubmitButton";
 
 //[styled comp] : 페이지 컨테이너
 const Detail = styled.div`
@@ -182,9 +183,11 @@ function CompDetail() {
           <TimerBox>
             <Timer due={comp.due}></Timer>
           </TimerBox>
-          <Button onClick={clickBet} disabled={!isBetted}>
-            배팅하기
-          </Button>
+          <SubmitButton
+            isActive={isBetted}
+            onClickFunc={clickBet}
+            title={"배팅하기"}
+          ></SubmitButton>
         </div>
       </Detail>
     </>
