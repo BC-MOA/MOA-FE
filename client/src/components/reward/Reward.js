@@ -41,6 +41,11 @@ function Reward() {
       <ScrollBox paddingValue={"24px 0 0 "}>
         <Content>
           <RewardUserInfo />
+          <img
+            className="banner"
+            src={require("assets/reward/aboutRewardBanner.png")}
+            alt="모아이용방법"
+          />
           <RewardBoxList
             setBuyClick={setBuyClick}
             setBuyBoxItem={setBuyBoxItem}
@@ -52,5 +57,9 @@ function Reward() {
     </Container>
   );
 }
-const Content = styled.div``;
+const Content = styled.div`
+  .banner {
+    margin-bottom: 16px;
+  }
+`;
 export default Reward;
