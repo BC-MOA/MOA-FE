@@ -22,13 +22,13 @@ function MyBoxList({ tabName, tabList, userBoxList }) {
 
 const MyBoxListStyle = styled.div`
   display: none;
-
   &.isSelect {
+    width: calc(160px * 2 + 15px);
+    margin: 0 auto;
     height: inherit;
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
-    justify-content: center;
     align-items: center;
     .emptyList {
       text-align: center;
