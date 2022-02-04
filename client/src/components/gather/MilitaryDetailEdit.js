@@ -46,7 +46,7 @@ function MilitaryDetailEdit() {
       <ScrollBox>
         <Content>
           <EditTitle
-            startTitle={"zz"}
+            startTitle={""}
             newTitle={newTitle}
             setNewTitle={setNewTitle}
             setIsInputChange={setIsInputChange}

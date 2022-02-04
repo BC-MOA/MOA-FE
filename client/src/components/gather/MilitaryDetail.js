@@ -2,12 +2,14 @@ import BackHeader from "components/common/BackHeader";
 import Container from "components/common/Container";
 import ScrollBox from "components/common/ScrollBox";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import ProcessStateBox from "./ProcessStateBox";
 import SetGoalModal from "./SetGoalModal";
 const stateList = ["신청 접수", "군 정보 확인", "은행 심사", "개설 완료"];
 
 function MilitaryDetail() {
+  const history = useNavigate();
   const [toggleClick, setToggleClick] = useState(false);
   const [isEmptyName, setIsEmptyName] = useState(true);
   // todo - 받아온 데이터의 목표명이 없을때 isEmptyName은 true/ 아니며 false
@@ -32,8 +34,12 @@ function MilitaryDetail() {
           <div className="tag">{"군적금"}</div>
           <div className="title">
             <div>{"신한 장병내일준비적금"}</div>
-            {/* todo - 라우터 링크 연결 */}
-            <div className="editGoal">
+            <div
+              onClick={() => {
+                history("/gather/mili-detail/edit");
+              }}
+              className="editGoal"
+            >
               <span>목표 설정하기</span>
               <img
                 src={require("assets/gather/ic_shortcut.svg").default}
