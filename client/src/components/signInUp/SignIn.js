@@ -4,7 +4,12 @@ import { styleTitle, styleSubTitle, styleNotice } from "style/common";
 import CustomBtn from "components/gather/addGoal/CustomBtn";
 import { useNavigate } from "react-router-dom";
 
-const Container = styled.div``;
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+`;
 const Header = styled.div`
   position: relative;
   height: 44px;
@@ -25,12 +30,12 @@ const Header = styled.div`
   }
 `;
 const Content = styled.div`
+  flex: 1;
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin: 81px auto 0;
+  margin-top: 75px;
 
   .title {
     ${styleTitle}
@@ -60,16 +65,23 @@ const Content = styled.div`
         color: var(--Line_01);
       }
     }
-    #serviceNumber1 {
-      width: 111px;
-      padding: 10px 12px;
-      text-align: center;
-    }
-    #serviceNumber2 {
-      width: 203px;
-    }
     &:nth-child(3) {
       margin: 24px 0 43px;
+    }
+  }
+
+  .dividedInput {
+    display: flex;
+    width: 100%;
+    gap: 7px;
+    align-items: center;
+    .first {
+      flex: 1;
+      padding: 10px 12px;
+    }
+    .second {
+      flex: 1.828828;
+      padding: 10px 12px;
     }
   }
 
@@ -132,23 +144,27 @@ function SignIn() {
           <label htmlFor="serviceNumber1" className="subTitle">
             군번
           </label>
-          <input
-            id="serviceNumber1"
-            placeholder="연도 뒤 2자리"
-            onChange={onChange}
-            onKeyUp={(e) => {
-              if (login[e.target.id].length === 2) {
-                inputFocus.current.focus();
-              }
-            }}
-          />{" "}
-          -{" "}
-          <input
-            id="serviceNumber2"
-            placeholder="군번 8자리를 입력해주세요"
-            onChange={onChange}
-            ref={inputFocus}
-          />
+          <div className="dividedInput">
+            <input
+              className="first"
+              id="serviceNumber1"
+              placeholder="연도 뒤 2자리"
+              onChange={onChange}
+              onKeyUp={(e) => {
+                if (login[e.target.id].length === 2) {
+                  inputFocus.current.focus();
+                }
+              }}
+            />
+            <span>-</span>
+            <input
+              className="second"
+              id="serviceNumber2"
+              placeholder="군번 8자리를 입력해주세요"
+              onChange={onChange}
+              ref={inputFocus}
+            />
+          </div>
         </div>
         <div className="inputForm">
           <label htmlFor="password" className="subTitle">
@@ -186,7 +202,7 @@ function SignIn() {
           >
             비밀번호 재설정
           </div>
-          <img src={require("assets/devide_line.svg").default} alt="구분선" />
+          <img src={require("assets/divide_line.svg").default} alt="구분선" />
         </div>
       </Content>
     </Container>
