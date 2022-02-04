@@ -31,6 +31,7 @@ import AdditionalDeposit from "components/gather/AdditionalDeposit";
 import MilitaryDetailEdit from "components/gather/MilitaryDetailEdit";
 import EditSavingTitle from "components/gather/addMilitarySavings/EditSavingTitle";
 import AddMilitarySavingsPassward from "components/gather/addMilitarySavings/AddMilitarySavingsPassward";
+import AboutReward from "components/reward/AboutReward";
 function AllRoutes() {
   return (
     <Routes>
@@ -95,6 +96,7 @@ function AllRoutes() {
       <Route path="/keypad" element={<MobileKeypad />} />
       <Route path="/key" element={<KeyPopUp />}></Route>
       <Route path="/reward" element={<Reward />} />
+      <Route path="/reward/about" element={<AboutReward />} />
       <Route path="/reward/:userId" element={<MyReward />} />
       <Route
         path="/reward/:userId/:productId"
