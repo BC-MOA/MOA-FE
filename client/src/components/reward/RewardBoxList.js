@@ -2,12 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import RewardBoxItem from "./RewardBoxItem";
 import { v1 as uuid } from "uuid";
-function RewardBoxList({ boxItemList }) {
+function RewardBoxList({ setBuyBoxItem, boxItemList, setBuyClick }) {
   return (
     <BoxList>
       {boxItemList &&
         boxItemList.map((boxItem) => (
-          <RewardBoxItem key={uuid()} boxItem={boxItem} />
+          <RewardBoxItem
+            key={uuid()}
+            setBuyClick={setBuyClick}
+            setBuyBoxItem={setBuyBoxItem}
+            boxItem={boxItem}
+          />
         ))}
     </BoxList>
   );
