@@ -28,6 +28,8 @@ import MyBoxOpen from "components/reward/MyBoxOpen";
 import RegisterDeposit from "components/gather/RegisterDeposit";
 import MilitaryDetail from "components/gather/MilitaryDetail";
 import AdditionalDeposit from "components/gather/AdditionalDeposit";
+import MilitaryDetailEdit from "components/gather/MilitaryDetailEdit";
+import EditSavingTitle from "components/gather/addMilitarySavings/EditSavingTitle";
 function AllRoutes() {
   return (
     <Routes>
@@ -54,6 +56,10 @@ function AllRoutes() {
         path="/gather/add-militarySaving/:bankname/term/form/success"
         element={<AddMilitarySavingSuccess />}
       />
+      <Route
+        path="/gather/add-militarySaving/:bankname/term/form/success/edit"
+        element={<EditSavingTitle />}
+      />
       <Route path="/gather/add-goal" element={<Goal />} />
       <Route path="/gather/add-goal/complete" element={<Complete />} />
       <Route path="/gather/add-safebox" element={<SafeBox />} />
@@ -73,7 +79,8 @@ function AllRoutes() {
         path="/gather/detail/midterm-termination"
         element={<MidTermTermination />}
       />
-      <Route path="/gather/mili-detail" element={<MilitaryDetail />}></Route>
+      <Route path="/gather/mili-detail" element={<MilitaryDetail />} />
+      <Route path="/gather/mili-detail/edit" element={<MilitaryDetailEdit />} />
       <Route path="/save" element={<Save />} />
       <Route path="/compete" element={<Compete />} />
       <Route path="/compete/howto" element={<CompHowTo />} />
