@@ -82,6 +82,20 @@ function EditGoal() {
     );
   };
 
+  const applyNewInputs = (newInputs) => {
+    const editableEls =
+      props.category === "군적금"
+        ? ["name"]
+        : ["goal_category", "name", "eDate"];
+
+    editableEls.map((x) => {
+      if (newInputs[x] === "") {
+        newInputs[x] = prev[x];
+      }
+    });
+    return newInputs;
+  };
+
   return (
     <Container>
       <BackHeader path={-1} />
@@ -94,7 +108,6 @@ function EditGoal() {
 
           <CustomInput
             name="name"
-            pBlack={true}
             placeholder={prev.name}
             value={newInputs.name}
             onChange={onChange}
@@ -133,7 +146,21 @@ function EditGoal() {
           </InputEl>
         </Content>
       )}
-      <CustomBtn path={"/gather/detail"} data={newInputs} active={isEdited()}>
+      <CustomBtn
+        addFunc={() => {
+          localStorage.setItem(
+            "gatherList",
+            JSON.stringify(
+              [...JSON.parse(localStorage.getItem("gatherList"))].map((x) =>
+                x.name === prev.name ? applyNewInputs(newInputs) : x
+              )
+            )
+          );
+        }}
+        path={"/gather/detail"}
+        data={newInputs}
+        active={isEdited()}
+      >
         목표수정 완료
       </CustomBtn>
     </Container>

@@ -79,7 +79,14 @@ const Main = styled.div`
 
   .content {
     flex: 1;
+    overflow: hidden;
     text-align: left;
+    .name {
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
   .dDay {
     font-family: Roboto;
@@ -89,8 +96,6 @@ const Main = styled.div`
     &.none {
       visibility: hidden;
     }
-  }
-  .completedState {
   }
 `;
 
@@ -181,7 +186,7 @@ function StateGather({ props, completed }) {
             )}
           </Icon>
           <div className="content">
-            <div>{props.name}</div>
+            <div className="name">{props.name}</div>
             {props.category !== "비상금" && (
               <div className={completed ? "dDay none" : "dDay"}>
                 D-{calc_dDay(props.eDate)}

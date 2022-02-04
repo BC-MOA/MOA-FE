@@ -3,9 +3,9 @@ import { Routes, Route } from "react-router-dom";
 import Home from "components/home/Home";
 import Gather from "components/gather/Gather";
 import Save from "components/save/Save";
-import Compete from "components/compete/Compete";
+import Compete from "components/compete/pages/Compete";
 import Profile from "components/profile/Profile";
-import CompeteDetail from "components/compete/CompDetail";
+import CompeteDetail from "components/compete/pages/CompDetail";
 import AddMilitarySavings from "components/gather/addMilitarySavings/AddMilitarySavings";
 import AvailableSavingItemDetail from "components/gather/addMilitarySavings/AvailableSavingItemDetail";
 import AddMilitarySavingsTerm from "components/gather/addMilitarySavings/AddMilitarySavingsTerm";
@@ -15,7 +15,7 @@ import SafeBox from "components/gather/safebox/SafeBox";
 import Goal from "components/gather/addGoal/Goal";
 import Complete from "components/gather/addGoal/Complete";
 import MobileKeypad from "components/gather/safebox/MobileKeypad";
-import CompHowTo from "components/compete/CompHowTo";
+import CompHowTo from "components/compete/pages/CompHowTo";
 import KeyPopUp from "components/common/KeyPopUp";
 import Reward from "components/reward/Reward";
 import MyReward from "components/reward/MyReward";
@@ -26,8 +26,8 @@ import EditDeposit from "components/gather/EditDeposit";
 import MidTermTermination from "components/gather/MidTermTermination";
 import MyBoxOpen from "components/reward/MyBoxOpen";
 import RegisterDeposit from "components/gather/RegisterDeposit";
-import AdditionalSafebox from "components/gather/AdditionalSafebox";
 import MilitaryDetail from "components/gather/MilitaryDetail";
+import AdditionalDeposit from "components/gather/AdditionalDeposit";
 function AllRoutes() {
   return (
     <Routes>
@@ -62,8 +62,8 @@ function AllRoutes() {
       <Route path="/gather/detail/edit-goal" element={<EditGoal />} />
       <Route path="/gather/detail/edit-deposit" element={<EditDeposit />} />
       <Route
-        path="/gather/detail/additional-safebox"
-        element={<AdditionalSafebox />}
+        path="/gather/detail/additional-deposit"
+        element={<AdditionalDeposit />}
       />
       <Route
         path="/gather/detail/register-deposit"

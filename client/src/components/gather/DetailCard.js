@@ -143,6 +143,8 @@ function DetailCard({ gatherInfo }) {
             padding={8}
             active={true}
             bgcolor={gatherInfo.category === "목표" ? "var(--Blue)" : ""}
+            path="additional-deposit"
+            data={gatherInfo}
           >
             입금하기
           </CustomBtn>
@@ -153,7 +155,8 @@ function DetailCard({ gatherInfo }) {
             padding={8}
             active={true}
             bgcolor="#EAAC0B"
-            path="additional-safebox"
+            path="additional-deposit"
+            data={gatherInfo}
           >
             모으기
           </CustomBtn>

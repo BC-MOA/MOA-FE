@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import StyledLink from "components/common/StyledLink";
-import kFormatter from "../compete/comp/kFormatter";
+import kFormatter from "../compete/function/kFormatter";
 
 //Header-상단공간
 const StyledHeader = styled.div`
   min-height: 44px;
 
   display: felx;
-  justify-content: ${({ title }) => (title ? "space-between" : "flex-end")};
+  justify-content: ${({ $title }) => ($title ? "space-between" : "flex-end")};
   align-items: center;
 
   .content {
@@ -67,8 +67,8 @@ const Bell = (props) => (
 
 function Header(props) {
   return (
-    <StyledHeader title={props.title}>
-      {props.title && <img src={require("assets/compete/moa.svg").default} />}
+    <StyledHeader $title={props.$title}>
+      {props.$title && <img src={require("assets/compete/moa.svg").default} />}
       <div className="content">
         <LinkedKey count={kFormatter(props.keys)}></LinkedKey>
         <Bell alarm={props.alarm}></Bell>

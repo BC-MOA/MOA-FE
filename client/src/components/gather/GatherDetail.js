@@ -89,19 +89,8 @@ function GatherDetail() {
   const { state: gatherInfo } = useLocation();
   const [modal, setModal] = useState(false);
 
-  const tr_lists = [
-    // {
-    //   date: "1월 10일",
-    //   lists: [
-    //     {
-    //       name: "국군재정단",
-    //       time: "20:00",
-    //       amount: 200000,
-    //       total: 800000,
-    //     },
-    //   ],
-    // },
-  ];
+  const tr_lists = gatherInfo.transactions;
+
   return (
     <Container>
       <BackHeader path={"/gather"} title={gatherInfo.name} isScrolled={true} />

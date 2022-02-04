@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import BackHeader from "components/common/BackHeader";
 
+//챌린지 안내 페이지 - 이미지로 대체도 고려
+
 const Page = styled.div`
   background-color: white;
   border-radius: 2px;
@@ -118,7 +120,7 @@ function CompHowTo() {
       <BackHeader isScrolled={false} title={""} path={-1}></BackHeader>
       <Page>
         <LogoBox>
-          <img src={require("assets/compete/moa.svg").default}></img>
+          <img alt="none" src={require("assets/compete/moa.svg").default}></img>
           <p>챌린지 참여 방법</p>
         </LogoBox>
         <StepBox>
