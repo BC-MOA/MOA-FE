@@ -30,6 +30,7 @@ import MilitaryDetail from "components/gather/MilitaryDetail";
 import AdditionalDeposit from "components/gather/AdditionalDeposit";
 import MilitaryDetailEdit from "components/gather/MilitaryDetailEdit";
 import EditSavingTitle from "components/gather/addMilitarySavings/EditSavingTitle";
+import AddMilitarySavingsPassward from "components/gather/addMilitarySavings/AddMilitarySavingsPassward";
 function AllRoutes() {
   return (
     <Routes>
@@ -52,12 +53,17 @@ function AllRoutes() {
         path="/gather/add-militarySaving/:bankname/term/form"
         element={<AddMilitarySavingsForm />}
       />
+
       <Route
-        path="/gather/add-militarySaving/:bankname/term/form/success"
+        path="/gather/add-militarySaving/:bankname/term/form/passward"
+        element={<AddMilitarySavingsPassward />}
+      />
+      <Route
+        path="/gather/add-militarySaving/:bankname/term/form/passward/success"
         element={<AddMilitarySavingSuccess />}
       />
       <Route
-        path="/gather/add-militarySaving/:bankname/term/form/success/edit"
+        path="/gather/add-militarySaving/:bankname/term/form/passward/success/edit"
         element={<EditSavingTitle />}
       />
       <Route path="/gather/add-goal" element={<Goal />} />
