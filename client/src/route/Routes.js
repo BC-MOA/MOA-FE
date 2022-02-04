@@ -26,6 +26,7 @@ import EditDeposit from "components/gather/EditDeposit";
 import MidTermTermination from "components/gather/MidTermTermination";
 import MyBoxOpen from "components/reward/MyBoxOpen";
 import RegisterDeposit from "components/gather/RegisterDeposit";
+import MilitaryDetail from "components/gather/MilitaryDetail";
 import AdditionalDeposit from "components/gather/AdditionalDeposit";
 function AllRoutes() {
   return (
@@ -72,6 +73,7 @@ function AllRoutes() {
         path="/gather/detail/midterm-termination"
         element={<MidTermTermination />}
       />
+      <Route path="/gather/mili-detail" element={<MilitaryDetail />}></Route>
       <Route path="/save" element={<Save />} />
       <Route path="/compete" element={<Compete />} />
       <Route path="/compete/howto" element={<CompHowTo />} />
