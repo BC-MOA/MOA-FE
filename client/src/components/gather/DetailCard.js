@@ -6,6 +6,7 @@ import "react-step-progress-bar/styles.css";
 import { ProgressBar } from "react-step-progress-bar";
 import { calc_dDay, calc_days } from "components/gather/addGoal/utils";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
 
 const Content = styled.div`
   margin: 12px 0 32px;
@@ -75,6 +76,18 @@ const Info = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  .setGoalName {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+    cursor: pointer;
+
+    font-family: "Pretendard-Regular";
+    font-size: 12px;
+    line-height: 19px;
+    color: var(--Body_01);
+  }
 `;
 
 const SafeBtns = styled.div`
@@ -89,6 +102,8 @@ const SafeBtns = styled.div`
 `;
 
 function DetailCard({ gatherInfo }) {
+  const history = useNavigate();
+
   return (
     <Content>
       <Info>
@@ -103,6 +118,22 @@ function DetailCard({ gatherInfo }) {
           {gatherInfo.account.name}
           <span className="number">{gatherInfo.account.number}</span>
         </div>
+        {gatherInfo.category === "군적금" && gatherInfo.name === "" && (
+          <div
+            className="setGoalName"
+            onClick={() => {
+              history("edit-goal", {
+                state: gatherInfo,
+              });
+            }}
+          >
+            목표 설정하기{" "}
+            <img
+              src={require("assets/gather/ic_shortcut.svg").default}
+              alt="목표 설정하러 가기 아이콘"
+            />
+          </div>
+        )}
         {gatherInfo.category !== "비상금" && (
           <div
             className={
