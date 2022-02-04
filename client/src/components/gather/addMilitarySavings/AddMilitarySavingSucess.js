@@ -4,10 +4,10 @@ import SubmitButton from "components/common/SubmitButton";
 import React, { Fragment, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
+import ProcessStateBox from "../ProcessStateBox";
 import ApplyDataCard from "./ApplyDataCard";
 import EditSavingTitle from "./EditSavingTitle";
-import ProcessStateBox from "./ProcessStateBox";
-
+const stateList = ["신청 접수", "군 정보 확인", "은행 심사", "개설 완료"];
 function AddMilitarySavingSuccess() {
   const { state: formData } = useLocation();
   const [isSubmit, setIsSubmit] = useState(false);
@@ -23,7 +23,7 @@ function AddMilitarySavingSuccess() {
             />
           </SuccessIcon>
           <Notice>군적금을 신청했어요</Notice>
-          <ProcessStateBox></ProcessStateBox>
+          <ProcessStateBox stateList={stateList} currentState={stateList[0]} />
           <CharacterImg>
             <img
               src={require("assets/gather/army_character.svg").default}
