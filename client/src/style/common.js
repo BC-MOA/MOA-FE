@@ -65,5 +65,5 @@ export const styleModalBackground = css`
   bottom: -8px;
   left: -20px;
   right: -20px;
-  background-color: #212121d9;
+  background-color: #2121214d;
 `;
