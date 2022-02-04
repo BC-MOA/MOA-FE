@@ -186,7 +186,9 @@ function StateGather({ props, completed }) {
             )}
           </Icon>
           <div className="content">
-            <div className="name">{props.name}</div>
+            <div className="name">
+              {props.name ? props.name : props.account.name}
+            </div>
             {props.category !== "비상금" && (
               <div className={completed ? "dDay none" : "dDay"}>
                 D-{calc_dDay(props.eDate)}
