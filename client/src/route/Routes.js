@@ -35,6 +35,7 @@ import AboutReward from "components/reward/AboutReward";
 import AddMoaSaving from "components/gather/addMoaSaving/AddMoaSaving";
 import AddMoaSavingPassward from "components/gather/addMoaSaving/AddMoaSavingPassward";
 import AddMoaSavingSuccess from "components/gather/addMoaSaving/AddMoaSavingSuccess";
+import AddMoaSavingTerm from "components/gather/addMoaSaving/AddMoaSavingTerm";
 function AllRoutes() {
   return (
     <Routes>
@@ -76,12 +77,13 @@ function AllRoutes() {
       <Route path="/gather/add-safebox/complete" element={<Complete />} />
 
       <Route path="/gather/add-moa" element={<AddMoaSaving />} />
+      <Route path="/gather/add-moa/term" element={<AddMoaSavingTerm />} />
       <Route
-        path="/gather/add-moa/passward"
+        path="/gather/add-moa/term/passward"
         element={<AddMoaSavingPassward />}
       />
       <Route
-        path="/gather/add-moa/passward/success"
+        path="/gather/add-moa/term/passward/success"
         element={<AddMoaSavingSuccess />}
       />
 
