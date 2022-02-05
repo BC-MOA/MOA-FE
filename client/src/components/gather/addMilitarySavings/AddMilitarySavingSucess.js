@@ -24,7 +24,7 @@ function AddMilitarySavingSuccess() {
         <ProcessStateBox stateList={stateList} currentState={stateList[0]} />
         <CharacterImg>
           <img
-            src={require("assets/gather/army_character.svg").default}
+            src={require("assets/army_character.svg").default}
             alt="군인캐릭터"
           />
         </CharacterImg>

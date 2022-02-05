@@ -123,7 +123,7 @@ function TerminationComplete() {
           )}
           <img
             className="character"
-            src={require("assets/goal/army_character.png")}
+            src={require("assets/army_character.svg").default}
             alt="character"
           />
         </CheckInfo>
