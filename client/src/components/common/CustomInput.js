@@ -1,29 +1,20 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import { styleCustomInput } from "style/common";
 import { ReactComponent as CheckIcon } from "assets/ic_input_check.svg";
 
 const InputBox = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+  &.plusPaddingRight {
+    input {
+      padding-right: 30px;
+    }
+  }
 
   input {
-    font-family: "Pretendard-Regular";
-    font-size: 16px;
-    line-height: 25px;
-    width: 100%;
-    box-sizing: border-box;
-    background: #fff;
-    border-radius: 8px;
-    border: none;
-    padding: 10px 30px 10px 16px;
-    color: var(--Title_01);
-    &::placeholder {
-      color: var(--Line_01);
-    }
-    &:disabled {
-      background-color: #ebebeb;
-    }
+    ${styleCustomInput}
   }
   .unit {
     position: absolute;
@@ -46,6 +37,7 @@ const InputBox = styled.div`
 `;
 
 function CustomInput({
+  id,
   name,
   type,
   placeholder,
@@ -57,8 +49,9 @@ function CustomInput({
   checked,
 }) {
   return (
-    <InputBox>
+    <InputBox className={unit || checkable ? "plusPaddingRight" : ""}>
       <input
+        id={id}
         name={name}
         type={type}
         placeholder={placeholder}
