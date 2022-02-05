@@ -1,7 +1,7 @@
 import BackHeader from "components/common/BackHeader";
 import Container from "components/common/Container";
 import ScrollBox from "components/common/ScrollBox";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import BuyBox from "./BuyBox";
@@ -37,6 +37,17 @@ function Reward() {
   const history = useNavigate();
   const [buyClick, setBuyClick] = useState(false);
   const [buyBoxItem, setBuyBoxItem] = useState({});
+  const [isValidBuy, setIsValidBuy] = useState(false);
+  const userId = "123";
+  useEffect(() => {
+    if (buyClick) {
+      if (userId !== "") {
+        setIsValidBuy(true);
+      } else {
+        history("/login");
+      }
+    }
+  }, [buyClick]);
   return (
     <Container>
       <BackHeader path={-1} title={""} isScrolled={true}></BackHeader>
@@ -58,7 +69,9 @@ function Reward() {
           />
         </Content>
       </ScrollBox>
-      {buyClick && <BuyBox setBuyClick={setBuyClick} buyBoxItem={buyBoxItem} />}
+      {isValidBuy && (
+        <BuyBox setBuyClick={setIsValidBuy} buyBoxItem={buyBoxItem} />
+      )}
     </Container>
   );
 }

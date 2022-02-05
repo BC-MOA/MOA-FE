@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 function BubbleContent({ savingNum }) {
   return (
-    <SpeechBubble>
+    <SpeechBubble value={savingNum}>
       <img className="bubbleImg" src={require("assets/말풍선.png")} alt="" />
       {0 === savingNum && (
         <div className="bubbleText">
@@ -33,6 +33,7 @@ function BubbleContent({ savingNum }) {
 }
 const SpeechBubble = styled.div`
   display: flex;
+  justify-content: flex-end;
   height: 75px;
   overflow: hidden;
   font-family: "Pretendard-SemiBold";
@@ -51,7 +52,12 @@ const SpeechBubble = styled.div`
   }
   .bubbleText {
     position: absolute;
-    left: 11px;
+    right: ${(props) => {
+      if (0 === props.value) return "77px";
+      else {
+        return "81px";
+      }
+    }};
     top: 11px;
 
     color: #ffffff;

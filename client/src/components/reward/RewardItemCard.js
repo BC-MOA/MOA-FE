@@ -33,9 +33,10 @@ const ItemCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
   img {
-    width: calc(70 / 160 * 100%);
+    width: calc(80 / 160 * 100%);
     margin-bottom: 6px;
   }
   span {
