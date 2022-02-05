@@ -63,7 +63,7 @@ const Content = styled.div`
 
 const Box = styled.div`
   position: relative;
-  margin-top: 24px;
+  margin: 24px 0;
   div {
     display: flex;
     justify-content: space-between;
