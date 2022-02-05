@@ -26,7 +26,7 @@ function AddMoaSaving() {
         <SubmitButton
           title={"통장 개설하기"}
           onClickFunc={() => {
-            history("passward");
+            history("term");
           }}
           isActive={true}
         />
