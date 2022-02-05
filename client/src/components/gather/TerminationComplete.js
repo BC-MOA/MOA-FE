@@ -3,7 +3,6 @@ import styled, { css } from "styled-components";
 import { styleTitle, styleSubTitle } from "style/common";
 import CustomBtn from "components/gather/addGoal/CustomBtn";
 import { useLocation } from "react-router-dom";
-import moment from "moment";
 
 const styleText = css`
   ${styleSubTitle}
