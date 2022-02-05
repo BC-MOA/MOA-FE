@@ -21,7 +21,7 @@ function AddMoaSavingSuccess() {
         <Notice>입출금통장이 개설됐어요</Notice>
         <CharacterImg>
           <img
-            src={require("assets/gather/army_character.svg").default}
+            src={require("assets/army_character.svg").default}
             alt="군인캐릭터"
           />
         </CharacterImg>
