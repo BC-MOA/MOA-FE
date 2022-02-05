@@ -39,6 +39,7 @@ import AddMoaSaving from "components/gather/addMoaSaving/AddMoaSaving";
 import AddMoaSavingPassward from "components/gather/addMoaSaving/AddMoaSavingPassward";
 import AddMoaSavingSuccess from "components/gather/addMoaSaving/AddMoaSavingSuccess";
 import AddMoaSavingTerm from "components/gather/addMoaSaving/AddMoaSavingTerm";
+import Loading from "components/loading/Loading";
 function AllRoutes() {
   return (
     <Routes>
@@ -47,6 +48,7 @@ function AllRoutes() {
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/home" element={<Home />} />
       <Route path="/gather" element={<Gather />} />
+      <Route path="/loading" element={<Loading />} />
       <Route
         path="/gather/add-militarySaving"
         element={<AddMilitarySavings />}
