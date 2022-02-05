@@ -1,7 +1,13 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import { styleTitle, styleSubTitle, styleNotice } from "style/common";
+import {
+  styleTitle,
+  styleSubTitle,
+  styleNotice,
+  styleCustomInput,
+} from "style/common";
 import CustomBtn from "components/gather/addGoal/CustomBtn";
+import CustomInput from "components/common/CustomInput";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
@@ -52,19 +58,6 @@ const Content = styled.div`
       text-align: left;
       margin: 0 0 4px 4px;
     }
-    input {
-      border-radius: 8px;
-      box-sizing: border-box;
-      width: 100%;
-      font-family: "Pretendard-Regular";
-      font-size: 16px;
-      line-height: 25px;
-      padding: 10px 16px;
-      border: none;
-      &::placeholder {
-        color: var(--Line_01);
-      }
-    }
     &:nth-child(3) {
       margin: 24px 0 43px;
     }
@@ -75,6 +68,10 @@ const Content = styled.div`
     width: 100%;
     gap: 7px;
     align-items: center;
+
+    input {
+      ${styleCustomInput}
+    }
     .first {
       flex: 1;
       padding: 10px 12px;
@@ -170,7 +167,7 @@ function SignIn() {
           <label htmlFor="password" className="subTitle">
             비밀번호
           </label>
-          <input
+          <CustomInput
             type="password"
             id="password"
             placeholder="비밀번호를 입력해주세요"
