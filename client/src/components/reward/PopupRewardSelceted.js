@@ -16,27 +16,29 @@ function PopupRewardSelceted({ selectedItem }) {
           alt="나가기"
         />
       </Header>
-      <Images>
-        <img
-          className="animate__animated animate__tada boxImg"
-          src={require("assets/reward/opendBoxWithReward.png")}
-          alt=""
-        />
-        <img
-          className="animate__animated animate__tada rewardImg"
-          src={require("./example.png")}
-          alt={"상품이름"}
-        />
-      </Images>
-      <Card>
-        <div className="title">{selectedItem}</div>
-        <div>박스를 열어 획득한 상품은</div>
-        <div className="flex">
-          <span className="bold">{"내 보관함 > 상품"}</span>
-          <span>에서 확인 가능해요</span>
-        </div>
-        <div>바코드를 통해 간편하게 결제를 해보세요</div>
-      </Card>
+      <div className="CenterBox">
+        <Images>
+          <img
+            className="animate__animated animate__tada boxImg"
+            src={require("assets/reward/opendBoxWithReward.png")}
+            alt=""
+          />
+          <img
+            className="animate__animated animate__tada rewardImg"
+            src={require("./example.png")}
+            alt={"상품이름"}
+          />
+        </Images>
+        <Card>
+          <div className="title">{selectedItem}</div>
+          <div>박스를 열어 획득한 상품은</div>
+          <div className="flex">
+            <span className="bold">{"내 보관함 > 상품"}</span>
+            <span>에서 확인 가능해요</span>
+          </div>
+          <div>바코드를 통해 간편하게 결제를 해보세요</div>
+        </Card>
+      </div>
       <StyleBtn>
         <SubmitButton
           onClickFunc={() => {
@@ -50,7 +52,15 @@ function PopupRewardSelceted({ selectedItem }) {
   );
 }
 const ModalStyle = styled.div`
+  display: flex;
+  flex-direction: column;
   flex: 1;
+  .CenterBox {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: space-around;
+  }
 `;
 const Header = styled.div`
   z-index: 100;
@@ -67,16 +77,14 @@ const Header = styled.div`
 const Images = styled.div`
   width: 100%;
   margin-bottom: 18px;
+  position: relative;
   .boxImg {
-    width: 375px;
+    width: calc(375 / 335 * 100%);
     margin-left: -15px;
   }
   .rewardImg {
-    width: 160px;
-    position: absolute;
-    top: calc(177% / 734 * 100);
-    left: 50%;
-    margin-left: calc(-160px / 2);
+    width: calc(160 / 335 * 100%);
+    margin-top: -100%;
   }
 `;
 const Card = styled.div`
@@ -106,9 +114,6 @@ const Card = styled.div`
   }
 `;
 const StyleBtn = styled.div`
-  position: absolute;
-  bottom: 24px;
-  left: 0;
-  right: 0;
+  margin-bottom: 24px;
 `;
 export default PopupRewardSelceted;
