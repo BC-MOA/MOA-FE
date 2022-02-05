@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import { ReactComponent as CheckIcon } from "assets/ic_input_check.svg";
 
 const InputBox = styled.div`
   position: relative;
@@ -17,7 +18,9 @@ const InputBox = styled.div`
     border: none;
     padding: 10px 30px 10px 16px;
     color: var(--Title_01);
-
+    &::placeholder {
+      color: var(--Line_01);
+    }
     &:disabled {
       background-color: #ebebeb;
     }
@@ -30,28 +33,45 @@ const InputBox = styled.div`
     line-height: 25px;
     color: var(--Body_01);
   }
+  .checkable {
+    position: absolute;
+    right: 16px;
+
+    &.checked {
+      path.main {
+        fill: var(--a2);
+      }
+    }
+  }
 `;
 
 function CustomInput({
   name,
+  type,
   placeholder,
-  pBlack,
   value,
   unit,
   disabled,
   onChange,
+  checkable,
+  checked,
 }) {
   return (
     <InputBox>
       <input
-        className={pBlack ? "pBlack" : ""}
         name={name}
+        type={type}
         placeholder={placeholder}
         disabled={disabled}
         value={value}
         onChange={onChange}
       />
       {unit ? <span className="unit">{unit}</span> : <></>}
+      {checkable ? (
+        <CheckIcon className={checked ? "checkable checked" : "checkable"} />
+      ) : (
+        <></>
+      )}
     </InputBox>
   );
 }
