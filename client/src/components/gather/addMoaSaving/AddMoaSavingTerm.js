@@ -37,7 +37,11 @@ function AddMoaSavingTerm() {
   }
   return (
     <Container>
-      <BackHeader path={-1} title={"통장"} isScrolled={true}></BackHeader>
+      <BackHeader
+        path={-1}
+        title={"모아(MOA) 입출금 통장"}
+        isScrolled={true}
+      ></BackHeader>
       <ScrollBox paddingValue={"24px 0 0 0"}>
         <TermPageTitle>약관동의</TermPageTitle>
         <TermPageNotice>
