@@ -35,6 +35,10 @@ import MilitaryDetailEdit from "components/gather/MilitaryDetailEdit";
 import EditSavingTitle from "components/gather/addMilitarySavings/EditSavingTitle";
 import AddMilitarySavingsPassward from "components/gather/addMilitarySavings/AddMilitarySavingsPassward";
 import AboutReward from "components/reward/AboutReward";
+import AddMoaSaving from "components/gather/addMoaSaving/AddMoaSaving";
+import AddMoaSavingPassward from "components/gather/addMoaSaving/AddMoaSavingPassward";
+import AddMoaSavingSuccess from "components/gather/addMoaSaving/AddMoaSavingSuccess";
+import AddMoaSavingTerm from "components/gather/addMoaSaving/AddMoaSavingTerm";
 function AllRoutes() {
   return (
     <Routes>
@@ -76,6 +80,18 @@ function AllRoutes() {
       <Route path="/gather/add-goal/complete" element={<Complete />} />
       <Route path="/gather/add-safebox" element={<SafeBox />} />
       <Route path="/gather/add-safebox/complete" element={<Complete />} />
+
+      <Route path="/gather/add-moa" element={<AddMoaSaving />} />
+      <Route path="/gather/add-moa/term" element={<AddMoaSavingTerm />} />
+      <Route
+        path="/gather/add-moa/term/passward"
+        element={<AddMoaSavingPassward />}
+      />
+      <Route
+        path="/gather/add-moa/term/passward/success"
+        element={<AddMoaSavingSuccess />}
+      />
+
       <Route path="/gather/detail" element={<GatherDetail />} />
       <Route path="/gather/detail/edit-goal" element={<EditGoal />} />
       <Route path="/gather/detail/edit-deposit" element={<EditDeposit />} />
