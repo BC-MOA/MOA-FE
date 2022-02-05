@@ -13,20 +13,25 @@ const Btn = styled.button`
   line-height: 25px;
   color: var(--Body_02);
 
-  ${(props) =>
-    props.Active === true &&
+  ${({ active }) =>
+    active === true &&
     css`
       color: #fff;
       background-color: var(--a2);
     `}
 
-  ${({ padding }) => css`
-    padding: ${padding}px 0;
-    font-family: "Pretendard-Regular";
+  ${({ Padding }) => css`
+    /* padding: ${Padding}px 0;
+    color: red;
+    font-family: "Pretendard-Regular"; */
   `}
   ${({ bgcolor }) =>
     css`
       background-color: ${bgcolor};
+    `}
+  ${({ txtcolor }) =>
+    css`
+      color: ${txtcolor};
     `}
 `;
 
@@ -37,23 +42,28 @@ function CustomBtn({
   children,
   padding,
   bgcolor,
+  txtcolor,
   addFunc,
 }) {
   const history = useNavigate();
   return (
     <Btn
-      Active={active}
+      active={active}
       disabled={!active}
       onClick={() => {
         {
           addFunc && addFunc();
         }
-        history(path, {
-          state: data,
-        });
+        {
+          path &&
+            history(path, {
+              state: data,
+            });
+        }
       }}
-      padding={padding}
+      Padding={padding}
       bgcolor={bgcolor}
+      txtcolor={txtcolor}
     >
       {children}
     </Btn>
