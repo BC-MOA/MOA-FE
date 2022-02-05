@@ -137,8 +137,6 @@ function AddMilitarySavingsPassward() {
             )}
           </MessageBox>
         )}
-        <span>{userPassword}</span>
-        <div>{userPasswordCheck}</div>
         <KeyPad>
           {[0, 1, 2].map((num) => {
             const list = [3 * num + 1, 3 * num + 2, 3 * num + 3];
