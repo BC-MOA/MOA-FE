@@ -130,7 +130,7 @@ function SignIn() {
         <img src={require("assets/moa_logo.svg").default} alt="로고이미지" />
         <button
           onClick={() => {
-            history("home");
+            history("/home");
           }}
         >
           건너뛰기
