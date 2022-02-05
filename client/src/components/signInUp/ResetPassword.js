@@ -101,6 +101,19 @@ function ResetPassword() {
           <div className="notice">
             영문, 숫자 포함 10자 이상으로 조합해주세요
           </div>
+          {newPassword.password.length ? (
+            !validationFunc.validPassword && (
+              <div className="notice warning">
+                <img
+                  src={require("assets/ic_alert.svg").default}
+                  alt="입력경고 아이콘"
+                />
+                조건에 맞게 비밀번호를 만들어주세요
+              </div>
+            )
+          ) : (
+            <></>
+          )}
         </div>
         <div className="inputForm">
           <label htmlFor="checkPassword" className="subTitle">
@@ -114,14 +127,18 @@ function ResetPassword() {
             checkable={true}
             checked={validationFunc.validCheckPassword}
           />
-          {!validationFunc.validCheckPassword && (
-            <div className="notice warning">
-              <img
-                src={require("assets/ic_alert.svg").default}
-                alt="입력경고 아이콘"
-              />
-              비밀번호가 일치하지 않습니다
-            </div>
+          {newPassword.checkPassword ? (
+            !validationFunc.validCheckPassword && (
+              <div className="notice warning">
+                <img
+                  src={require("assets/ic_alert.svg").default}
+                  alt="입력경고 아이콘"
+                />
+                비밀번호가 일치하지 않습니다
+              </div>
+            )
+          ) : (
+            <></>
           )}
         </div>
         <div className="inputForm">
@@ -135,14 +152,18 @@ function ResetPassword() {
             checkable={true}
             checked={validationFunc.validPhoneNumber}
           />
-          {!validationFunc.validPhoneNumber && (
-            <div className="notice warning">
-              <img
-                src={require("assets/ic_alert.svg").default}
-                alt="입력경고 아이콘"
-              />
-              잘못된 휴대폰번호입니다
-            </div>
+          {newPassword.phoneNumber.length ? (
+            !validationFunc.validPhoneNumber && (
+              <div className="notice warning">
+                <img
+                  src={require("assets/ic_alert.svg").default}
+                  alt="입력경고 아이콘"
+                />
+                잘못된 휴대폰번호입니다
+              </div>
+            )
+          ) : (
+            <></>
           )}
         </div>
       </Content>
