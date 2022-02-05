@@ -72,7 +72,7 @@ function AddMilitarySavingsForm() {
       <SubmitButton
         title={"신청 완료"}
         onClickFunc={() => {
-          history("success", { state: formData });
+          history("passward", { state: formData });
         }}
         isActive={isAvildForm}
       ></SubmitButton>

@@ -9,7 +9,6 @@ import { ReactSortable } from "react-sortablejs";
 import moment from "moment";
 
 const Container = styled.div`
-  position: relative;
   width: 100%;
   height: 100%;
   display: flex;
@@ -37,6 +36,9 @@ const Container = styled.div`
       color: var(--a2);
     }
   }
+  .editBtnPosition {
+    position: relative;
+  }
 `;
 const Content = styled.div`
   ${hideScrollBar}
@@ -44,7 +46,7 @@ const Content = styled.div`
 `;
 const EditBtn = styled.button`
   position: absolute;
-  top: 93px;
+  top: 0;
   right: 0;
   font-family: "Pretendard-Medium";
   font-size: 12px;
@@ -70,10 +72,11 @@ const EditBtn = styled.button`
 
 function Gather() {
   const userName = "민수";
-  const gatherList = [
+  const gatherList = JSON.parse(localStorage.getItem("gatherList")) || [
     {
+      id: 1,
       category: "군적금",
-      name: "320만원 모으기",
+      name: "",
       currentAmount: 800000,
       targetAmount: 3200000,
       account: {
@@ -85,89 +88,9 @@ function Gather() {
       depositMethod: "자동이체",
       howOften: "매월 10일",
       amount: "200000",
-    },
-    {
-      category: "목표",
-      goal_category: "여행",
-      name: "유럽여행 준비",
-      currentAmount: 170000,
-      targetAmount: 1000000,
-      account: {
-        name: "하나은행",
-        number: "123-456-78-910111",
-      },
-      sDate: "Wed Nov 10 2021 15:11:39 GMT+0900",
-      eDate: "Sat Dec 10 2022 23:59:59 GMT+0900",
-      depositMethod: "자동이체",
-      howOften: "매월 10일",
-      amount: "50000",
-    },
-    {
-      category: "비상금",
-      name: "비상금",
-      currentAmount: 100000,
-      account: {
-        name: "하나은행",
-        number: "123-456-78-103556",
-      },
-    },
-    // {
-    //   category: "비상금",
-    //   name: "비상금",
-    //   currentAmount: 300000,
-    //   account: {
-    //     name: "NH국민",
-    //     number: "123-456-78-103556",
-    //   },
-    // },
-    // {
-    //   category: "군적금",
-    //   name: "100만원 모으기",
-    //   currentAmount: 100000,
-    //   targetAmount: 100000,
-    //   account: {
-    //     name: "IBK기업",
-    //     number: "112-0330-0201-55",
-    //   },
-    //   sDate: "Sun Oct 10 2021 15:11:39 GMT+0900",
-    //   eDate: "Sat Dec 10 2022 23:59:59 GMT+0900",
-    //   depositMethod: "자동이체",
-    // howOften: "매월 10일",
-    //   amount: "200000",
-    // },
-    {
-      category: "목표",
-      goal_category: "선물",
-      name: "조카 선물😎",
-      currentAmount: 150000,
-      targetAmount: 150000,
-      account: {
-        name: "NH농협",
-        number: "356-0915-7261-11",
-      },
-      sDate: "Wed Nov 10 2021 15:11:39 GMT+0900",
-      eDate: "Wed Jan 26 2022 23:59:59 GMT+0900",
-      depositMethod: "자유입금",
-      howOften: "",
-      amount: "50000",
-    },
-    {
-      category: "군적금",
-      name: "1000만원 모으기",
-      currentAmount: 0,
-      targetAmount: 2400000,
-      account: {
-        name: "신한",
-        number: "112-0650-0987",
-      },
-      sDate: "Mon Jan 10 2022 15:11:39 GMT+0900",
-      eDate: "Fri Mar 10 2023 23:59:59 GMT+0900",
-      depositMethod: "자유입금",
-      howOften: "",
-      amount: "",
+      transactions: [],
     },
   ];
-
   const inProgressList = gatherList.filter((x) => !moment().isAfter(x.eDate));
   const completedList = gatherList.filter((x) => moment().isAfter(x.eDate));
   const totalAmount = inProgressList.reduce((acc, cur) => {
@@ -200,13 +123,27 @@ function Gather() {
       <div className="TotalAmount">
         <span className="green">{totalAmount.toLocaleString()}</span> 원
       </div>
-      <ContentControlBtn
-        btnGap="24px"
-        marginBottom="16px"
-        listControl={listControl}
-        setListControl={setListControl}
-        controlNameList={controlNameList}
-      />
+      <div className="editBtnPosition">
+        <ContentControlBtn
+          btnGap="24px"
+          marginBottom="16px"
+          listControl={listControl}
+          setListControl={setListControl}
+          controlNameList={controlNameList}
+        />
+        <EditBtn
+          onClick={() => {
+            setEditToggle(!editToggle);
+          }}
+          className={editToggle ? "" : "Active"}
+        >
+          <img
+            src={require("assets/gather/Sort_arrow_light.svg").default}
+            alt="순서변경 아이콘"
+          />
+          {editToggle ? "순서 편집하기" : "편집완료"}
+        </EditBtn>
+      </div>
       <Content>
         {listControl === "진행중" ? (
           <ReactSortable
@@ -229,18 +166,6 @@ function Gather() {
           </>
         )}
       </Content>
-      <EditBtn
-        onClick={() => {
-          setEditToggle(!editToggle);
-        }}
-        className={editToggle ? "" : "Active"}
-      >
-        <img
-          src={require("assets/gather/Sort_arrow_light.svg").default}
-          alt="순서변경 아이콘"
-        />
-        {editToggle ? "순서 편집하기" : "편집완료"}
-      </EditBtn>
       <NavBar />
     </Container>
   );

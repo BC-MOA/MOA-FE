@@ -30,13 +30,24 @@ const Btn = styled.button`
     `}
 `;
 
-function CustomBtn({ path, data, active, children, padding, bgcolor }) {
+function CustomBtn({
+  path,
+  data,
+  active,
+  children,
+  padding,
+  bgcolor,
+  addFunc,
+}) {
   const history = useNavigate();
   return (
     <Btn
       Active={active}
       disabled={!active}
       onClick={() => {
+        {
+          addFunc && addFunc();
+        }
         history(path, {
           state: data,
         });

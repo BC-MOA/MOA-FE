@@ -29,7 +29,10 @@ function MilitaryAutoSavingForm({
         <span>됩니다.</span>
       </div>
       <div className="marginBox">
-        <div className="title">기간</div>
+        <div className="title">
+          <span>기간</span>
+          <span className="green">만기일자:{"2023.03.15"}</span>
+        </div>
         <Dropdown
           valueName={"formDataMonth"}
           setValue={setFormData}

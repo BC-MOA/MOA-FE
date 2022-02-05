@@ -5,6 +5,7 @@ function Container({ children }) {
   return <ContainerStyle>{children}</ContainerStyle>;
 }
 const ContainerStyle = styled.div`
+  position: relative;
   box-sizing: border-box;
   background: var(--Surface);
   display: flex;

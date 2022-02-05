@@ -65,5 +65,24 @@ export const styleModalBackground = css`
   bottom: -8px;
   left: -20px;
   right: -20px;
-  background-color: #212121d9;
+  background-color: #21212180;
+`;
+
+export const styleCustomInput = css`
+  font-family: "Pretendard-Regular";
+  font-size: 16px;
+  line-height: 25px;
+  width: 100%;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 8px;
+  border: none;
+  padding: 10px 16px;
+  color: var(--Title_01);
+  &::placeholder {
+    color: var(--Line_01);
+  }
+  &:disabled {
+    background-color: #ebebeb;
+  }
 `;
