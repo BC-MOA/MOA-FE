@@ -2,8 +2,9 @@ import "./App.css";
 import styled from "styled-components";
 import AllRoutes from "./route/Routes";
 const MobileBox = styled.div`
-  width: 375px;
-  height: 734px;
+  max-width: 500px;
+  min-width: 280px;
+  height: 100vh;
   padding: 8px 20px;
   box-sizing: border-box;
   margin: 0 auto;
@@ -15,6 +16,10 @@ const MobileBox = styled.div`
     display: none;
   }
   background-color: var(--Surface);
+  @media (min-width: 280px) and (max-width: 500px) {
+    width: 100vw;
+    /* height: 100vh; */
+  }
 `;
 
 function App() {

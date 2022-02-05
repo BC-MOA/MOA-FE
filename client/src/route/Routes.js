@@ -28,6 +28,9 @@ import MyBoxOpen from "components/reward/MyBoxOpen";
 import RegisterDeposit from "components/gather/RegisterDeposit";
 import MilitaryDetail from "components/gather/MilitaryDetail";
 import AdditionalDeposit from "components/gather/AdditionalDeposit";
+import SignIn from "components/signInUp/SignIn";
+import SignUp from "components/signInUp/SignUp";
+import ResetPassword from "components/signInUp/ResetPassword";
 import MilitaryDetailEdit from "components/gather/MilitaryDetailEdit";
 import EditSavingTitle from "components/gather/addMilitarySavings/EditSavingTitle";
 import AddMilitarySavingsPassward from "components/gather/addMilitarySavings/AddMilitarySavingsPassward";
@@ -35,7 +38,9 @@ import AboutReward from "components/reward/AboutReward";
 function AllRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<SignIn />} />
+      <Route path="/sign-up" element={<SignUp />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/home" element={<Home />} />
       <Route path="/gather" element={<Gather />} />
       <Route
