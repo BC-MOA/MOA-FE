@@ -15,7 +15,7 @@ function Loading() {
   return (
     <Container>
       {1 === step && <LoadingStep1 />}
-      {2 === step && <LoadingStep2 />}
+      {2 === step && <LoadingStep2 setStep={setStep} />}
       {3 === step && <LoadingStep3 />}
     </Container>
   );
