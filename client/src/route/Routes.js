@@ -35,6 +35,8 @@ import MilitaryDetailEdit from "components/gather/MilitaryDetailEdit";
 import EditSavingTitle from "components/gather/addMilitarySavings/EditSavingTitle";
 import AddMilitarySavingsPassward from "components/gather/addMilitarySavings/AddMilitarySavingsPassward";
 import AboutReward from "components/reward/AboutReward";
+import TerminationPassword from "components/gather/TerminationPassword";
+import TerminationComplete from "components/gather/TerminationComplete";
 function AllRoutes() {
   return (
     <Routes>
@@ -90,6 +92,14 @@ function AllRoutes() {
       <Route
         path="/gather/detail/midterm-termination"
         element={<MidTermTermination />}
+      />
+      <Route
+        path="/gather/detail/midterm-termination/check-password"
+        element={<TerminationPassword />}
+      />
+      <Route
+        path="/gather/detail/midterm-termination/complete"
+        element={<TerminationComplete />}
       />
       <Route path="/gather/mili-detail" element={<MilitaryDetail />} />
       <Route path="/gather/mili-detail/edit" element={<MilitaryDetailEdit />} />
