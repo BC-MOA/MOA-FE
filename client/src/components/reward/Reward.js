@@ -1,8 +1,10 @@
 import BackHeader from "components/common/BackHeader";
 import Container from "components/common/Container";
 import ScrollBox from "components/common/ScrollBox";
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import BuyBox from "./BuyBox";
 import RewardBoxList from "./RewardBoxList";
 import RewardUserInfo from "./RewardUserInfo";
 const boxItemList = [
@@ -32,17 +34,40 @@ const boxItemList = [
   },
 ];
 function Reward() {
+  const history = useNavigate();
+  const [buyClick, setBuyClick] = useState(false);
+  const [buyBoxItem, setBuyBoxItem] = useState({});
   return (
     <Container>
       <BackHeader path={-1} title={""} isScrolled={true}></BackHeader>
       <ScrollBox paddingValue={"24px 0 0 "}>
         <Content>
           <RewardUserInfo />
-          <RewardBoxList boxItemList={boxItemList} />
+          <img
+            onClick={() => {
+              history("about");
+            }}
+            className="banner"
+            src={require("assets/reward/aboutRewardBanner.png")}
+            alt="모아이용방법"
+          />
+          <RewardBoxList
+            setBuyClick={setBuyClick}
+            setBuyBoxItem={setBuyBoxItem}
+            boxItemList={boxItemList}
+          />
         </Content>
       </ScrollBox>
+      {buyClick && <BuyBox setBuyClick={setBuyClick} buyBoxItem={buyBoxItem} />}
     </Container>
   );
 }
-const Content = styled.div``;
+const Content = styled.div`
+  .banner {
+    margin-bottom: 16px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+`;
 export default Reward;

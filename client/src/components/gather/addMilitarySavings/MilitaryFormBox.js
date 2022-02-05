@@ -104,6 +104,9 @@ const FormTile = css`
   text-align: start;
   margin-left: 4px;
   margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 const typeButton = css`
   .typeButton {
@@ -220,6 +223,9 @@ const FormBox = styled.div`
   ${MessageStyle}
   .title {
     ${FormTile}
+    .green {
+      color: var(--a2);
+    }
   }
   .inputBox {
     ${InputBox}

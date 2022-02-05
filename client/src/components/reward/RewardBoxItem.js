@@ -2,9 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { css } from "styled-components";
 import { v1 as uuid } from "uuid";
-function RewardBoxItem({ boxItem }) {
+function RewardBoxItem({ setBuyBoxItem, boxItem, setBuyClick }) {
   return (
-    <BoxCard>
+    <BoxCard
+      onClick={() => {
+        setBuyBoxItem(boxItem);
+        setBuyClick(true);
+      }}
+    >
       <img
         className="boxImage"
         src={require(`assets/reward/reward_box_${boxItem.boxName}.png`)}

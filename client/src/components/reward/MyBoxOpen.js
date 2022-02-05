@@ -1,13 +1,11 @@
 import Container from "components/common/Container";
 import SubmitButton from "components/common/SubmitButton";
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react/cjs/react.development";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import RewardItemCard from "./RewardItemCard";
 import { v1 as uuid } from "uuid";
+import PopupRewardSelceted from "./PopupRewardSelceted";
 function MyBoxOpen() {
-  const history = useNavigate();
   // todo - 박스 아이템에 대한 정보를 라우터 이동시 받아올 것
   const productList = [
     "a1",
@@ -23,11 +21,19 @@ function MyBoxOpen() {
   ];
   const [randomList, setRandomList] = useState([]);
   const [selectedItem, setSelectedItem] = useState("");
-
+  const [isModal, setIsModal] = useState("box");
+  const [selectBtnClick, setSelectBtnClick] = useState(false);
   useEffect(() => {
     randomRefresh();
   }, []);
-
+  useEffect(() => {
+    setTimeout(() => {
+      setIsModal("boxOpening");
+    }, 500);
+    setTimeout(() => {
+      setIsModal("boxOpened");
+    }, 1000);
+  }, []);
   function randomRefresh() {
     let newList = [];
     while (newList.length < 6) {
@@ -41,47 +47,69 @@ function MyBoxOpen() {
   }
   return (
     <Container>
-      <Header>
-        <div>
-          <span>다음 상품 중 </span>
-          <span className="green">하나</span>
-          <span>를 골라주세요</span>
-        </div>
-        <div
-          onClick={() => {
-            randomRefresh();
-          }}
-          className="refresh"
-        >
-          <img
-            src={require("assets/reward/ic_refresh.svg").default}
-            alt="새로고침"
+      {"box" === isModal && (
+        <BoxImg>
+          <img src={require("assets/reward/notOpenBox.png")} alt="박스" />
+        </BoxImg>
+      )}
+      {"boxOpening" === isModal && (
+        <BoxImg>
+          <img src={require("assets/reward/openedBox.png")} alt="박스오픈" />
+        </BoxImg>
+      )}
+
+      {"boxOpened" === isModal && !selectBtnClick && (
+        <>
+          <Header>
+            <div>
+              <span>다음 상품 중 </span>
+              <span className="green">하나</span>
+              <span>를 골라주세요</span>
+            </div>
+            <div
+              onClick={() => {
+                randomRefresh();
+              }}
+              className="refresh"
+            >
+              <img
+                src={require("assets/reward/ic_refresh.svg").default}
+                alt="새로고침"
+              />
+            </div>
+          </Header>
+          <MyBoxOpenList>
+            {randomList &&
+              randomList.map((item) => (
+                <RewardItemCard
+                  key={uuid()}
+                  itemName={item}
+                  selectedItem={selectedItem}
+                  setSelectedItem={setSelectedItem}
+                ></RewardItemCard>
+              ))}
+          </MyBoxOpenList>
+          {/* todo  */}
+          <SubmitButton
+            title={"선택완료"}
+            onClickFunc={() => {
+              setSelectBtnClick(true);
+            }}
+            isActive={true}
           />
-        </div>
-      </Header>
-      <MyBoxOpenList>
-        {randomList &&
-          randomList.map((item) => (
-            <RewardItemCard
-              key={uuid()}
-              itemName={item}
-              selectedItem={selectedItem}
-              setSelectedItem={setSelectedItem}
-            ></RewardItemCard>
-          ))}
-      </MyBoxOpenList>
-      {/* todo  */}
-      <SubmitButton
-        title={"선택완료"}
-        onClickFunc={() => {
-          history(-1);
-        }}
-        isActive={true}
-      />
+        </>
+      )}
+      {selectBtnClick && <PopupRewardSelceted selectedItem={selectedItem} />}
     </Container>
   );
 }
-
+const BoxImg = styled.div`
+  height: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
 const Header = styled.div`
   height: 28px;
   margin: 8px 4px;
