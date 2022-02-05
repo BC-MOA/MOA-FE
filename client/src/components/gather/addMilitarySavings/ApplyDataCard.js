@@ -11,7 +11,7 @@ function ApplyDataCard({ formData }) {
         <span className="bold">적금</span>
       </div>
       <div className="cardItem">
-        <span>유형</span>
+        <span>적금방식</span>
         <div>
           <span className="bold">자동이체</span>
         </div>
