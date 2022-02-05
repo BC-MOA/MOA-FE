@@ -75,6 +75,7 @@ const Content = styled.div`
     .first {
       flex: 1;
       padding: 10px 12px;
+      text-align: center;
     }
     .second {
       flex: 1.828828;
