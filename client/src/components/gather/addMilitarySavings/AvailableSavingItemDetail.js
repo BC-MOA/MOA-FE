@@ -98,6 +98,9 @@ const Content = styled.div`
   div {
     display: none;
   }
+  img {
+    width: 100%;
+  }
   .isSelect {
     display: block;
   }

@@ -21,7 +21,7 @@ function RewardItemCard({ itemName, selectedItem, setSelectedItem }) {
   );
 }
 const ItemCard = styled.div`
-  width: 160px;
+  width: calc(160 / 335 * 100%);
   border-radius: 10px;
   padding: 16px;
   box-sizing: border-box;
@@ -35,7 +35,7 @@ const ItemCard = styled.div`
   align-items: center;
   cursor: pointer;
   img {
-    width: 70px;
+    width: calc(70 / 160 * 100%);
     margin-bottom: 6px;
   }
   span {

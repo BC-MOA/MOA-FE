@@ -40,16 +40,16 @@ function Reward() {
   return (
     <Container>
       <BackHeader path={-1} title={""} isScrolled={true}></BackHeader>
-      <ScrollBox paddingValue={"24px 0 0 "}>
+      <ScrollBox paddingValue={"24px 0  "}>
         <Content>
           <RewardUserInfo />
           <img
-            onClick={() => {
-              history("about");
-            }}
             className="banner"
             src={require("assets/reward/aboutRewardBanner.png")}
             alt="모아이용방법"
+            onClick={() => {
+              history("about");
+            }}
           />
           <RewardBoxList
             setBuyClick={setBuyClick}
@@ -64,6 +64,7 @@ function Reward() {
 }
 const Content = styled.div`
   .banner {
+    width: 100%;
     margin-bottom: 16px;
     &:hover {
       cursor: pointer;

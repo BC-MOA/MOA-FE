@@ -62,7 +62,6 @@ function MyProductList({ tabName, tabList }) {
 const MyRewardListStyle = styled.div`
   display: none;
   &.isSelect {
-    width: calc(160px * 2 + 15px);
     margin: 0 auto;
     height: inherit;
     flex: 1;

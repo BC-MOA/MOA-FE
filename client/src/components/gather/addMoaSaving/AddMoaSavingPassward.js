@@ -1,13 +1,12 @@
 import BackHeader from "components/common/BackHeader";
 import Container from "components/common/Container";
 import ScrollBox from "components/common/ScrollBox";
-import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect } from "react/cjs/react.development";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { v1 as uuid } from "uuid";
-function AddMilitarySavingsPassward() {
-  const { state: formData } = useLocation();
+
+function AddMoaSavingPassward() {
   const history = useNavigate();
   const [userPassword, setUserPassword] = useState(["", "", "", ""]);
   const [userPasswordCheck, setUserPasswordCheck] = useState(["", "", "", ""]);
@@ -36,7 +35,7 @@ function AddMilitarySavingsPassward() {
     if (4 === passwordCheckCnt) {
       if (JSON.stringify(userPasswordCheck) === JSON.stringify(userPassword)) {
         setIsSame("true");
-        history("success", { state: { ...formData, userPassword } });
+        history("success");
       } else {
         setUserPasswordCheck(["", "", "", ""]);
         setIsSame("false");
@@ -70,7 +69,7 @@ function AddMilitarySavingsPassward() {
 
   return (
     <Container>
-      <BackHeader path={-1} isScrolled={true} title={"신한 장병내일준비적금"} />
+      <BackHeader path={-1} isScrolled={true} title={"모아(MOA) 입출금 통장"} />
       <ScrollBox paddingValue={"140px 0"}>
         {4 !== passwordCnt && (
           <MessageBox>
@@ -251,4 +250,4 @@ const KeyPad = styled.div`
     }
   }
 `;
-export default AddMilitarySavingsPassward;
+export default AddMoaSavingPassward;
