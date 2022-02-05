@@ -146,5 +146,6 @@ const MyBoxOpenList = styled.div`
   flex-wrap: wrap;
   gap: 11px;
   margin-bottom: 10px;
+  flex: 1;
 `;
 export default MyBoxOpen;
