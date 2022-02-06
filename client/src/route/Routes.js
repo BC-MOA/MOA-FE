@@ -44,6 +44,7 @@ import AddMoaSavingTerm from "components/gather/addMoaSaving/AddMoaSavingTerm";
 import Loading from "components/loading/Loading";
 import AdditionalComplete from "components/gather/safebox/AdditionalComplete";
 import TakeInOutSafeBox from "components/gather/TakeInOutSafeBox";
+import EditComplete from "components/gather/EditComplete";
 function AllRoutes() {
   return (
     <Routes>
@@ -100,10 +101,22 @@ function AllRoutes() {
 
       <Route path="/gather/detail" element={<GatherDetail />} />
       <Route path="/gather/detail/edit-goal" element={<EditGoal />} />
+      <Route
+        path="/gather/detail/edit-goal/complete"
+        element={<EditComplete />}
+      />
       <Route path="/gather/detail/edit-deposit" element={<EditDeposit />} />
+      <Route
+        path="/gather/detail/edit-deposit/complete"
+        element={<EditComplete />}
+      />
       <Route
         path="/gather/detail/register-deposit"
         element={<RegisterDeposit />}
+      />
+      <Route
+        path="/gather/detail/register-deposit/complete"
+        element={<EditComplete />}
       />
       <Route
         path="/gather/detail/additional-deposit"

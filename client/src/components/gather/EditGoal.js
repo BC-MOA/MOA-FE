@@ -147,18 +147,12 @@ function EditGoal() {
         </Content>
       )}
       <CustomBtn
-        addFunc={() => {
-          localStorage.setItem(
-            "gatherList",
-            JSON.stringify(
-              [...JSON.parse(localStorage.getItem("gatherList"))].map((x) =>
-                x.name === prev.name ? applyNewInputs(newInputs) : x
-              )
-            )
-          );
+        path={"complete"}
+        data={{
+          prev: prev,
+          newInputs: applyNewInputs(newInputs),
+          whatEdit: "goal",
         }}
-        path={"/gather/detail"}
-        data={newInputs}
         active={isEdited()}
       >
         목표수정 완료
