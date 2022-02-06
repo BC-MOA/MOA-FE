@@ -45,6 +45,7 @@ import Loading from "components/loading/Loading";
 import AdditionalComplete from "components/gather/safebox/AdditionalComplete";
 import TakeInOutSafeBox from "components/gather/TakeInOutSafeBox";
 import EditComplete from "components/gather/EditComplete";
+import Notice from "components/profile/Notice";
 function AllRoutes() {
   return (
     <Routes>
@@ -55,6 +56,7 @@ function AllRoutes() {
       <Route path="/home" element={<Home />} />
       <Route path="/gather" element={<Gather />} />
       <Route path="/loading" element={<Loading />} />
+      <Route path="/notice" element={<Notice />} />
       <Route
         path="/gather/add-militarySaving"
         element={<AddMilitarySavings />}
