@@ -4,7 +4,7 @@ import Home from "components/home/Home";
 import Gather from "components/gather/Gather";
 import Save from "components/save/Save";
 import Compete from "components/compete/pages/Compete";
-import Profile from "components/profile/Profile";
+import Profile from "components/profile/pages/Profile";
 import CompeteDetail from "components/compete/pages/CompDetail";
 import AddMilitarySavings from "components/gather/addMilitarySavings/AddMilitarySavings";
 import AvailableSavingItemDetail from "components/gather/addMilitarySavings/AvailableSavingItemDetail";
