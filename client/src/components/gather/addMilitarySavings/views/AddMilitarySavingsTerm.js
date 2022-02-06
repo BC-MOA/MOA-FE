@@ -5,7 +5,7 @@ import SubmitButton from "components/common/SubmitButton";
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import TermCheckBox from "./TermCheckBox";
+import TermCheckBox from "../TermCheckBox";
 const checkLists = [
   { isCheck: false, name: "예금거래기본약관", necessary: true },
   { isCheck: false, name: "적립식예금약관", necessary: true },
@@ -21,7 +21,7 @@ const checkLists = [
 function AddMilitarySavingsTerm() {
   const [isAllChecked, setIsAllChecked] = useState(false);
   const [checkList, setCheckList] = useState(checkLists);
-  const { state: item } = useLocation();
+  const { state: savingData } = useLocation();
   const history = useNavigate();
   useEffect(() => {
     resetAllCheck();
@@ -38,7 +38,11 @@ function AddMilitarySavingsTerm() {
   }
   return (
     <Container>
-      <BackHeader path={-1} title={item.적금명} isScrolled={true}></BackHeader>
+      <BackHeader
+        path={-1}
+        title={`${savingData.bank.bankName} ${savingData.productName}`}
+        isScrolled={true}
+      ></BackHeader>
       <ScrollBox paddingValue={"16px 0 0 0"}>
         <TermPageNum>
           <span className="bold">1</span>
@@ -61,7 +65,7 @@ function AddMilitarySavingsTerm() {
       <SubmitButton
         title={"다음"}
         onClickFunc={() => {
-          history("form", { state: item });
+          history("form", { state: savingData });
         }}
         isActive={isAllChecked}
       ></SubmitButton>

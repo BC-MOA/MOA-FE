@@ -7,7 +7,7 @@ import { useEffect } from "react/cjs/react.development";
 import styled from "styled-components";
 import { v1 as uuid } from "uuid";
 function AddMilitarySavingsPassward() {
-  const { state: formData } = useLocation();
+  const { state: applyData } = useLocation();
   const history = useNavigate();
   const [userPassword, setUserPassword] = useState(["", "", "", ""]);
   const [userPasswordCheck, setUserPasswordCheck] = useState(["", "", "", ""]);
@@ -36,7 +36,7 @@ function AddMilitarySavingsPassward() {
     if (4 === passwordCheckCnt) {
       if (JSON.stringify(userPasswordCheck) === JSON.stringify(userPassword)) {
         setIsSame("true");
-        history("success", { state: { ...formData, userPassword } });
+        history("success", { state: { ...applyData, userPassword } });
       } else {
         setUserPasswordCheck(["", "", "", ""]);
         setIsSame("false");
