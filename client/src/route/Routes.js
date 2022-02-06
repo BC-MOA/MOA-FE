@@ -49,6 +49,7 @@ function AllRoutes() {
   return (
     <Routes>
       <Route path="/" element={<SignIn />} />
+      <Route path="/login" element={<SignIn />} />
       <Route path="/sign-up" element={<SignUp />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/home" element={<Home />} />
