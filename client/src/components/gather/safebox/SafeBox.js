@@ -96,7 +96,6 @@ function SafeBox() {
   ];
 
   const [safeInputs, setSafeInputs] = useState({
-    amount: 0,
     category: "비상금",
     name: "비상금",
     amount: "",
