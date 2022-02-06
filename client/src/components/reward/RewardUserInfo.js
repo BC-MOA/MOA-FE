@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 function RewardUserInfo() {
   const history = useNavigate();
-  const userId = "1234";
+  const userId = "";
   return (
     <UserInfo>
       <div className="userKeyNum">
@@ -16,7 +16,11 @@ function RewardUserInfo() {
       </div>
       <label
         onClick={() => {
-          history(`/reward/${userId}`);
+          if ("" === userId) {
+            history("/login");
+          } else {
+            history(`/reward/${userId}`);
+          }
         }}
         className="userRewardNum"
       >

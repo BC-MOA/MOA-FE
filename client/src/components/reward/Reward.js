@@ -1,8 +1,10 @@
 import BackHeader from "components/common/BackHeader";
 import Container from "components/common/Container";
 import ScrollBox from "components/common/ScrollBox";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import BuyBox from "./BuyBox";
 import RewardBoxList from "./RewardBoxList";
 import RewardUserInfo from "./RewardUserInfo";
 const boxItemList = [
@@ -32,17 +34,54 @@ const boxItemList = [
   },
 ];
 function Reward() {
+  const history = useNavigate();
+  const [buyClick, setBuyClick] = useState(false);
+  const [buyBoxItem, setBuyBoxItem] = useState({});
+  const [isValidBuy, setIsValidBuy] = useState(false);
+  const userId = "123";
+  useEffect(() => {
+    if (buyClick) {
+      if (userId !== "") {
+        setIsValidBuy(true);
+      } else {
+        history("/login");
+      }
+    }
+  }, [buyClick]);
   return (
     <Container>
       <BackHeader path={-1} title={""} isScrolled={true}></BackHeader>
-      <ScrollBox paddingValue={"24px 0 0 "}>
+      <ScrollBox paddingValue={"24px 0  "}>
         <Content>
           <RewardUserInfo />
-          <RewardBoxList boxItemList={boxItemList} />
+          <img
+            className="banner"
+            src={require("assets/reward/aboutRewardBanner.png")}
+            alt="모아이용방법"
+            onClick={() => {
+              history("about");
+            }}
+          />
+          <RewardBoxList
+            setBuyClick={setBuyClick}
+            setBuyBoxItem={setBuyBoxItem}
+            boxItemList={boxItemList}
+          />
         </Content>
       </ScrollBox>
+      {isValidBuy && (
+        <BuyBox setBuyClick={setIsValidBuy} buyBoxItem={buyBoxItem} />
+      )}
     </Container>
   );
 }
-const Content = styled.div``;
+const Content = styled.div`
+  .banner {
+    width: 100%;
+    margin-bottom: 16px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+`;
 export default Reward;

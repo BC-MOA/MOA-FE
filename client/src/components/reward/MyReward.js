@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import MyBoxList from "./MyBoxList";
 import MyProductList from "./MyProductList";
-const tabList = ["MOA 박스", "리워드"];
+const tabList = ["MOA 박스", "상품"];
 const userBoxList = [
   {
     boxId: "a123",
@@ -46,6 +46,7 @@ const userBoxList = [
     ],
   },
 ];
+// const userBoxList = [];
 function MyReward() {
   const [tabName, setTabName] = useState(tabList[0]);
 

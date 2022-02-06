@@ -2,26 +2,36 @@ import React from "react";
 import styled from "styled-components";
 import { css } from "styled-components";
 import { v1 as uuid } from "uuid";
-function RewardBoxItem({ boxItem }) {
+function RewardBoxItem({ setBuyBoxItem, boxItem, setBuyClick }) {
   return (
-    <BoxCard>
-      <img
-        className="boxImage"
-        src={require(`assets/reward/reward_box_${boxItem.boxName}.png`)}
-        alt={boxItem.boxName}
-      />
-      <BoxTitle>{boxItem.boxName}</BoxTitle>
-      <BoxDescription>
-        <span className="bold">[획득 가능 상품]</span>
-        {boxItem.boxDescription &&
-          boxItem.boxDescription.map((item) => (
-            <span key={uuid()}>{item}</span>
-          ))}
-      </BoxDescription>
-      <BoxPrice>
-        <img src={require(`assets/ic_key_small.svg`).default} alt="열쇠개수" />
-        <span>{boxItem.boxPrice}</span>
-      </BoxPrice>
+    <BoxCard
+      onClick={() => {
+        setBuyBoxItem(boxItem);
+        setBuyClick(true);
+      }}
+    >
+      <div className="boxContent">
+        <img
+          className="boxImage"
+          src={require(`assets/reward/reward_box_${boxItem.boxName}.png`)}
+          alt={boxItem.boxName}
+        />
+        <BoxTitle>{boxItem.boxName}</BoxTitle>
+        <BoxDescription>
+          <span className="bold">[획득 가능 상품]</span>
+          {boxItem.boxDescription &&
+            boxItem.boxDescription.map((item) => (
+              <span key={uuid()}>{item}</span>
+            ))}
+        </BoxDescription>
+        <BoxPrice>
+          <img
+            src={require(`assets/ic_key_small.svg`).default}
+            alt="열쇠개수"
+          />
+          <span>{boxItem.boxPrice}</span>
+        </BoxPrice>
+      </div>
     </BoxCard>
   );
 }
@@ -58,14 +68,14 @@ const BoxTitle = styled.div`
   line-height: 25px;
   color: var(--Title_01);
   margin-bottom: 4px;
+  text-align: start;
 `;
 const BoxImage = css`
-  width: 120px;
-  height: 68px;
+  width: 100%;
   margin-bottom: 12px;
 `;
 const BoxCard = styled.div`
-  width: 160px;
+  width: calc(160 / 335 * 100%);
   min-height: 254px;
   background: #ffffff;
   box-shadow: 0px 1px 2px rgba(33, 33, 33, 0.08);
@@ -75,6 +85,9 @@ const BoxCard = styled.div`
   display: flex;
   align-items: flex-start;
   flex-direction: column;
+  .boxContent {
+    margin: 0 auto;
+  }
   .boxImage {
     ${BoxImage}
   }

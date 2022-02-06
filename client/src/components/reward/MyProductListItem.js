@@ -9,7 +9,7 @@ function MyProductListItem({ item, listControl }) {
   return (
     <MyRewardListItemStyle>
       {/* todo 이미지 변경 */}
-      <img src={require("./example.png")} alt={item.name} />
+      <img className="item" src={require("./example.png")} alt={item.name} />
       <span className="itemName">{item.name}</span>
       {/* todo item의 id값을 넣어주는 것으로 변경 id라는 변수 명을 넣어줘야함 */}
       <label
@@ -34,8 +34,7 @@ function MyProductListItem({ item, listControl }) {
   );
 }
 const MyRewardListItemStyle = styled.div`
-  width: 160px;
-  height: 261px;
+  width: calc(160 / 335 * 100%);
   padding: 24px 10px 14px;
   box-sizing: border-box;
   background: #ffffff;
@@ -51,6 +50,9 @@ const MyRewardListItemStyle = styled.div`
   line-height: 16px;
   color: var(--Body_03);
   img {
+    &.item {
+      width: calc(140 / 160 * 100%);
+    }
     margin-bottom: 8px;
   }
   label {

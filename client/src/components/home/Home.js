@@ -203,6 +203,7 @@ const UserAmountMsg = styled.div`
   }
 `;
 const AboutReward = styled.img`
+  width: 100%;
   cursor: pointer;
 `;
 export default Home;

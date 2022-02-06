@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Container from "./Container";
 import ScrollBox from "./ScrollBox";
-import SubmitButton from "./SubmitButton";
 
 function KeyPopUp() {
   const { state: keyInfo } = useLocation();
@@ -43,13 +42,13 @@ function KeyPopUp() {
           <span>받은 열쇠는 리워드 페이지에서</span>
           <span>상품으로 교환이 가능해요!</span>
         </MessageCard>
-        <SubmitButton
-          title={"확인"}
-          onClickFunc={() => {
+        <SaveBtn
+          onClick={() => {
             history(-1);
           }}
-          isActive={true}
-        />
+        >
+          확인
+        </SaveBtn>
       </ScrollBox>
     </Container>
   );
@@ -100,5 +99,19 @@ const MessageCard = styled.div`
     line-height: 38px;
     margin-bottom: 12px;
   }
+`;
+const SaveBtn = styled.button`
+  width: 100%;
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  border-radius: 12px;
+  border: none;
+  background-color: var(--a2);
+  color: #fff;
+  font-family: "Pretendard-SemiBold";
+  font-size: 16px;
+  line-height: 49px;
 `;
 export default KeyPopUp;

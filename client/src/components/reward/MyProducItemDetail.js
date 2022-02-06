@@ -1,5 +1,4 @@
 import Container from "components/common/Container";
-import SubmitButton from "components/common/SubmitButton";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -75,14 +74,14 @@ function MyProducItemDetail() {
           <span className="bold">2022. 05. 16</span>
         </Detail>
       </div>
-      <SubmitButton
-        title={"교환권 저장"}
-        onClickFunc={() => {
+      <SaveBtn
+        onClick={() => {
           setIsSaveClick(true);
           SaveProductImg();
         }}
-        isActive={true}
-      />
+      >
+        교환권 저장
+      </SaveBtn>
     </Container>
   );
 }
@@ -98,7 +97,7 @@ const Header = styled.div`
   }
 `;
 const ImgCard = styled.div`
-  width: 280px;
+  width: calc(280 / 335 * 100%);
   background: #ffffff;
   box-shadow: 0px 1px 2px rgba(33, 33, 33, 0.08);
   border-radius: 12px;
@@ -110,7 +109,7 @@ const ImgCard = styled.div`
   padding: 28px 40px;
   box-sizing: border-box;
   img {
-    width: 200px;
+    width: calc(200 / 280 * 100%);
     margin-bottom: 12px;
   }
   .itemName {
@@ -123,7 +122,8 @@ const ImgCard = styled.div`
 const BarCode = styled.div`
   margin: 0 auto 53px;
   img {
-    width: 232px;
+    width: calc(232 / 335 * 100%);
+
     height: 100px;
     margin-bottom: 12px;
   }
@@ -173,5 +173,19 @@ const Detail = styled.div`
   .bold {
     color: var(--Title_01);
   }
+`;
+const SaveBtn = styled.button`
+  width: 100%;
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  border-radius: 12px;
+  border: none;
+  background-color: var(--a2);
+  color: #fff;
+  font-family: "Pretendard-SemiBold";
+  font-size: 16px;
+  line-height: 49px;
 `;
 export default MyProducItemDetail;

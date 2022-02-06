@@ -7,24 +7,26 @@ function MyBoxListItem({ itme }) {
   const history = useNavigate();
   return (
     <MyBoxListItemStyle>
-      <img
-        className="boxImage"
-        src={require(`assets/reward/reward_box_${itme.boxName}.png`)}
-        alt={itme.boxName}
-      />
-      <BoxTitle>{itme.boxName}</BoxTitle>
-      <BoxDescription>
-        <span className="bold">[획득 가능 상품]</span>
-        {itme.boxDescription &&
-          itme.boxDescription.map((item) => <span key={uuid()}>{item}</span>)}
-      </BoxDescription>
-      <button
-        onClick={() => {
-          history(`select/${itme.boxId}`);
-        }}
-      >
-        열기
-      </button>
+      <div className="boxContent">
+        <img
+          className="boxImage"
+          src={require(`assets/reward/reward_box_${itme.boxName}.png`)}
+          alt={itme.boxName}
+        />
+        <BoxTitle>{itme.boxName}</BoxTitle>
+        <BoxDescription>
+          <span className="bold">[획득 가능 상품]</span>
+          {itme.boxDescription &&
+            itme.boxDescription.map((item) => <span key={uuid()}>{item}</span>)}
+        </BoxDescription>
+        <button
+          onClick={() => {
+            history(`select/${itme.boxId}`);
+          }}
+        >
+          열기
+        </button>
+      </div>
     </MyBoxListItemStyle>
   );
 }
@@ -52,7 +54,7 @@ const BoxTitle = styled.div`
   margin-bottom: 4px;
 `;
 const MyBoxListItemStyle = styled.div`
-  width: 160px;
+  width: calc((160 / 335) * 100%);
   padding: 24px 20px 16px;
   box-sizing: border-box;
   display: flex;
@@ -62,9 +64,16 @@ const MyBoxListItemStyle = styled.div`
   background: #ffffff;
   box-shadow: 0px 1px 2px rgba(33, 33, 33, 0.08);
   border-radius: 12px;
+  .boxContent {
+    margin: 0 auto;
+    text-align: start;
+  }
+  .boxImage {
+    width: 100%;
+  }
   button {
     border: none;
-    width: 120px;
+    width: 100%;
     padding: 3px 24px;
     background: var(--a2);
     border-radius: 10px;
