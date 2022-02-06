@@ -101,7 +101,7 @@ const NumBtn = styled.button`
   }
 `;
 
-function TerminationPassword() {
+function CheckPassword() {
   const history = useNavigate();
   const { state: props } = useLocation();
 
@@ -125,7 +125,7 @@ function TerminationPassword() {
     if (input.length === 4) {
       if (correctPassword === input) {
         setTimeout(() => {
-          history("/gather/detail/midterm-termination/complete", {
+          history("complete", {
             state: props,
           });
         }, 500);
@@ -134,7 +134,7 @@ function TerminationPassword() {
         setInput("");
       }
     }
-  }, [input, result]);
+  }, [input]);
 
   return (
     <Container>
@@ -188,4 +188,4 @@ function TerminationPassword() {
   );
 }
 
-export default TerminationPassword;
+export default CheckPassword;
