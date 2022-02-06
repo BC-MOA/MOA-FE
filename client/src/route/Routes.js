@@ -35,13 +35,15 @@ import MilitaryDetailEdit from "components/gather/MilitaryDetailEdit";
 import EditSavingTitle from "components/gather/addMilitarySavings/EditSavingTitle";
 import AddMilitarySavingsPassward from "components/gather/addMilitarySavings/AddMilitarySavingsPassward";
 import AboutReward from "components/reward/AboutReward";
-import TerminationPassword from "components/gather/TerminationPassword";
+import CheckPassword from "components/gather/CheckPassword";
 import TerminationComplete from "components/gather/TerminationComplete";
 import AddMoaSaving from "components/gather/addMoaSaving/AddMoaSaving";
 import AddMoaSavingPassward from "components/gather/addMoaSaving/AddMoaSavingPassward";
 import AddMoaSavingSuccess from "components/gather/addMoaSaving/AddMoaSavingSuccess";
 import AddMoaSavingTerm from "components/gather/addMoaSaving/AddMoaSavingTerm";
 import Loading from "components/loading/Loading";
+import AdditionalComplete from "components/gather/safebox/AdditionalComplete";
+import TakeInOutSafeBox from "components/gather/TakeInOutSafeBox";
 function AllRoutes() {
   return (
     <Routes>
@@ -100,12 +102,36 @@ function AllRoutes() {
       <Route path="/gather/detail/edit-goal" element={<EditGoal />} />
       <Route path="/gather/detail/edit-deposit" element={<EditDeposit />} />
       <Route
+        path="/gather/detail/register-deposit"
+        element={<RegisterDeposit />}
+      />
+      <Route
         path="/gather/detail/additional-deposit"
         element={<AdditionalDeposit />}
       />
       <Route
-        path="/gather/detail/register-deposit"
-        element={<RegisterDeposit />}
+        path="/gather/detail/additional-deposit/complete"
+        element={<AdditionalComplete />}
+      />
+      <Route
+        path="/gather/detail/take-in-safebox"
+        element={<TakeInOutSafeBox />}
+      />
+      <Route
+        path="/gather/detail/take-out-safebox"
+        element={<TakeInOutSafeBox />}
+      />
+      <Route
+        path="/gather/detail/take-in-safebox/complete"
+        element={<AdditionalComplete />}
+      />
+      <Route
+        path="/gather/detail/take-out-safebox/check-password"
+        element={<CheckPassword />}
+      />
+      <Route
+        path="/gather/detail/take-out-safebox/check-password/complete"
+        element={<AdditionalComplete />}
       />
       <Route
         path="/gather/detail/midterm-termination"
@@ -113,10 +139,10 @@ function AllRoutes() {
       />
       <Route
         path="/gather/detail/midterm-termination/check-password"
-        element={<TerminationPassword />}
+        element={<CheckPassword />}
       />
       <Route
-        path="/gather/detail/midterm-termination/complete"
+        path="/gather/detail/midterm-termination/check-password/complete"
         element={<TerminationComplete />}
       />
       <Route path="/gather/mili-detail" element={<MilitaryDetail />} />
