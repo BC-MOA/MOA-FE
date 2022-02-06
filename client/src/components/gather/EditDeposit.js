@@ -5,7 +5,9 @@ import { styleTitle, styleSubTitle, styleNotice } from "style/common";
 import { useLocation } from "react-router-dom";
 import CustomInput from "components/common/CustomInput";
 import CustomBtn from "components/gather/addGoal/CustomBtn";
+import CustomSelect from "components/gather/addGoal/CustomSelect";
 import SelectBox from "components/gather/addGoal/SelectBox";
+import { accountList } from "components/common/dummyData";
 
 const Container = styled.div`
   width: 100%;
@@ -137,44 +139,68 @@ function EditDeposit() {
               </>
             )
           ) : (
-            <></>
+            <div className="subNotice bottomMargin">
+              <span>자동이체</span>하시면,{" "}
+              <span className="l_space">우대금리</span>를 받을 수 있어요!
+            </div>
           )}
         </InputEl>
         <InputEl>
-          <div className="subTitle">
-            {props.category === "군적금" ? "월 납입액" : "납입액"}
-          </div>
-          <CustomInput
-            name="amount"
-            placeholder={prev.amount}
-            value={newInputs.amount}
-            onChange={onChange}
-            unit={"원"}
-          />
-          {props.category === "군적금" ? (
-            <div className="subNotice">
-              <span>1</span>만원부터 <span className="l_space">20</span>만원까지
-              납입할 수 있습니다
-            </div>
+          {newInputs.depositMethod === "자동이체" ? (
+            props.category === "군적금" ? (
+              <>
+                <div className="subTitle">월 납입액</div>
+                <CustomInput
+                  name="amount"
+                  placeholder={prev.amount}
+                  value={newInputs.amount}
+                  onChange={onChange}
+                  unit={"원"}
+                />
+                <div className="subNotice">
+                  <span>1</span>만원부터 <span className="l_space">20</span>
+                  만원까지 납입할 수 있습니다
+                </div>
+              </>
+            ) : (
+              <>
+                <InputEl>
+                  <div className="subTitle">납입액</div>
+                  <CustomInput
+                    name="amount"
+                    placeholder={prev.amount}
+                    value={newInputs.amount}
+                    onChange={onChange}
+                    unit={"원"}
+                  />
+                </InputEl>
+                <InputEl>
+                  <div className="subTitle">출금계좌</div>
+                  <CustomSelect
+                    name="account"
+                    onChange={onChange}
+                    accounts={accountList}
+                    selected={accountList[0]}
+                  ></CustomSelect>
+                </InputEl>
+              </>
+            )
           ) : (
-            <></>
+            <InputEl>
+              <div className="subTitle">출금계좌</div>
+              <CustomSelect
+                name="account"
+                onChange={onChange}
+                accounts={accountList}
+                selected={accountList[0]}
+              ></CustomSelect>
+            </InputEl>
           )}
         </InputEl>
       </Content>
-
       <CustomBtn
-        addFunc={() =>
-          localStorage.setItem(
-            "gatherList",
-            JSON.stringify(
-              [...JSON.parse(localStorage.getItem("gatherList"))].map((x) =>
-                x.name === prev.name ? newInputs : x
-              )
-            )
-          )
-        }
-        path={"/gather/detail"}
-        data={newInputs}
+        path={"complete"}
+        data={{ prev: prev, newInputs: newInputs, whatEdit: "deposit" }}
         active={isEdited()}
       >
         자동이체 변경

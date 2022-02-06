@@ -1,38 +1,23 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import CustomBtn from "components/gather/addGoal/CustomBtn";
 import BackHeader from "components/common/BackHeader";
+import CustomBtn from "components/gather/addGoal/CustomBtn";
 
 const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  position: relative;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
   flex-direction: column;
-`;
-
-const SelectedAccount = styled.div`
-  position: absolute;
-  top: 56px;
-  left: 6px;
-  text-align: left;
-  .title {
-    font-family: "Pretendard-Regular";
-    font-size: 14px;
-    line-height: 22px;
-    color: var(--Body_02);
-  }
-  .account {
-    margin-top: 2px;
-    font-family: "Pretendard-Regular";
-    font-size: 16px;
-    line-height: 25px;
-  }
+  background-color: var(--Surface);
 `;
 
 const Content = styled.div`
   flex: 1;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
@@ -87,9 +72,8 @@ const NumBtn = styled.button`
   }
 `;
 
-function MobileKeypad({ path, props }) {
+function KeypadModal({ inputs, setInputs, setModal }) {
   const [input, setInput] = useState("");
-
   const onClick = (event) => {
     setInput(input + event.target.innerText);
   };
@@ -101,14 +85,6 @@ function MobileKeypad({ path, props }) {
   return (
     <Container>
       <BackHeader path={-1} />
-      {path ? (
-        <SelectedAccount>
-          <div className="title">출금계좌</div>
-          <div className="account">KB나라사랑우대통장</div>
-        </SelectedAccount>
-      ) : (
-        <></>
-      )}
       <Content>
         <input
           disabled
@@ -117,9 +93,14 @@ function MobileKeypad({ path, props }) {
         />
       </Content>
       <CustomBtn
-        path={path ? "complete" : "/gather/add-safebox"}
         active={input !== ""}
-        data={path ? { props: props, inOutMoney: input } : input}
+        addFunc={() => {
+          setInputs({
+            ...inputs,
+            amount: input,
+          });
+          setModal(false);
+        }}
       >
         입력 완료
       </CustomBtn>
@@ -155,5 +136,4 @@ function MobileKeypad({ path, props }) {
     </Container>
   );
 }
-
-export default MobileKeypad;
+export default KeypadModal;

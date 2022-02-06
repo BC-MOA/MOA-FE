@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { styleTitle, styleSubTitle, styleNotice } from "style/common";
 import { useLocation } from "react-router-dom";
 import BackHeader from "components/common/BackHeader";
-import SliderInput from "./SliderInput";
-import CustomSelect from "../addGoal/CustomSelect";
-import CustomBtn from "../addGoal/CustomBtn";
+import SliderInput from "components/gather/safebox/SliderInput";
+import CustomSelect from "components/gather/addGoal/CustomSelect";
+import CustomBtn from "components/gather/addGoal/CustomBtn";
+import KeypadModal from "components/gather/safebox/KeypadModal";
 
 const Container = styled.div`
+  position: relative;
   width: 100%;
   height: 100%;
   display: flex;
@@ -59,19 +61,9 @@ const InputEl = styled.div`
   margin-top: 24px;
 `;
 
-function SafeBox() {
+function TakeInOutSafeBox() {
   const { state } = useLocation();
-
-  useEffect(() => {
-    if (state) {
-      setSafeInputs({
-        ...safeInputs,
-        amount: state,
-      });
-    }
-  }, [state]);
-
-  const avgSafeAmount = 200000;
+  const { gatherInfo, usage } = state;
   const accountList = [
     {
       bank: "KB국민",
@@ -96,14 +88,11 @@ function SafeBox() {
   ];
 
   const [safeInputs, setSafeInputs] = useState({
-    category: "비상금",
-    name: "비상금",
+    ...gatherInfo,
     amount: "",
-    currentAmount: 0,
-    account: "",
-    balance: 0,
-    transactions: [],
   });
+  const [modal, setModal] = useState(false);
+
   const onChange = (event) => {
     const { name, value } = event.target;
     setSafeInputs({
@@ -116,21 +105,24 @@ function SafeBox() {
     <Container>
       <BackHeader path={"/gather"} />
       <Content>
-        <div className="Title">비상금 만들기</div>
-        <div className="Text">
-          다른 장병들은 비상금으로 평균
-          <span className="l_space green">{avgSafeAmount} 원</span>을 모아요.
+        <div className="Title">
+          {usage === "takeIn" ? "비상금 모으기" : "비상금 꺼내기"}
         </div>
         <InputEl>
-          <div className="SubTitle">보관금액</div>
+          <div className="SubTitle">
+            {usage === "takeIn" ? "보관금액" : "꺼낼금액"}
+          </div>
           <SliderInput
             inputs={safeInputs}
             setInputs={setSafeInputs}
-            onChange={onChange}
+            usage={"additional"}
+            setModal={setModal}
           />
         </InputEl>
         <InputEl>
-          <div className="SubTitle">출금계좌</div>
+          <div className="SubTitle">
+            {usage === "takeIn" ? "출금계좌" : "입금계좌"}
+          </div>
           <CustomSelect
             name="account"
             onChange={onChange}
@@ -139,25 +131,34 @@ function SafeBox() {
           ></CustomSelect>
         </InputEl>
       </Content>
-      <CustomBtn
-        addFunc={() => {
-          const getted = JSON.parse(localStorage.getItem("gatherList"));
-          safeInputs.currentAmount = safeInputs.amount;
-          localStorage.setItem(
-            "gatherList",
-            getted
-              ? JSON.stringify([...getted, safeInputs])
-              : JSON.stringify([safeInputs])
-          );
-        }}
-        path={"complete"}
-        data={{ inputs: safeInputs, name: "비상금" }}
-        active={!Object.values(safeInputs).filter((x) => x === "").length}
-      >
-        비상금 만들기 완료
-      </CustomBtn>
+      {usage === "takeIn" ? (
+        <CustomBtn
+          path={"complete"}
+          data={{ props: safeInputs, inOutMoney: safeInputs.amount }}
+          active={!Object.values(safeInputs).filter((x) => x === "").length}
+        >
+          모으기
+        </CustomBtn>
+      ) : (
+        <CustomBtn
+          active={!Object.values(safeInputs).filter((x) => x === "").length}
+          path={"check-password"}
+          data={{ props: safeInputs, inOutMoney: -safeInputs.amount }}
+        >
+          꺼내기
+        </CustomBtn>
+      )}
+      {modal ? (
+        <KeypadModal
+          inputs={safeInputs}
+          setInputs={setSafeInputs}
+          setModal={setModal}
+        />
+      ) : (
+        <></>
+      )}
     </Container>
   );
 }
 
-export default SafeBox;
+export default TakeInOutSafeBox;
