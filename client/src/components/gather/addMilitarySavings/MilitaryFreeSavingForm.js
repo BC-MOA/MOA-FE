@@ -5,7 +5,7 @@ import styled from "styled-components";
 function MilitaryFreeSavingForm({
   userMonthOptions,
   savingType,
-  item,
+  savingData,
   formData,
   setFormData,
   userAccountList,
@@ -23,6 +23,7 @@ function MilitaryFreeSavingForm({
         <Dropdown
           valueName={"formDataMonth"}
           setValue={setFormData}
+          suffix={"개월"}
           selectValue={formData.formDataMonth}
           placeHolder={"적금하실 기간을 선택해주세요"}
           options={userMonthOptions}
@@ -31,6 +32,7 @@ function MilitaryFreeSavingForm({
 
       <div className="title">출금계좌</div>
       <Dropdown
+        suffix={""}
         valueName={"formDataAccount"}
         setValue={setFormData}
         selectValue={formData.formDataAccount}

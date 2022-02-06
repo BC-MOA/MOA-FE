@@ -2,7 +2,14 @@ import React from "react";
 import { v1 as uuid } from "uuid";
 import styled from "styled-components";
 
-function Dropdown({ valueName, options, selectValue, setValue, placeHolder }) {
+function Dropdown({
+  suffix,
+  valueName,
+  options,
+  selectValue,
+  setValue,
+  placeHolder,
+}) {
   const bgUrl = require("assets/gather/ic_select_arrow.svg").default;
   return (
     <DropdownBox
@@ -19,7 +26,7 @@ function Dropdown({ valueName, options, selectValue, setValue, placeHolder }) {
       </option>
       {options.map((item) => (
         <option value={item} key={uuid()}>
-          {item}
+          {`${item}${suffix}`}
         </option>
       ))}
     </DropdownBox>

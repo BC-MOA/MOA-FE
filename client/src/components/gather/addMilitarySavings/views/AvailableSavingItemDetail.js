@@ -5,19 +5,20 @@ import SubmitButton from "components/common/SubmitButton";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import ContentControlBtn from "../../common/ContentControlBtn";
+import ContentControlBtn from "../../../common/ContentControlBtn";
 import { v1 as uuid } from "uuid";
 function AvailableSavingItemDetail() {
   const controlNameList = ["상품안내", "금리이율", "유의사항"];
-  const { state: item } = useLocation();
+  const { state: savingData } = useLocation();
   const [listControl, setListControl] = useState(controlNameList[0]);
   const [isScrolled, setIsScrolled] = useState(false);
   const history = useNavigate();
+
   return (
     <Container>
       <BackHeader
         path={-1}
-        title={item.적금명}
+        title={`${savingData.bank.bankName} ${savingData.productName}`}
         isScrolled={isScrolled}
       ></BackHeader>
       <ScrollBox
@@ -35,28 +36,30 @@ function AvailableSavingItemDetail() {
           <div className="cardHeader">
             <div className="banklogo">
               <img
-                src={require(`assets/gather/ic_banklogo_${item.은행코드}.svg`)}
-                alt={item.은행명}
+                src={savingData.bank.bankImageUrl}
+                alt={savingData.bank.bankName}
               />
             </div>
-            <span>{item.적금명}</span>
+            <span>
+              {savingData.bank.bankName} {savingData.productName}
+            </span>
           </div>
           <CardText>
             <span>최고</span>
             <span className="cardTextBold">
-              {item.최대금리.toFixed(1)}% (12개월)
+              {savingData.highestInterest.toFixed(1)}% (12개월)
             </span>
           </CardText>
           <CardText>
             <span>금액</span>
             <div className="cardTextBold">
-              <div>월 20만원 이하 </div>
-              <div>(전 금융기관 합산 40만원 이내)</div>
+              <div>{savingData.amountExplanation.split("/n/r")[0]} </div>
+              <div>{savingData.amountExplanation.split("/n/r")[1]}</div>
             </div>
           </CardText>
           <CardText>
             <span>기간</span>
-            <span className="cardTextBold">6개월 이상 24개월 이하</span>
+            <span className="cardTextBold">{savingData.subscriptionLimit}</span>
           </CardText>
         </SavingItemCard>
         <ContentControlBtn
@@ -84,7 +87,7 @@ function AvailableSavingItemDetail() {
         title={"군적금 신청하기"}
         onClickFunc={() => {
           history("term", {
-            state: item,
+            state: savingData,
           });
         }}
         isActive={true}

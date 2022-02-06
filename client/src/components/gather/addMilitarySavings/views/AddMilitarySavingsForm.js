@@ -5,11 +5,11 @@ import SubmitButton from "components/common/SubmitButton";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import MilitaryFormBox from "./MilitaryFormBox";
+import MilitaryFormBox from "../MilitaryFormBox";
 const controlNameList = ["자동이체", "자유입금"];
 
 function AddMilitarySavingsForm() {
-  const { state: item } = useLocation();
+  const { state: savingData } = useLocation();
   const history = useNavigate();
   // todo - api 데이터
   const [userAccountList, setUserAccountList] = useState(["통장1", "통장2"]);
@@ -46,7 +46,11 @@ function AddMilitarySavingsForm() {
   }
   return (
     <Container>
-      <BackHeader path={-1} title={item.적금명} isScrolled={true}></BackHeader>
+      <BackHeader
+        path={-1}
+        title={`${savingData.bank.bankName} ${savingData.productName}`}
+        isScrolled={true}
+      ></BackHeader>
       <ScrollBox paddingValue={"16px 0 40px "}>
         <TermPageNum>
           <span className="bold">2</span>
@@ -66,13 +70,13 @@ function AddMilitarySavingsForm() {
           savingType={formData.savingType}
           controlNameList={controlNameList}
           setFormData={setFormData}
-          item={item}
+          savingData={savingData}
         />
       </ScrollBox>
       <SubmitButton
         title={"신청 완료"}
         onClickFunc={() => {
-          history("passward", { state: formData });
+          history("passward", { state: { savingData, formData } });
         }}
         isActive={isAvildForm}
       ></SubmitButton>
