@@ -1,16 +1,18 @@
 import { createContext, useState } from "react";
 
 export const MiliSavingListData = createContext({
-  availableSavingList: {
-    id: "",
-    bank: { id: "", bankName: "", bankImageUrl: "" },
-    productName: "",
-    highestInterest: 0,
-    basicInterest: 0,
-    amountExplanation: "",
-    subscriptionPeriod: "",
-    subscriptionLimit: "",
-  },
+  availableSavingList: [
+    {
+      id: "",
+      bank: { id: "", bankName: "", bankImageUrl: "" },
+      productName: "",
+      highestInterest: 0,
+      basicInterest: 0,
+      amountExplanation: "",
+      subscriptionPeriod: "",
+      subscriptionLimit: "",
+    },
+  ],
   setAvailableSavingList: () => {},
   getSavingList: () => {},
 });
