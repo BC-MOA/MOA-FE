@@ -7,7 +7,7 @@ function AvailableSavingItem({ item }) {
   return (
     <SavingItemBox
       onClick={() => {
-        history(`/gather/add-militarySaving/${item.은행명}`, {
+        history(`/gather/add-militarySaving/${item.bank.bankName}`, {
           state: item,
         });
       }}
@@ -15,23 +15,28 @@ function AvailableSavingItem({ item }) {
       {/* 로고 */}
       <div className="banklogo">
         <img
-          src={require(`assets/gather/ic_banklogo_${item.은행코드}.svg`)}
-          alt={item.은행명}
+          src={item.bank.bankImageUrl}
+          // src={require(`assets/gather/ic_banklogo_${item.은행코드}.svg`)}
+          alt={item.bank.bankName}
         />
       </div>
       {/* 상품이름 및 기본금리*/}
       <div className="savingInfo">
-        <span className="savingName">{item.적금명}</span>
+        <span className="savingName">
+          {item.bank.bankName} {item.productName}
+        </span>
         <span className="savingRate">
           <span className="rigntMargin">기본</span>
-          <span className="robotoFont">{item.기본금리.toFixed(1)}% (12</span>
+          <span className="robotoFont">
+            {item.basicInterest.toFixed(1)}% (12
+          </span>
           <span>개월</span>
           <span className="robotoFont">)</span>
         </span>
       </div>
       {/* 최대금리 */}
       <div className="savingMaxRate">
-        <span className="maxRateNum">{item.최대금리.toFixed(1)}%</span>
+        <span className="maxRateNum">{item.highestInterest.toFixed(1)}%</span>
         <span>최대금리</span>
       </div>
     </SavingItemBox>
@@ -61,14 +66,10 @@ const SavingItemBox = styled.div`
     justify-content: center;
     width: 48px;
     height: 48px;
-    /* width: calc(48 / 375 * 100vw);
-    height: calc(48 / 375 * 100vw); */
     background: #edefed;
     border-radius: 48px;
-    /* border-radius: calc(48 / 2 / 375 * 100vw); */
     img {
       width: 24px;
-      /* width: calc(24 / 375 * 100vw); */
     }
   }
   .savingInfo {
