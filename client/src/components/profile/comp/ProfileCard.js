@@ -3,7 +3,7 @@ import FileUploader from "./FileUploader";
 import DueProgressBar from "./DueProgressBar";
 
 const Card = styled.div`
-  width: 335px;
+  width: 100%;
   height: 231px;
   border-radius: 12px;
   background-color: white;
@@ -11,10 +11,13 @@ const Card = styled.div`
 
 const Info = styled.div`
   display: flex;
-  padding: 24px 16px;
+  padding: 24px 0;
 
   font-family: "Pretendard-Regular";
   font-size: 14px;
+
+  justify-content: space-evenly;
+  width: 80%;
 
   .profileimg {
     margin-right: 15px;
@@ -56,7 +59,10 @@ const ProfileCard = (props) => {
         <div className="profileinfo">
           <p className="name">{user.name}</p>
           <div className="rank">
-            <img src={require("assets/profile/" + user.rank + ".png")}></img>
+            <img
+              alt="none"
+              src={require("assets/profile/" + user.rank + ".png")}
+            ></img>
             <span>
               {rank_list[user.rank - 1]} {user.pay_step}호봉
             </span>

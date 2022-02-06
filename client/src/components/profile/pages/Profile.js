@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { Header } from "components/common/Header";
 import ProfileCard from "../comp/ProfileCard";
+import LinkButton from "../comp/NavButton";
 
 const userdata = {
   name: "최민수",
@@ -25,6 +26,18 @@ function Profile(props) {
       <Header $title={false} keys={3000} alarm={true}></Header>
       <ScrollBox>
         <ProfileCard user={userdata}></ProfileCard>
+        <LinkButton
+          title={"내 정보 수정"}
+          to={"compete"}
+          trans={false}
+        ></LinkButton>
+        <LinkButton
+          title={"내 보관함"}
+          to={"compete"}
+          trans={false}
+        ></LinkButton>
+        <LinkButton title={"내 계좌"} to={"compete"} trans={false}></LinkButton>
+        <LinkButton title={"로그아웃"} to={"compete"} trans={true}></LinkButton>
       </ScrollBox>
       <NavBar></NavBar>
     </Container>

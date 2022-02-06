@@ -26,6 +26,7 @@ const FileUploader = ({ onFileSelect }) => {
   return (
     <StyledFileInput>
       <img
+        alt="none"
         src={
           file
             ? //실제로는 업로드후 다시 가져오는 과정 필요
