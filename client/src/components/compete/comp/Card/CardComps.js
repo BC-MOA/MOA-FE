@@ -6,15 +6,20 @@ import { css } from "styled-components";
 //[style] : 기본 카드 디자인
 const CardDesign = css`
   background-color: white;
-  width: 295px;
+  width: 80%;
   height: 80px;
   margin: 15px 0;
   border-radius: 12px;
-  padding: 10px 20px;
+  padding: 10px 10%;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  @media (min-width: 280px) and (max-width: 500px) {
+    width: 90%;
+    padding: 10px 5%;
+  }
 `;
 
 //[styled comp] : 날짜
@@ -31,6 +36,7 @@ const Date = styled.div`
 const ContentBox = styled.div`
   display: flex;
   align-items: flex-end;
+  justify-content: space-between;
 `;
 
 //[styled comp] : 카드 썸네일

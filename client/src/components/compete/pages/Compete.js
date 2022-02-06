@@ -8,16 +8,19 @@ import React, { useState } from "react";
 import CompLists from "./CompLists";
 import Banner from "../comp/BannerSwiper";
 import CategoryButton from "../comp/CategoryButton";
+import { hideScrollBar } from "style/common";
+
+const StyleNavBar = styled(NavBar)`
+  position: fixed;
+  bottom: 0;
+`;
 
 //[styled comp]: 상위 패딩 무시용 박스
 const IgnorePaddingBox = styled.div`
-  margin: -8px -20px;
+  margin: -8px -20px 0;
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-
-  height: calc(734px - 52px);
 `;
 
 /**
@@ -60,8 +63,8 @@ function Compete() {
               {isAll ? <Banner></Banner> : <></>}
               <CompLists category={isAll}></CompLists>
             </div>
-            <NavBar></NavBar>
           </IgnorePaddingBox>
+          <StyleNavBar></StyleNavBar>
         </AllCompContext.Provider>
       </MyCompeteContext.Provider>
     </>

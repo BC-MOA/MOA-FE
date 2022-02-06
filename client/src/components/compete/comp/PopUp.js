@@ -3,12 +3,12 @@ import styled from "styled-components";
 //[styled comp] : 팝업 카드 배경
 const Background = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
-  width: 375px;
-  height: 745px;
+  width: 100%;
+  height: 100%;
 
   position: absolute;
   top: 0;
-  margin: 0 -40px;
+  left: 0;
 
   display: flex;
   flex-direction: column;
@@ -19,11 +19,17 @@ const Background = styled.div`
 
 //[styled comp] : 팝업 카드
 const Modal = styled.div`
-  width: 90%;
+  width: 400px;
+
+  @media (min-width: 280px) and (max-width: 500px) {
+    width: 340px;
+  }
+
   height: 168px;
   background-color: white;
   border-radius: 12px 12px 0 0;
   padding: 15px 5%;
+  margin: 0 auto;
 
   display: flex;
   flex-direction: column;

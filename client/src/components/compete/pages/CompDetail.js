@@ -14,7 +14,7 @@ import SubmitButton from "components/common/SubmitButton";
 
 //[styled comp] : 페이지 컨테이너
 const Detail = styled.div`
-  height: 650px;
+  height: calc(100vh - 100px);
 
   display: flex;
   flex-direction: column;
