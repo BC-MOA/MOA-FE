@@ -186,12 +186,21 @@ function DetailCard({ gatherInfo }) {
             padding={8}
             active={true}
             bgcolor="#EAAC0B"
-            path="additional-deposit"
-            data={gatherInfo}
+            path="take-in-safebox"
+            data={{ gatherInfo: gatherInfo, usage: "takeIn" }}
           >
             모으기
           </CustomBtn>
-          <CustomBtn padding={8}>꺼내기</CustomBtn>
+          <CustomBtn
+            padding={8}
+            active={true}
+            bgcolor="var(--Line_03)"
+            txtcolor="var(--Body_02)"
+            path="take-out-safebox"
+            data={{ gatherInfo: gatherInfo, usage: "takeOut" }}
+          >
+            꺼내기
+          </CustomBtn>
         </SafeBtns>
       )}
     </Content>
