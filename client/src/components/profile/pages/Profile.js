@@ -28,16 +28,21 @@ function Profile(props) {
         <ProfileCard user={userdata}></ProfileCard>
         <LinkButton
           title={"내 정보 수정"}
-          to={"compete"}
+          to={"profile/edit"}
           trans={false}
         ></LinkButton>
         <LinkButton
           title={"내 보관함"}
-          to={"compete"}
+          //userid 필요
+          to={"reward"}
           trans={false}
         ></LinkButton>
-        <LinkButton title={"내 계좌"} to={"compete"} trans={false}></LinkButton>
-        <LinkButton title={"로그아웃"} to={"compete"} trans={true}></LinkButton>
+        <LinkButton
+          title={"내 계좌"}
+          to={"profile/account"}
+          trans={false}
+        ></LinkButton>
+        <LinkButton title={"로그아웃"} trans={true}></LinkButton>
       </ScrollBox>
       <NavBar></NavBar>
     </Container>

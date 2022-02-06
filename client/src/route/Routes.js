@@ -42,6 +42,9 @@ import AddMoaSavingPassward from "components/gather/addMoaSaving/AddMoaSavingPas
 import AddMoaSavingSuccess from "components/gather/addMoaSaving/AddMoaSavingSuccess";
 import AddMoaSavingTerm from "components/gather/addMoaSaving/AddMoaSavingTerm";
 import Loading from "components/loading/Loading";
+import ProfileEdit from "components/profile/pages/ProfileEdit";
+import ProfileAccount from "components/profile/pages/ProfileAccount";
+
 function AllRoutes() {
   return (
     <Routes>
@@ -127,6 +130,8 @@ function AllRoutes() {
       <Route path="/compete/howto" element={<CompHowTo />} />
       <Route path="/compete/:id" element={<CompeteDetail />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/profile/account" element={<ProfileAccount />} />
+      <Route path="/profile/edit" element={<ProfileEdit />} />
       <Route path="/keypad" element={<MobileKeypad />} />
       <Route path="/key" element={<KeyPopUp />}></Route>
       <Route path="/reward" element={<Reward />} />

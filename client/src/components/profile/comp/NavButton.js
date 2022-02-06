@@ -34,8 +34,15 @@ const StyledLinkButton = styled.div`
 function LinkButton({ title, to, trans }) {
   const navigate = useNavigate();
 
+  const logout = () => {
+    console.log("logout!");
+  };
+
   return (
-    <StyledLinkButton trans={trans} onClick={() => navigate("/" + to)}>
+    <StyledLinkButton
+      trans={trans}
+      onClick={to ? () => navigate("/" + to) : logout}
+    >
       <div>{title}</div>
       <img alt="none" src={require("assets/profile/ic.svg").default}></img>
     </StyledLinkButton>
