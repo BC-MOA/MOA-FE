@@ -107,7 +107,7 @@ function DetailCard({ gatherInfo }) {
   return (
     <Content>
       <Info>
-        <Tag>{gatherInfo.category}</Tag>
+        <Tag>{gatherInfo.savingMode}</Tag>
         <div className="current">
           <span className="number">
             {gatherInfo.currentAmount.toLocaleString()}
@@ -115,10 +115,10 @@ function DetailCard({ gatherInfo }) {
           원
         </div>
         <div className="text">
-          {gatherInfo.account.name}
-          <span className="number">{gatherInfo.account.number}</span>
+          {gatherInfo.account.bankName}
+          <span className="number">{gatherInfo.account.accountNumber}</span>
         </div>
-        {gatherInfo.category === "군적금" && gatherInfo.name === "" && (
+        {gatherInfo.savingMode === "군적금" && gatherInfo.name === "" && (
           <div
             className="setGoalName"
             onClick={() => {
@@ -134,27 +134,27 @@ function DetailCard({ gatherInfo }) {
             />
           </div>
         )}
-        {gatherInfo.category !== "비상금" && (
+        {gatherInfo.savingMode !== "비상금" && (
           <div
             className={
-              gatherInfo.category === "군적금" ? "text green" : "text blue"
+              gatherInfo.savingMode === "군적금" ? "text green" : "text blue"
             }
           >
             목표금액{" "}
             <span className="number l_space bold">
-              {gatherInfo.targetAmount.toLocaleString()}
+              {gatherInfo.goalAmount.toLocaleString()}
             </span>{" "}
             원
           </div>
         )}
       </Info>
-      {gatherInfo.category !== "비상금" ? (
+      {gatherInfo.savingMode !== "비상금" ? (
         <>
           <div className="progressbar">
             <ProgressBar
               percent={20}
               filledBackground={
-                gatherInfo.category === "군적금"
+                gatherInfo.savingMode === "군적금"
                   ? "var(--a2)"
                   : "var(--subBlue)"
               }
@@ -173,7 +173,7 @@ function DetailCard({ gatherInfo }) {
           <CustomBtn
             padding={8}
             active={true}
-            bgcolor={gatherInfo.category === "목표" ? "var(--Blue)" : ""}
+            bgcolor={gatherInfo.savingMode === "목표" ? "var(--Blue)" : ""}
             path="additional-deposit"
             data={gatherInfo}
           >

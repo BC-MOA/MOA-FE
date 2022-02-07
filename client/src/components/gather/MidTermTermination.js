@@ -50,7 +50,7 @@ function MidTermTermination() {
         <div className="title">중도해지</div>
         <TerminationCard props={props} />
         <div className="subTitle l_space b_space">유의사항</div>
-        {props.category === "군적금" ? (
+        {props.savingMode === "군적금" ? (
           <div className="text l_space">
             중도해지 시, 약정한 이자율보다 낮은 중도해지 이자율이 적용되며
             비과세 및 재정 지원금 혜택을 받으실 수 없습니다. 추후 재가입이

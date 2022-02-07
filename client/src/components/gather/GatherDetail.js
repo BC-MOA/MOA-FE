@@ -93,7 +93,7 @@ function GatherDetail() {
   const tr_lists = gatherInfo.transactions;
 
   useEffect(() => {
-    if (gatherInfo.name === "") {
+    if (gatherInfo.goalName === "") {
       setGoalModal(true);
     }
   }, []);
@@ -101,11 +101,17 @@ function GatherDetail() {
     <Container>
       <BackHeader
         path={"/gather"}
-        title={gatherInfo.name ? gatherInfo.name : gatherInfo.account.name}
+        title={
+          gatherInfo.goalName
+            ? gatherInfo.goalName
+            : gatherInfo.account.productName
+        }
         isScrolled={true}
       />
       <button
-        className={gatherInfo.category === "비상금" ? "fixBtn none" : "fixBtn"}
+        className={
+          gatherInfo.savingMode === "비상금" ? "fixBtn none" : "fixBtn"
+        }
         onClick={() => setModal(true)}
       >
         <img src={require("assets/ic_fix.svg").default} alt="수정하기" />
@@ -115,7 +121,7 @@ function GatherDetail() {
       <Content className={tr_lists.length ? "" : "zero"}>
         {tr_lists.length ? (
           <>
-            <TransHistory category={gatherInfo.category}>
+            <TransHistory category={gatherInfo.savingMode}>
               {tr_lists.map((x, idx) => (
                 <TransactionEl key={idx} lists={x.lists}>
                   {x.date}

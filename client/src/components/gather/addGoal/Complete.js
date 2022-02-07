@@ -82,12 +82,7 @@ const InfoEl = styled.div`
 
 function Complete() {
   const { state } = useLocation();
-  const { inputs: userInfo, name } = state;
-
-  const accountInfo = {
-    Bank: "KB국민",
-    Account: "123-456-78-970111",
-  };
+  const { props, name } = state;
 
   return (
     <Container>
@@ -102,7 +97,7 @@ function Complete() {
           <>
             <div className="Title">목표를 세웠어요</div>
             <div className="Text">
-              {userInfo.account} {accountInfo.Account}에 <br />
+              {props.account.bankName} {props.account.accountNumber}에 <br />
               목표 금액이 모아져요.
             </div>
           </>
@@ -110,7 +105,7 @@ function Complete() {
           <>
             <div className="Title">비상금을 만들었어요</div>
             <div className="Text">
-              {userInfo.account} {accountInfo.Account}에 <br />
+              {props.account.bankName} {props.account.accountNumber}에 <br />
               비상금이 모아져요.
             </div>
           </>
@@ -121,24 +116,24 @@ function Complete() {
             <>
               <InfoEl className="Text">
                 <div>목표 이름</div>
-                <div className="userInfo">{userInfo.name}</div>
+                <div className="userInfo">{props.goalName}</div>
               </InfoEl>
               <InfoEl className="Text">
                 <div>목표 날짜</div>
                 <div className="userInfo">
-                  {moment(userInfo.deadline).format("YYYY년 MM월 DD일")}
+                  {moment(props.eDate).format("YYYY년 MM월 DD일")}
                 </div>
               </InfoEl>
               <InfoEl className="Text">
                 <div>
-                  {userInfo.depositMethod === "자동이체"
+                  {props.depositMethod === "자동이체"
                     ? "자동이체"
                     : "이체 방식"}
                 </div>
                 <div className="userInfo">
-                  {userInfo.howOften !== "-"
-                    ? userInfo.howOften
-                    : userInfo.depositMethod}
+                  {props.limitCycle !== ""
+                    ? props.limitCycle
+                    : props.depositMethod}
                 </div>
               </InfoEl>
             </>
@@ -147,27 +142,27 @@ function Complete() {
             <div>
               {name !== "목표"
                 ? "보관"
-                : userInfo.amount === "-"
+                : props.amountPerCycle === 0
                 ? "목표 "
                 : ""}
               금액
             </div>
             <div className="userInfo green">
-              {userInfo.amount !== "-"
-                ? Number(userInfo.amount).toLocaleString()
-                : Number(userInfo.targetAmount).toLocaleString()}{" "}
+              {props.amountPerCycle !== 0
+                ? props.amountPerCycle.toLocaleString()
+                : props.goalAmount.toLocaleString()}{" "}
               원
             </div>
           </InfoEl>
           <InfoEl className="Text">
             <div>출금계좌</div>
-            <div className="userInfo">{userInfo.account}</div>
+            <div className="userInfo">{props.account.bankName}</div>
           </InfoEl>
           {name !== "목표" && (
             <InfoEl className="Text">
               <div>출금계좌 예상잔액</div>
               <div className="userInfo">
-                {userInfo.balance.toLocaleString()} 원
+                {props.account.accountCurrentAmount.toLocaleString()} 원
               </div>
             </InfoEl>
           )}
