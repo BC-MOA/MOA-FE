@@ -10,7 +10,6 @@ function MilitaryAutoSavingForm({
   formData,
   setFormData,
 }) {
-  // todo - 예상원금 / 이자 계산해서 표시
   const [expectAmount, setExpectAmount] = useState(0);
   const [expectInterest, setExpectInterest] = useState(0);
   const [endDay, setEndDay] = useState("");
@@ -27,6 +26,7 @@ function MilitaryAutoSavingForm({
     const end = now.add(formData.formDataMonth, "months");
     setEndDay(end.format("YYYY.MM.DD"));
   }, [formData.formDataMonth]);
+
   function funcCheckIsNumInput(value) {
     if (Number(value)) {
       setFormData((preData) => ({
@@ -88,7 +88,6 @@ function MilitaryAutoSavingForm({
         <span className="bold roboto">20</span>
         <span>만원까지 납입할 수 있습니다</span>
       </div>
-      {/* todo 예상원금 및 이자 표시  */}
       <div className="interestBox">
         <div className="boxItem">
           <span className="title">만기예상원금</span>
@@ -118,6 +117,11 @@ function MilitaryAutoSavingForm({
             <span> 원</span>
           </span>
         </div>
+      </div>
+      <div className="message">
+        <span>
+          ** 해당금액은 예상금액으로, 실제 수령 금액과는 다를 수 있습니다
+        </span>
       </div>
     </AutoSavingForm>
   );

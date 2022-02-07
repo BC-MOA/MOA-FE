@@ -86,7 +86,7 @@ function EditComplete() {
     goal: "목표를 수정했어요",
     deposit: `${
       newInputs.depositMethod === "자동이체"
-        ? newInputs.category === "군적금"
+        ? newInputs.savingMode === "군적금"
           ? "월 납입액을 변경했어요"
           : "자동이체 내용을 변경했어요"
         : "자유입금으로 변경했어요"
@@ -107,16 +107,16 @@ function EditComplete() {
 
         <CheckInfo>
           {whatEdit === "goal" &&
-            (newInputs.category === "군적금" ? (
+            (newInputs.savingMode === "군적금" ? (
               <InfoEl className="Text">
                 <div>군적금 이름</div>
-                <div className="bold">{newInputs.account}</div>
+                <div className="bold">{newInputs.account.productName}</div>
               </InfoEl>
             ) : (
               <>
                 <InfoEl className="Text">
                   <div>목표 이름</div>
-                  <div className="bold">{newInputs.name}</div>
+                  <div className="bold">{newInputs.goalName}</div>
                 </InfoEl>
                 <InfoEl className="Text">
                   <div>목표 날짜</div>
@@ -126,25 +126,27 @@ function EditComplete() {
                 </InfoEl>
                 <InfoEl className="Text">
                   <div>목표 금액</div>
-                  <div className="bold">{newInputs.targetAmount} 원</div>
+                  <div className="bold">{newInputs.goalAmount} 원</div>
                 </InfoEl>
               </>
             ))}
           {whatEdit === "deposit" &&
-            (newInputs.category === "목표" ? (
+            (newInputs.savingMode === "목표" ? (
               newInputs.depositMethod === "자동이체" ? (
                 <>
                   <InfoEl className="Text">
                     <div>자동이체</div>
-                    <div className="bold">{newInputs.howOften}</div>
+                    <div className="bold">{newInputs.limitCycle}</div>
                   </InfoEl>
                   <InfoEl className="Text">
                     <div>금액</div>
-                    <div className="bold green">{newInputs.amount} 원</div>
+                    <div className="bold green">
+                      {newInputs.amountPerCycle} 원
+                    </div>
                   </InfoEl>
                   <InfoEl className="Text">
                     <div>출금계좌</div>
-                    <div className="bold">{newInputs.account}</div>
+                    <div className="bold">{newInputs.account.bankName}</div>
                   </InfoEl>
                 </>
               ) : (
@@ -155,7 +157,7 @@ function EditComplete() {
                   </InfoEl>
                   <InfoEl className="Text">
                     <div>출금계좌</div>
-                    <div className="bold">{newInputs.account}</div>
+                    <div className="bold">{newInputs.account.bankName}</div>
                   </InfoEl>
                 </>
               )
@@ -163,7 +165,7 @@ function EditComplete() {
               <>
                 <InfoEl className="Text">
                   <div>군적금 이름</div>
-                  <div className="bold">{newInputs.account.name}</div>
+                  <div className="bold">{newInputs.account.productName}</div>
                 </InfoEl>
                 <InfoEl className="Text">
                   <div>적금방식</div>
@@ -172,22 +174,24 @@ function EditComplete() {
                 {newInputs.depositMethod === "자동이체" ? (
                   <InfoEl className="Text">
                     <div>월 납입액</div>
-                    <div className="bold green">{newInputs.amount} 원</div>
+                    <div className="bold green">
+                      {newInputs.amountPerCycle} 원
+                    </div>
                   </InfoEl>
                 ) : (
                   <InfoEl className="Text">
                     <div>출금계좌</div>
-                    <div className="bold">{newInputs.account.name}</div>
+                    <div className="bold">{newInputs.account.bankName}</div>
                   </InfoEl>
                 )}
               </>
             ))}
           {whatEdit === "register" &&
-            (newInputs.category === "군적금" ? (
+            (newInputs.savingMode === "군적금" ? (
               <>
                 <InfoEl className="Text">
                   <div>군적금 이름</div>
-                  <div className="bold">{newInputs.account}</div>
+                  <div className="bold">{newInputs.account.productName}</div>
                 </InfoEl>
                 <InfoEl className="Text">
                   <div>적금방식</div>
@@ -195,22 +199,24 @@ function EditComplete() {
                 </InfoEl>
                 <InfoEl className="Text">
                   <div>월 납입액</div>
-                  <div className="bold">{newInputs.amount}</div>
+                  <div className="bold">{newInputs.amountPerCycle}</div>
                 </InfoEl>
               </>
             ) : (
               <>
                 <InfoEl className="Text">
                   <div>자동이체</div>
-                  <div className="bold">{newInputs.howOften}</div>
+                  <div className="bold">{newInputs.limitCycle}</div>
                 </InfoEl>
                 <InfoEl className="Text">
                   <div>금액</div>
-                  <div className="bold green">{newInputs.amount} 원</div>
+                  <div className="bold green">
+                    {newInputs.amountPerCycle} 원
+                  </div>
                 </InfoEl>
                 <InfoEl className="Text">
                   <div>출금계좌</div>
-                  <div className="bold">{newInputs.account}</div>
+                  <div className="bold">{newInputs.account.bankName}</div>
                 </InfoEl>
               </>
             ))}
@@ -227,7 +233,7 @@ function EditComplete() {
             "gatherList",
             JSON.stringify(
               [...JSON.parse(localStorage.getItem("gatherList"))].map((x) =>
-                x.name === prev.name ? newInputs : x
+                x.goalName === prev.goalName ? newInputs : x
               )
             )
           )

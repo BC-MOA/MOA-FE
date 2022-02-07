@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { styleTitle, styleSubTitle, styleNotice } from "style/common";
 import { useLocation } from "react-router-dom";
@@ -7,6 +7,7 @@ import SliderInput from "components/gather/safebox/SliderInput";
 import CustomSelect from "components/gather/addGoal/CustomSelect";
 import CustomBtn from "components/gather/addGoal/CustomBtn";
 import KeypadModal from "components/gather/safebox/KeypadModal";
+import { accountList } from "components/common/dummyData";
 
 const Container = styled.div`
   position: relative;
@@ -62,42 +63,40 @@ const InputEl = styled.div`
 `;
 
 function TakeInOutSafeBox() {
+  const [modal, setModal] = useState(false);
   const { state } = useLocation();
   const { gatherInfo, usage } = state;
-  const accountList = [
-    {
-      bank: "KB국민",
-      name: "KB 나라사랑통장",
-      accountNumber: "123-456-78-910111",
-    },
-    {
-      bank: "NH농협",
-      name: "NH 장병내일준비적금",
-      accountNumber: "356-0239-21-1208",
-    },
-    {
-      bank: "IBK기업",
-      name: "IBK 장병내일준비적금",
-      accountNumber: "235-455372-02-011",
-    },
-    {
-      bank: "제주은행",
-      name: "제주은행 장병내일준비적금",
-      accountNumber: "123-226-78-913511",
-    },
-  ];
 
+  const [bankInfo, setBankInfo] = useState({
+    bankName: "",
+    productName: "",
+    accountNumber: "",
+    accountCurrentAmount: 0,
+    bankImageUrl: "",
+  });
   const [safeInputs, setSafeInputs] = useState({
     ...gatherInfo,
-    amount: "",
+    amountPerCycle: 0,
+    account: bankInfo,
   });
-  const [modal, setModal] = useState(false);
+
+  useEffect(() => {
+    setSafeInputs({
+      ...safeInputs,
+      account: bankInfo,
+    });
+  }, [bankInfo.bankName]);
 
   const onChange = (event) => {
     const { name, value } = event.target;
-    setSafeInputs({
-      ...safeInputs,
+    const selected = accountList.find((x) => x.bankName === value);
+
+    setBankInfo({
       [name]: value,
+      productName: selected.accountName,
+      accountNumber: selected.accountNumber,
+      accountCurrentAmount: selected.currentAmount,
+      bankImageUrl: selected.bankImageUrl,
     });
   };
 
@@ -124,26 +123,32 @@ function TakeInOutSafeBox() {
             {usage === "takeIn" ? "출금계좌" : "입금계좌"}
           </div>
           <CustomSelect
-            name="account"
+            name="bankName"
             onChange={onChange}
             accounts={accountList}
-            selected={safeInputs.account}
+            selected={safeInputs.account.bankName}
           ></CustomSelect>
         </InputEl>
       </Content>
       {usage === "takeIn" ? (
         <CustomBtn
           path={"complete"}
-          data={{ props: safeInputs, inOutMoney: safeInputs.amount }}
-          active={!Object.values(safeInputs).filter((x) => x === "").length}
+          data={{ props: safeInputs, inOutMoney: safeInputs.amountPerCycle }}
+          active={
+            safeInputs.account.bankName !== "" &&
+            safeInputs.amountPerCycle !== 0
+          }
         >
           모으기
         </CustomBtn>
       ) : (
         <CustomBtn
-          active={!Object.values(safeInputs).filter((x) => x === "").length}
+          active={
+            safeInputs.account.bankName !== "" &&
+            safeInputs.amountPerCycle !== 0
+          }
           path={"check-password"}
-          data={{ props: safeInputs, inOutMoney: -safeInputs.amount }}
+          data={{ props: safeInputs, inOutMoney: -safeInputs.amountPerCycle }}
         >
           꺼내기
         </CustomBtn>

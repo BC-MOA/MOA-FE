@@ -43,8 +43,8 @@ function CustomSelect({ name, onChange, accounts, selected }) {
           출금계좌를 선택해주세요
         </option>
         {accounts.map((x) => (
-          <option value={x.bank} key={x.accountNumber}>
-            {x.name}
+          <option value={x.bankName} key={x.id}>
+            {x.accountName}
           </option>
         ))}
       </Select>

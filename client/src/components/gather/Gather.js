@@ -72,30 +72,13 @@ const EditBtn = styled.button`
 
 function Gather() {
   const userName = "민수";
-  const gatherList = JSON.parse(localStorage.getItem("gatherList")) || [
-    {
-      id: 1,
-      category: "군적금",
-      name: "",
-      currentAmount: 800000,
-      targetAmount: 3200000,
-      account: {
-        name: "KB국민",
-        number: "112-0330-0201",
-      },
-      sDate: "Sun Oct 10 2021 15:11:39 GMT+0900",
-      eDate: "Fri Mar 10 2023 23:59:59 GMT+0900",
-      depositMethod: "자동이체",
-      howOften: "매월 10일",
-      amount: "200000",
-      transactions: [],
-    },
-  ];
+  const gatherList = JSON.parse(localStorage.getItem("gatherList")) || [];
   const inProgressList = gatherList.filter((x) => !moment().isAfter(x.eDate));
   const completedList = gatherList.filter((x) => moment().isAfter(x.eDate));
   const totalAmount = inProgressList.reduce((acc, cur) => {
     return (acc += cur.currentAmount);
   }, 0);
+
   const controlNameList = ["진행중", "완료"];
   const [listControl, setListControl] = useState(controlNameList[0]);
   const [editToggle, setEditToggle] = useState(true);
@@ -117,6 +100,7 @@ function Gather() {
       adText: "저축하고 남은 돈을 비상금처럼 따로 보관하세요.",
     },
   ]);
+
   return (
     <Container>
       <div className="Title">{userName}님이 현재 모으고 있는 금액은?</div>

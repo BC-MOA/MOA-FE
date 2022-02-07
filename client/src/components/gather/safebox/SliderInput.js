@@ -32,13 +32,12 @@ const Custom = styled.div`
 `;
 
 function SliderInput({ inputs, setInputs, usage, setModal }) {
-  const { amount } = inputs;
-
+  const { amountPerCycle } = inputs;
   const history = useNavigate();
 
   return (
     <Container>
-      <div className="Title">{Number(amount).toLocaleString()} 원</div>
+      <div className="Title">{amountPerCycle.toLocaleString()} 원</div>
       <div
         className="SubTitle green btn"
         onClick={
@@ -57,11 +56,11 @@ function SliderInput({ inputs, setInputs, usage, setModal }) {
         step={1000}
         max={1000000}
         min={0}
-        value={amount}
+        value={amountPerCycle}
         onChange={(e) =>
           setInputs({
             ...inputs,
-            amount: e,
+            amountPerCycle: e,
           })
         }
         width={350}

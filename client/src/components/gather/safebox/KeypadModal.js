@@ -97,7 +97,7 @@ function KeypadModal({ inputs, setInputs, setModal }) {
         addFunc={() => {
           setInputs({
             ...inputs,
-            amount: input,
+            amountPerCycle: Number(input),
           });
           setModal(false);
         }}

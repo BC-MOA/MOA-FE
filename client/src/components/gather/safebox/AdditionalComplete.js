@@ -103,7 +103,7 @@ function AdditionalComplete() {
           data-micron="bounce"
         />
         <div className="Title">
-          {props.category === "비상금"
+          {props.savingMode === "비상금"
             ? Number(inOutMoney) > 0
               ? "비상금을 모았어요"
               : "비상금을 꺼냈어요"
@@ -113,15 +113,19 @@ function AdditionalComplete() {
         <CheckInfo>
           <InfoEl className="Text">
             <div>{Number(inOutMoney) > 0 ? "입금금액" : "꺼낸 금액"}</div>
-            <div className="bold green">{inOutMoney} 원</div>
+            <div className="bold green">
+              {Number(inOutMoney).toLocaleString()} 원
+            </div>
           </InfoEl>
           <InfoEl className="Text">
             <div>{Number(inOutMoney) > 0 ? "출금계좌" : "입금계좌"}</div>
-            <div className="bold">{props.account}</div>
+            <div className="bold">{props.account.bankName}</div>
           </InfoEl>
           <InfoEl className="Text">
             <div>총 금액</div>
-            <div className="bold">{props.currentAmount} 원</div>
+            <div className="bold">
+              {props.currentAmount.toLocaleString()} 원
+            </div>
           </InfoEl>
           <img
             className="character"
@@ -138,7 +142,8 @@ function AdditionalComplete() {
             "gatherList",
             JSON.stringify([
               ...JSON.parse(localStorage.getItem("gatherList")).map((x) =>
-                x.name === props.name && x.account === props.account
+                x.goalName === props.goalName &&
+                x.account.accountNumber === props.account.accountNumber
                   ? {
                       ...x,
                       transactions: [...x.transactions, trFormat(inOutMoney)],

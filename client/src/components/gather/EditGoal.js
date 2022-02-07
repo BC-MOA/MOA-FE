@@ -60,7 +60,7 @@ function EditGoal() {
 
   const [newInputs, setNewInputs] = useState({
     ...props,
-    name: "",
+    goalName: "",
   });
 
   const onChange = (event) => {
@@ -73,9 +73,9 @@ function EditGoal() {
 
   const isEdited = () => {
     const editableEls =
-      props.category === "군적금"
-        ? ["name"]
-        : ["goal_category", "name", "eDate"];
+      props.savingMode === "군적금"
+        ? ["goalName"]
+        : ["category", "goalName", "eDate"];
     return (
       editableEls.filter((x) => newInputs[x] !== "" && newInputs[x] !== prev[x])
         .length > 0
@@ -84,22 +84,21 @@ function EditGoal() {
 
   const applyNewInputs = (newInputs) => {
     const editableEls =
-      props.category === "군적금"
-        ? ["name"]
-        : ["goal_category", "name", "eDate"];
+      props.savingMode === "군적금"
+        ? ["goalName"]
+        : ["category", "goalName", "eDate"];
 
     editableEls.map((x) => {
       if (newInputs[x] === "") {
         newInputs[x] = prev[x];
       }
     });
-    return newInputs;
   };
 
   return (
     <Container>
       <BackHeader path={-1} />
-      {props.category === "군적금" ? (
+      {props.savingMode === "군적금" ? (
         <Content>
           <div className="title">
             <div>{userInfo.name}님!</div>
@@ -107,9 +106,9 @@ function EditGoal() {
           </div>
 
           <CustomInput
-            name="name"
-            placeholder={prev.name}
-            value={newInputs.name}
+            name="goalName"
+            placeholder={prev.goalName}
+            value={newInputs.goalName}
             onChange={onChange}
           />
           <div className="notice">
@@ -126,10 +125,9 @@ function EditGoal() {
           <InputEl>
             <div className="subTitle">목표 이름</div>
             <CustomInput
-              name="name"
-              pBlack={true}
-              placeholder={prev.name}
-              value={newInputs.name}
+              name="goalName"
+              placeholder={prev.goalName}
+              value={newInputs.goalName}
               onChange={onChange}
             />
             <div className="subNotice">예) 폰바꾸기</div>
@@ -148,9 +146,10 @@ function EditGoal() {
       )}
       <CustomBtn
         path={"complete"}
+        addFunc={() => applyNewInputs(newInputs)}
         data={{
           prev: prev,
-          newInputs: applyNewInputs(newInputs),
+          newInputs: newInputs,
           whatEdit: "goal",
         }}
         active={isEdited()}

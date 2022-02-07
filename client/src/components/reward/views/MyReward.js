@@ -3,8 +3,8 @@ import Container from "components/common/Container";
 import ScrollBox from "components/common/ScrollBox";
 import React, { useState } from "react";
 import styled from "styled-components";
-import MyBoxList from "./MyBoxList";
-import MyProductList from "./MyProductList";
+import MyBoxList from "../MyBoxList";
+import MyProductList from "../MyProductList";
 const tabList = ["MOA 박스", "상품"];
 const userBoxList = [
   {
