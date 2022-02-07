@@ -4,11 +4,11 @@ import SubmitButton from "components/common/SubmitButton";
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import ProcessStateBox from "../ProcessStateBox";
-import ApplyDataCard from "./ApplyDataCard";
+import ProcessStateBox from "../../ProcessStateBox";
+import ApplyDataCard from "../ApplyDataCard";
 const stateList = ["신청 접수", "군 정보 확인", "은행 심사", "개설 완료"];
 function AddMilitarySavingSuccess() {
-  const { state: formData } = useLocation();
+  const { state: applyData } = useLocation();
   const history = useNavigate();
   return (
     <Container>
@@ -28,7 +28,7 @@ function AddMilitarySavingSuccess() {
             alt="군인캐릭터"
           />
         </CharacterImg>
-        <ApplyDataCard formData={formData}></ApplyDataCard>
+        <ApplyDataCard applyData={applyData} />
       </ScrollBox>
       <SubmitButton
         title={"확인"}

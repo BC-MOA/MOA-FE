@@ -1,41 +1,44 @@
-import React, { Fragment } from "react";
+import React from "react";
 import styled from "styled-components";
 
-function ApplyDataCard({ formData }) {
-  // todo - formData 데이터의 값으로 표시할것
-  // 적금 이름 /유형 / 기간 / 자동이체일 / 금액 / 출금계좌
+function ApplyDataCard({ applyData }) {
   return (
     <ApplyDataCardStyle>
       <div className="cardItem">
         <span>군적금 이름</span>
-        <span className="bold">적금</span>
+        <span className="bold">
+          {applyData.savingData.bank.bankName}{" "}
+          {applyData.savingData.productName}
+        </span>
       </div>
       <div className="cardItem">
         <span>적금방식</span>
         <div>
-          <span className="bold">자동이체</span>
+          <span className="bold">{applyData.formData.savingType}</span>
         </div>
       </div>
       <div className="cardItem">
         <span>기간</span>
         <div>
-          <span className="bold">12</span>
+          <span className="bold">{applyData.formData.formDataMonth}</span>
           <span className="bold roboto">개월</span>
         </div>
       </div>
-      {"자동이체" === formData.savingType && (
+      {"자동이체" === applyData.formData.savingType && (
         <div className="cardItem">
           <span>월 납입액</span>
           <div>
-            <span className="bold green roboto">2000</span>
+            <span className="bold green roboto">
+              {applyData.formData.formDataAmount}
+            </span>
             <span></span> <span className="bold green">원</span>
           </div>
         </div>
       )}
-      {"자유입금" === formData.savingType && (
+      {"자유입금" === applyData.formData.savingType && (
         <div className="cardItem">
           <span>출금계좌</span>
-          <span className="bold">통장</span>
+          <span className="bold">{applyData.formData.formDataAccount}</span>
         </div>
       )}
     </ApplyDataCardStyle>

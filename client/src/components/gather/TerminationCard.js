@@ -22,6 +22,15 @@ const Container = styled.div`
       background: var(--Surface);
       border-radius: 10px;
     }
+    .account {
+      flex: 1;
+      overflow: hidden;
+      .shortening {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
   }
   .InfoEl {
     display: flex;
@@ -50,13 +59,16 @@ function TerminationCard({ props }) {
     <Container>
       <div className="accountInfo">
         <div className="bgIcon">
-          <img src={require("assets/gather/ic_banklogo_004.svg").default} />
+          <img
+            src={require("assets/gather/ic_banklogo_국민.svg").default}
+            alt="logo"
+          />
         </div>
-        <div>
+        <div className="account">
           {props.category === "군적금" ? (
             <div className="subTitle">{props.account}</div>
           ) : (
-            <div className="subTitle">{props.name}</div>
+            <div className="subTitle shortening">{props.name}</div>
           )}
           <div className="text txt_body2">{"KB국민 112-0330-0201"} </div>
         </div>

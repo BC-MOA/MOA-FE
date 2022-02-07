@@ -7,7 +7,6 @@ function AdditionalDeposit() {
 
   return (
     <>
-      {/* Todo: 비상금 추가 입력완료 후 페이지 */}
       <MobileKeypad path={"/gather/detail"} props={props} />
     </>
   );

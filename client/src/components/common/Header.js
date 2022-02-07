@@ -54,7 +54,7 @@ const NotLinkedKey = (props) => (
 
 //알람
 const Bell = (props) => (
-  <StyledLink to="/compete">
+  <StyledLink to="/notice">
     <img
       src={
         props.alarm
