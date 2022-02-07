@@ -49,6 +49,8 @@ import AdditionalComplete from "components/gather/safebox/AdditionalComplete";
 import TakeInOutSafeBox from "components/gather/TakeInOutSafeBox";
 import EditComplete from "components/gather/EditComplete";
 import Notice from "components/profile/Notice";
+import InterLock from "components/interlock/pages/InterLock";
+
 function AllRoutes() {
   return (
     <Routes>
@@ -183,6 +185,8 @@ function AllRoutes() {
         element={<MyProducItemDetail />}
       />
       <Route path="/reward/:userId/select/:boxId" element={<MyBoxOpen />} />
+
+      <Route path="/interlock" element={<InterLock />} />
     </Routes>
   );
 }
