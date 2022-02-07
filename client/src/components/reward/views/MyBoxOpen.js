@@ -2,23 +2,13 @@ import Container from "components/common/Container";
 import SubmitButton from "components/common/SubmitButton";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import RewardItemCard from "./RewardItemCard";
 import { v1 as uuid } from "uuid";
-import PopupRewardSelceted from "./PopupRewardSelceted";
+import { useLocation } from "react-router-dom";
+import RewardItemCard from "../RewardItemCard";
+import PopupRewardSelceted from "../PopupRewardSelceted";
 function MyBoxOpen() {
-  // todo - 박스 아이템에 대한 정보를 라우터 이동시 받아올 것
-  const productList = [
-    "a1",
-    "a2",
-    "a3",
-    "a4",
-    "a5",
-    "a6",
-    "a7",
-    "a8",
-    "a9",
-    "a10",
-  ];
+  const { state: item } = useLocation();
+  console.log(item);
   const [randomList, setRandomList] = useState([]);
   const [selectedItem, setSelectedItem] = useState("");
   const [isModal, setIsModal] = useState("box");
@@ -37,13 +27,14 @@ function MyBoxOpen() {
   function randomRefresh() {
     let newList = [];
     while (newList.length < 6) {
-      let num = Math.floor(Math.random() * productList.length);
-      newList.push(productList[num]);
+      let num = Math.floor(Math.random() * item.productList.length);
+      newList.push(item.productList[num]);
 
       const set = new Set(newList);
       newList = [...set];
     }
     setRandomList(newList);
+    setSelectedItem("");
   }
   return (
     <Container>
@@ -83,7 +74,7 @@ function MyBoxOpen() {
               randomList.map((item) => (
                 <RewardItemCard
                   key={uuid()}
-                  itemName={item}
+                  item={item}
                   selectedItem={selectedItem}
                   setSelectedItem={setSelectedItem}
                 ></RewardItemCard>

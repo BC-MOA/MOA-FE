@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserInventoryData } from "store/UserInventory";
 import styled from "styled-components";
 
 function RewardUserInfo() {
   const history = useNavigate();
+  const { userBoxList } = useContext(UserInventoryData);
   const userId = "123";
+
   return (
     <UserInfo>
       <div className="userKeyNum">
@@ -25,7 +28,7 @@ function RewardUserInfo() {
         className="userRewardNum"
       >
         <div className="header">
-          <span>2</span>
+          <span>{userBoxList.length}</span>
         </div>
         <div className="infoTitle">
           <span>내 보관함</span>

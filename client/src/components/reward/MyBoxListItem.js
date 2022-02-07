@@ -3,25 +3,25 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { v1 as uuid } from "uuid";
 
-function MyBoxListItem({ itme }) {
+function MyBoxListItem({ item }) {
   const history = useNavigate();
   return (
     <MyBoxListItemStyle>
       <div className="boxContent">
         <img
           className="boxImage"
-          src={require(`assets/reward/reward_box_${itme.boxName}.png`)}
-          alt={itme.boxName}
+          src={require(`assets/reward/reward_box_${item.boxName}.png`)}
+          alt={item.boxName}
         />
-        <BoxTitle>{itme.boxName}</BoxTitle>
+        <BoxTitle>{item.boxName}</BoxTitle>
         <BoxDescription>
           <span className="bold">[획득 가능 상품]</span>
-          {itme.boxDescription &&
-            itme.boxDescription.map((item) => <span key={uuid()}>{item}</span>)}
+          {item.boxDescription &&
+            item.boxDescription.map((item) => <span key={uuid()}>{item}</span>)}
         </BoxDescription>
         <button
           onClick={() => {
-            history(`select/${itme.boxId}`);
+            history(`select/${item.boxId}`, { state: item });
           }}
         >
           열기
