@@ -34,7 +34,7 @@ function Profile(props) {
         <LinkButton
           title={"내 보관함"}
           //userid 필요
-          to={"reward"}
+          to={"reward/:userId"}
           trans={false}
         ></LinkButton>
         <LinkButton
