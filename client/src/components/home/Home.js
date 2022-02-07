@@ -1,3 +1,4 @@
+import axios from "axios";
 import Container from "components/common/Container";
 import { Header } from "components/common/Header";
 import NavBar from "components/common/NavBar";
@@ -7,8 +8,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { v1 as uuid } from "uuid";
 import BubbleContent from "./BubbleContent";
-import axios from "axios";
-
+const PROXY = window.location.hostname === "localhost" ? "" : "/api";
 function Home() {
   const history = useNavigate();
   const [challengeList, setChallengeList] = useState([]);
@@ -22,7 +22,7 @@ function Home() {
   }, []);
   useEffect(() => {
     axios
-      .get("/v1/hello")
+      .get(`${PROXY}/v1/hello`)
       .then((res) => {
         console.log(res.data);
       })
@@ -38,7 +38,7 @@ function Home() {
         <UserAmountMsg>
           <p>{"민수"}님이 지금까지 모은 금액은?</p>
           <div className="num">
-            <span className="roboto">{Number(200000).toLocaleString()}</span>
+            <span className="roboto">{Number("2000").toLocaleString()}</span>
             <span>원</span>
             <div className="highlight"></div>
           </div>
