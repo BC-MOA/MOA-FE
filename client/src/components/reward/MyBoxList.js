@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import MyBoxListItem from "./MyBoxListItem";
 import { v1 as uuid } from "uuid";
-function MyBoxList({ tabName, tabList, userBoxList }) {
+import { UserInventoryData } from "store/UserInventory";
+function MyBoxList({ tabName, tabList }) {
+  const { userBoxList } = useContext(UserInventoryData);
   return (
     <MyBoxListStyle className={tabList[0] === tabName ? "isSelect" : ""}>
       {0 < userBoxList.length &&
-        userBoxList.map((item) => <MyBoxListItem key={uuid()} itme={item} />)}
-      {0 >= userBoxList.length && (
+        userBoxList.map((item) => <MyBoxListItem key={uuid()} item={item} />)}
+      {0 >= userBoxList?.length && (
         <div className="emptyList">
           <img
             src={require("assets/reward/character_head.svg").default}
@@ -29,6 +31,7 @@ const MyBoxListStyle = styled.div`
     gap: 15px;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     .emptyList {
       text-align: center;
       color: var(--Body_01);

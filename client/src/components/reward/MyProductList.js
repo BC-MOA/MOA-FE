@@ -1,24 +1,20 @@
 import ContentControlBtn from "components/common/ContentControlBtn";
 import ScrollBox from "components/common/ScrollBox";
 import MyProductListItem from "./MyProductListItem";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { v1 as uuid } from "uuid";
+import { UserInventoryData } from "store/UserInventory";
 const controlNameList = ["부대 내", "부대 외"];
 function MyProductList({ tabName, tabList }) {
   const [listControl, setListControl] = useState(controlNameList[0]);
-  // const [inReward, setInReward] = useState([
-  //   { id: 1, name: "불닭볶음면" },
-  //   { id: 2, name: "바나나우유" },
-  // ]);
+  const { userRewardList } = useContext(UserInventoryData);
   const [inReward, setInReward] = useState([]);
-  const [outReward, setOutReward] = useState([
-    { id: 3, name: "불닭볶음면" },
-    { id: 4, name: "포스틱" },
-    { id: 5, name: "커피" },
-    { id: 6, name: "짜파게티" },
-    { id: 7, name: "아이스크림" },
-  ]);
+  const [outReward, setOutReward] = useState([]);
+  useEffect(() => {
+    setInReward(userRewardList.filter((item) => item.armyInOut === "in"));
+    setOutReward(userRewardList.filter((item) => item.armyInOut === "out"));
+  }, []);
 
   // todo - 사용자 리워드 내역을 받아와 부대내외로 값을 나눠 저장
   return (

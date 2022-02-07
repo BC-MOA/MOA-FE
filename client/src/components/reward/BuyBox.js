@@ -1,18 +1,34 @@
 import SubmitButton from "components/common/SubmitButton";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserInventoryData } from "store/UserInventory";
 import { styleModal, styleModalBackground } from "style/common";
 import styled from "styled-components";
-
-function BuyBox({ setBuyClick, buyBoxItem }) {
+import { v1 as uuid } from "uuid";
+function BuyBox({ setBuyClick, buyBoxItem, setIsValidBuy }) {
   const [isBought, setIsBought] = useState("");
+  const { getUserBoxList, setUserBoxList } = useContext(UserInventoryData);
   // todo - 박스 구매 클릭시 로직 짤 것 - api 성공
   function funcBuyBox() {
-    // 사용자 열쇠 개수가 박스구매개수보다 많을때
+    // 1. 사용자 열쇠 개수가 박스구매개수보다 많을때
     // api호출
-    // setIsBought("true");
-    // // 사용자 열쇠 개수가 박스구매개수보다 적을때
+    setIsBought("true");
+    // setUserBoxList((pre) => {
+    //   const temp = [...pre];
+    //   temp.push(buyBoxItem);
+    //    return temp;
+    // });
+    // 2. 사용자 열쇠 개수가 박스구매개수보다 적을때
     // api호출없이 바로
-    setIsBought("false");
+    // setIsBought("false");
+
+    // 아래는 임시 코드
+    const temp = JSON.parse(localStorage.getItem("userBoxList"))
+      ? JSON.parse(localStorage.getItem("userBoxList"))
+      : [];
+    const boxNew = { ...buyBoxItem, boxId: uuid() };
+    temp.push(boxNew);
+    localStorage.setItem("userBoxList", JSON.stringify(temp));
+    getUserBoxList();
   }
   return (
     <Background>
@@ -21,6 +37,7 @@ function BuyBox({ setBuyClick, buyBoxItem }) {
           className="closeBtn"
           onClick={() => {
             setBuyClick(false);
+            setIsValidBuy(false);
           }}
         >
           <img src={require("assets/ic_close.svg").default} alt="닫기" />
@@ -35,6 +52,7 @@ function BuyBox({ setBuyClick, buyBoxItem }) {
               <button
                 onClick={() => {
                   setBuyClick(false);
+                  setIsValidBuy(false);
                 }}
               >
                 취소하기
@@ -63,6 +81,7 @@ function BuyBox({ setBuyClick, buyBoxItem }) {
             <SubmitButton
               onClickFunc={() => {
                 setBuyClick(false);
+                setIsValidBuy(false);
               }}
               isActive={true}
               title={"확인"}
