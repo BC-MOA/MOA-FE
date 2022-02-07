@@ -1,10 +1,10 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { v1 as uuid } from "uuid";
+import MyBoxOpenModal from "./MyBoxOpenModal";
 
 function MyBoxListItem({ item }) {
-  const history = useNavigate();
+  const [isOpenClick, setIsOpenClick] = useState(false);
   return (
     <MyBoxListItemStyle>
       <div className="boxContent">
@@ -21,12 +21,15 @@ function MyBoxListItem({ item }) {
         </BoxDescription>
         <button
           onClick={() => {
-            history(`select/${item.boxId}`, { state: item });
+            setIsOpenClick(true);
           }}
         >
           열기
         </button>
       </div>
+      {isOpenClick && (
+        <MyBoxOpenModal item={item} setIsOpenClick={setIsOpenClick} />
+      )}
     </MyBoxListItemStyle>
   );
 }
