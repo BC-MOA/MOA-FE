@@ -1,6 +1,5 @@
 import Container from "components/common/Container";
-import React, { useState } from "react";
-import { useEffect } from "react/cjs/react.development";
+import React, { useState, useEffect } from "react";
 import LoadingStep1 from "./LoadingStep1";
 import LoadingStep2 from "./LoadingStep2";
 import LoadingStep3 from "./LoadingStep3";
