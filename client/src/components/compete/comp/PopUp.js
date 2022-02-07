@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 //[styled comp] : 팝업 카드 배경
-const StyledPopUpBox = styled.div`
+const Background = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
-  width: 375px;
-  height: 745px;
+  width: 100%;
+  height: 100%;
 
   position: absolute;
   top: 0;
-  margin: 0 -40px;
+  left: 0;
 
   display: flex;
   flex-direction: column;
@@ -18,12 +18,18 @@ const StyledPopUpBox = styled.div`
 `;
 
 //[styled comp] : 팝업 카드
-const StyledPopUpCard = styled.div`
-  width: 90%;
+const Modal = styled.div`
+  width: 400px;
+
+  @media (min-width: 280px) and (max-width: 500px) {
+    width: 340px;
+  }
+
   height: 168px;
   background-color: white;
   border-radius: 12px 12px 0 0;
   padding: 15px 5%;
+  margin: 0 auto;
 
   display: flex;
   flex-direction: column;
@@ -41,10 +47,10 @@ const StyledPopUpCard = styled.div`
   }
 
   .title {
-    font-size: 14px;
+    font-size: 16px;
     font-family: "Pretendard-Regular";
     font-weight: 600;
-    color: var(--a5);
+    color: var(--a3);
   }
 
   .buttonbox {
@@ -97,17 +103,17 @@ function PopUp(props) {
   };
 
   return (
-    <StyledPopUpBox>
-      <StyledPopUpCard>
+    <Background>
+      <Modal>
         <p className="text">베팅을 정말 취소하시겠어요?</p>
         <p className="title">{obj.title}</p>
         <div className="buttonbox">
           <button onClick={clickNo}>아니요</button>
           <button onClick={clickYes}>예</button>
         </div>
-      </StyledPopUpCard>
-    </StyledPopUpBox>
+      </Modal>
+    </Background>
   );
 }
 
-export default PopUp;
+export { PopUp, Modal, Background };

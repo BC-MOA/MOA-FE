@@ -7,12 +7,10 @@ import createCardList from "../function/FilterList";
 
 //[styled comp] : 리스트 컨테이너
 const StyledAllList = styled.div`
-  background-color: var(--Surface);
-  height: 450px;
-
-  padding: 0 20px;
-
   ${hideScrollBar}
+  background-color: var(--Surface);
+  padding: 0 20px;
+  height: calc(100vh - 280px);
 `;
 
 /**

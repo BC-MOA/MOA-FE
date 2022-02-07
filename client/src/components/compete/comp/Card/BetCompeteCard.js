@@ -2,7 +2,7 @@ import styled from "styled-components";
 import formatDate from "../../function/DateChanger";
 import StyledLink from "components/common/StyledLink";
 import kFormatter from "../../function/kFormatter";
-import PopUp from "../PopUp";
+import { PopUp } from "../PopUp";
 import { NotLinkedKey } from "components/common/Header";
 import React, { useState } from "react";
 

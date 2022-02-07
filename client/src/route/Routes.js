@@ -4,7 +4,7 @@ import Home from "components/home/Home";
 import Gather from "components/gather/Gather";
 import Save from "components/save/Save";
 import Compete from "components/compete/pages/Compete";
-import Profile from "components/profile/Profile";
+import Profile from "components/profile/pages/Profile";
 import CompeteDetail from "components/compete/pages/CompDetail";
 import AddMilitarySavings from "components/gather/addMilitarySavings/views/AddMilitarySavings";
 import AvailableSavingItemDetail from "components/gather/addMilitarySavings/views/AvailableSavingItemDetail";
@@ -42,6 +42,9 @@ import AddMoaSavingPassward from "components/gather/addMoaSaving/AddMoaSavingPas
 import AddMoaSavingSuccess from "components/gather/addMoaSaving/AddMoaSavingSuccess";
 import AddMoaSavingTerm from "components/gather/addMoaSaving/AddMoaSavingTerm";
 import Loading from "components/loading/Loading";
+import ProfileEdit from "components/profile/pages/ProfileEdit";
+import ProfileAccount from "components/profile/pages/ProfileAccount";
+
 import AdditionalComplete from "components/gather/safebox/AdditionalComplete";
 import TakeInOutSafeBox from "components/gather/TakeInOutSafeBox";
 import EditComplete from "components/gather/EditComplete";
@@ -168,6 +171,8 @@ function AllRoutes() {
       <Route path="/compete/howto" element={<CompHowTo />} />
       <Route path="/compete/:id" element={<CompeteDetail />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/profile/account" element={<ProfileAccount />} />
+      <Route path="/profile/edit" element={<ProfileEdit />} />
       <Route path="/keypad" element={<MobileKeypad />} />
       <Route path="/key" element={<KeyPopUp />}></Route>
       <Route path="/reward" element={<Reward />} />
