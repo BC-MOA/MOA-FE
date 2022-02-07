@@ -42,13 +42,13 @@ const Card = styled.div`
   }
 `;
 
-const AccountCard = ({ key, obj }) => {
+const AccountCard = ({ id, obj }) => {
   const moneyFormatter = new Intl.NumberFormat();
 
   const styledSum = moneyFormatter.format(obj.sum);
 
   return (
-    <Card key={key}>
+    <Card key={id}>
       <img src={obj.thumb}></img>
       <div className="content">
         <div className="sum">{styledSum}원</div>

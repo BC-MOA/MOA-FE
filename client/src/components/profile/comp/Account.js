@@ -9,14 +9,12 @@ const ListBox = styled.div`
   ${hideScrollBar}
 `;
 
-const Account = ({ type, list }) => {
+const Account = ({ list }) => {
   let cardList = [];
-
-  console.log(list);
 
   if (list.length != 0) {
     for (const obj of list) {
-      cardList.push(<AccountCard obj={obj} key={obj.key}></AccountCard>);
+      cardList.push(<AccountCard obj={obj} id={obj.key}></AccountCard>);
     }
   }
 
