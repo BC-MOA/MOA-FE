@@ -36,9 +36,9 @@ function Banner(props) {
 
 //Swiper 컨테이너
 const SwiperBox = styled.div`
-  width: 335px;
+  width: 90%;
   height: 76px;
-  padding: 0 20px;
+  padding: 0 5%;
   margin-top: 20px;
   background-color: var(--Surface);
 `;

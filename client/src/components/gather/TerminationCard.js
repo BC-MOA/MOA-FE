@@ -59,7 +59,10 @@ function TerminationCard({ props }) {
     <Container>
       <div className="accountInfo">
         <div className="bgIcon">
-          <img src={require("assets/gather/ic_banklogo_004.svg").default} />
+          <img
+            src={require("assets/gather/ic_banklogo_국민.svg").default}
+            alt="logo"
+          />
         </div>
         <div className="account">
           {props.savingMode === "군적금" ? (

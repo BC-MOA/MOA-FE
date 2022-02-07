@@ -4,21 +4,21 @@ import Home from "components/home/Home";
 import Gather from "components/gather/Gather";
 import Save from "components/save/Save";
 import Compete from "components/compete/pages/Compete";
-import Profile from "components/profile/Profile";
+import Profile from "components/profile/pages/Profile";
 import CompeteDetail from "components/compete/pages/CompDetail";
-import AddMilitarySavings from "components/gather/addMilitarySavings/AddMilitarySavings";
-import AvailableSavingItemDetail from "components/gather/addMilitarySavings/AvailableSavingItemDetail";
-import AddMilitarySavingsTerm from "components/gather/addMilitarySavings/AddMilitarySavingsTerm";
-import AddMilitarySavingsForm from "components/gather/addMilitarySavings/AddMilitarySavingsForm";
-import AddMilitarySavingSuccess from "components/gather/addMilitarySavings/AddMilitarySavingSucess";
+import AddMilitarySavings from "components/gather/addMilitarySavings/views/AddMilitarySavings";
+import AvailableSavingItemDetail from "components/gather/addMilitarySavings/views/AvailableSavingItemDetail";
+import AddMilitarySavingsTerm from "components/gather/addMilitarySavings/views/AddMilitarySavingsTerm";
+import AddMilitarySavingsForm from "components/gather/addMilitarySavings/views/AddMilitarySavingsForm";
+import AddMilitarySavingSuccess from "components/gather/addMilitarySavings/views/AddMilitarySavingSucess";
 import SafeBox from "components/gather/safebox/SafeBox";
 import Goal from "components/gather/addGoal/Goal";
 import Complete from "components/gather/addGoal/Complete";
 import MobileKeypad from "components/gather/safebox/MobileKeypad";
 import CompHowTo from "components/compete/pages/CompHowTo";
 import KeyPopUp from "components/common/KeyPopUp";
-import Reward from "components/reward/Reward";
-import MyReward from "components/reward/MyReward";
+import Reward from "components/reward/views/Reward";
+import MyReward from "components/reward/views/MyReward";
 import MyProducItemDetail from "components/reward/MyProducItemDetail";
 import GatherDetail from "components/gather/GatherDetail";
 import EditGoal from "components/gather/EditGoal";
@@ -33,8 +33,8 @@ import SignUp from "components/signInUp/SignUp";
 import ResetPassword from "components/signInUp/ResetPassword";
 import MilitaryDetailEdit from "components/gather/MilitaryDetailEdit";
 import EditSavingTitle from "components/gather/addMilitarySavings/EditSavingTitle";
-import AddMilitarySavingsPassward from "components/gather/addMilitarySavings/AddMilitarySavingsPassward";
-import AboutReward from "components/reward/AboutReward";
+import AddMilitarySavingsPassward from "components/gather/addMilitarySavings/views/AddMilitarySavingsPassward";
+import AboutReward from "components/reward/views/AboutReward";
 import CheckPassword from "components/gather/CheckPassword";
 import TerminationComplete from "components/gather/TerminationComplete";
 import AddMoaSaving from "components/gather/addMoaSaving/AddMoaSaving";
@@ -42,6 +42,9 @@ import AddMoaSavingPassward from "components/gather/addMoaSaving/AddMoaSavingPas
 import AddMoaSavingSuccess from "components/gather/addMoaSaving/AddMoaSavingSuccess";
 import AddMoaSavingTerm from "components/gather/addMoaSaving/AddMoaSavingTerm";
 import Loading from "components/loading/Loading";
+import ProfileEdit from "components/profile/pages/ProfileEdit";
+import ProfileAccount from "components/profile/pages/ProfileAccount";
+
 import AdditionalComplete from "components/gather/safebox/AdditionalComplete";
 import TakeInOutSafeBox from "components/gather/TakeInOutSafeBox";
 import EditComplete from "components/gather/EditComplete";
@@ -168,6 +171,8 @@ function AllRoutes() {
       <Route path="/compete/howto" element={<CompHowTo />} />
       <Route path="/compete/:id" element={<CompeteDetail />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/profile/account" element={<ProfileAccount />} />
+      <Route path="/profile/edit" element={<ProfileEdit />} />
       <Route path="/keypad" element={<MobileKeypad />} />
       <Route path="/key" element={<KeyPopUp />}></Route>
       <Route path="/reward" element={<Reward />} />

@@ -3,7 +3,7 @@ import Container from "components/common/Container";
 import ScrollBox from "components/common/ScrollBox";
 import React, { useState } from "react";
 import styled from "styled-components";
-import AvailableSavingList from "./AvailableSavingList";
+import AvailableSavingList from "../AvailableSavingList";
 import ContentControlBtn from "components/common/ContentControlBtn";
 function AddMilitarySavings() {
   const controlNameList = ["최고금리순", "기본금리순"];

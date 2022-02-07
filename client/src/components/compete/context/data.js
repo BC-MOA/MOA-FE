@@ -60,6 +60,26 @@ const allCompList = {
       total: 300,
       win: false,
     },
+    {
+      key: "A7",
+      due: new Date("2022-04-28T21:00:00"),
+      thumb: "soccer.png",
+      title: "프리미어리그 경기 승자는1?",
+      versus: ["맨시티", "리버풀"],
+      totalkey: [77, 29],
+      total: 320,
+      win: false,
+    },
+    {
+      key: "A8",
+      due: new Date("2022-04-28T21:00:00"),
+      thumb: "soccer.png",
+      title: "프리미어리그 경기 승자는1?",
+      versus: ["맨시티", "리버풀"],
+      totalkey: [77, 29],
+      total: 320,
+      win: false,
+    },
   ],
 };
 

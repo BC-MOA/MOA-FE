@@ -10,10 +10,11 @@ import { Timer, TimerBox } from "../comp/Timer";
 import { PickUp } from "../comp/ChalOption";
 import { KeyPicker, options } from "../comp/KeyPicker";
 import ExpectedKey from "../comp/KeyExpect";
+import SubmitButton from "components/common/SubmitButton";
 
 //[styled comp] : 페이지 컨테이너
 const Detail = styled.div`
-  height: 650px;
+  height: calc(100vh - 100px);
 
   display: flex;
   flex-direction: column;
@@ -52,28 +53,6 @@ const BetCard = styled.div`
     height: 75px;
     margin: 15px auto;
     justify-content: space-around;
-  }
-`;
-
-//[styled comp] : 배팅하기 버튼
-const Button = styled.button`
-  height: 49px;
-  width: 100%;
-  border: none;
-  border-radius: 12px;
-
-  background-color: var(--a5);
-  font-family: "Pretendard-SemiBold";
-  color: white;
-
-  transition: 1s all;
-  :hover {
-    opacity: 0.8;
-  }
-
-  :disabled {
-    background-color: var(--Line_02);
-    color: var(--Body_03);
   }
 `;
 
@@ -182,9 +161,11 @@ function CompDetail() {
           <TimerBox>
             <Timer due={comp.due}></Timer>
           </TimerBox>
-          <Button onClick={clickBet} disabled={!isBetted}>
-            배팅하기
-          </Button>
+          <SubmitButton
+            isActive={isBetted}
+            onClickFunc={clickBet}
+            title={"배팅하기"}
+          ></SubmitButton>
         </div>
       </Detail>
     </>

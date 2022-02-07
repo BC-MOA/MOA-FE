@@ -8,7 +8,7 @@ import createCardList from "../function/FilterList";
 //[styled comp] : 리스트 컨테이너
 const StyledMyList = styled.div`
   background-color: var(--Surface);
-  height: 550px;
+  height: calc(100vh - 185px);
 
   padding: 0 20px;
 
