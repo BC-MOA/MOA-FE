@@ -46,11 +46,11 @@ function CategoryEl({ El, inputs, setInputs }) {
       onClick={(e) => {
         setInputs({
           ...inputs,
-          goal_category: e.currentTarget.children[1].innerText,
+          category: e.currentTarget.children[1].innerText,
         });
       }}
     >
-      <ElBox selected={inputs.goal_category === category}>
+      <ElBox selected={inputs.category === category}>
         <StoreSvg category={category} />
       </ElBox>
       <div className="name">{category}</div>

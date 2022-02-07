@@ -65,12 +65,14 @@ function TerminationCard({ props }) {
           />
         </div>
         <div className="account">
-          {props.category === "군적금" ? (
-            <div className="subTitle">{props.account}</div>
+          {props.savingMode === "군적금" ? (
+            <div className="subTitle">{props.account.productName}</div>
           ) : (
-            <div className="subTitle shortening">{props.name}</div>
+            <div className="subTitle shortening">{props.goalName}</div>
           )}
-          <div className="text txt_body2">{"KB국민 112-0330-0201"} </div>
+          <div className="text txt_body2">
+            {props.account.bankName} {props.account.accountNumber}
+          </div>
         </div>
       </div>
       <div className="InfoEl text">
@@ -91,7 +93,7 @@ function TerminationCard({ props }) {
       </div>
       <div className="InfoEl text">
         <div className="txt_body1">입금계좌</div>
-        <div className="txt_title2">{props.account}</div>
+        <div className="txt_title2">{props.account.bankName}</div>
       </div>
     </Container>
   );

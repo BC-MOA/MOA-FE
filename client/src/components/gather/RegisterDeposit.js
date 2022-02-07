@@ -58,38 +58,40 @@ function RegisterDeposit() {
   const [newInputs, setNewInputs] = useState({
     ...props,
     depositMethod: "자동이체",
-    amount: "",
+    amountPerCycle: 0,
   });
 
   const onChange = (event) => {
     const { name, value } = event.target;
     setNewInputs({
       ...newInputs,
-      [name]: value,
+      [name]: name === "amountPerCycle" ? Number(value) : value,
     });
   };
 
   const isEdited = () => {
     const editableEls =
-      props.category === "군적금" ? ["amount"] : ["howOften", "amount"];
+      props.savingMode === "군적금"
+        ? ["amountPerCycle"]
+        : ["limitCycle", "amountPerCycle"];
     return (
       editableEls.filter((x) => newInputs[x] !== "" && newInputs[x] !== prev[x])
         .length === editableEls.length
     );
   };
-
+  console.log(newInputs);
   return (
     <Container>
       <BackHeader path={-1} />
       <Content>
         <div
           className={
-            props.category === "군적금" ? "title bottomMargin" : "title"
+            props.savingMode === "군적금" ? "title bottomMargin" : "title"
           }
         >
           자동이체 등록
         </div>
-        {props.category === "군적금" ? (
+        {props.savingMode === "군적금" ? (
           <div className="subNotice noPaddingBottomMargin">
             <span>자동이체</span>하시면,{" "}
             <span className="l_space">국군재정단</span>이 적금 통장에{" "}
@@ -101,7 +103,7 @@ function RegisterDeposit() {
           <InputEl>
             <div className="subTitle">이체 주기</div>
             <SelectBox
-              name="howOften"
+              name="limitCycle"
               inputs={newInputs}
               setInputs={setNewInputs}
             >
@@ -113,19 +115,22 @@ function RegisterDeposit() {
         )}
         <InputEl>
           <div className="subTitle">
-            {props.category === "군적금" ? "월 납입액" : "납입액"}
+            {props.savingMode === "군적금" ? "월 납입액" : "납입액"}
           </div>
           <CustomInput
-            name="amount"
+            unit="원"
+            name="amountPerCycle"
             placeholder={
-              props.category === "군적금"
+              props.savingMode === "군적금"
                 ? "월 납입액을 입력해주세요."
                 : "정기적으로 넣을 금액을 입력해주세요."
             }
-            value={newInputs.amount}
+            value={
+              newInputs.amountPerCycle === 0 ? "" : newInputs.amountPerCycle
+            }
             onChange={onChange}
           />
-          {props.category === "군적금" ? (
+          {props.savingMode === "군적금" ? (
             <div className="subNotice">
               <span>1</span>만원부터 <span className="l_space">20</span>만원까지
               납입할 수 있습니다

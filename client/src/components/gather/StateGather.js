@@ -164,8 +164,8 @@ function StateGather({ props, completed }) {
   const history = useNavigate();
   return (
     <Container
-      className={props.category === "비상금" ? "safebox" : ""}
-      category={props.category}
+      className={props.savingMode === "비상금" ? "safebox" : ""}
+      category={props.savingMode}
       completed={completed}
       onClick={() => {
         history("detail", {
@@ -175,10 +175,10 @@ function StateGather({ props, completed }) {
     >
       <Content completed={completed}>
         <Main>
-          <Icon category={props.category}>
-            {props.goal_category ? (
-              <StoreSvg category={props.goal_category} />
-            ) : props.category === "군적금" ? (
+          <Icon category={props.savingMode}>
+            {props.category ? (
+              <StoreSvg category={props.category} />
+            ) : props.savingMode === "군적금" ? (
               // Todo: 군적금 - 은행 로고로 이미지 바꾸기
               <StoreSvg category="군적금" />
             ) : (
@@ -187,14 +187,14 @@ function StateGather({ props, completed }) {
           </Icon>
           <div className="content">
             <div className="name">
-              {props.name ? props.name : props.account.name}
+              {props.goalName ? props.goalName : props.account.productName}
             </div>
-            {props.category !== "비상금" && (
+            {props.savingMode !== "비상금" && (
               <div className={completed ? "dDay none" : "dDay"}>
                 D-{calc_dDay(props.eDate)}
               </div>
             )}
-            {props.category === "비상금" && (
+            {props.savingMode === "비상금" && (
               <State style={{ marginTop: "2px" }}>
                 <div className="amount">
                   <div className="currentAmount">
@@ -207,15 +207,15 @@ function StateGather({ props, completed }) {
               </State>
             )}
           </div>
-          {completed ? <Tag className="tag">{props.category}</Tag> : <></>}
+          {completed ? <Tag className="tag">{props.savingMode}</Tag> : <></>}
         </Main>
-        {props.category !== "비상금" && (
+        {props.savingMode !== "비상금" && (
           <State>
             <div className="progressbar">
               <ProgressBar
-                percent={(props.currentAmount / props.targetAmount) * 100}
+                percent={(props.currentAmount / props.goalAmount) * 100}
                 filledBackground={
-                  props.category === "군적금" ? "var(--a2)" : "var(--Blue)"
+                  props.savingMode === "군적금" ? "var(--a2)" : "var(--Blue)"
                 }
                 unfilledBackground="#EBEBEB"
                 height="8px"
@@ -229,7 +229,7 @@ function StateGather({ props, completed }) {
                 원
               </div>
               <div className="targetAmount">
-                <span>{props.targetAmount.toLocaleString()}</span> 원
+                <span>{props.goalAmount.toLocaleString()}</span> 원
               </div>
             </div>
           </State>
@@ -238,12 +238,10 @@ function StateGather({ props, completed }) {
       {completed ? (
         <CompleteState
           className={
-            props.currentAmount >= props.targetAmount ? "success" : "fail"
+            props.currentAmount >= props.goalAmount ? "success" : "fail"
           }
         >
-          {props.currentAmount >= props.targetAmount
-            ? "목표 성공"
-            : "목표 실패"}
+          {props.currentAmount >= props.goalAmount ? "목표 성공" : "목표 실패"}
         </CompleteState>
       ) : (
         <></>

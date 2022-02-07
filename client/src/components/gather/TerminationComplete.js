@@ -90,15 +90,15 @@ function TerminationComplete() {
         <div className="Title">중도해지가 완료되었어요</div>
 
         <CheckInfo>
-          {props.category === "군적금" ? (
+          {props.savingMode === "군적금" ? (
             <>
               <InfoEl className="Text">
                 <div>적금명</div>
-                <div className="bold">{props.account}</div>
+                <div className="bold">{props.account.productName}</div>
               </InfoEl>
               <InfoEl className="Text">
                 <div>계좌번호</div>
-                <div className="bold">{"112-0330-0201"}</div>
+                <div className="bold">{props.account.accountNumber}</div>
               </InfoEl>
               <InfoEl className="Text green">
                 <div>{"해지예상금액"}</div>
@@ -109,7 +109,7 @@ function TerminationComplete() {
             <>
               <InfoEl className="Text">
                 <div>목표명</div>
-                <div className="bold">{props.name}</div>
+                <div className="bold">{props.goalName}</div>
               </InfoEl>
               <InfoEl className="Text">
                 <div>{"해지예상금액"}</div>
@@ -128,7 +128,17 @@ function TerminationComplete() {
           />
         </CheckInfo>
       </Content>
-      <CustomBtn active={true} path="/gather">
+      <CustomBtn
+        active={true}
+        path="/gather"
+        addFunc={() => {
+          const getted = JSON.parse(localStorage.getItem("gatherList"));
+          localStorage.setItem(
+            "gatherList",
+            JSON.stringify(getted.filter((x) => x.goalName !== props.goalName))
+          );
+        }}
+      >
         확인
       </CustomBtn>
     </Container>
