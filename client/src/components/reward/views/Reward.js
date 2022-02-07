@@ -4,33 +4,41 @@ import ScrollBox from "components/common/ScrollBox";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import BuyBox from "./BuyBox";
-import RewardBoxList from "./RewardBoxList";
-import RewardUserInfo from "./RewardUserInfo";
-const boxItemList = [
+import BuyBox from "../BuyBox";
+import RewardBoxList from "../RewardBoxList";
+import RewardUserInfo from "../RewardUserInfo";
+const boxList = [
   {
+    boxId: "1",
     boxName: "MOA박스",
-    boxPrice: "7",
+    boxPrice: 7,
     boxDescription: ["다양한 PX 간식", "(냉동 식품 제외)"],
+    boxImageUrl: "",
   },
   {
+    boxId: "2",
     boxName: "야금야금MOA박스",
-    boxPrice: "12",
+    boxPrice: 12,
     boxDescription: ["PX 냉동식품", "PC방 2천원 금액권", "카페 기프티콘"],
+    boxImageUrl: "",
   },
   {
+    boxId: "3",
     boxName: "왕창MOA박스",
-    boxPrice: "20",
+    boxPrice: 20,
     boxDescription: ["PX 50% 할인권", "PC방 2천원 금액권", "카페 기프티콘"],
+    boxImageUrl: "",
   },
   {
+    boxId: "4",
     boxName: "영끌MOA박스",
-    boxPrice: "30",
+    boxPrice: 30,
     boxDescription: [
       "PX 1만원 금액권",
       "PC방 1만원 금액권",
       "치킨, 피자 기프티콘",
     ],
+    boxImageUrl: "",
   },
 ];
 function Reward() {
@@ -38,7 +46,9 @@ function Reward() {
   const [buyClick, setBuyClick] = useState(false);
   const [buyBoxItem, setBuyBoxItem] = useState({});
   const [isValidBuy, setIsValidBuy] = useState(false);
+  const [boxLists, setBoxItemLists] = useState([]);
   const userId = "123";
+
   useEffect(() => {
     if (buyClick) {
       if (userId !== "") {
@@ -48,6 +58,15 @@ function Reward() {
       }
     }
   }, [buyClick]);
+
+  useEffect(() => {
+    getBoxList();
+  }, []);
+
+  // todo api - get 구매가능한 박스 리스트
+  function getBoxList() {
+    setBoxItemLists(boxList);
+  }
   return (
     <Container>
       <BackHeader path={-1} title={""} isScrolled={true}></BackHeader>
@@ -65,7 +84,7 @@ function Reward() {
           <RewardBoxList
             setBuyClick={setBuyClick}
             setBuyBoxItem={setBuyBoxItem}
-            boxItemList={boxItemList}
+            boxItemList={boxLists}
           />
         </Content>
       </ScrollBox>

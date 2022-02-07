@@ -29,7 +29,7 @@ function ApplyDataCard({ applyData }) {
           <span>월 납입액</span>
           <div>
             <span className="bold green roboto">
-              {applyData.formData.formDataAmount}
+              {Number(applyData.formData.formDataAmount).toLocaleString()}
             </span>
             <span></span> <span className="bold green">원</span>
           </div>
