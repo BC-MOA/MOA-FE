@@ -44,7 +44,7 @@ function BuyBox({ setBuyClick, buyBoxItem, setIsValidBuy }) {
         </div>
         {"" === isBought && (
           <div className="content">
-            <div className="title">MOA박스를 구매하시겠어요?</div>
+            <div className="title">{buyBoxItem.boxName}를 구매하시겠어요?</div>
             <div className="aboutKey">
               열쇠 {buyBoxItem.boxPrice}개가 사용됩니다
             </div>
@@ -115,6 +115,7 @@ const Background = styled.div`
 const ModalBox = styled.div`
   ${styleModal}
   font-family: "Pretendard-SemiBold";
+  text-align: start;
   .content {
     text-align: center;
 
@@ -144,8 +145,6 @@ const ModalBox = styled.div`
       margin-bottom: 48px;
     }
   }
-
-  text-align: start;
 `;
 const ButtonList = styled.div`
   display: flex;
@@ -157,6 +156,7 @@ const ButtonList = styled.div`
     padding: 12px 0;
     border: none;
     border-radius: 12px;
+    background-color: #ebebeb;
     &.green {
       background-color: var(--a2);
       color: #ffffff;
