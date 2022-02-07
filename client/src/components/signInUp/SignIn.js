@@ -188,14 +188,14 @@ function SignIn() {
         <div className="signup subTitle">
           <div
             onClick={() => {
-              history("sign-up");
+              history("/sign-up");
             }}
           >
             회원가입
           </div>
           <div
             onClick={() => {
-              history("reset-password");
+              history("/reset-password");
             }}
           >
             비밀번호 재설정
