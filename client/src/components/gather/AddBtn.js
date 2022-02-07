@@ -43,7 +43,7 @@ function AddBtn({ name, gatherList, children }) {
     비상금: "add-safebox",
   };
 
-  const filterdLists = gatherList.filter((x) => x.category === name);
+  const filterdLists = gatherList.filter((x) => x.savingMode === name);
 
   return (
     <Container>

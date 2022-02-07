@@ -30,7 +30,12 @@ function TerminationModal({ setModal, props }) {
   return (
     <Background>
       <ModalBox>
-        <div>{props.category === "군적금" ? props.acount : props.name}을</div>
+        <div>
+          {props.savingMode === "군적금"
+            ? props.account.productName
+            : props.goalName}
+          을
+        </div>
         <div>중도해지하시겠어요?</div>
         <div className="emphasis">중도해지는 철회가 불가능합니다. </div>
         <div className="btns">

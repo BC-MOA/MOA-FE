@@ -6,6 +6,7 @@ import BackHeader from "components/common/BackHeader";
 import SliderInput from "./SliderInput";
 import CustomSelect from "../addGoal/CustomSelect";
 import CustomBtn from "../addGoal/CustomBtn";
+import { accountList } from "components/common/dummyData";
 
 const Container = styled.div`
   width: 100%;
@@ -60,57 +61,60 @@ const InputEl = styled.div`
 `;
 
 function SafeBox() {
+  const avgSafeAmount = 200000;
   const { state } = useLocation();
+
+  const [bankInfo, setBankInfo] = useState({
+    bankName: "",
+    productName: "",
+    accountNumber: "",
+    accountCurrentAmount: 0,
+    bankImageUrl: "",
+  });
+
+  useEffect(() => {
+    setSafeInputs({
+      ...safeInputs,
+      account: bankInfo,
+    });
+  }, [bankInfo.bankName]);
+
+  const onChange = (event) => {
+    const { name, value } = event.target;
+    const selected = accountList.find((x) => x.bankName === value);
+
+    setBankInfo({
+      [name]: value,
+      productName: selected.accountName,
+      accountNumber: selected.accountNumber,
+      accountCurrentAmount: selected.currentAmount,
+      bankImageUrl: selected.bankImageUrl,
+    });
+  };
+
+  const [safeInputs, setSafeInputs] = useState({
+    savingMode: "비상금",
+    goalName: "비상금 모으기",
+    category: "",
+    currentAmount: 0,
+    goalAmount: 0,
+    account: bankInfo,
+    sDate: "",
+    eDate: "",
+    depositMethod: "",
+    limitCycle: "",
+    amountPerCycle: 0,
+    transactions: [],
+  });
 
   useEffect(() => {
     if (state) {
       setSafeInputs({
         ...safeInputs,
-        amount: state,
+        amountPerCycle: Number(state),
       });
     }
   }, [state]);
-
-  const avgSafeAmount = 200000;
-  const accountList = [
-    {
-      bank: "KB국민",
-      name: "KB 나라사랑통장",
-      accountNumber: "123-456-78-910111",
-    },
-    {
-      bank: "NH농협",
-      name: "NH 장병내일준비적금",
-      accountNumber: "356-0239-21-1208",
-    },
-    {
-      bank: "IBK기업",
-      name: "IBK 장병내일준비적금",
-      accountNumber: "235-455372-02-011",
-    },
-    {
-      bank: "제주은행",
-      name: "제주은행 장병내일준비적금",
-      accountNumber: "123-226-78-913511",
-    },
-  ];
-
-  const [safeInputs, setSafeInputs] = useState({
-    category: "비상금",
-    name: "비상금",
-    amount: "",
-    currentAmount: 0,
-    account: "",
-    balance: 0,
-    transactions: [],
-  });
-  const onChange = (event) => {
-    const { name, value } = event.target;
-    setSafeInputs({
-      ...safeInputs,
-      [name]: value,
-    });
-  };
 
   return (
     <Container>
@@ -132,17 +136,17 @@ function SafeBox() {
         <InputEl>
           <div className="SubTitle">출금계좌</div>
           <CustomSelect
-            name="account"
+            name="bankName"
             onChange={onChange}
             accounts={accountList}
-            selected={safeInputs.account}
+            selected={safeInputs.account.bankName}
           ></CustomSelect>
         </InputEl>
       </Content>
       <CustomBtn
         addFunc={() => {
           const getted = JSON.parse(localStorage.getItem("gatherList"));
-          safeInputs.currentAmount = safeInputs.amount;
+          safeInputs.currentAmount = safeInputs.amountPerCycle;
           localStorage.setItem(
             "gatherList",
             getted
@@ -151,8 +155,10 @@ function SafeBox() {
           );
         }}
         path={"complete"}
-        data={{ inputs: safeInputs, name: "비상금" }}
-        active={!Object.values(safeInputs).filter((x) => x === "").length}
+        data={{ props: safeInputs, name: "비상금" }}
+        active={
+          safeInputs.account.bankName !== "" && safeInputs.amountPerCycle !== 0
+        }
       >
         비상금 만들기 완료
       </CustomBtn>

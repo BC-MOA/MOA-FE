@@ -63,15 +63,15 @@ function EditDeposit() {
 
   const [newInputs, setNewInputs] = useState({
     ...props,
-    amount: "",
+    amountPerCycle: "",
   });
 
   useEffect(() => {
     if (newInputs.depositMethod === "자유입금") {
       setNewInputs({
         ...newInputs,
-        howOften: "-",
-        amount: "",
+        limitCycle: "-",
+        amountPerCycle: "",
       });
     }
   }, [newInputs.depositMethod]);
@@ -87,8 +87,8 @@ function EditDeposit() {
   const isEdited = () => {
     const editableEls =
       props.category === "군적금"
-        ? ["depositMethod", "amount"]
-        : ["depositMethod", "howOften", "amount"];
+        ? ["depositMethod", "amountPerCycle"]
+        : ["depositMethod", "limitCycle", "amountPerCycle"];
     return (
       editableEls.filter((x) => newInputs[x] !== "" && newInputs[x] !== prev[x])
         .length > 0
@@ -102,7 +102,7 @@ function EditDeposit() {
         <div className="title">자동이체 변경</div>
         <InputEl>
           <div className="subTitle">
-            {props.category === "군적금" ? "적금방식" : "이체 방식"}
+            {props.savingMode === "군적금" ? "적금방식" : "이체 방식"}
           </div>
           <SelectBox
             name="depositMethod"
@@ -113,7 +113,7 @@ function EditDeposit() {
             <div>자유입금</div>
           </SelectBox>
           {newInputs.depositMethod === "자동이체" ? (
-            props.category === "군적금" ? (
+            props.savingMode === "군적금" ? (
               <div className="subNotice">
                 <span>자동이체</span>하시면,{" "}
                 <span className="l_space">국군재정단</span>이 적금 통장에{" "}
@@ -128,7 +128,7 @@ function EditDeposit() {
                   받을 수 있어요!
                 </div>
                 <SelectBox
-                  name="howOften"
+                  name="limitCycle"
                   inputs={newInputs}
                   setInputs={setNewInputs}
                 >
@@ -147,13 +147,13 @@ function EditDeposit() {
         </InputEl>
         <InputEl>
           {newInputs.depositMethod === "자동이체" ? (
-            props.category === "군적금" ? (
+            props.savingMode === "군적금" ? (
               <>
                 <div className="subTitle">월 납입액</div>
                 <CustomInput
-                  name="amount"
-                  placeholder={prev.amount}
-                  value={newInputs.amount}
+                  name="amountPerCycle"
+                  placeholder={prev.amountPerCycle}
+                  value={newInputs.amountPerCycle}
                   onChange={onChange}
                   unit={"원"}
                 />
@@ -167,9 +167,9 @@ function EditDeposit() {
                 <InputEl>
                   <div className="subTitle">납입액</div>
                   <CustomInput
-                    name="amount"
-                    placeholder={prev.amount}
-                    value={newInputs.amount}
+                    name="amountPerCycle"
+                    placeholder={prev.amountPerCycle}
+                    value={newInputs.amountPerCycle}
                     onChange={onChange}
                     unit={"원"}
                   />
@@ -186,6 +186,7 @@ function EditDeposit() {
               </>
             )
           ) : (
+            // Todo: 출금계좌 선택 박스 수정하기
             <InputEl>
               <div className="subTitle">출금계좌</div>
               <CustomSelect
