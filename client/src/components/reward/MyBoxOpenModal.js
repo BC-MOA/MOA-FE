@@ -21,6 +21,7 @@ function MyBoxOpenModal({ item, setIsOpenClick }) {
           <div className="message">한번 열면 다시 닫을 수 없어요 </div>
           <ButtonList>
             <button
+              className="btn"
               onClick={() => {
                 setIsOpenClick(false);
               }}
@@ -28,7 +29,7 @@ function MyBoxOpenModal({ item, setIsOpenClick }) {
               취소하기
             </button>
             <button
-              className="green"
+              className="btn green"
               onClick={() => {
                 history(`select/${item.boxId}`, { state: item });
 
@@ -73,7 +74,7 @@ const ButtonList = styled.div`
   display: flex;
   align-items: center;
   gap: 15px;
-  button {
+  .btn {
     flex-grow: 1;
     padding: 12px 0;
     border: none;
