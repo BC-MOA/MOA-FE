@@ -1,14 +1,15 @@
 import Container from "components/common/Container";
 import SubmitButton from "components/common/SubmitButton";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { v1 as uuid } from "uuid";
 import { useLocation } from "react-router-dom";
 import RewardItemCard from "../RewardItemCard";
 import PopupRewardSelceted from "../PopupRewardSelceted";
+import { UserInventoryData } from "store/UserInventory";
 function MyBoxOpen() {
+  const { userBoxList, getUserBoxList } = useContext(UserInventoryData);
   const { state: item } = useLocation();
-  console.log(item);
   const [randomList, setRandomList] = useState([]);
   const [selectedItem, setSelectedItem] = useState("");
   const [isModal, setIsModal] = useState("box");
@@ -35,6 +36,13 @@ function MyBoxOpen() {
     }
     setRandomList(newList);
     setSelectedItem("");
+  }
+  function funcAddReward() {
+    const temp = [...userBoxList];
+    temp.splice(userBoxList.indexOf(item), 1);
+    localStorage.setItem("userBoxList", JSON.stringify(temp));
+    getUserBoxList();
+    setSelectBtnClick(true);
   }
   return (
     <Container>
@@ -84,7 +92,7 @@ function MyBoxOpen() {
           <SubmitButton
             title={"선택완료"}
             onClickFunc={() => {
-              setSelectBtnClick(true);
+              funcAddReward();
             }}
             isActive={true}
           />

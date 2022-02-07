@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { UserInventoryData } from "store/UserInventory";
 import { styleModal, styleModalBackground } from "style/common";
 import styled from "styled-components";
-
+import { v1 as uuid } from "uuid";
 function BuyBox({ setBuyClick, buyBoxItem, setIsValidBuy }) {
   const [isBought, setIsBought] = useState("");
   const { getUserBoxList, setUserBoxList } = useContext(UserInventoryData);
@@ -25,7 +25,8 @@ function BuyBox({ setBuyClick, buyBoxItem, setIsValidBuy }) {
     const temp = JSON.parse(localStorage.getItem("userBoxList"))
       ? JSON.parse(localStorage.getItem("userBoxList"))
       : [];
-    temp.push(buyBoxItem);
+    const boxNew = { ...buyBoxItem, boxId: uuid() };
+    temp.push(boxNew);
     localStorage.setItem("userBoxList", JSON.stringify(temp));
     getUserBoxList();
   }

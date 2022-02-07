@@ -1,16 +1,21 @@
 import SubmitButton from "components/common/SubmitButton";
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserInventoryData } from "store/UserInventory";
 import styled from "styled-components";
 
 function PopupRewardSelceted({ selectedItem }) {
   const history = useNavigate();
+  const { userBoxList, getUserBoxList } = useContext(UserInventoryData);
+  function funcDeleteBox() {
+    history(-1);
+  }
   return (
     <ModalStyle>
       <Header>
         <img
           onClick={() => {
-            history(-1);
+            funcDeleteBox();
           }}
           src={require("assets/ic_close.svg").default}
           alt="나가기"
@@ -43,7 +48,7 @@ function PopupRewardSelceted({ selectedItem }) {
       <StyleBtn>
         <SubmitButton
           onClickFunc={() => {
-            history(-1);
+            funcDeleteBox();
           }}
           title={"확인"}
           isActive={true}
