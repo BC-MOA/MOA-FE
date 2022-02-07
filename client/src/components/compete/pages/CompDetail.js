@@ -75,7 +75,7 @@ function CompDetail() {
   const comp = state;
 
   //베팅 여부 state
-  const [isBetted, setIsBetted] = useState(comp.bet != undefined);
+  const [isBetted, setIsBetted] = useState(comp.bet !== undefined);
 
   //베팅 대상 선택 state
   const [pick, setPick] = useState(isBetted ? comp.pick : false);
@@ -89,7 +89,7 @@ function CompDetail() {
   //베팅 열쇠 개수 관리
   const [keyCount, setKeyCount] = useState({
     valueGroups: {
-      number: comp.bet == undefined ? 1 : comp.bet,
+      number: comp.bet === undefined ? 1 : comp.bet,
     },
     optionGroups: options,
   });
