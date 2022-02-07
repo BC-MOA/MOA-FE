@@ -84,7 +84,7 @@ function createCardList(condition, compList) {
 
     for (const obj of filterdList) {
       cardList.push(
-        condition != "done" ? (
+        condition !== "done" ? (
           <BasicCompeteCard key={obj.key} obj={obj}></BasicCompeteCard>
         ) : (
           <EndCompeteCard type={true} key={obj.key} obj={obj}></EndCompeteCard>

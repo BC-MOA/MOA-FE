@@ -17,7 +17,7 @@ function prediction(keys, pick, bet) {
   const pickedKey = pick ? keys[0] : keys[1];
   const pickedRatio = (pickedKey / total).toFixed(2);
 
-  return Math.floor(bet / pickedRatio);
+  return Math.ceil(bet / pickedRatio);
 }
 
 export default prediction;

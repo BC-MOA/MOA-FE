@@ -23,7 +23,7 @@ const renderer = ({ days, hours, minutes, seconds, completed }) => {
     //카운트 다운 출력
     return (
       <span>
-        {days != 0 && days + "일 "}
+        {days !== 0 && days + "일 "}
         {hours < 10 ? "0" + hours : hours}:
         {minutes < 10 ? "0" + minutes : minutes}:
         {seconds < 10 ? "0" + seconds : seconds} 후 종료
