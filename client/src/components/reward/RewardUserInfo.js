@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 function RewardUserInfo() {
   const history = useNavigate();
-  const userId = "";
+  const userId = "123";
   return (
     <UserInfo>
       <div className="userKeyNum">

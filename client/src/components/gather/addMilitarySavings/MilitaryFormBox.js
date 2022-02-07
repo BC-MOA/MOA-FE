@@ -14,7 +14,7 @@ function MilitaryFormBox({
   setFormData,
 }) {
   const [monthOptions, setMonthOptions] = useState([]);
-  // todo - api
+  // todo - 유저 만기일로 남은 날 계산해서 값 바꾸기
   const userSavingMonth = [6, 9];
   useEffect(() => {
     const dropDownOptions = [];
