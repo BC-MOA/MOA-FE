@@ -8,7 +8,6 @@ import React, { useState } from "react";
 import CompLists from "./CompLists";
 import Banner from "../comp/BannerSwiper";
 import CategoryButton from "../comp/CategoryButton";
-import { hideScrollBar } from "style/common";
 
 const StyleNavBar = styled(NavBar)`
   position: fixed;
