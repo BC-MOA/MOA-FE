@@ -8,10 +8,10 @@ import MyBoxList from "../MyBoxList";
 import MyProductList from "../MyProductList";
 const tabList = ["MOA 박스", "상품"];
 
-// const userBoxList = [];
 function MyReward() {
   const [tabName, setTabName] = useState(tabList[0]);
-  const { userBoxList, getUserBoxList } = useContext(UserInventoryData);
+  const { userBoxList, userRewardList, getUserBoxList } =
+    useContext(UserInventoryData);
 
   return (
     <Container>
@@ -32,7 +32,7 @@ function MyReward() {
           }}
           className={tabList[1] === tabName ? "isSelect" : ""}
         >
-          {tabList[1]}(1)
+          {tabList[1]}({userRewardList.length})
         </div>
       </TabBox>
       <ScrollBox paddingValue={"36px 0 "}>

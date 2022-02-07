@@ -7,8 +7,10 @@ import { useLocation } from "react-router-dom";
 import RewardItemCard from "../RewardItemCard";
 import PopupRewardSelceted from "../PopupRewardSelceted";
 import { UserInventoryData } from "store/UserInventory";
+import moment from "moment";
 function MyBoxOpen() {
-  const { userBoxList, getUserBoxList } = useContext(UserInventoryData);
+  const { userBoxList, userRewardList, getUserRewardList, getUserBoxList } =
+    useContext(UserInventoryData);
   const { state: item } = useLocation();
   const [randomList, setRandomList] = useState([]);
   const [selectedItem, setSelectedItem] = useState("");
@@ -38,10 +40,29 @@ function MyBoxOpen() {
     setSelectedItem("");
   }
   function funcAddReward() {
-    const temp = [...userBoxList];
-    temp.splice(userBoxList.indexOf(item), 1);
-    localStorage.setItem("userBoxList", JSON.stringify(temp));
+    // 박스 삭제
+    const tempBox = [...userBoxList];
+    tempBox.splice(userBoxList.indexOf(item), 1);
+    localStorage.setItem("userBoxList", JSON.stringify(tempBox));
     getUserBoxList();
+    // 리워드 추가
+    const tempReward = [...userRewardList];
+    const newDate = moment().add(6, "months").format("YYYY.MM.DD");
+    let barCodeNum = uuid().split("-")[4];
+    barCodeNum = `${barCodeNum.slice(0, 4)} ${barCodeNum.slice(
+      4,
+      8
+    )} ${barCodeNum.slice(8, 12)}`;
+    const newItem = {
+      ...selectedItem,
+      barcodeNum: barCodeNum,
+      expiryDate: newDate,
+      productId: uuid(),
+    };
+    tempReward.push(newItem);
+    localStorage.setItem("userRewardList", JSON.stringify(tempReward));
+    getUserRewardList();
+
     setSelectBtnClick(true);
   }
   return (
@@ -85,7 +106,7 @@ function MyBoxOpen() {
                   item={item}
                   selectedItem={selectedItem}
                   setSelectedItem={setSelectedItem}
-                ></RewardItemCard>
+                />
               ))}
           </MyBoxOpenList>
           {/* todo  */}

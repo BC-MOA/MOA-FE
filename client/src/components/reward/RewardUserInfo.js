@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 function RewardUserInfo() {
   const history = useNavigate();
-  const { userBoxList } = useContext(UserInventoryData);
+  const { userBoxList, userRewardList } = useContext(UserInventoryData);
   const userId = "123";
 
   return (
@@ -28,7 +28,7 @@ function RewardUserInfo() {
         className="userRewardNum"
       >
         <div className="header">
-          <span>{userBoxList.length}</span>
+          <span>{userBoxList.length + userRewardList.length}</span>
         </div>
         <div className="infoTitle">
           <span>내 보관함</span>

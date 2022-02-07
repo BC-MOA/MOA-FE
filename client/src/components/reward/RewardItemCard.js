@@ -15,7 +15,7 @@ function RewardItemCard({ item, selectedItem, setSelectedItem }) {
         src={require("assets/reward/reward_item_coffee.png")}
         alt={item.productName}
       />
-      <span>{item.productName}</span>
+      <div className="itemName">{item.productName}</div>
       <button
         className={
           item.productName === selectedItem.productName ? "isSelect" : ""
@@ -41,12 +41,12 @@ const ItemCard = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  .itemName {
+    margin: 0 -16px 8px -16px;
+  }
   img {
     width: calc(80 / 160 * 100%);
     margin-bottom: 6px;
-  }
-  span {
-    margin-bottom: 8px;
   }
   button {
     line-height: 22px;

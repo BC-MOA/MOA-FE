@@ -6,20 +6,18 @@ import html2canvas from "html2canvas";
 import JsBarcode from "jsbarcode";
 
 function MyProducItemDetail() {
-  const { state } = useLocation();
+  const { state: item } = useLocation();
   const history = useNavigate();
   const [isSaveClick, setIsSaveClick] = useState(false);
-  const item = state.item;
-  const barCodeNum = "1234 5678 9012";
   function copy() {
-    navigator.clipboard.writeText(barCodeNum);
+    navigator.clipboard.writeText(item.barcodeNum);
   }
   // todo - 사진 저장 파일명 포맷 변경
   function SaveProductImg() {
     setTimeout(() => {
       html2canvas(document.getElementById("exportImgBox")).then((canvas) => {
         const imgUrl = canvas.toDataURL("image/jpg");
-        const imgFileName = "image.jpg";
+        const imgFileName = `${item.productName}.jpg`;
         const link = document.createElement("a");
         document.body.appendChild(link);
         link.href = imgUrl;
@@ -31,7 +29,7 @@ function MyProducItemDetail() {
     }, 1);
   }
   useEffect(() => {
-    JsBarcode("#barcode", barCodeNum, {
+    JsBarcode("#barcode", item.barcodeNum, {
       displayValue: false,
       background: "transparent",
       margin: 0,
@@ -52,14 +50,13 @@ function MyProducItemDetail() {
       <div id="exportImgBox">
         <ImgCard>
           <img src={require("./example.png")} alt={item.name} />
-          <div>px 간식</div>
-          <div className="itemName">{item.name}</div>
+          <div>{item.productType}</div>
+          <div className="itemName">{item.productName}</div>
         </ImgCard>
-        {/* todo 바코드 text변경하기*/}
         <BarCode>
           <img id="barcode" alt="barcode" />
           <div className="barcodeDetail">
-            <p>{barCodeNum}</p>
+            <p>{item.barcodeNum}</p>
             <button className={isSaveClick ? "isSaveClick" : ""} onClick={copy}>
               번호복사
             </button>
@@ -67,11 +64,11 @@ function MyProducItemDetail() {
         </BarCode>
         <Detail>
           <span>교환처</span>
-          <span className="bold">부대 안 PX</span>
+          <span className="bold">{item.exchangeStore}</span>
         </Detail>
         <Detail className="last">
           <span>유효기간</span>
-          <span className="bold">2022. 05. 16</span>
+          <span className="bold">{item.expiryDate}</span>
         </Detail>
       </div>
       <SaveBtn
@@ -113,6 +110,9 @@ const ImgCard = styled.div`
     margin-bottom: 12px;
   }
   .itemName {
+    display: flex;
+    word-wrap: wrap;
+    justify-content: center;
     font-family: "Pretendard-SemiBold";
     font-size: 24px;
     line-height: 38px;
