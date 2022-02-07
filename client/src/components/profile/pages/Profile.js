@@ -1,7 +1,7 @@
 import Container from "components/common/Container";
 import NavBar from "components/common/NavBar";
 import ScrollBox from "components/common/ScrollBox";
-import React, { useState } from "react";
+import React from "react";
 import { Navigate } from "react-router-dom";
 import { Header } from "components/common/Header";
 import ProfileCard from "../comp/ProfileCard";
@@ -34,7 +34,7 @@ function Profile(props) {
         <LinkButton
           title={"내 보관함"}
           //userid 필요
-          to={"reward"}
+          to={"reward/:userId"}
           trans={false}
         ></LinkButton>
         <LinkButton

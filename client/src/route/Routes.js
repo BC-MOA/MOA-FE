@@ -44,11 +44,11 @@ import AddMoaSavingTerm from "components/gather/addMoaSaving/AddMoaSavingTerm";
 import Loading from "components/loading/Loading";
 import ProfileEdit from "components/profile/pages/ProfileEdit";
 import ProfileAccount from "components/profile/pages/ProfileAccount";
-
 import AdditionalComplete from "components/gather/safebox/view/AdditionalComplete";
 import TakeInOutSafeBox from "components/gather/detail/view/TakeInOutSafeBox";
 import EditComplete from "components/gather/detail/view/EditComplete";
 import Notice from "components/profile/pages/Notice";
+import InterLock from "components/interlock/pages/InterLock";
 function AllRoutes() {
   return (
     <Routes>
@@ -183,6 +183,8 @@ function AllRoutes() {
         element={<MyProducItemDetail />}
       />
       <Route path="/reward/:userId/select/:boxId" element={<MyBoxOpen />} />
+
+      <Route path="/interlock" element={<InterLock />} />
     </Routes>
   );
 }

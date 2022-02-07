@@ -1,0 +1,11 @@
+# api redirect.
+[[redirects]]
+  from = "/api/*"
+  to = "http://13.125.206.146:8080/:splat"
+  status = 200
+  
+# SPA router support.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
