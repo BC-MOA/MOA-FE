@@ -80,10 +80,10 @@ const ButtonList = styled.div`
     border-radius: 12px;
     color: var(--Title_02);
     background-color: #ebebeb;
-    &.green {
-      background-color: var(--a2);
-      color: #ffffff;
-    }
+  }
+  .green {
+    background-color: var(--a2);
+    color: #ffffff;
   }
 `;
 export default MyBoxOpenModal;
