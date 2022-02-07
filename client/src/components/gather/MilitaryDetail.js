@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import ProcessStateBox from "./ProcessStateBox";
-import SetGoalModal from "./SetGoalModal";
+import SetGoalModal from "components/gather/detail/SetGoalModal";
 const stateList = ["신청 접수", "군 정보 확인", "은행 심사", "개설 완료"];
 
 function MilitaryDetail() {

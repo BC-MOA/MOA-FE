@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 import CustomInput from "components/common/CustomInput";
 import CustomBtn from "components/gather/addGoal/CustomBtn";
 import Category from "components/gather/addGoal/Category";
-import DatePick from "./addGoal/DatePick";
+import DatePick from "components/gather/addGoal/DatePick";
 import moment from "moment";
 
 const Container = styled.div`

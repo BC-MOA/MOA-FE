@@ -8,7 +8,7 @@ import { calcAmount } from "components/gather/addGoal/utils";
 import CustomSelect from "components/gather/addGoal/CustomSelect";
 import BackHeader from "components/common/BackHeader";
 import { hideScrollBar } from "style/common";
-import DatePick from "./DatePick";
+import DatePick from "../DatePick";
 import { accountList } from "components/common/dummyData";
 
 const Container = styled.div`

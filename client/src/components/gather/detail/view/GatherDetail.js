@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import BackHeader from "components/common/BackHeader";
-import DetailCard from "./DetailCard";
-import TransactionEl from "./TransactionEl";
+import DetailCard from "../DetailCard";
+import TransactionEl from "../TransactionEl";
 import { hideScrollBar } from "style/common";
 import { useLocation } from "react-router-dom";
-import FixModal from "components/gather/FixModal";
-import SetGoalModal from "./SetGoalModal";
+import FixModal from "components/gather/detail/FixModal";
+import SetGoalModal from "../SetGoalModal";
 
 const Container = styled.div`
   width: 100%;

@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { styleTitle, styleSubTitle, styleNotice } from "style/common";
 import { useLocation } from "react-router-dom";
 import BackHeader from "components/common/BackHeader";
-import SliderInput from "./SliderInput";
-import CustomSelect from "../addGoal/CustomSelect";
-import CustomBtn from "../addGoal/CustomBtn";
+import SliderInput from "../SliderInput";
+import CustomSelect from "../../addGoal/CustomSelect";
+import CustomBtn from "../../addGoal/CustomBtn";
 import { accountList } from "components/common/dummyData";
 
 const Container = styled.div`

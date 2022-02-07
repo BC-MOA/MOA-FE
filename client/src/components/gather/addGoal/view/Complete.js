@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { styleTitle, styleSubTitle } from "style/common";
-import CustomBtn from "./CustomBtn";
+import CustomBtn from "../CustomBtn";
 import { useLocation } from "react-router-dom";
 import moment from "moment";
 

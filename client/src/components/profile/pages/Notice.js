@@ -4,7 +4,7 @@ import BackHeader from "components/common/BackHeader";
 import { hideScrollBar } from "style/common";
 import { noticeList } from "components/common/dummyData";
 import { groupBy } from "components/common/utils";
-import NoticeEl from "./NoticeEl";
+import NoticeEl from "../NoticeEl";
 
 const Container = styled.div`
   width: 100%;

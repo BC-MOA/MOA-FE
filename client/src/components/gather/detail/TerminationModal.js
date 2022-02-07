@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import CustomBtn from "./addGoal/CustomBtn";
+import CustomBtn from "components/gather/addGoal/CustomBtn";
 import { ReactComponent as CloseBtn } from "assets/ic_close.svg";
 import { styleTitle, styleModal, styleModalBackground } from "style/common";
 

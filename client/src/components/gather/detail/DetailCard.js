@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Tag from "components/common/Tag";
-import CustomBtn from "./addGoal/CustomBtn";
+import CustomBtn from "components/gather/addGoal/CustomBtn";
 import "react-step-progress-bar/styles.css";
 import { ProgressBar } from "react-step-progress-bar";
 import { calc_dDay, calc_days } from "components/gather/addGoal/utils";
