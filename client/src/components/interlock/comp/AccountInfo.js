@@ -2,12 +2,12 @@ import styled from "styled-components";
 import AccountCard from "components/profile/comp/AccountCard";
 import SubmitButton from "components/common/SubmitButton";
 import { useState } from "react";
+import Modal from "./Modal";
 
 const Box = styled.div`
   font-family: "Pretendard-Regular";
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   height: calc(100vh - 60px);
 
   padding: 15px 0;
@@ -21,7 +21,7 @@ const Box = styled.div`
       margin: 20px 0;
     }
     span {
-      color: green;
+      color: var(--a3);
     }
   }
 
@@ -42,53 +42,19 @@ const Box = styled.div`
 
   .button {
     margin-top: auto;
-  }
-`;
-
-const Modal = styled.div`
-  background-color: white;
-  width: calc(100%);
-  height: 235px;
-
-  font-family: "Pretendard-Regular";
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-
-  padding: 15px 5%;
-
-  margin: auto 0 -16px -20px;
-
-  border-radius: 14px 14px 0 0;
-
-  .big {
-    font-weight: 600;
-    font-size: 18px;
-
-    margin: 5px 0;
+    width: 100%;
   }
 
-  .small {
-    font-size: 14px;
-    color: var(--Body_02);
-
-    margin: 1px 0;
-  }
-
-  .colored {
-    display: flex;
-
-    span {
-      color: var(--a3);
-    }
+  .alert {
+    padding: 25px 0;
   }
 `;
 
 const AccountInfo = ({ depo_list, ins_list, func }) => {
+  //step 관리 state
   const [click, setClick] = useState(false);
 
+  //중복 은행명 제거
   const bankNameSet = new Set();
 
   let depoList = [];
@@ -104,6 +70,7 @@ const AccountInfo = ({ depo_list, ins_list, func }) => {
     bankNameSet.add(obj.bank);
   }
 
+  //은행명 모음
   const banks = bankNameSet.values();
 
   return (
@@ -113,11 +80,17 @@ const AccountInfo = ({ depo_list, ins_list, func }) => {
       ) : (
         <div className="text">
           <p>
-            <span>{banks.next().value}</span>와{" "}
-            <span>{banks.next().value}</span>에
+            {bankNameSet.size > 1 ? (
+              <>
+                <span>{banks.next().value}</span>와&nbsp;
+              </>
+            ) : (
+              <></>
+            )}
+            <span> {banks.next().value}</span>에
           </p>
           <p>
-            월급통장 <span>{depo_list.length}</span> 개와 군적금
+            월급통장&nbsp; <span>{depo_list.length}</span> 개, 군적금 &nbsp;
             <span>{insList.length}</span>
             개가
           </p>
@@ -131,26 +104,15 @@ const AccountInfo = ({ depo_list, ins_list, func }) => {
         </div>
         <div>
           <p className="type">군적금</p>
-          {insList}
+          {insList.length == 0 ? (
+            <p className="alert">"군적금은 아직 가입을 안하셨네요!" </p>
+          ) : (
+            insList
+          )}
         </div>
       </div>
       {click ? (
-        <Modal>
-          <p className="colored big">
-            <span>군적금 계좌</span>는 이제부터
-          </p>
-          <p className="big">모아(MOA)에서 따로 볼 수 있어요</p>
-          <p className="small">
-            나라사랑계좌는 연동되어 출금계좌로 설정되어요.
-          </p>
-          <p className="small">다른 계좌를 출금계좌로 설정하고 싶으면,</p>
-          <p className="small">프로필 {">"} 계좌설정에서 추가하면 돼요</p>
-          <SubmitButton
-            title={"확인"}
-            onClickFunc={() => func(3)}
-            isActive={true}
-          ></SubmitButton>
-        </Modal>
+        <Modal length={insList.length} func={func}></Modal>
       ) : (
         <div className="button">
           <SubmitButton

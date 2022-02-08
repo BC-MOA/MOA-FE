@@ -2,34 +2,10 @@ import React, { useState } from "react";
 import AccountFound from "../comp/AccountFound";
 import AccountInfo from "../comp/AccountInfo";
 import SetGoal from "../comp/SetGoal";
+import { data_case1, data_case2, data_case3, user_data } from "../data";
 
-const data = {
-  account_deposit: [
-    {
-      key: "a1",
-      account: "KB나라사랑우대통장",
-      thumb: require("assets/profile/bank.png"),
-      sum: 500000,
-      bank: "KB국민은행",
-    },
-  ],
-  account_install: [
-    {
-      key: "a2",
-      account: "KB장병내일준비적금",
-      thumb: require("assets/profile/bank.png"),
-      sum: 500000,
-      bank: "KB국민은행",
-    },
-    {
-      key: "a3",
-      account: "IBK군인적금",
-      thumb: require("assets/profile/bank.png"),
-      sum: 500000,
-      bank: "IBK기업은행",
-    },
-  ],
-};
+//계좌 정보 설정 변경
+const account_data = data_case2;
 
 const InterLock = () => {
   const [step, setStep] = useState(1);
@@ -43,19 +19,22 @@ const InterLock = () => {
       {step === 1 && (
         <AccountFound
           func={setStepWrapper}
-          name="민수"
-          count={3}
+          name={user_data.name}
+          count={
+            account_data.account_deposit.length +
+            account_data.account_install.length
+          }
         ></AccountFound>
       )}
       {step === 2 && (
         <AccountInfo
-          depo_list={data.account_deposit}
-          ins_list={data.account_install}
+          depo_list={account_data.account_deposit}
+          ins_list={account_data.account_install}
           func={setStepWrapper}
         ></AccountInfo>
       )}
       {step === 3 && (
-        <SetGoal name="민수" ins_list={data.account_install}></SetGoal>
+        <SetGoal name="민수" ins_list={account_data.account_install}></SetGoal>
       )}
     </div>
   );
