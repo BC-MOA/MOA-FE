@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled, { css } from "styled-components";
 import { styleTitle, styleSubTitle } from "style/common";
 import CustomBtn from "components/gather/addGoal/CustomBtn";
 import { useLocation } from "react-router-dom";
 import moment from "moment";
+import { GatherList } from "store/GatherListContext";
 
 const styleText = css`
   ${styleSubTitle}
@@ -81,7 +82,8 @@ const InfoEl = styled.div`
 function EditComplete() {
   const { state } = useLocation();
   const { prev, newInputs, whatEdit } = state;
-  console.log(prev, newInputs);
+  const { setGatherList } = useContext(GatherList);
+
   const editCates = {
     goal: "목표를 수정했어요",
     deposit: `${
@@ -126,7 +128,9 @@ function EditComplete() {
                 </InfoEl>
                 <InfoEl className="Text">
                   <div>목표 금액</div>
-                  <div className="bold">{newInputs.goalAmount} 원</div>
+                  <div className="bold">
+                    {newInputs.goalAmount.toLocaleString()} 원
+                  </div>
                 </InfoEl>
               </>
             ))}
@@ -141,7 +145,7 @@ function EditComplete() {
                   <InfoEl className="Text">
                     <div>금액</div>
                     <div className="bold green">
-                      {newInputs.amountPerCycle} 원
+                      {newInputs.amountPerCycle.toLocaleString()} 원
                     </div>
                   </InfoEl>
                   <InfoEl className="Text">
@@ -175,7 +179,7 @@ function EditComplete() {
                   <InfoEl className="Text">
                     <div>월 납입액</div>
                     <div className="bold green">
-                      {newInputs.amountPerCycle} 원
+                      {newInputs.amountPerCycle.toLocaleString()} 원
                     </div>
                   </InfoEl>
                 ) : (
@@ -199,7 +203,9 @@ function EditComplete() {
                 </InfoEl>
                 <InfoEl className="Text">
                   <div>월 납입액</div>
-                  <div className="bold">{newInputs.amountPerCycle}</div>
+                  <div className="bold">
+                    {newInputs.amountPerCycle.toLocaleString()}
+                  </div>
                 </InfoEl>
               </>
             ) : (
@@ -211,7 +217,7 @@ function EditComplete() {
                 <InfoEl className="Text">
                   <div>금액</div>
                   <div className="bold green">
-                    {newInputs.amountPerCycle} 원
+                    {newInputs.amountPerCycle.toLocaleString()} 원
                   </div>
                 </InfoEl>
                 <InfoEl className="Text">
@@ -229,13 +235,8 @@ function EditComplete() {
       </Content>
       <CustomBtn
         addFunc={() =>
-          localStorage.setItem(
-            "gatherList",
-            JSON.stringify(
-              [...JSON.parse(localStorage.getItem("gatherList"))].map((x) =>
-                x.goalName === prev.goalName ? newInputs : x
-              )
-            )
+          setGatherList((prevList) =>
+            prevList.map((x) => (x.goalName === prev.goalName ? newInputs : x))
           )
         }
         active={true}

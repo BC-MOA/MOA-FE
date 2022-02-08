@@ -79,7 +79,7 @@ function RegisterDeposit() {
         .length === editableEls.length
     );
   };
-  console.log(newInputs);
+
   return (
     <Container>
       <BackHeader path={-1} />

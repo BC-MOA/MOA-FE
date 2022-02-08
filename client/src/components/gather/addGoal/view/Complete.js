@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled, { css } from "styled-components";
 import { styleTitle, styleSubTitle } from "style/common";
 import CustomBtn from "../CustomBtn";
 import { useLocation } from "react-router-dom";
 import moment from "moment";
+import { GatherList } from "store/GatherListContext";
 
 const styleText = css`
   ${styleSubTitle}
@@ -83,6 +84,8 @@ const InfoEl = styled.div`
 function Complete() {
   const { state } = useLocation();
   const { props, name } = state;
+
+  const { setGatherList } = useContext(GatherList);
 
   return (
     <Container>
@@ -178,13 +181,7 @@ function Complete() {
 
       <CustomBtn
         addFunc={() => {
-          const getted = JSON.parse(localStorage.getItem("gatherList"));
-          localStorage.setItem(
-            "gatherList",
-            getted
-              ? JSON.stringify([...getted, props])
-              : JSON.stringify([props])
-          );
+          setGatherList((prev) => [...prev, props]);
         }}
         path={"/gather"}
         active={true}

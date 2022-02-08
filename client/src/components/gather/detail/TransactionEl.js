@@ -87,36 +87,34 @@ const Icon = styled.div`
   }
 `;
 
-function TransactionEl({ lists, children }) {
+function TransactionEl({ props, children }) {
   return (
     <Container>
       <div className="date">{children}</div>
-      {lists.map((x, idx) => (
-        <TranEl key={idx}>
-          <Icon>
-            <StoreSvg category="휴가비" />
-          </Icon>
-          <Content>
-            <div className="left">
-              <span className="name">{x.name}</span>
-              <span className="time">{x.time}</span>
+      <TranEl>
+        <Icon>
+          <StoreSvg category="휴가비" />
+        </Icon>
+        <Content>
+          <div className="left">
+            <span className="name">{props.name}</span>
+            <span className="time">{props.time}</span>
+          </div>
+          <div className="right">
+            <div className="amount">
+              <span className="number bold">
+                {props.amount > 0
+                  ? `+${Number(props.amount).toLocaleString()}`
+                  : `${Number(props.amount).toLocaleString()}`}
+              </span>
+              원
             </div>
-            <div className="right">
-              <div className="amount">
-                <span className="number bold">
-                  {x.amount > 0
-                    ? `+${Number(x.amount).toLocaleString()}`
-                    : `${Number(x.amount).toLocaleString()}`}
-                </span>
-                원
-              </div>
-              <div className="total">
-                <span className="number">{x.total.toLocaleString()}</span>원
-              </div>
+            <div className="total">
+              <span className="number">{props.total.toLocaleString()}</span>원
             </div>
-          </Content>
-        </TranEl>
-      ))}
+          </div>
+        </Content>
+      </TranEl>
     </Container>
   );
 }

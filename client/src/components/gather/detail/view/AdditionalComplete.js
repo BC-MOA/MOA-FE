@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { styleTitle, styleSubTitle } from "style/common";
 import CustomBtn from "components/gather/addGoal/CustomBtn";
 import { useLocation } from "react-router-dom";
 import moment from "moment";
+import { GatherList } from "store/GatherListContext";
 
 const Container = styled.div`
   width: 100%;
@@ -76,19 +77,15 @@ const InfoEl = styled.div`
 function AdditionalComplete() {
   const { state } = useLocation();
   const { props, inOutMoney } = state;
-
+  const { setGatherList } = useContext(GatherList);
   const trFormat = (props, input) => {
     const formatted = {
       date: moment(new Date()).format("MM월 DD일"),
-      lists: [
-        {
-          name: props.account.bankName,
-          time: moment(new Date()).format("hh:mm"),
-          amount: input,
-          // Todo: 추가 입금 시, 잔액 처리
-          total: props.currentAmount,
-        },
-      ],
+      name: props.account.bankName,
+      time: moment(new Date()).format("hh:mm"),
+      amount: input,
+      // Todo: 추가 입금 시, 잔액 처리
+      total: Number(props.currentAmount) + Number(input),
     };
 
     return formatted;
@@ -124,7 +121,10 @@ function AdditionalComplete() {
           <InfoEl className="Text">
             <div>총 금액</div>
             <div className="bold">
-              {props.currentAmount.toLocaleString()} 원
+              {(
+                Number(props.currentAmount) + Number(inOutMoney)
+              ).toLocaleString()}{" "}
+              원
             </div>
           </InfoEl>
           <img
@@ -138,23 +138,21 @@ function AdditionalComplete() {
         active={true}
         addFunc={() => {
           props.transactions.push(trFormat(props, inOutMoney));
-          localStorage.setItem(
-            "gatherList",
-            JSON.stringify([
-              ...JSON.parse(localStorage.getItem("gatherList")).map((x) =>
-                x.goalName === props.goalName
-                  ? {
-                      ...x,
-                      currentAmount:
-                        Number(x.currentAmount) + Number(inOutMoney),
-                      transactions: [
-                        ...x.transactions,
-                        trFormat(props, inOutMoney),
-                      ],
-                    }
-                  : x
-              ),
-            ])
+          props.currentAmount =
+            Number(props.currentAmount) + Number(inOutMoney);
+          setGatherList((prevList) =>
+            prevList.map((x) =>
+              x.goalName === props.goalName
+                ? {
+                    ...x,
+                    currentAmount: Number(x.currentAmount) + Number(inOutMoney),
+                    transactions: [
+                      ...x.transactions,
+                      trFormat(props, inOutMoney),
+                    ],
+                  }
+                : x
+            )
           );
         }}
         path="/gather/detail"
