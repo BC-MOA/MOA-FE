@@ -42,7 +42,7 @@ const ItemCard = styled.div`
     margin: 0 -16px 8px -16px;
   }
   img {
-    width: 100%;
+    width: 80%;
     margin-bottom: 6px;
   }
   button {
