@@ -151,7 +151,12 @@ function Gather() {
             animation={500}
           >
             {gather.map((x) => (
-              <AddBtn key={x.id} name={x.name} gatherList={inProgressList}>
+              <AddBtn
+                key={x.id}
+                name={x.name}
+                gatherList={inProgressList}
+                editToggle={editToggle}
+              >
                 {x.adText}
               </AddBtn>
             ))}

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import StateGather from "components/gather/detail/StateGather";
 import { useNavigate } from "react-router-dom";
+import { ReactSortable } from "react-sortablejs";
 
 const Container = styled.div`
   padding: 16px 24px;
@@ -35,7 +36,7 @@ const Container = styled.div`
     text-align: left;
   }
 `;
-function AddBtn({ name, gatherList, children }) {
+function AddBtn({ name, gatherList, editToggle, children }) {
   const history = useNavigate();
   const movePages = {
     군적금: "add-militarySaving",
@@ -43,13 +44,17 @@ function AddBtn({ name, gatherList, children }) {
     비상금: "add-safebox",
   };
 
-  const filterdLists = gatherList.filter((x) => x.savingMode === name);
+  const [filteredList, setFilteredList] = useState(
+    gatherList.filter((x) => x.savingMode === name)
+  );
+
+  // const filterdList = gatherList.filter((x) => x.savingMode === name);/
 
   return (
     <Container>
       <div className="btnName">
         <div>{name}</div>
-        {name === "군적금" && filterdLists.length < 2 ? (
+        {name === "군적금" && filteredList.length < 2 ? (
           <button
             onClick={() => {
               history(movePages[name]);
@@ -71,8 +76,20 @@ function AddBtn({ name, gatherList, children }) {
         )}
       </div>
       <div className="adText">{children}</div>
-      {filterdLists &&
-        filterdLists.map((x, idx) => <StateGather key={idx} props={x} />)}
+      {filteredList && (
+        <ReactSortable
+          group="filtered"
+          handle=".sortHandle"
+          list={filteredList}
+          setList={setFilteredList}
+          disabled={editToggle}
+          animation={500}
+        >
+          {filteredList.map((x, idx) => (
+            <StateGather key={idx} props={x} editToggle={editToggle} />
+          ))}
+        </ReactSortable>
+      )}
     </Container>
   );
 }
