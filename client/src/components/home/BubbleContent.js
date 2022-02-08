@@ -4,7 +4,6 @@ import styled from "styled-components";
 function BubbleContent({ savingNum }) {
   return (
     <SpeechBubble value={savingNum}>
-      {/* <img className="bubbleImg" src={require("assets/말풍선.png")} alt="" /> */}
       {0 === savingNum && (
         <div className="bubbleText">
           <span>군적금이 없는 {"민수"}님을 위해 추천드려요</span>
@@ -26,7 +25,7 @@ function BubbleContent({ savingNum }) {
       <div className="tail"></div>
       <img
         className="character"
-        src={require("assets/army_character.png")}
+        src={require("assets/army_character.svg").default}
         alt="군인캐릭터"
       />
     </SpeechBubble>
