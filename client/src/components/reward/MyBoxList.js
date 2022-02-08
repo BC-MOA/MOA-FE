@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import MyBoxListItem from "./MyBoxListItem";
 import { v1 as uuid } from "uuid";
-function MyBoxList({ tabName, tabList, userBoxList }) {
+import { UserInventoryData } from "store/UserInventory";
+function MyBoxList({ tabName, tabList }) {
+  const { userBoxList } = useContext(UserInventoryData);
   return (
     <MyBoxListStyle className={tabList[0] === tabName ? "isSelect" : ""}>
-      {0 < userBoxList.length &&
-        userBoxList.map((item) => <MyBoxListItem key={uuid()} itme={item} />)}
-      {0 >= userBoxList.length && (
+      {0 < userBoxList.length && (
+        <div className="itemList">
+          {userBoxList.map((item) => (
+            <MyBoxListItem key={uuid()} item={item} />
+          ))}
+        </div>
+      )}
+      {0 >= userBoxList?.length && (
         <div className="emptyList">
           <img
             src={require("assets/reward/character_head.svg").default}
@@ -22,23 +29,32 @@ function MyBoxList({ tabName, tabList, userBoxList }) {
 
 const MyBoxListStyle = styled.div`
   display: none;
+
   &.isSelect {
     margin: 0 auto;
     height: inherit;
+    flex: 1;
+    display: block;
+  }
+  .itemList {
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
     align-items: center;
-    .emptyList {
-      text-align: center;
-      color: var(--Body_01);
-      font-family: "Pretendard-Medium";
-      font-size: 16px;
-      line-height: 25px;
-      img {
-        filter: grayscale();
-        margin-bottom: 8px;
-      }
+  }
+  .emptyList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: inherit;
+    color: var(--Body_01);
+    font-family: "Pretendard-Medium";
+    font-size: 16px;
+    line-height: 25px;
+    img {
+      filter: grayscale();
+      margin-bottom: 8px;
     }
   }
 `;

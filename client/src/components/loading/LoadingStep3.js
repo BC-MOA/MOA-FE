@@ -1,9 +1,11 @@
 import Container from "components/common/Container";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import SyncLoader from "react-spinners/SyncLoader";
 import styled from "styled-components";
 
 function LoadingStep3() {
+  const history = useNavigate();
   const [isFound, setIsFound] = useState(false);
   useEffect(() => {
     getUserAccountAll();
@@ -16,6 +18,12 @@ function LoadingStep3() {
     // 3. 다음 라우터로 이동
     // catch 이면
     // alert 또는 confirm 후 다시 재귀
+
+    // 아래는 테스트코드
+    setTimeout(() => {
+      setIsFound(true);
+      history("/interlock");
+    }, 1000);
   }
   return (
     <Container>

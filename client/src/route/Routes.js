@@ -24,7 +24,6 @@ import GatherDetail from "components/gather/detail/view/GatherDetail";
 import EditGoal from "components/gather/detail/view/EditGoal";
 import EditDeposit from "components/gather/detail/view/EditDeposit";
 import MidTermTermination from "components/gather/detail/view/MidTermTermination";
-import MyBoxOpen from "components/reward/MyBoxOpen";
 import RegisterDeposit from "components/gather/detail/view/RegisterDeposit";
 import MilitaryDetail from "components/gather/MilitaryDetail";
 import AdditionalDeposit from "components/gather/detail/AdditionalDeposit";
@@ -48,6 +47,7 @@ import AdditionalComplete from "components/gather/safebox/view/AdditionalComplet
 import TakeInOutSafeBox from "components/gather/detail/view/TakeInOutSafeBox";
 import EditComplete from "components/gather/detail/view/EditComplete";
 import Notice from "components/profile/pages/Notice";
+import MyBoxOpen from "components/reward/views/MyBoxOpen";
 import InterLock from "components/interlock/pages/InterLock";
 function AllRoutes() {
   return (

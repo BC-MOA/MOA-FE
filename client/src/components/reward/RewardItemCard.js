@@ -1,21 +1,27 @@
 import React from "react";
 import styled from "styled-components";
 
-function RewardItemCard({ itemName, selectedItem, setSelectedItem }) {
+function RewardItemCard({ item, selectedItem, setSelectedItem }) {
   return (
     <ItemCard
       onClick={() => {
-        setSelectedItem(itemName);
+        setSelectedItem(item);
       }}
-      className={itemName === selectedItem ? "isSelect" : ""}
+      className={
+        item.productName === selectedItem.productName ? "isSelect" : ""
+      }
     >
       <img
         src={require("assets/reward/reward_item_coffee.png")}
-        alt={itemName}
+        alt={item.productName}
       />
-      <span>{itemName}</span>
-      <button className={itemName === selectedItem ? "isSelect" : ""}>
-        {itemName === selectedItem ? "선택됨" : "선택"}
+      <div className="itemName">{item.productName}</div>
+      <button
+        className={
+          item.productName === selectedItem.productName ? "isSelect" : ""
+        }
+      >
+        {item.productName === selectedItem.productName ? "선택됨" : "선택"}
       </button>
     </ItemCard>
   );
@@ -35,12 +41,12 @@ const ItemCard = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  .itemName {
+    margin: 0 -16px 8px -16px;
+  }
   img {
     width: calc(80 / 160 * 100%);
     margin-bottom: 6px;
-  }
-  span {
-    margin-bottom: 8px;
   }
   button {
     line-height: 22px;
