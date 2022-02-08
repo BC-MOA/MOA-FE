@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import FileUploader from "./FileUploader";
 import DueProgressBar from "./DueProgressBar";
+import userInfo from "../function/userInfo";
 
 const Card = styled.div`
   width: 100%;
@@ -45,10 +46,22 @@ const Info = styled.div`
   }
 `;
 
-const rank_list = ["이병", "일병", "상병", "병장"];
-
 const ProfileCard = (props) => {
-  const user = props.user;
+  //부대, 입영일, 이름
+
+  const user = {
+    name: "최민수",
+    unit: "11사단 화랑부대",
+    join_date: "2021-09-16",
+    //type: "육군",
+  };
+
+  //전역일, 호봉, 계급
+  const now = new Date("2021-01-16");
+
+  //const user = userInfo(props);
+  //params : 입대일, 현재
+  const info = userInfo("2019-12-16", now);
 
   return (
     <Card>
@@ -61,16 +74,20 @@ const ProfileCard = (props) => {
           <div className="rank">
             <img
               alt="none"
-              src={require("assets/profile/" + user.rank + ".png")}
+              src={require("assets/profile/" + info.rank + ".png")}
             ></img>
             <span>
-              {rank_list[user.rank - 1]} {user.pay_step}호봉
+              {info.rank} {info.step}호봉
             </span>
           </div>
           <p>{user.unit}</p>
         </div>
       </Info>
-      <DueProgressBar type={user.type} join={user.join_date}></DueProgressBar>
+      <DueProgressBar
+        now={now}
+        join={info.join}
+        end={info.end}
+      ></DueProgressBar>
     </Card>
   );
 };
