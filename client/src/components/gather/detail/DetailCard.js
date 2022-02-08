@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import Tag from "components/common/Tag";
-import CustomBtn from "./addGoal/CustomBtn";
+import CustomBtn from "components/gather/addGoal/CustomBtn";
 import "react-step-progress-bar/styles.css";
 import { ProgressBar } from "react-step-progress-bar";
-import { calc_dDay, calc_days } from "components/gather/addGoal/utils";
+import { calc_dDay } from "components/gather/addGoal/utils";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import SpeechBubble from "./SpeechBubble";
 
 const Content = styled.div`
   margin: 12px 0 32px;
@@ -56,6 +57,8 @@ const Content = styled.div`
   }
 
   .progressbar {
+    position: relative;
+    padding-top: 33px;
     margin: 16px 0 32px;
   }
   .dateInfo {
@@ -101,29 +104,27 @@ const SafeBtns = styled.div`
   }
 `;
 
-function DetailCard({ gatherInfo }) {
+function DetailCard({ props }) {
   const history = useNavigate();
 
   return (
     <Content>
       <Info>
-        <Tag>{gatherInfo.savingMode}</Tag>
+        <Tag>{props.savingMode}</Tag>
         <div className="current">
-          <span className="number">
-            {gatherInfo.currentAmount.toLocaleString()}
-          </span>{" "}
+          <span className="number">{props.currentAmount.toLocaleString()}</span>{" "}
           원
         </div>
         <div className="text">
-          {gatherInfo.account.bankName}
-          <span className="number">{gatherInfo.account.accountNumber}</span>
+          {props.account.bankName}
+          <span className="number">{props.account.accountNumber}</span>
         </div>
-        {gatherInfo.savingMode === "군적금" && gatherInfo.name === "" && (
+        {props.savingMode === "군적금" && props.name === "" && (
           <div
             className="setGoalName"
             onClick={() => {
               history("edit-goal", {
-                state: gatherInfo,
+                state: props,
               });
             }}
           >
@@ -134,29 +135,40 @@ function DetailCard({ gatherInfo }) {
             />
           </div>
         )}
-        {gatherInfo.savingMode !== "비상금" && (
+        {props.savingMode !== "비상금" && (
           <div
             className={
-              gatherInfo.savingMode === "군적금" ? "text green" : "text blue"
+              props.savingMode === "군적금" ? "text green" : "text blue"
             }
           >
             목표금액{" "}
             <span className="number l_space bold">
-              {gatherInfo.goalAmount.toLocaleString()}
+              {props.goalAmount.toLocaleString()}
             </span>{" "}
             원
           </div>
         )}
       </Info>
-      {gatherInfo.savingMode !== "비상금" ? (
+      {props.savingMode !== "비상금" ? (
         <>
           <div className="progressbar">
+            <SpeechBubble
+              position={
+                props.currentAmount < props.goalAmount
+                  ? (props.currentAmount / props.goalAmount) * 100
+                  : 100
+              }
+            >
+              d-{calc_dDay(props.eDate)}
+            </SpeechBubble>
             <ProgressBar
-              percent={20}
+              percent={
+                props.currentAmount < props.goalAmount
+                  ? (props.currentAmount / props.goalAmount) * 100
+                  : 100
+              }
               filledBackground={
-                gatherInfo.savingMode === "군적금"
-                  ? "var(--a2)"
-                  : "var(--subBlue)"
+                props.savingMode === "군적금" ? "var(--a2)" : "var(--subBlue)"
               }
               unfilledBackground="#EBEBEB"
               height="12px"
@@ -166,16 +178,16 @@ function DetailCard({ gatherInfo }) {
               <span>만기일</span>
             </div>
             <div className="dateInfo number">
-              <span>{moment(gatherInfo.sDate).format("YYYY.MM.DD")}</span>
-              <span>{moment(gatherInfo.eDate).format("YYYY.MM.DD")}</span>
+              <span>{moment(props.sDate).format("YYYY.MM.DD")}</span>
+              <span>{moment(props.eDate).format("YYYY.MM.DD")}</span>
             </div>
           </div>
           <CustomBtn
             padding={8}
             active={true}
-            bgcolor={gatherInfo.savingMode === "목표" ? "var(--Blue)" : ""}
+            bgcolor={props.savingMode === "목표" ? "var(--Blue)" : ""}
             path="additional-deposit"
-            data={gatherInfo}
+            data={props}
           >
             입금하기
           </CustomBtn>
@@ -187,7 +199,7 @@ function DetailCard({ gatherInfo }) {
             active={true}
             bgcolor="#EAAC0B"
             path="take-in-safebox"
-            data={{ gatherInfo: gatherInfo, usage: "takeIn" }}
+            data={{ props: props, usage: "takeIn" }}
           >
             모으기
           </CustomBtn>
@@ -197,7 +209,7 @@ function DetailCard({ gatherInfo }) {
             bgcolor="var(--Line_03)"
             txtcolor="var(--Body_02)"
             path="take-out-safebox"
-            data={{ gatherInfo: gatherInfo, usage: "takeOut" }}
+            data={{ props: props, usage: "takeOut" }}
           >
             꺼내기
           </CustomBtn>

@@ -72,7 +72,7 @@ const NumBtn = styled.button`
   }
 `;
 
-function KeypadModal({ inputs, setInputs, setModal }) {
+function KeypadModal({ amount, setAmount, setModal }) {
   const [input, setInput] = useState("");
   const onClick = (event) => {
     setInput(input + event.target.innerText);
@@ -95,10 +95,7 @@ function KeypadModal({ inputs, setInputs, setModal }) {
       <CustomBtn
         active={input !== ""}
         addFunc={() => {
-          setInputs({
-            ...inputs,
-            amountPerCycle: Number(input),
-          });
+          setAmount(Number(input));
           setModal(false);
         }}
       >

@@ -4,8 +4,8 @@ import styled from "styled-components";
 import BackHeader from "components/common/BackHeader";
 import { styleTitle, styleSubTitle } from "style/common";
 import CustomBtn from "components/gather/addGoal/CustomBtn";
-import TerminationCard from "./TerminationCard";
-import TerminationModal from "./TerminationModal";
+import TerminationCard from "../TerminationCard";
+import TerminationModal from "../TerminationModal";
 
 const Container = styled.div`
   position: relative;

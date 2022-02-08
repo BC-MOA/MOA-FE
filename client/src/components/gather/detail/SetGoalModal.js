@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { ReactComponent as CloseBtn } from "assets/ic_close.svg";
 import { styleModal, styleModalBackground } from "style/common";
-import CustomBtn from "./addGoal/CustomBtn";
+import CustomBtn from "components/gather/addGoal/CustomBtn";
 
 const Background = styled.div`
   ${styleModalBackground}

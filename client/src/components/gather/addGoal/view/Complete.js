@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { styleTitle, styleSubTitle } from "style/common";
-import CustomBtn from "./CustomBtn";
+import CustomBtn from "../CustomBtn";
 import { useLocation } from "react-router-dom";
 import moment from "moment";
 
@@ -148,9 +148,11 @@ function Complete() {
               금액
             </div>
             <div className="userInfo green">
-              {props.amountPerCycle !== 0
-                ? props.amountPerCycle.toLocaleString()
-                : props.goalAmount.toLocaleString()}{" "}
+              {name !== "목표"
+                ? props.currentAmount.toLocaleString()
+                : props.amountPerCycle === 0
+                ? props.goalAmount.toLocaleString()
+                : props.amountPerCycle.toLocaleString()}{" "}
               원
             </div>
           </InfoEl>
@@ -174,7 +176,19 @@ function Complete() {
         </CheckInfo>
       </Content>
 
-      <CustomBtn path={"/gather"} active={true}>
+      <CustomBtn
+        addFunc={() => {
+          const getted = JSON.parse(localStorage.getItem("gatherList"));
+          localStorage.setItem(
+            "gatherList",
+            getted
+              ? JSON.stringify([...getted, props])
+              : JSON.stringify([props])
+          );
+        }}
+        path={"/gather"}
+        active={true}
+      >
         확인
       </CustomBtn>
     </Container>

@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { styleTitle, styleSubTitle, styleNotice } from "style/common";
 import { useLocation } from "react-router-dom";
 import BackHeader from "components/common/BackHeader";
-import SliderInput from "components/gather/safebox/SliderInput";
-import CustomSelect from "components/gather/addGoal/CustomSelect";
-import CustomBtn from "components/gather/addGoal/CustomBtn";
-import KeypadModal from "components/gather/safebox/KeypadModal";
+import SliderInput from "../SliderInput";
+import CustomSelect from "../../addGoal/CustomSelect";
+import CustomBtn from "../../addGoal/CustomBtn";
 import { accountList } from "components/common/dummyData";
 
 const Container = styled.div`
-  position: relative;
   width: 100%;
   height: 100%;
   display: flex;
@@ -62,10 +60,9 @@ const InputEl = styled.div`
   margin-top: 24px;
 `;
 
-function TakeInOutSafeBox() {
-  const [modal, setModal] = useState(false);
+function SafeBox() {
+  const avgSafeAmount = 200000;
   const { state } = useLocation();
-  const { gatherInfo, usage } = state;
 
   const [bankInfo, setBankInfo] = useState({
     bankName: "",
@@ -73,11 +70,6 @@ function TakeInOutSafeBox() {
     accountNumber: "",
     accountCurrentAmount: 0,
     bankImageUrl: "",
-  });
-  const [safeInputs, setSafeInputs] = useState({
-    ...gatherInfo,
-    amountPerCycle: 0,
-    account: bankInfo,
   });
 
   useEffect(() => {
@@ -100,28 +92,50 @@ function TakeInOutSafeBox() {
     });
   };
 
+  const [safeInputs, setSafeInputs] = useState({
+    savingMode: "비상금",
+    goalName: "비상금 모으기",
+    category: "",
+    currentAmount: 0,
+    goalAmount: 0,
+    account: bankInfo,
+    sDate: "",
+    eDate: "",
+    depositMethod: "",
+    limitCycle: "",
+    amountPerCycle: 0,
+    transactions: [],
+  });
+
+  const [amount, setAmount] = useState(0);
+  useEffect(() => {
+    setSafeInputs({
+      ...safeInputs,
+      currentAmount: amount,
+    });
+  }, [amount]);
+
+  useEffect(() => {
+    if (state) {
+      setAmount(Number(state));
+    }
+  }, [state]);
+
   return (
     <Container>
       <BackHeader path={"/gather"} />
       <Content>
-        <div className="Title">
-          {usage === "takeIn" ? "비상금 모으기" : "비상금 꺼내기"}
+        <div className="Title">비상금 만들기</div>
+        <div className="Text">
+          다른 장병들은 비상금으로 평균
+          <span className="l_space green">{avgSafeAmount} 원</span>을 모아요.
         </div>
         <InputEl>
-          <div className="SubTitle">
-            {usage === "takeIn" ? "보관금액" : "꺼낼금액"}
-          </div>
-          <SliderInput
-            inputs={safeInputs}
-            setInputs={setSafeInputs}
-            usage={"additional"}
-            setModal={setModal}
-          />
+          <div className="SubTitle">보관금액</div>
+          <SliderInput amount={amount} setAmount={setAmount} />
         </InputEl>
         <InputEl>
-          <div className="SubTitle">
-            {usage === "takeIn" ? "출금계좌" : "입금계좌"}
-          </div>
+          <div className="SubTitle">출금계좌</div>
           <CustomSelect
             name="bankName"
             onChange={onChange}
@@ -130,40 +144,17 @@ function TakeInOutSafeBox() {
           ></CustomSelect>
         </InputEl>
       </Content>
-      {usage === "takeIn" ? (
-        <CustomBtn
-          path={"complete"}
-          data={{ props: safeInputs, inOutMoney: safeInputs.amountPerCycle }}
-          active={
-            safeInputs.account.bankName !== "" &&
-            safeInputs.amountPerCycle !== 0
-          }
-        >
-          모으기
-        </CustomBtn>
-      ) : (
-        <CustomBtn
-          active={
-            safeInputs.account.bankName !== "" &&
-            safeInputs.amountPerCycle !== 0
-          }
-          path={"check-password"}
-          data={{ props: safeInputs, inOutMoney: -safeInputs.amountPerCycle }}
-        >
-          꺼내기
-        </CustomBtn>
-      )}
-      {modal ? (
-        <KeypadModal
-          inputs={safeInputs}
-          setInputs={setSafeInputs}
-          setModal={setModal}
-        />
-      ) : (
-        <></>
-      )}
+      <CustomBtn
+        path={"complete"}
+        data={{ props: safeInputs, name: "비상금" }}
+        active={
+          safeInputs.account.bankName !== "" && safeInputs.currentAmount !== 0
+        }
+      >
+        비상금 만들기 완료
+      </CustomBtn>
     </Container>
   );
 }
 
-export default TakeInOutSafeBox;
+export default SafeBox;

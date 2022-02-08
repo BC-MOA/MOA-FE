@@ -8,7 +8,7 @@ import { calcAmount } from "components/gather/addGoal/utils";
 import CustomSelect from "components/gather/addGoal/CustomSelect";
 import BackHeader from "components/common/BackHeader";
 import { hideScrollBar } from "style/common";
-import DatePick from "./DatePick";
+import DatePick from "../DatePick";
 import { accountList } from "components/common/dummyData";
 
 const Container = styled.div`
@@ -178,6 +178,24 @@ function Goal() {
     });
   };
 
+  const isActive = (method) => {
+    if (method === "자동이체") {
+      return (
+        !Object.keys(inputs).filter(
+          (x) => x !== "currentAmount" && inputs[x] === ("" || 0)
+        ).length && inputs.account.bankName !== ""
+      );
+    } else {
+      return (
+        !Object.keys(inputs).filter(
+          (x) =>
+            !["amountPerCycle", "limitCycle", "currentAmount"].includes(x) &&
+            inputs[x] === ("" || 0)
+        ).length && inputs.account.bankName !== ""
+      );
+    }
+  };
+
   return (
     <Container>
       <BackHeader path={-1} />
@@ -252,7 +270,6 @@ function Goal() {
             </>
           )}
         </InputEl>
-
         <InputEl>
           <div className="SubTitle">목표 금액</div>
           <CustomInput
@@ -291,26 +308,9 @@ function Goal() {
       </Content>
 
       <CustomBtn
-        addFunc={() => {
-          const getted = JSON.parse(localStorage.getItem("gatherList"));
-          localStorage.setItem(
-            "gatherList",
-            getted
-              ? JSON.stringify([...getted, inputs])
-              : JSON.stringify([inputs])
-          );
-        }}
         path={"complete"}
         data={{ props: inputs, name: "목표" }}
-        active={
-          inputs.depositMethod === "자동이체"
-            ? !Object.values(inputs).filter((x) => x === "").length
-            : !Object.keys(inputs).filter(
-                (x) =>
-                  !["amountPerCycle", "limitCycle"].includes(x) &&
-                  inputs[x] === ""
-              ).length
-        }
+        active={isActive(inputs.depositMethod)}
       >
         목표 세우기 완료
       </CustomBtn>

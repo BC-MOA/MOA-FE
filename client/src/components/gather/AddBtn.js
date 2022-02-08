@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import StateGather from "components/gather/StateGather";
+import StateGather from "components/gather/detail/StateGather";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`

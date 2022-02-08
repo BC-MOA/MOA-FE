@@ -4,7 +4,7 @@ import AddBtn from "components/gather/AddBtn";
 import ContentControlBtn from "components/common/ContentControlBtn";
 import { hideScrollBar } from "style/common";
 import NavBar from "components/common/NavBar";
-import StateGather from "components/gather/StateGather";
+import StateGather from "components/gather/detail/StateGather";
 import { ReactSortable } from "react-sortablejs";
 import moment from "moment";
 

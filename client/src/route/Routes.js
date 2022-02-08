@@ -11,22 +11,22 @@ import AvailableSavingItemDetail from "components/gather/addMilitarySavings/view
 import AddMilitarySavingsTerm from "components/gather/addMilitarySavings/views/AddMilitarySavingsTerm";
 import AddMilitarySavingsForm from "components/gather/addMilitarySavings/views/AddMilitarySavingsForm";
 import AddMilitarySavingSuccess from "components/gather/addMilitarySavings/views/AddMilitarySavingSucess";
-import SafeBox from "components/gather/safebox/SafeBox";
-import Goal from "components/gather/addGoal/Goal";
-import Complete from "components/gather/addGoal/Complete";
+import SafeBox from "components/gather/safebox/view/SafeBox";
+import Goal from "components/gather/addGoal/view/Goal";
+import Complete from "components/gather/addGoal/view/Complete";
 import MobileKeypad from "components/gather/safebox/MobileKeypad";
 import CompHowTo from "components/compete/pages/CompHowTo";
 import KeyPopUp from "components/common/KeyPopUp";
 import Reward from "components/reward/views/Reward";
 import MyReward from "components/reward/views/MyReward";
 import MyProducItemDetail from "components/reward/MyProducItemDetail";
-import GatherDetail from "components/gather/GatherDetail";
-import EditGoal from "components/gather/EditGoal";
-import EditDeposit from "components/gather/EditDeposit";
-import MidTermTermination from "components/gather/MidTermTermination";
-import RegisterDeposit from "components/gather/RegisterDeposit";
+import GatherDetail from "components/gather/detail/view/GatherDetail";
+import EditGoal from "components/gather/detail/view/EditGoal";
+import EditDeposit from "components/gather/detail/view/EditDeposit";
+import MidTermTermination from "components/gather/detail/view/MidTermTermination";
+import RegisterDeposit from "components/gather/detail/view/RegisterDeposit";
 import MilitaryDetail from "components/gather/MilitaryDetail";
-import AdditionalDeposit from "components/gather/AdditionalDeposit";
+import AdditionalDeposit from "components/gather/detail/AdditionalDeposit";
 import SignIn from "components/signInUp/SignIn";
 import SignUp from "components/signInUp/SignUp";
 import ResetPassword from "components/signInUp/ResetPassword";
@@ -34,8 +34,8 @@ import MilitaryDetailEdit from "components/gather/MilitaryDetailEdit";
 import EditSavingTitle from "components/gather/addMilitarySavings/EditSavingTitle";
 import AddMilitarySavingsPassward from "components/gather/addMilitarySavings/views/AddMilitarySavingsPassward";
 import AboutReward from "components/reward/views/AboutReward";
-import CheckPassword from "components/gather/CheckPassword";
-import TerminationComplete from "components/gather/TerminationComplete";
+import CheckPassword from "components/gather/detail/view/CheckPassword";
+import TerminationComplete from "components/gather/detail/view/TerminationComplete";
 import AddMoaSaving from "components/gather/addMoaSaving/AddMoaSaving";
 import AddMoaSavingPassward from "components/gather/addMoaSaving/AddMoaSavingPassward";
 import AddMoaSavingSuccess from "components/gather/addMoaSaving/AddMoaSavingSuccess";
@@ -43,14 +43,12 @@ import AddMoaSavingTerm from "components/gather/addMoaSaving/AddMoaSavingTerm";
 import Loading from "components/loading/Loading";
 import ProfileEdit from "components/profile/pages/ProfileEdit";
 import ProfileAccount from "components/profile/pages/ProfileAccount";
-
-import AdditionalComplete from "components/gather/safebox/AdditionalComplete";
-import TakeInOutSafeBox from "components/gather/TakeInOutSafeBox";
-import EditComplete from "components/gather/EditComplete";
-import Notice from "components/profile/Notice";
+import AdditionalComplete from "components/gather/safebox/view/AdditionalComplete";
+import TakeInOutSafeBox from "components/gather/detail/view/TakeInOutSafeBox";
+import EditComplete from "components/gather/detail/view/EditComplete";
+import Notice from "components/profile/pages/Notice";
 import MyBoxOpen from "components/reward/views/MyBoxOpen";
 import InterLock from "components/interlock/pages/InterLock";
-
 function AllRoutes() {
   return (
     <Routes>
