@@ -88,7 +88,7 @@ function Gather() {
       }
     }
   });
-
+  const isFirst = !gatherList.filter((x) => x.savingMode !== "군적금").length;
   const totalAmount = inProgressList.reduce((acc, cur) => {
     return (acc += cur.currentAmount);
   }, 0);
@@ -156,6 +156,7 @@ function Gather() {
                 name={x.name}
                 gatherList={inProgressList}
                 editToggle={editToggle}
+                isFirst={isFirst}
               >
                 {x.adText}
               </AddBtn>

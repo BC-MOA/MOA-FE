@@ -36,7 +36,7 @@ const Container = styled.div`
     text-align: left;
   }
 `;
-function AddBtn({ name, gatherList, editToggle, children }) {
+function AddBtn({ name, gatherList, editToggle, isFirst, children }) {
   const history = useNavigate();
   const movePages = {
     군적금: "add-militarySaving",
@@ -68,7 +68,7 @@ function AddBtn({ name, gatherList, editToggle, children }) {
         {name !== "군적금" && (
           <button
             onClick={() => {
-              history(movePages[name]);
+              isFirst ? history("add-moa") : history(movePages[name]);
             }}
           >
             <img src={require("assets/gather/ic_add.svg").default} alt="" />
