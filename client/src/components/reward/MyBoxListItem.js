@@ -8,11 +8,7 @@ function MyBoxListItem({ item }) {
   return (
     <MyBoxListItemStyle>
       <div className="boxContent">
-        <img
-          className="boxImage"
-          src={require(`assets/reward/reward_box_${item.boxName}.png`)}
-          alt={item.boxName}
-        />
+        <img className="boxImage" src={item.boxImageUrl} alt={item.boxName} />
         <BoxTitle>{item.boxName}</BoxTitle>
         <BoxDescription>
           <span className="bold">[획득 가능 상품]</span>

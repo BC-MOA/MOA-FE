@@ -7,8 +7,7 @@ function MyProductListItem({ item }) {
 
   return (
     <MyRewardListItemStyle>
-      {/* todo 이미지 변경 item.productImageUrl */}
-      <img className="item" src={require("./example.png")} alt={item.name} />
+      <img className="item" src={item.productImageUrl} alt={item.name} />
       <span
         className={
           item.productName.length > 10 ? "itemName longName" : "itemName"
