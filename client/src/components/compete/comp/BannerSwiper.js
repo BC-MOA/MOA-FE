@@ -41,7 +41,8 @@ const SwiperBox = styled.div`
   margin-top: 20px;
   background-color: var(--Surface);
   img {
-    width: 100%;
+    width: 336px;
+    height: 76px;
   }
 `;
 

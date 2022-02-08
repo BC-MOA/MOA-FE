@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 //[styled comp] : 팝업 카드 배경
 const Background = styled.div`
@@ -19,13 +20,9 @@ const Background = styled.div`
 
 //[styled comp] : 팝업 카드
 const Modal = styled.div`
-  width: 400px;
+  width: 340px;
 
-  @media (min-width: 280px) and (max-width: 500px) {
-    width: 340px;
-  }
-
-  height: 168px;
+  height: 148px;
   background-color: white;
   border-radius: 12px 12px 0 0;
   padding: 15px 5%;
@@ -51,24 +48,26 @@ const Modal = styled.div`
     font-family: "Pretendard-Regular";
     font-weight: 600;
     color: var(--a3);
+
+    margin-bottom: 15px;
   }
 
   .buttonbox {
     width: 100%;
     display: flex;
-    justify-content: space-between;
 
     color: var(--Title_01);
 
     button:nth-child(2) {
       background-color: var(--a5);
       color: white;
+      margin-left: 15px;
     }
   }
 
-  .buttonbox button {
-    width: 160px;
-    height: 49px;
+  button {
+    width: 50%;
+    height: 40px;
     border: none;
     border-radius: 12px;
 
@@ -90,26 +89,33 @@ const Modal = styled.div`
  * state 변경용 함수
  */
 
-function PopUp(props) {
-  const obj = props.obj;
-
+function PopUp({ title, func, type }) {
   const clickYes = () => {
-    obj.onclick();
+    func();
+
+    if (!type) {
+      navigate("../compete");
+    }
+
     //추가 API 작업
   };
 
+  const navigate = useNavigate();
+
   const clickNo = () => {
-    obj.onclick();
+    func();
   };
 
   return (
     <Background>
       <Modal>
-        <p className="text">베팅을 정말 취소하시겠어요?</p>
-        <p className="title">{obj.title}</p>
+        <p className="text">
+          {type ? "베팅을 정말 취소하시겠어요?" : "배팅이 완료되었어요!"}
+        </p>
+        <p className="title">{title}</p>
         <div className="buttonbox">
-          <button onClick={clickNo}>아니요</button>
-          <button onClick={clickYes}>예</button>
+          <button onClick={clickNo}>{type ? "계속하기" : "수정하기"}</button>
+          <button onClick={clickYes}>{type ? "취소하기" : "확인"}</button>
         </div>
       </Modal>
     </Background>
