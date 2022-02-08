@@ -159,7 +159,7 @@ function DetailCard({ props }) {
                   : 100
               }
             >
-              d-{calc_dDay(props.eDate)}
+              D-{calc_dDay(props.eDate)}
             </SpeechBubble>
             <ProgressBar
               percent={

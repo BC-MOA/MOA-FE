@@ -73,8 +73,21 @@ const EditBtn = styled.button`
 function Gather() {
   const userName = "민수";
   const gatherList = JSON.parse(localStorage.getItem("gatherList")) || [];
-  const inProgressList = gatherList.filter((x) => !moment().isAfter(x.eDate));
-  const completedList = gatherList.filter((x) => moment().isAfter(x.eDate));
+  let inProgressList = [];
+  let completedList = [];
+  // 모으기 진행 상태 분류
+  gatherList.map((x) => {
+    if (x.savingMode === "비상금") {
+      inProgressList.push(x);
+    } else {
+      if (!moment().isAfter(x.eDate) && x.currentAmount < x.goalAmount) {
+        inProgressList.push(x);
+      } else {
+        completedList.push(x);
+      }
+    }
+  });
+
   const totalAmount = inProgressList.reduce((acc, cur) => {
     return (acc += cur.currentAmount);
   }, 0);

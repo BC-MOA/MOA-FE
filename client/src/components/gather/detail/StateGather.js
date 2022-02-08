@@ -92,7 +92,7 @@ const Main = styled.div`
     font-family: Roboto;
     font-size: 12px;
     line-height: 19px;
-    color: #212121;
+    color: var(--Body_01);
     &.none {
       visibility: hidden;
     }
