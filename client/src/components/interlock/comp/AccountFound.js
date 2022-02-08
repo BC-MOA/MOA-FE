@@ -2,8 +2,10 @@ import styled from "styled-components";
 import React, { useEffect } from "react";
 
 const Background = styled.div`
-  width: 100%;
-  height: calc(100vh - 24px);
+  width: calc(100% + 40px);
+  margin-left: -20px;
+  margin-top: -8px;
+  height: calc(100vh);
   background-color: white;
   font-size: 24px;
   font-weight: 600;
@@ -76,6 +78,7 @@ const Background = styled.div`
 `;
 
 const AccountFound = ({ name, count, func }) => {
+  //render된 이후에
   useEffect(() => {
     setTimeout(() => {
       func(2);
