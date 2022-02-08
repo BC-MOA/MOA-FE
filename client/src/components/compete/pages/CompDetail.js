@@ -11,6 +11,7 @@ import { PickUp } from "../comp/ChalOption";
 import { KeyPicker, options } from "../comp/KeyPicker";
 import ExpectedKey from "../comp/KeyExpect";
 import SubmitButton from "components/common/SubmitButton";
+import { PopUp } from "../comp/PopUp";
 
 //[styled comp] : 페이지 컨테이너
 const Detail = styled.div`
@@ -103,10 +104,17 @@ function CompDetail() {
     }));
   };
 
+  const [pop, setPop] = useState(false);
+
+  const togglePop = () => {
+    setPop(!pop);
+  };
+
   //베팅 버튼 클릭
   //API 추가 필요
   const clickBet = () => {
     console.log("bet!");
+    togglePop();
   };
 
   return (
@@ -167,6 +175,9 @@ function CompDetail() {
             title={"배팅하기"}
           ></SubmitButton>
         </div>
+        {pop && (
+          <PopUp func={togglePop} title={comp.title} type={false}></PopUp>
+        )}
       </Detail>
     </>
   );

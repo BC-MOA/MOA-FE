@@ -45,11 +45,6 @@ function BetCompeteCard(props) {
     setPop(!pop);
   };
 
-  const popupProp = {
-    onclick: togglePop,
-    title: obj.title,
-  };
-
   return (
     <BetCard>
       <Date>{formatDate(obj.due)} 마감</Date>
@@ -68,7 +63,7 @@ function BetCompeteCard(props) {
           <Count>{kFormatter(obj.total)}명 참여</Count>
         </div>
       </ContentBox>
-      {pop && <PopUp obj={popupProp}></PopUp>}
+      {pop && <PopUp func={togglePop} title={obj.title} type={true}></PopUp>}
       <StyledBetButtonBox>
         <StyledLink to={"/compete/" + obj.key} state={obj}>
           <StyledBetButton>배팅 수정</StyledBetButton>

@@ -24,9 +24,9 @@ const StyledAllList = styled.div`
  * cond : 챌린지 필터링 조건
  */
 const AllList = (props) => {
-  // const compList = useContext(AllCompContext);
+  const compList = useContext(AllCompContext);
   //챌린지 없을 때 테스트
-  const compList = [];
+  // const compList = [];
 
   return <StyledAllList>{FilterList(props.cond, compList)}</StyledAllList>;
 };
