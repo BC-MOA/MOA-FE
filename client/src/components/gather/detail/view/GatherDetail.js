@@ -124,7 +124,7 @@ function GatherDetail() {
           <>
             <TransHistory category={gatherInfo.savingMode}>
               {tr_lists.map((x, idx) => (
-                <TransactionEl key={idx} lists={x.lists}>
+                <TransactionEl key={idx} props={x}>
                   {x.date}
                 </TransactionEl>
               ))}

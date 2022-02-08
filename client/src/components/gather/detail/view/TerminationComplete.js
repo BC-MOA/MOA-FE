@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled, { css } from "styled-components";
 import { styleTitle, styleSubTitle } from "style/common";
 import CustomBtn from "components/gather/addGoal/CustomBtn";
 import { useLocation } from "react-router-dom";
+import { GatherList } from "store/GatherListContext";
 
 const styleText = css`
   ${styleSubTitle}
@@ -77,7 +78,7 @@ const InfoEl = styled.div`
 
 function TerminationComplete() {
   const { state: props } = useLocation();
-
+  const { setGatherList } = useContext(GatherList);
   return (
     <Container>
       <Content>
@@ -132,10 +133,8 @@ function TerminationComplete() {
         active={true}
         path="/gather"
         addFunc={() => {
-          const getted = JSON.parse(localStorage.getItem("gatherList"));
-          localStorage.setItem(
-            "gatherList",
-            JSON.stringify(getted.filter((x) => x.goalName !== props.goalName))
+          setGatherList((prevList) =>
+            prevList.filter((x) => x.goalName !== props.goalName)
           );
         }}
       >

@@ -181,14 +181,7 @@ function Complete() {
 
       <CustomBtn
         addFunc={() => {
-          // setGatherList((prev) => [...prev, props]);
-          // const getted = JSON.parse(localStorage.getItem("gatherList"));
-          // localStorage.setItem(
-          //   "gatherList",
-          //   getted
-          //     ? JSON.stringify([...getted, props])
-          //     : JSON.stringify([props])
-          // );
+          setGatherList((prev) => [...prev, props]);
         }}
         path={"/gather"}
         active={true}
