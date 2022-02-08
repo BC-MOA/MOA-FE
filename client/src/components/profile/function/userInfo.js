@@ -57,9 +57,6 @@ function userInfo(join_date, now) {
     step = "";
     rank = rank_list[4];
   }
-
-  console.log(step, rank);
-
   return {
     join: joinDate,
     end: endDate,

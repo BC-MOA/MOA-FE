@@ -44,7 +44,6 @@ const Card = styled.div`
 
 const AccountCard = ({ id, obj }) => {
   const moneyFormatter = new Intl.NumberFormat();
-
   const styledSum = moneyFormatter.format(obj.sum);
 
   return (
