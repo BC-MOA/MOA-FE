@@ -98,7 +98,7 @@ function createCardList(condition, compList) {
     }
     return cardList;
   } else {
-    return <Empty type={typeof condition == "boolean"}></Empty>;
+    return <Empty type={typeof condition != "boolean"}></Empty>;
   }
 }
 
