@@ -11,10 +11,7 @@ function AboutReward() {
       </div>
       <ScrollBox paddingValue={"16px 0 0"}>
         <Title>
-          <img
-            src={require("assets/reward/MOA_logo.svg").default}
-            alt="모아로고"
-          />
+          <img src={require("assets/moa_logo.svg").default} alt="모아로고" />
           <div>리워드 획득 방법</div>
         </Title>
         <Devider>
