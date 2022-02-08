@@ -4,7 +4,7 @@ import styled from "styled-components";
 function BubbleContent({ savingNum }) {
   return (
     <SpeechBubble value={savingNum}>
-      <img className="bubbleImg" src={require("assets/말풍선.png")} alt="" />
+      {/* <img className="bubbleImg" src={require("assets/말풍선.png")} alt="" /> */}
       {0 === savingNum && (
         <div className="bubbleText">
           <span>군적금이 없는 {"민수"}님을 위해 추천드려요</span>
@@ -23,6 +23,7 @@ function BubbleContent({ savingNum }) {
           <span>목표를 잡아 추가 저축하고 열쇠 받아가세요!</span>
         </div>
       )}
+      <div className="tail"></div>
       <img
         className="character"
         src={require("assets/army_character.png")}
@@ -40,30 +41,38 @@ const SpeechBubble = styled.div`
   font-size: 12px;
   line-height: 19px;
   position: relative;
-  margin-top: 32px;
+  padding-top: 21px;
+
   .bubbleImg {
     width: 226px;
     height: 60px;
   }
   .character {
     margin-top: 10px;
+    margin-right: 16px;
     width: 68px;
     height: 100px;
   }
   .bubbleText {
-    position: absolute;
-    right: ${(props) => {
-      if (0 === props.value) return "77px";
-      else {
-        return "81px";
-      }
-    }};
-    top: 11px;
-
+    height: fit-content;
     color: #ffffff;
     display: flex;
     align-items: center;
     flex-direction: column;
+    background-color: var(--a2);
+    padding: 10px;
+    border-radius: 16px;
+  }
+  .tail {
+    width: 0px;
+    height: 0px;
+    border-right: 14px solid var(--a2);
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    position: absolute;
+    right: 80px;
+    bottom: 15px;
+    transform: rotate(-143deg);
   }
 `;
 export default BubbleContent;

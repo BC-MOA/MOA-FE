@@ -182,6 +182,7 @@ function SignIn() {
         )}
         <CustomBtn
           active={!Object.keys(login).filter((x) => login[x] === "").length}
+          path={isSuccess ? "/home" : ""}
         >
           로그인
         </CustomBtn>
