@@ -7,8 +7,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import ContentControlBtn from "../../../common/ContentControlBtn";
 import { v1 as uuid } from "uuid";
+const controlNameList = ["상품안내", "금리이율", "유의사항"];
+const imgList = [
+  "https://github.com/BuenCamino3rd/test/blob/main/image/%EA%B5%B0%EC%A0%81%EA%B8%88%EC%83%81%ED%92%88%EC%95%88%EB%82%B4.png?raw=true",
+  "https://github.com/BuenCamino3rd/test/blob/main/image/%EA%B5%B0%EC%A0%81%EA%B8%88%EA%B8%88%EB%A6%AC%EC%9D%B4%EC%9C%A8.png?raw=true",
+  "https://github.com/BuenCamino3rd/test/blob/main/image/%EA%B5%B0%EC%A0%81%EA%B8%88%EC%9C%A0%EC%9D%98%EC%82%AC%ED%95%AD.png?raw=true",
+];
+
 function AvailableSavingItemDetail() {
-  const controlNameList = ["상품안내", "금리이율", "유의사항"];
   const { state: savingData } = useLocation();
   const [listControl, setListControl] = useState(controlNameList[0]);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -78,7 +84,7 @@ function AvailableSavingItemDetail() {
                   controlNameList[index] === listControl ? "isSelect" : ""
                 }
               >
-                <img src={require(`assets/gather/${item}.png`)} alt={item} />{" "}
+                <img src={imgList[index]} alt={item} />{" "}
               </div>
             ))}
         </Content>
