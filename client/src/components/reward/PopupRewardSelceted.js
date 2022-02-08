@@ -23,10 +23,9 @@ function PopupRewardSelceted({ selectedItem }) {
             src={require("assets/reward/opendBoxWithReward.png")}
             alt=""
           />
-          {/* todo - 이미지 src selectedItem.productImageUrl로 바꾸기 */}
           <img
             className="animate__animated animate__tada rewardImg"
-            src={require("./example.png")}
+            src={selectedItem.productImageUrl}
             alt={selectedItem.productName}
           />
         </Images>

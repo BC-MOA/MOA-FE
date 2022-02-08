@@ -22,7 +22,9 @@ function KeyPopUp() {
         <KeyImage>
           <img
             className="animate__animated animate__tada"
-            src={require("assets/keyPopUp.svg").default}
+            src={
+              "https://raw.githubusercontent.com/BuenCamino3rd/test/219dfc7cbb07418738815ae70953cd7c4497f484/image/popupkey.svg"
+            }
             alt="열쇠이미지"
           />
         </KeyImage>
