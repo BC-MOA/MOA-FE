@@ -26,9 +26,9 @@ const StyledMyList = styled.div`
  * cond : 챌린지 필터링 조건
  */
 const MyList = (props) => {
-  const compList = useContext(MyCompContext);
+  // const compList = useContext(MyCompContext);
   //챌린지 없을 때 테스트
-  //const compList = [];
+  const compList = [];
 
   return <StyledMyList>{FilterList(props.cond, compList)}</StyledMyList>;
 };
