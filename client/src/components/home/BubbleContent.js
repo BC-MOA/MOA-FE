@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 function BubbleContent({ savingNum }) {
   return (
-    <SpeechBubble value={savingNum}>
+    <SpeechBubble>
       {0 === savingNum && (
         <div className="bubbleText">
           <span>군적금이 없는 {"민수"}님을 위해 추천드려요</span>

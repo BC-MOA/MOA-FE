@@ -16,8 +16,8 @@ function MyProducItemDetail() {
   function SaveProductImg() {
     setTimeout(() => {
       html2canvas(document.getElementById("exportImgBox")).then((canvas) => {
-        const imgUrl = canvas.toDataURL("image/jpg");
-        const imgFileName = `${item.productName}.jpg`;
+        const imgUrl = canvas.toDataURL("image/png");
+        const imgFileName = `${item.productName}`;
         const link = document.createElement("a");
         document.body.appendChild(link);
         link.href = imgUrl;
