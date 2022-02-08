@@ -3,13 +3,10 @@ import styled, { css } from "styled-components";
 
 const TextBalloon = styled.div`
   width: fit-content;
-
-  ${({ position }) => css`
-    position: absolute;
-    left: ${position}%;
-    margin-left: -24px;
-    top: 0;
-  `}
+  position: absolute;
+  left: ${({ position }) => position}%;
+  margin-left: -${({ mL }) => mL / 2}px;
+  top: 0;
 
   .balloon {
     position: relative;
@@ -40,8 +37,17 @@ const TextBalloon = styled.div`
 `;
 
 function SpeechBubble({ children, position }) {
+  const marginLeft = {
+    1: 32.61,
+    2: 39.42,
+    3: 46.25,
+    4: 53.06,
+  };
   return (
-    <TextBalloon position={position}>
+    <TextBalloon
+      position={position}
+      mL={marginLeft[String(children[1]).length]}
+    >
       <div className="balloon">
         {children}
         <div className="tail" />

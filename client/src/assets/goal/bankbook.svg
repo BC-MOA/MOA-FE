@@ -1,6 +1,6 @@
 <svg width="21" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g opacity="0.8">
-<path className="main" d="M19.7993 14.9163L17.3456 7.38547L18.0946 0.709961L1.85548 2.81724L1.10649 9.49275L3.56018 17.0236L19.7993 14.9163Z" fill="#C5C5C5"/>
+<path className="main" d="M19.7993 14.9163L17.3456 7.38547L18.0946 0.709961L1.85548 2.81724L1.10649 9.49275L3.56018 17.0236L19.7993 14.9163Z" fill="#4CAF5B99"/>
 <path d="M17.3456 7.38547L19.7993 14.9163L3.56018 17.0236L1.10649 9.49275M17.3456 7.38547L1.10649 9.49275M17.3456 7.38547L18.0946 0.709961L1.85548 2.81724L1.10649 9.49275" stroke="#666666" stroke-width="0.801477" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 <path opacity="0.8" d="M13.7883 12.6433L5.66876 13.6969" stroke="#666666" stroke-width="0.801477" stroke-linecap="round" stroke-linejoin="round"/>

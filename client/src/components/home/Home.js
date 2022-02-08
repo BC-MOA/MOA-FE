@@ -8,10 +8,29 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { v1 as uuid } from "uuid";
 import BubbleContent from "./BubbleContent";
+import StoreSvg from "components/gather/addGoal/StoreSvg";
+
 const PROXY = window.location.hostname === "localhost" ? "" : "/api";
 function Home() {
   const history = useNavigate();
   const [challengeList, setChallengeList] = useState([]);
+  const [gather, setGather] = useState([
+    {
+      id: 1,
+      name: "군적금",
+      adText: "은행 최고이율과 국가지원혜택까지 받아보세요.",
+    },
+    {
+      id: 2,
+      name: "목표",
+      adText: "부대 내에서 목표를 잡고 돈을 모아나가보세요.",
+    },
+    {
+      id: 3,
+      name: "비상금",
+      adText: "저축하고 남은 돈을 비상금처럼 따로 보관하세요.",
+    },
+  ]);
   useEffect(() => {
     // todo 인기 챌린지 받아오기
     setChallengeList([
@@ -49,6 +68,27 @@ function Home() {
             alt={"모아이용방법확인하기"}
           /> */}
         {/* 공통 */}
+        {
+          /* 로그인 전 홈화면 */
+          gather.map((x) => (
+            <AboutGather>
+              <div className="icon">
+                <StoreSvg category={x.name === "목표" ? "여행" : x.name} />
+              </div>
+              <div className="content">
+                <div>{x.name}</div>
+                <div className="adText">{x.adText}</div>
+              </div>
+            </AboutGather>
+          ))
+        }
+        <Btn
+          onClick={() => {
+            history("/gather");
+          }}
+        >
+          저축 시작하기
+        </Btn>
         <AboutChallenge>
           <div className="mainTitle">
             <span>현재 진행중인 </span>
@@ -73,13 +113,13 @@ function Home() {
                 </div>
               ))}
           </div>
-          <button
+          <Btn
             onClick={() => {
               history("/compete");
             }}
           >
             더보기
-          </button>
+          </Btn>
         </AboutChallenge>
         <AboutReward
           onClick={() => {
@@ -99,8 +139,60 @@ function Home() {
 //   display: block;
 //   margin-bottom: 54px;
 // `;
+
+const Btn = styled.button`
+  width: 100%;
+  padding: 12px 0;
+  margin: 16px 0;
+  border-radius: 12px;
+  font-family: "Pretendard-Medium";
+  font-size: 16px;
+  line-height: 25px;
+  border: none;
+  color: var(--Body_01);
+  background-color: var(--Line_03);
+`;
+const AboutGather = styled.div`
+  display: flex;
+  align-items:center;
+  gap:16px;
+  padding: 17px 16px;
+  background: #fff;
+  box-shadow: 0px 1px 2px rgba(33, 33, 33, 0.08);
+  border-radius: 12px;
+
+  font-family: "Pretendard-SemiBold";
+  color: var(--Title_02);
+  font-size: 18px;
+  line-height: 28px;
+
+  .icon {
+    width:40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .content {
+    flex: 1;
+    text-align: left;
+  }
+  .adText {
+    margin-top: 4px;
+    font-family: "Pretendard-Regular";
+    font-size: 12px;
+    line-height: 19px;
+    color: var(--Body_01);
+  }
+  &+&{
+    margin-top:8px;
+  }
+  }
+`;
+
 const AboutChallenge = styled.div`
-  margin-bottom: 40px;
+  margin-top: 24px;
+  margin-bottom: 5px;
   .mainTitle {
     font-family: "Pretendard-SemiBold";
     font-size: 18px;
@@ -116,7 +208,7 @@ const AboutChallenge = styled.div`
     display: flex;
     flex-direction: column;
     gap: 12px;
-    margin-bottom: 12px;
+    margin-bottom: 4px;
   }
 
   .challengeItem {
@@ -162,17 +254,6 @@ const AboutChallenge = styled.div`
         }
       }
     }
-  }
-  button {
-    width: 100%;
-    padding: 12px 0;
-    border-radius: 12px;
-    font-family: "Pretendard-Medium";
-    font-size: 16px;
-    line-height: 25px;
-    border: none;
-    color: var(--Body_01);
-    background-color: var(--Line_03);
   }
 `;
 const UserAmountMsg = styled.div`

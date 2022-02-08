@@ -49,10 +49,11 @@ import EditComplete from "components/gather/detail/view/EditComplete";
 import Notice from "components/profile/pages/Notice";
 import MyBoxOpen from "components/reward/views/MyBoxOpen";
 import InterLock from "components/interlock/pages/InterLock";
+import StartMoa from "components/common/StartMoa";
 function AllRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<SignIn />} />
+      <Route path="/" element={<StartMoa />} />
       <Route path="/login" element={<SignIn />} />
       <Route path="/sign-up" element={<SignUp />} />
       <Route path="/reset-password" element={<ResetPassword />} />

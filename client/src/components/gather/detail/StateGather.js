@@ -5,7 +5,7 @@ import { ProgressBar } from "react-step-progress-bar";
 import Tag from "components/common/Tag";
 import StoreSvg from "components/gather/addGoal/StoreSvg";
 import { useNavigate } from "react-router-dom";
-import { calc_dDay, calc_days } from "components/gather/addGoal/utils";
+import { calc_dDay } from "components/gather/addGoal/utils";
 
 const Container = styled.div`
   position: relative;
@@ -92,7 +92,7 @@ const Main = styled.div`
     font-family: Roboto;
     font-size: 12px;
     line-height: 19px;
-    color: #212121;
+    color: var(--Body_01);
     &.none {
       visibility: hidden;
     }
