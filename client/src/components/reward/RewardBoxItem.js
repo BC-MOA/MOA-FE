@@ -13,7 +13,7 @@ function RewardBoxItem({ setBuyBoxItem, boxItem, setBuyClick }) {
       <div className="boxContent">
         <img
           className="boxImage"
-          src={require(`assets/reward/reward_box_${boxItem.boxName}.png`)}
+          src={boxItem.boxImageUrl}
           alt={boxItem.boxName}
         />
         <BoxTitle>{boxItem.boxName}</BoxTitle>

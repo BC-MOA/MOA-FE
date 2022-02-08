@@ -45,11 +45,10 @@ function MyProducItemDetail() {
           src={require("assets/ic_close.svg").default}
           alt="나가기"
         />
-        {/* todo item의 이미지로 변경할 것 */}
       </Header>
       <div id="exportImgBox">
         <ImgCard>
-          <img src={require("./example.png")} alt={item.name} />
+          <img src={item.productImageUrl} alt={item.name} />
           <div>{item.productType}</div>
           <div className="itemName">{item.productName}</div>
         </ImgCard>
