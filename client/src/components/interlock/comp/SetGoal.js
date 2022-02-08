@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import SubmitButton from "components/common/SubmitButton";
-import AccountCard from "components/profile/comp/AccountCard";
 import { useState } from "react";
-
 import { useNavigate } from "react-router-dom";
+import AccountGoal from "./AccountGoal";
 
 const Box = styled.div`
   font-family: "Pretendard-Regular";
@@ -31,28 +30,7 @@ const Box = styled.div`
   }
 `;
 
-const StyledInput = styled.input`
-  width: 90%;
-  height: 45px;
-
-  font-family: Roboto;
-  font-size: 16px;
-  font-weight: normal;
-  font-size: 16px;
-  padding: 0 5%;
-
-  border: none;
-  border-radius: 8px;
-
-  margin-bottom: 5px;
-`;
-
-const StyledP = styled.p`
-  text-align: left;
-  font-size: 14px;
-  margin: 5px 0 50px;
-`;
-
+//다음에 하기 버튼
 const HeaderButton = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -67,28 +45,7 @@ const HeaderButton = styled.div`
   }
 `;
 
-const GoalSetter = (ins_list, reg) => {
-  let insList = [];
-
-  for (let i = 0; i < ins_list.length; i++) {
-    const obj = ins_list[i];
-
-    insList.push(
-      <div key={obj.key}>
-        <AccountCard obj={obj}></AccountCard>
-        <StyledInput
-          {...reg(`${obj.key}`)}
-          type={"text"}
-          placeholder="목표를 입력해주세요"
-        ></StyledInput>
-        <StyledP>예) 1000만원 모으기, 해외여행 가기, 학비로 사용하기</StyledP>
-      </div>
-    );
-  }
-
-  return insList;
-};
-
+//입력값 체크를 위한 id 가져오기
 const idListGetter = (ins_list) => {
   let idList = [];
 
@@ -100,20 +57,18 @@ const idListGetter = (ins_list) => {
 };
 
 const SetGoal = ({ name, ins_list }) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    getValues,
-    setValue,
-  } = useForm({ mode: "onChange", reValidateMode: "onChange" });
+  //react-hook-form
+  const { register, handleSubmit, getValues, setValue } = useForm({
+    mode: "onChange",
+    reValidateMode: "onChange",
+  });
 
-  //컴포넌트 리스트 생성
-  const result = GoalSetter(ins_list, register);
+  const navigate = useNavigate();
 
-  //valid check
+  //valid check용 state
   const [valid, setValid] = useState(false);
 
+  //onChange
   const onchange = () => {
     const id_list = idListGetter(ins_list);
     const val_list = [];
@@ -132,14 +87,17 @@ const SetGoal = ({ name, ins_list }) => {
     id_list.length == val_list.length ? setValid(true) : setValid(false);
   };
 
-  const navigate = useNavigate();
-
+  //onClick-submit
   const onclick = (data) => {
     //api 호출
     //home으로 navigatge
+    //열쇠 적용
     navigate("/home");
     console.log(data);
   };
+
+  //컴포넌트 리스트 생성
+  const result = AccountGoal(ins_list, register);
 
   return (
     <Box>
