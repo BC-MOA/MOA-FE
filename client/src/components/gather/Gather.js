@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import AddBtn from "components/gather/AddBtn";
 import ContentControlBtn from "components/common/ContentControlBtn";
@@ -7,6 +7,7 @@ import NavBar from "components/common/NavBar";
 import StateGather from "components/gather/detail/StateGather";
 import { ReactSortable } from "react-sortablejs";
 import moment from "moment";
+import GatherList from "store/GatherListContext";
 
 const Container = styled.div`
   width: 100%;
@@ -72,7 +73,8 @@ const EditBtn = styled.button`
 
 function Gather() {
   const userName = "민수";
-  const gatherList = JSON.parse(localStorage.getItem("gatherList")) || [];
+  const gatherList = useContext(GatherList) || [];
+  // const gatherList = JSON.parse(localStorage.getItem("gatherList")) || [];
   let inProgressList = [];
   let completedList = [];
   // 모으기 진행 상태 분류

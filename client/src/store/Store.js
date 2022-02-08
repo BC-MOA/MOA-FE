@@ -2,14 +2,17 @@ import React from "react";
 import BoxList from "./BoxList";
 import MiliSavingList from "./MiliSavingList";
 import UserInventory from "./UserInventory";
+import GatherListContext from "./GatherListContext";
 
 function Store({ children }) {
   return (
-    <UserInventory>
-      <BoxList>
-        <MiliSavingList>{children}</MiliSavingList>
-      </BoxList>
-    </UserInventory>
+    <GatherListContext>
+      <UserInventory>
+        <BoxList>
+          <MiliSavingList>{children}</MiliSavingList>
+        </BoxList>
+      </UserInventory>
+    </GatherListContext>
   );
 }
 
