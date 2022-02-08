@@ -65,7 +65,7 @@ const InputEl = styled.div`
 function TakeInOutSafeBox() {
   const [modal, setModal] = useState(false);
   const { state } = useLocation();
-  const { gatherInfo, usage } = state;
+  const { props, usage } = state;
 
   const [bankInfo, setBankInfo] = useState({
     bankName: "",
@@ -75,8 +75,7 @@ function TakeInOutSafeBox() {
     bankImageUrl: "",
   });
   const [safeInputs, setSafeInputs] = useState({
-    ...gatherInfo,
-    amountPerCycle: 0,
+    ...props,
     account: bankInfo,
   });
 
@@ -86,6 +85,21 @@ function TakeInOutSafeBox() {
       account: bankInfo,
     });
   }, [bankInfo.bankName]);
+
+  const [amount, setAmount] = useState(0);
+  useEffect(() => {
+    if (usage === "takeIn") {
+      setSafeInputs({
+        ...safeInputs,
+        currentAmount: safeInputs.currentAmount + amount,
+      });
+    } else {
+      setSafeInputs({
+        ...safeInputs,
+        currentAmount: safeInputs.currentAmount - amount,
+      });
+    }
+  }, [amount]);
 
   const onChange = (event) => {
     const { name, value } = event.target;
@@ -112,8 +126,8 @@ function TakeInOutSafeBox() {
             {usage === "takeIn" ? "보관금액" : "꺼낼금액"}
           </div>
           <SliderInput
-            inputs={safeInputs}
-            setInputs={setSafeInputs}
+            amount={amount}
+            setAmount={setAmount}
             usage={"additional"}
             setModal={setModal}
           />
@@ -133,30 +147,24 @@ function TakeInOutSafeBox() {
       {usage === "takeIn" ? (
         <CustomBtn
           path={"complete"}
-          data={{ props: safeInputs, inOutMoney: safeInputs.amountPerCycle }}
-          active={
-            safeInputs.account.bankName !== "" &&
-            safeInputs.amountPerCycle !== 0
-          }
+          data={{ props: safeInputs, inOutMoney: amount }}
+          active={safeInputs.account.bankName !== "" && amount !== 0}
         >
           모으기
         </CustomBtn>
       ) : (
         <CustomBtn
-          active={
-            safeInputs.account.bankName !== "" &&
-            safeInputs.amountPerCycle !== 0
-          }
+          active={safeInputs.account.bankName !== "" && amount !== 0}
           path={"check-password"}
-          data={{ props: safeInputs, inOutMoney: -safeInputs.amountPerCycle }}
+          data={{ props: safeInputs, inOutMoney: -amount }}
         >
           꺼내기
         </CustomBtn>
       )}
       {modal ? (
         <KeypadModal
-          inputs={safeInputs}
-          setInputs={setSafeInputs}
+          amount={amount}
+          setAmount={setAmount}
           setModal={setModal}
         />
       ) : (

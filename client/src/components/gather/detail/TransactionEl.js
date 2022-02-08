@@ -104,7 +104,9 @@ function TransactionEl({ lists, children }) {
             <div className="right">
               <div className="amount">
                 <span className="number bold">
-                  {Number(x.amount) > 0 ? `+${x.amount}` : `${x.amount}`}
+                  {x.amount > 0
+                    ? `+${Number(x.amount).toLocaleString()}`
+                    : `${Number(x.amount).toLocaleString()}`}
                 </span>
                 원
               </div>

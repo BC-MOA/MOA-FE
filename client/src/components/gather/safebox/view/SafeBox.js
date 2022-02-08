@@ -107,12 +107,17 @@ function SafeBox() {
     transactions: [],
   });
 
+  const [amount, setAmount] = useState(0);
+  useEffect(() => {
+    setSafeInputs({
+      ...safeInputs,
+      currentAmount: amount,
+    });
+  }, [amount]);
+
   useEffect(() => {
     if (state) {
-      setSafeInputs({
-        ...safeInputs,
-        amountPerCycle: Number(state),
-      });
+      setAmount(Number(state));
     }
   }, [state]);
 
@@ -127,11 +132,7 @@ function SafeBox() {
         </div>
         <InputEl>
           <div className="SubTitle">보관금액</div>
-          <SliderInput
-            inputs={safeInputs}
-            setInputs={setSafeInputs}
-            onChange={onChange}
-          />
+          <SliderInput amount={amount} setAmount={setAmount} />
         </InputEl>
         <InputEl>
           <div className="SubTitle">출금계좌</div>
@@ -144,20 +145,10 @@ function SafeBox() {
         </InputEl>
       </Content>
       <CustomBtn
-        addFunc={() => {
-          const getted = JSON.parse(localStorage.getItem("gatherList"));
-          safeInputs.currentAmount = safeInputs.amountPerCycle;
-          localStorage.setItem(
-            "gatherList",
-            getted
-              ? JSON.stringify([...getted, safeInputs])
-              : JSON.stringify([safeInputs])
-          );
-        }}
         path={"complete"}
         data={{ props: safeInputs, name: "비상금" }}
         active={
-          safeInputs.account.bankName !== "" && safeInputs.amountPerCycle !== 0
+          safeInputs.account.bankName !== "" && safeInputs.currentAmount !== 0
         }
       >
         비상금 만들기 완료

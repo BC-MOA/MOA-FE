@@ -77,16 +77,16 @@ function AdditionalComplete() {
   const { state } = useLocation();
   const { props, inOutMoney } = state;
 
-  const trFormat = (input) => {
+  const trFormat = (props, input) => {
     const formatted = {
       date: moment(new Date()).format("MM월 DD일"),
       lists: [
         {
-          name: "국군재정단",
+          name: props.account.bankName,
           time: moment(new Date()).format("hh:mm"),
           amount: input,
           // Todo: 추가 입금 시, 잔액 처리
-          total: 10000,
+          total: props.currentAmount,
         },
       ],
     };
@@ -104,7 +104,7 @@ function AdditionalComplete() {
         />
         <div className="Title">
           {props.savingMode === "비상금"
-            ? Number(inOutMoney) > 0
+            ? inOutMoney > 0
               ? "비상금을 모았어요"
               : "비상금을 꺼냈어요"
             : "추가입금을 했어요"}
@@ -112,13 +112,13 @@ function AdditionalComplete() {
 
         <CheckInfo>
           <InfoEl className="Text">
-            <div>{Number(inOutMoney) > 0 ? "입금금액" : "꺼낸 금액"}</div>
+            <div>{inOutMoney > 0 ? "입금금액" : "꺼낸 금액"}</div>
             <div className="bold green">
               {Number(inOutMoney).toLocaleString()} 원
             </div>
           </InfoEl>
           <InfoEl className="Text">
-            <div>{Number(inOutMoney) > 0 ? "출금계좌" : "입금계좌"}</div>
+            <div>{inOutMoney > 0 ? "출금계좌" : "입금계좌"}</div>
             <div className="bold">{props.account.bankName}</div>
           </InfoEl>
           <InfoEl className="Text">
@@ -137,16 +137,20 @@ function AdditionalComplete() {
       <CustomBtn
         active={true}
         addFunc={() => {
-          props.transactions.push(trFormat(inOutMoney));
+          props.transactions.push(trFormat(props, inOutMoney));
           localStorage.setItem(
             "gatherList",
             JSON.stringify([
               ...JSON.parse(localStorage.getItem("gatherList")).map((x) =>
-                x.goalName === props.goalName &&
-                x.account.accountNumber === props.account.accountNumber
+                x.goalName === props.goalName
                   ? {
                       ...x,
-                      transactions: [...x.transactions, trFormat(inOutMoney)],
+                      currentAmount:
+                        Number(x.currentAmount) + Number(inOutMoney),
+                      transactions: [
+                        ...x.transactions,
+                        trFormat(props, inOutMoney),
+                      ],
                     }
                   : x
               ),

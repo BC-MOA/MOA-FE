@@ -97,6 +97,7 @@ function GatherDetail() {
       setGoalModal(true);
     }
   }, []);
+
   return (
     <Container>
       <BackHeader
@@ -116,7 +117,7 @@ function GatherDetail() {
       >
         <img src={require("assets/ic_fix.svg").default} alt="수정하기" />
       </button>
-      <DetailCard gatherInfo={gatherInfo} />
+      <DetailCard props={gatherInfo} />
       <div className="title">거래내역</div>
       <Content className={tr_lists.length ? "" : "zero"}>
         {tr_lists.length ? (

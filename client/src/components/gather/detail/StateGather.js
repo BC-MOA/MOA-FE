@@ -213,7 +213,11 @@ function StateGather({ props, completed }) {
           <State>
             <div className="progressbar">
               <ProgressBar
-                percent={(props.currentAmount / props.goalAmount) * 100}
+                percent={
+                  props.currentAmount < props.goalAmount
+                    ? (props.currentAmount / props.goalAmount) * 100
+                    : 100
+                }
                 filledBackground={
                   props.savingMode === "군적금" ? "var(--a2)" : "var(--Blue)"
                 }

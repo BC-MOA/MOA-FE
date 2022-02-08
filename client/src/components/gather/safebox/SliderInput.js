@@ -31,13 +31,12 @@ const Custom = styled.div`
   border-radius: 10px;
 `;
 
-function SliderInput({ inputs, setInputs, usage, setModal }) {
-  const { amountPerCycle } = inputs;
+function SliderInput({ amount, setAmount, usage, setModal }) {
   const history = useNavigate();
 
   return (
     <Container>
-      <div className="Title">{amountPerCycle.toLocaleString()} 원</div>
+      <div className="Title">{amount.toLocaleString()} 원</div>
       <div
         className="SubTitle green btn"
         onClick={
@@ -56,13 +55,10 @@ function SliderInput({ inputs, setInputs, usage, setModal }) {
         step={1000}
         max={1000000}
         min={0}
-        value={amountPerCycle}
-        onChange={(e) =>
-          setInputs({
-            ...inputs,
-            amountPerCycle: e,
-          })
-        }
+        value={amount}
+        onChange={(e) => {
+          setAmount(e);
+        }}
         width={350}
         height={50}
         markStyle={{
