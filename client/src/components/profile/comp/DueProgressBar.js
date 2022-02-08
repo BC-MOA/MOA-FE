@@ -1,5 +1,5 @@
-import { calc_days } from "components/gather/addGoal/utils";
 import styled from "styled-components";
+import dateFormat from "../function/dateFormat";
 
 const Speechbubble = styled.div`
   display: flex;
@@ -58,7 +58,7 @@ const Bar = styled.div`
   }
 `;
 
-const Date = styled.div`
+const Date_ = styled.div`
   display: flex;
   justify-content: space-between;
 
@@ -83,33 +83,32 @@ const Date = styled.div`
   }
 `;
 
-const DueProgressBar = ({ type, join }) => {
-  //실제로는 전역일을 계산해서 처리
-  //남은 일자, 전역일, 퍼센트 변환
+const DueProgressBar = ({ join, end, now }) => {
+  const diff = parseInt((end - now) / (1000 * 60 * 60 * 24));
 
-  const percent = 50;
+  const percent = parseInt(((575 - diff) / 575) * 100);
 
   return (
     <div>
       <Bar ratio={percent}>
         <Speechbubble>
-          <div className="bubble">D-411</div>
+          <div className="bubble">D-{diff}</div>
           <div className="pointer"></div>
         </Speechbubble>
         <div className="bar-back">
           <div className="bar"></div>
         </div>
       </Bar>
-      <Date>
+      <Date_>
         <div className="left">
           <p className="type">입대일</p>
-          <p>2021.09.16</p>
+          <p>{dateFormat(join)}</p>
         </div>
         <div className="right">
           <p className="type">전역일</p>
-          <p>2021.09.16</p>
+          <p>{dateFormat(end)}</p>
         </div>
-      </Date>
+      </Date_>
     </div>
   );
 };

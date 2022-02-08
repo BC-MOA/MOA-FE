@@ -1,44 +1,9 @@
 import styled from "styled-components";
 import BackHeader from "components/common/BackHeader";
 import Account from "../comp/Account";
+import { data_case3 } from "components/interlock/data";
 
-const data = {
-  account_deposit: [
-    {
-      key: 1,
-      account: "KB나라사랑우대통장",
-      thumb: require("assets/profile/bank.png"),
-      sum: 500000,
-    },
-    {
-      key: 2,
-      account: "KB나라사랑우대통장",
-      thumb: require("assets/profile/bank.png"),
-      sum: 500000,
-    },
-    {
-      key: 3,
-      account: "KB나라사랑우대통장",
-      thumb: require("assets/profile/bank.png"),
-      sum: 500000,
-    },
-  ],
-  account_install: [
-    {
-      key: 1,
-      account: "KB나라사랑우대통장",
-      thumb: require("assets/profile/bank.png"),
-      sum: 500000,
-    },
-    {
-      key: 2,
-      account: "KB나라사랑우대통장",
-      thumb: require("assets/profile/bank.png"),
-      sum: 500000,
-    },
-  ],
-  account_partner: [],
-};
+//계좌연동(interlock) data를 가져다 쓰고 있음!
 
 const Title = styled.p`
   font-family: "Pretendard-Regular";
@@ -69,11 +34,11 @@ const ProfileAccount = () => {
       <Box>
         <Title>내 계좌</Title>
         <Type>입출금 통장</Type>
-        <Account list={data.account_deposit}></Account>
+        <Account list={data_case3.account_deposit}></Account>
         <Type>군적금</Type>
-        <Account list={data.account_install}></Account>
+        <Account list={data_case3.account_install}></Account>
         <Type>제휴 통장</Type>
-        <Account list={data.account_partner}></Account>
+        <Account list={data_case3.account_partner}></Account>
       </Box>
     </>
   );

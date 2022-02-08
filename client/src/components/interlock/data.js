@@ -1,8 +1,12 @@
 /**
- * 계좌 정보
+ * [계좌 정보]
  *
  * 월급 계좌 1개
  * 군 적금 : 0개~2개
+ *
+ * account_deposit : 월급
+ * account_install : 적금
+ * account_partner : 제휴
  */
 const data_case1 = {
   account_deposit: [
@@ -15,6 +19,7 @@ const data_case1 = {
     },
   ],
   account_install: [],
+  account_partner: [],
 };
 
 const data_case2 = {
@@ -36,6 +41,7 @@ const data_case2 = {
       bank: "KB국민은행",
     },
   ],
+  account_partner: [],
 };
 
 const data_case3 = {
@@ -64,6 +70,7 @@ const data_case3 = {
       bank: "IBK기업은행",
     },
   ],
+  account_partner: [],
 };
 
 //사용자 정보
