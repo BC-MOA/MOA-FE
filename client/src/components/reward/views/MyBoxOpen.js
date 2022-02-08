@@ -109,7 +109,6 @@ function MyBoxOpen() {
                 />
               ))}
           </MyBoxOpenList>
-          {/* todo  */}
           <SubmitButton
             title={"선택완료"}
             onClickFunc={() => {
