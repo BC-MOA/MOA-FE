@@ -71,8 +71,16 @@ function Home() {
         {
           /* 로그인 전 홈화면 */
           gather.map((x) => (
-            <AboutGather>
-              <div className="icon">
+            <AboutGather key={x.id}>
+              <div
+                className={`icon ${
+                  x.name === "군적금"
+                    ? "armySaving"
+                    : x.name === "목표"
+                    ? "goal"
+                    : ""
+                }`}
+              >
                 <StoreSvg category={x.name === "목표" ? "여행" : x.name} />
               </div>
               <div className="content">
@@ -172,6 +180,16 @@ const AboutGather = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    &.armySaving {
+      path.main {
+        fill: var(--a3);
+      }
+    }
+    &.goal {
+      path.main {
+        fill: var(--subBlue);
+      }
+    }
   }
   .content {
     flex: 1;
