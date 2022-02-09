@@ -17,10 +17,7 @@ function User({ children }) {
   }, []);
   // 로그인 함수
   function login(newData) {
-    const temp = JSON.parse(localStorage.getItem("userData"))
-      ? JSON.parse(localStorage.getItem("userData"))
-      : { id: "", key: 0 };
-    const newUserData = { ...temp, ...newData };
+    const newUserData = { ...userData, ...newData };
     localStorage.setItem("userData", JSON.stringify(newUserData));
     setUserData(newUserData);
   }
