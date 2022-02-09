@@ -44,6 +44,22 @@ const Container = styled.div`
 const Content = styled.div`
   ${hideScrollBar}
   flex: 1;
+
+  .zeroCompleted {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Pretendard-Regular";
+    font-size: 16px;
+    line-height: 25px;
+    color: var(--Body_01);
+
+    img {
+      filter: grayscale(1);
+      margin-bottom: 12px;
+    }
+  }
 `;
 const EditBtn = styled.button`
   position: absolute;
@@ -164,9 +180,18 @@ function Gather() {
           </ReactSortable>
         ) : (
           <>
-            {completedList.map((x, idx) => (
-              <StateGather key={idx} props={x} completed />
-            ))}
+            {completedList.length ? (
+              completedList.map((x, idx) => (
+                <StateGather key={idx} props={x} completed />
+              ))
+            ) : (
+              <div className="zeroCompleted">
+                <div>
+                  <img src={require("assets/character_head.svg").default} />
+                  <div>아직 완료한 모으기가 없어요</div>
+                </div>
+              </div>
+            )}
           </>
         )}
       </Content>
