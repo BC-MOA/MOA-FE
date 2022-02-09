@@ -1,34 +1,31 @@
 import SubmitButton from "components/common/SubmitButton";
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserData } from "store/User";
 import { UserInventoryData } from "store/UserInventory";
 import { styleModal, styleModalBackground } from "style/common";
 import styled from "styled-components";
 import { v1 as uuid } from "uuid";
 function BuyBox({ setBuyClick, buyBoxItem, setIsValidBuy }) {
   const [isBought, setIsBought] = useState("");
-  const { getUserBoxList, setUserBoxList } = useContext(UserInventoryData);
-  // todo - 박스 구매 클릭시 로직 짤 것 - api 성공
-  function funcBuyBox() {
-    // 1. 사용자 열쇠 개수가 박스구매개수보다 많을때
-    // api호출
-    setIsBought("true");
-    // setUserBoxList((pre) => {
-    //   const temp = [...pre];
-    //   temp.push(buyBoxItem);
-    //    return temp;
-    // });
-    // 2. 사용자 열쇠 개수가 박스구매개수보다 적을때
-    // api호출없이 바로
-    // setIsBought("false");
+  const { userData } = useContext(UserData);
+  const { userBoxList, userRewardList, getUserBoxList, setUserBoxList } =
+    useContext(UserInventoryData);
+  const history = useNavigate();
 
-    // 아래는 임시 코드
-    const temp = JSON.parse(localStorage.getItem("userBoxList"))
-      ? JSON.parse(localStorage.getItem("userBoxList"))
-      : [];
-    const boxNew = { ...buyBoxItem, boxId: uuid() };
-    temp.push(boxNew);
-    localStorage.setItem("userBoxList", JSON.stringify(temp));
-    getUserBoxList();
+  function funcBuyBox() {
+    if (userData.key >= buyBoxItem.boxPrice) {
+      setIsBought("true");
+      const temp = JSON.parse(localStorage.getItem("userBoxList"))
+        ? JSON.parse(localStorage.getItem("userBoxList"))
+        : [];
+      const boxNew = { ...buyBoxItem, boxId: uuid() };
+      temp.push(boxNew);
+      localStorage.setItem("userBoxList", JSON.stringify(temp));
+      getUserBoxList();
+    } else {
+      setIsBought("false");
+    }
   }
   return (
     <Background>
@@ -38,6 +35,17 @@ function BuyBox({ setBuyClick, buyBoxItem, setIsValidBuy }) {
           onClick={() => {
             setBuyClick(false);
             setIsValidBuy(false);
+            if ("true" === isBought) {
+              if (1 === userBoxList.length + userRewardList.length) {
+                history("/key", {
+                  state: {
+                    num: 1,
+                    message: "처음으로 MOA박스를 구매하셨네요",
+                    nextPath: "/reward",
+                  },
+                });
+              }
+            }
           }}
         >
           <img src={require("assets/ic_close.svg").default} alt="닫기" />
@@ -82,6 +90,15 @@ function BuyBox({ setBuyClick, buyBoxItem, setIsValidBuy }) {
               onClickFunc={() => {
                 setBuyClick(false);
                 setIsValidBuy(false);
+                if (1 === userBoxList.length + userRewardList.length) {
+                  history("/key", {
+                    state: {
+                      num: 1,
+                      message: "처음으로 MOA박스를 구매하셨네요",
+                      nextPath: "/reward",
+                    },
+                  });
+                }
               }}
               isActive={true}
               title={"확인"}
@@ -99,6 +116,7 @@ function BuyBox({ setBuyClick, buyBoxItem, setIsValidBuy }) {
             <SubmitButton
               onClickFunc={() => {
                 setBuyClick(false);
+                setIsValidBuy(false);
               }}
               isActive={true}
               title={"확인"}
