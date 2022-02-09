@@ -31,13 +31,8 @@ function MilitaryFreeSavingForm({
       </div>
 
       <div className="title">출금계좌</div>
-      <Dropdown
-        suffix={""}
-        valueName={"formDataAccount"}
-        setValue={setFormData}
-        selectValue={formData.formDataAccount}
-        options={userAccountList}
-      ></Dropdown>
+      {/* todo 유저에서 계좌 정보 불러와서 넣기*/}
+      <div className="fixData">{userAccountList[0]}</div>
     </FreeSavingForm>
   );
 }
@@ -48,6 +43,16 @@ const FreeSavingForm = styled.div`
   }
   .marginBox {
     margin-bottom: 24px;
+  }
+  .fixData {
+    font-family: "Pretendard-Regular";
+    font-size: 16px;
+    line-height: 25px;
+    padding: 10px 0 10px 16px;
+    background: #ffffff;
+    border-radius: 8px;
+    color: var(Title_01);
+    text-align: start;
   }
 `;
 
