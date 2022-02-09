@@ -31,9 +31,9 @@ function User({ children }) {
   }
   // 로그아웃 함수
   function logOut() {
-    localStorage.setItem("userData", JSON.stringify({ id: "", key: 0 }));
-    localStorage.setItem("userRewardList", JSON.stringify([]));
-    localStorage.setItem("userBoxList", JSON.stringify([]));
+    localStorage.removeItem("userData");
+    localStorage.removeItem("userRewardList");
+    localStorage.removeItem("userBoxList");
     setUserData({ id: "", key: 0 });
   }
 
