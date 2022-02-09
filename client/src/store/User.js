@@ -11,7 +11,6 @@ export const UserData = createContext({
 
 function User({ children }) {
   const [userData, setUserData] = useState({ id: "", key: 0 });
-
   useEffect(() => {
     getUserInfo();
   }, []);
@@ -33,6 +32,8 @@ function User({ children }) {
   // 로그아웃 함수
   function logOut() {
     localStorage.setItem("userData", JSON.stringify({ id: "", key: 0 }));
+    localStorage.setItem("userRewardList", JSON.stringify([]));
+    localStorage.setItem("userBoxList", JSON.stringify([]));
     setUserData({ id: "", key: 0 });
   }
 
