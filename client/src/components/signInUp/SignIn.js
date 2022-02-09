@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import styled from "styled-components";
 import {
   styleTitle,
@@ -9,6 +9,7 @@ import {
 import CustomBtn from "components/gather/addGoal/CustomBtn";
 import CustomInput from "components/common/CustomInput";
 import { useNavigate } from "react-router-dom";
+import { UserData } from "store/User";
 
 const Container = styled.div`
   width: 100%;
@@ -123,7 +124,7 @@ function SignIn() {
   const inputFocus = useRef();
   const history = useNavigate();
   const isSuccess = true;
-
+  const { login: funcLogin } = useContext(UserData);
   return (
     <Container>
       <Header>
@@ -183,6 +184,9 @@ function SignIn() {
         <CustomBtn
           active={!Object.keys(login).filter((x) => login[x] === "").length}
           path={isSuccess ? "/home" : ""}
+          addFunc={() => {
+            funcLogin({ id: "1234", name: "zz" });
+          }}
         >
           로그인
         </CustomBtn>

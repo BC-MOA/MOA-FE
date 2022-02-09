@@ -3,15 +3,17 @@ import Container from "components/common/Container";
 import { Header } from "components/common/Header";
 import NavBar from "components/common/NavBar";
 import ScrollBox from "components/common/ScrollBox";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { v1 as uuid } from "uuid";
 import BubbleContent from "./BubbleContent";
 import StoreSvg from "components/gather/addGoal/StoreSvg";
+import { UserData } from "store/User";
 
 const PROXY = window.location.hostname === "localhost" ? "" : "/api";
 function Home() {
+  const { userData } = useContext(UserData);
   const history = useNavigate();
   const [challengeList, setChallengeList] = useState([]);
   const [gather, setGather] = useState([
@@ -39,37 +41,43 @@ function Home() {
       { name: "3", type1: "A", type2: "B", 참여자: "300" },
     ]);
   }, []);
-  useEffect(() => {
-    axios
-      .get(`${PROXY}/v1/hello`)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(`${PROXY}/saving/products/high`)
+  //     .then((res) => {
+  //       console.log(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
   return (
     <Container>
-      <Header title={true} keys={30} alarm={false}></Header>
+      <Header $title={true} keys={30} alarm={false}></Header>
       <ScrollBox paddingValue={"24px 0 "}>
         <UserAmountMsg>
-          <p>{"민수"}님이 지금까지 모은 금액은?</p>
-          <div className="num">
-            <span className="roboto">{Number("2000").toLocaleString()}</span>
-            <span>원</span>
-            <div className="highlight"></div>
-          </div>
+          {!userData.id && (
+            <>
+              <p>안녕하세요</p>
+              <p>저축을 시작하려는 군인이시군요!</p>
+            </>
+          )}
+          {userData.id && (
+            <>
+              <p>{userData.name}님이 지금까지 모은 금액은?</p>
+              <div className="num">
+                <span className="roboto">
+                  {Number("2000").toLocaleString()}
+                </span>
+                <span>원</span>
+                <div className="highlight"></div>
+              </div>
+            </>
+          )}
         </UserAmountMsg>
-        <BubbleContent savingNum={0} />
-        {/* <AboutMoa
-            src={require("assets/about_moa.png")}
-            alt={"모아이용방법확인하기"}
-          /> */}
-        {/* 공통 */}
-        {
-          /* 로그인 전 홈화면 */
+        <BubbleContent isLogin={true} savingNum={0} />
+        {!userData.id &&
           gather.map((x) => (
             <AboutGather key={x.id}>
               <div
@@ -88,14 +96,17 @@ function Home() {
                 <div className="adText">{x.adText}</div>
               </div>
             </AboutGather>
-          ))
-        }
+          ))}
         <Btn
           onClick={() => {
-            history("/gather");
+            if (!userData.id) {
+              history("/login");
+            } else {
+              history("/gather");
+            }
           }}
         >
-          저축 시작하기
+          {!userData.id ? "저축 시작하기" : "더보기"}
         </Btn>
         <AboutChallenge>
           <div className="mainTitle">
@@ -141,12 +152,6 @@ function Home() {
     </Container>
   );
 }
-// style
-
-// const AboutMoa = styled.img`
-//   display: block;
-//   margin-bottom: 54px;
-// `;
 
 const Btn = styled.button`
   width: 100%;
@@ -162,8 +167,8 @@ const Btn = styled.button`
 `;
 const AboutGather = styled.div`
   display: flex;
-  align-items:center;
-  gap:16px;
+  align-items: center;
+  gap: 16px;
   padding: 17px 16px;
   background: #fff;
   box-shadow: 0px 1px 2px rgba(33, 33, 33, 0.08);
@@ -175,7 +180,7 @@ const AboutGather = styled.div`
   line-height: 28px;
 
   .icon {
-    width:40px;
+    width: 40px;
     height: 40px;
     display: flex;
     justify-content: center;
@@ -202,9 +207,8 @@ const AboutGather = styled.div`
     line-height: 19px;
     color: var(--Body_01);
   }
-  &+&{
-    margin-top:8px;
-  }
+  & + & {
+    margin-top: 8px;
   }
 `;
 
