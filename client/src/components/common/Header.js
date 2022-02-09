@@ -7,7 +7,7 @@ import kFormatter from "../compete/function/kFormatter";
 const StyledHeader = styled.div`
   min-height: 44px;
 
-  display: felx;
+  display: flex;
   justify-content: ${({ $title }) => ($title ? "space-between" : "flex-end")};
   align-items: center;
 
