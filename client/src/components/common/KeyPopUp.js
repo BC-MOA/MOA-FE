@@ -7,11 +7,13 @@ import ScrollBox from "./ScrollBox";
 function KeyPopUp() {
   const { state: keyInfo } = useLocation();
   const history = useNavigate();
+  // todo 사용자 키 값 변경하는 함수 넣기
   return (
     <Container>
       <Header>
         <img
           onClick={() => {
+            // 사용자 키 값 변경하는 함수 실행
             history(-1);
           }}
           src={require("assets/ic_close.svg").default}
@@ -46,6 +48,7 @@ function KeyPopUp() {
         </MessageCard>
         <SaveBtn
           onClick={() => {
+            // 사용자 키 값 변경하는 함수 실행
             history(-1);
           }}
         >
