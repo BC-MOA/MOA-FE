@@ -16,8 +16,8 @@ function MyProducItemDetail() {
   function SaveProductImg() {
     setTimeout(() => {
       html2canvas(document.getElementById("exportImgBox")).then((canvas) => {
-        const imgUrl = canvas.toDataURL("image/jpg");
-        const imgFileName = `${item.productName}.jpg`;
+        const imgUrl = canvas.toDataURL("image/png");
+        const imgFileName = `${item.productName}`;
         const link = document.createElement("a");
         document.body.appendChild(link);
         link.href = imgUrl;
@@ -45,11 +45,10 @@ function MyProducItemDetail() {
           src={require("assets/ic_close.svg").default}
           alt="나가기"
         />
-        {/* todo item의 이미지로 변경할 것 */}
       </Header>
       <div id="exportImgBox">
         <ImgCard>
-          <img src={require("./example.png")} alt={item.name} />
+          <img src={item.productImageUrl} alt={item.name} />
           <div>{item.productType}</div>
           <div className="itemName">{item.productName}</div>
         </ImgCard>

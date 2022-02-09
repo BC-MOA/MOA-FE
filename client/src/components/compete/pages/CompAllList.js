@@ -3,7 +3,7 @@ import { hideScrollBar } from "style/common";
 import AllCompContext from "../context/AllCompContext";
 import { useContext } from "react";
 
-import createCardList from "../function/FilterList";
+import FilterList from "../function/FilterList";
 
 //[styled comp] : 리스트 컨테이너
 const StyledAllList = styled.div`
@@ -25,8 +25,10 @@ const StyledAllList = styled.div`
  */
 const AllList = (props) => {
   const compList = useContext(AllCompContext);
+  //챌린지 없을 때 테스트
+  // const compList = [];
 
-  return <StyledAllList>{createCardList(props.cond, compList)}</StyledAllList>;
+  return <StyledAllList>{FilterList(props.cond, compList)}</StyledAllList>;
 };
 
 export default AllList;
