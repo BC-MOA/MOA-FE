@@ -8,27 +8,27 @@ export const GatherList = createContext({
 
 function GatherListContext({ children }) {
   const [gatherList, setGatherList] = useState([
-    // {
-    //   id: 1,
-    //   savingMode: "군적금",
-    //   goalName: "1000만원 모으기",
-    //   category: "",
-    //   currentAmount: 800000,
-    //   goalAmount: 3600000,
-    //   account: {
-    //     bankName: "KB국민",
-    //     productName: "KB 장병내일준비적금",
-    //     accountNumber: "112-0330-0201",
-    //     accountCurrentAmount: 0,
-    //     bankImageUrl: "",
-    //   },
-    //   sDate: "Sun Oct 10 2021 15:11:39 GMT+0900",
-    //   eDate: "Fri Mar 10 2023 23:59:59 GMT+0900",
-    //   depositMethod: "자동이체",
-    //   limitCycle: "매월 10일",
-    //   amountPerCycle: 200000,
-    //   transactions: [],
-    // },
+    {
+      id: 1,
+      savingMode: "군적금",
+      goalName: "1000만원 모으기",
+      category: "",
+      currentAmount: 800000,
+      goalAmount: 3600000,
+      account: {
+        bankName: "KB국민",
+        productName: "KB 장병내일준비적금",
+        accountNumber: "112-0330-0201",
+        accountCurrentAmount: 0,
+        bankImageUrl: "",
+      },
+      sDate: "Sun Oct 10 2021 15:11:39 GMT+0900",
+      eDate: "Fri Mar 10 2023 23:59:59 GMT+0900",
+      depositMethod: "자동이체",
+      limitCycle: "매월 10일",
+      amountPerCycle: 200000,
+      transactions: [],
+    },
     {
       id: 2,
       savingMode: "목표",

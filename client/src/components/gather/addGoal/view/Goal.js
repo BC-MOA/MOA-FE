@@ -103,11 +103,11 @@ function Goal() {
     currentAmount: 0,
     goalAmount: 0,
     account: {
-      bankName: "",
+      bankName: accountList[0].bankName,
       productName: "",
-      accountNumber: "",
-      accountCurrentAmount: 0,
-      bankImageUrl: "",
+      accountNumber: accountList[0].accountNumber,
+      accountCurrentAmount: accountList[0].currentAmount,
+      bankImageUrl: accountList[0].bankImageUrl,
     },
     sDate: new Date(),
     eDate: "",
@@ -116,21 +116,6 @@ function Goal() {
     amountPerCycle: 0,
     transactions: [],
   });
-  // Todo: account 선택 => 값 수정 부분 해야함
-  const [bankInfo, setBankInfo] = useState({
-    bankName: "",
-    productName: "",
-    accountNumber: "",
-    accountCurrentAmount: 0,
-    bankImageUrl: "",
-  });
-
-  useEffect(() => {
-    setInputs({
-      ...inputs,
-      account: bankInfo,
-    });
-  }, [bankInfo.bankName]);
 
   useEffect(() => {
     if (
@@ -180,19 +165,15 @@ function Goal() {
 
   const isActive = (method) => {
     if (method === "자동이체") {
-      return (
-        !Object.keys(inputs).filter(
-          (x) => x !== "currentAmount" && inputs[x] === ("" || 0)
-        ).length && inputs.account.bankName !== ""
-      );
+      return !Object.keys(inputs).filter(
+        (x) => x !== "currentAmount" && ["", 0].includes(inputs[x])
+      ).length;
     } else {
-      return (
-        !Object.keys(inputs).filter(
-          (x) =>
-            !["amountPerCycle", "limitCycle", "currentAmount"].includes(x) &&
-            inputs[x] === ("" || 0)
-        ).length && inputs.account.bankName !== ""
-      );
+      return !Object.keys(inputs).filter(
+        (x) =>
+          !["amountPerCycle", "limitCycle", "currentAmount"].includes(x) &&
+          ["", 0].includes(inputs[x])
+      ).length;
     }
   };
 
@@ -253,6 +234,7 @@ function Goal() {
               <InputEl>
                 <div className="SubTitle">납입액</div>
                 <CustomInput
+                  type="number"
                   name="amountPerCycle"
                   placeholder="정기적으로 넣을 금액을 입력해주세요."
                   onChange={onChange}
@@ -273,7 +255,7 @@ function Goal() {
         <InputEl>
           <div className="SubTitle">목표 금액</div>
           <CustomInput
-            unit="원"
+            type="number"
             placeholder="모을 금액을 입력해주세요."
             disabled={inputs.depositMethod === "자동이체"}
             value={inputs.goalAmount === 0 ? "" : inputs.goalAmount}
@@ -287,23 +269,7 @@ function Goal() {
         </InputEl>
         <InputEl>
           <div className="SubTitle">출금계좌</div>
-          <CustomSelect
-            name="bankName"
-            onChange={(e) => {
-              const { name, value } = e.target;
-              const selected = accountList.find((x) => x.bankName === value);
-
-              setBankInfo({
-                [name]: value,
-                productName: selected.accountName,
-                accountNumber: selected.accountNumber,
-                accountCurrentAmount: selected.currentAmount,
-                bankImageUrl: selected.bankImageUrl,
-              });
-            }}
-            accounts={accountList}
-            selected={inputs.account.bankName}
-          ></CustomSelect>
+          <CustomInput disabled={true} value={accountList[0].accountName} />
         </InputEl>
       </Content>
 

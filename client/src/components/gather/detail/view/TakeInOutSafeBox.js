@@ -4,7 +4,7 @@ import { styleTitle, styleSubTitle, styleNotice } from "style/common";
 import { useLocation } from "react-router-dom";
 import BackHeader from "components/common/BackHeader";
 import SliderInput from "components/gather/safebox/SliderInput";
-import CustomSelect from "components/gather/addGoal/CustomSelect";
+import CustomInput from "components/common/CustomInput";
 import CustomBtn from "components/gather/addGoal/CustomBtn";
 import KeypadModal from "components/gather/safebox/KeypadModal";
 import { accountList } from "components/common/dummyData";
@@ -67,24 +67,16 @@ function TakeInOutSafeBox() {
   const { state } = useLocation();
   const { props, usage } = state;
 
-  const [bankInfo, setBankInfo] = useState({
-    bankName: "",
-    productName: "",
-    accountNumber: "",
-    accountCurrentAmount: 0,
-    bankImageUrl: "",
-  });
   const [safeInputs, setSafeInputs] = useState({
     ...props,
-    account: bankInfo,
+    account: {
+      bankName: accountList[0].bankName,
+      productName: "",
+      accountNumber: accountList[0].accountNumber,
+      accountCurrentAmount: accountList[0].currentAmount,
+      bankImageUrl: accountList[0].bankImageUrl,
+    },
   });
-
-  useEffect(() => {
-    setSafeInputs({
-      ...safeInputs,
-      account: bankInfo,
-    });
-  }, [bankInfo.bankName]);
 
   const [amount, setAmount] = useState(0);
   useEffect(() => {
@@ -100,19 +92,6 @@ function TakeInOutSafeBox() {
       });
     }
   }, [amount]);
-
-  const onChange = (event) => {
-    const { name, value } = event.target;
-    const selected = accountList.find((x) => x.bankName === value);
-
-    setBankInfo({
-      [name]: value,
-      productName: selected.accountName,
-      accountNumber: selected.accountNumber,
-      accountCurrentAmount: selected.currentAmount,
-      bankImageUrl: selected.bankImageUrl,
-    });
-  };
 
   return (
     <Container>
@@ -136,12 +115,7 @@ function TakeInOutSafeBox() {
           <div className="SubTitle">
             {usage === "takeIn" ? "출금계좌" : "입금계좌"}
           </div>
-          <CustomSelect
-            name="bankName"
-            onChange={onChange}
-            accounts={accountList}
-            selected={safeInputs.account.bankName}
-          ></CustomSelect>
+          <CustomInput disabled={true} value={accountList[0].accountName} />
         </InputEl>
       </Content>
       {usage === "takeIn" ? (

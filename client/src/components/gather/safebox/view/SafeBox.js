@@ -4,7 +4,7 @@ import { styleTitle, styleSubTitle, styleNotice } from "style/common";
 import { useLocation } from "react-router-dom";
 import BackHeader from "components/common/BackHeader";
 import SliderInput from "../SliderInput";
-import CustomSelect from "../../addGoal/CustomSelect";
+import CustomInput from "components/common/CustomInput";
 import CustomBtn from "../../addGoal/CustomBtn";
 import { accountList } from "components/common/dummyData";
 
@@ -64,41 +64,19 @@ function SafeBox() {
   const avgSafeAmount = 200000;
   const { state } = useLocation();
 
-  const [bankInfo, setBankInfo] = useState({
-    bankName: "",
-    productName: "",
-    accountNumber: "",
-    accountCurrentAmount: 0,
-    bankImageUrl: "",
-  });
-
-  useEffect(() => {
-    setSafeInputs({
-      ...safeInputs,
-      account: bankInfo,
-    });
-  }, [bankInfo.bankName]);
-
-  const onChange = (event) => {
-    const { name, value } = event.target;
-    const selected = accountList.find((x) => x.bankName === value);
-
-    setBankInfo({
-      [name]: value,
-      productName: selected.accountName,
-      accountNumber: selected.accountNumber,
-      accountCurrentAmount: selected.currentAmount,
-      bankImageUrl: selected.bankImageUrl,
-    });
-  };
-
   const [safeInputs, setSafeInputs] = useState({
     savingMode: "비상금",
     goalName: "비상금 모으기",
     category: "",
     currentAmount: 0,
     goalAmount: 0,
-    account: bankInfo,
+    account: {
+      bankName: accountList[0].bankName,
+      productName: "",
+      accountNumber: accountList[0].accountNumber,
+      accountCurrentAmount: accountList[0].currentAmount,
+      bankImageUrl: accountList[0].bankImageUrl,
+    },
     sDate: "",
     eDate: "",
     depositMethod: "",
@@ -136,12 +114,7 @@ function SafeBox() {
         </InputEl>
         <InputEl>
           <div className="SubTitle">출금계좌</div>
-          <CustomSelect
-            name="bankName"
-            onChange={onChange}
-            accounts={accountList}
-            selected={safeInputs.account.bankName}
-          ></CustomSelect>
+          <CustomInput disabled={true} value={accountList[0].accountName} />
         </InputEl>
       </Content>
       <CustomBtn

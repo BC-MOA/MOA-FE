@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import CustomInput from "components/common/CustomInput";
 import CustomBtn from "components/gather/addGoal/CustomBtn";
 import SelectBox from "components/gather/addGoal/SelectBox";
+import { accountList } from "components/common/dummyData";
 
 const Container = styled.div`
   width: 100%;
@@ -75,8 +76,9 @@ function RegisterDeposit() {
         ? ["amountPerCycle"]
         : ["limitCycle", "amountPerCycle"];
     return (
-      editableEls.filter((x) => newInputs[x] !== "" && newInputs[x] !== prev[x])
-        .length === editableEls.length
+      editableEls.filter(
+        (x) => !["", 0].includes(newInputs[x]) && newInputs[x] !== prev[x]
+      ).length === editableEls.length
     );
   };
 
@@ -118,6 +120,7 @@ function RegisterDeposit() {
             {props.savingMode === "군적금" ? "월 납입액" : "납입액"}
           </div>
           <CustomInput
+            type="number"
             unit="원"
             name="amountPerCycle"
             placeholder={
@@ -138,6 +141,16 @@ function RegisterDeposit() {
           ) : (
             <></>
           )}
+        </InputEl>
+        <InputEl>
+          <div className="subTitle">출금계좌</div>
+          <CustomInput
+            disabled={true}
+            value={
+              accountList.find((x) => x.bankName === newInputs.account.bankName)
+                .accountName
+            }
+          />
         </InputEl>
       </Content>
 
