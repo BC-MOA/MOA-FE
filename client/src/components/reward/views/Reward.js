@@ -3,7 +3,7 @@ import Container from "components/common/Container";
 import ScrollBox from "components/common/ScrollBox";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { BoxListData } from "store/BoxList";
+import { UserData } from "store/User";
 import styled from "styled-components";
 import BuyBox from "../BuyBox";
 import RewardBoxList from "../RewardBoxList";
@@ -14,11 +14,10 @@ function Reward() {
   const [buyClick, setBuyClick] = useState(false);
   const [buyBoxItem, setBuyBoxItem] = useState({});
   const [isValidBuy, setIsValidBuy] = useState(false);
-  const userId = "123";
-
+  const { userData } = useContext(UserData);
   useEffect(() => {
     if (buyClick) {
-      if (userId !== "") {
+      if (userData.id) {
         setIsValidBuy(true);
       } else {
         history("/login");
@@ -28,7 +27,7 @@ function Reward() {
 
   return (
     <Container>
-      <BackHeader path={-1} title={""} isScrolled={true}></BackHeader>
+      <BackHeader path={"/home"} title={""} isScrolled={true}></BackHeader>
       <ScrollBox paddingValue={"24px 0  "}>
         <Content>
           <RewardUserInfo />

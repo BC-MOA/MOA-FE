@@ -8,7 +8,7 @@ import styled from "styled-components";
 import { v1 as uuid } from "uuid";
 function BuyBox({ setBuyClick, buyBoxItem, setIsValidBuy }) {
   const [isBought, setIsBought] = useState("");
-  const { userData } = useContext(UserData);
+  const { userData, updateUserData } = useContext(UserData);
   const { userBoxList, userRewardList, getUserBoxList, setUserBoxList } =
     useContext(UserInventoryData);
   const history = useNavigate();
@@ -23,6 +23,7 @@ function BuyBox({ setBuyClick, buyBoxItem, setIsValidBuy }) {
       temp.push(boxNew);
       localStorage.setItem("userBoxList", JSON.stringify(temp));
       getUserBoxList();
+      updateUserData({ key: userData.key - buyBoxItem.boxPrice });
     } else {
       setIsBought("false");
     }
