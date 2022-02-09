@@ -39,7 +39,6 @@ function KeyPopUp() {
         <MessageCard>
           <div className="big">
             <span className=" bold">열쇠 </span>
-            {/* todo - props인 keyNum로 변경*/}
             <span className=" bold roboto green">
               {keyInfo ? keyInfo.num : 0}
             </span>
@@ -47,7 +46,6 @@ function KeyPopUp() {
             <span className=" bold"> 획득!</span>
           </div>
           <span>축하드려요~</span>
-          {/* todo - props인 message로 변경*/}
           <span className="bold">{keyInfo ? keyInfo.message : ""}</span>
           <span>받은 열쇠는 리워드 페이지에서</span>
           <span>상품으로 교환이 가능해요!</span>
