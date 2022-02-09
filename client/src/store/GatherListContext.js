@@ -7,6 +7,7 @@ export const GatherList = createContext({
 });
 
 function GatherListContext({ children }) {
+  // 초기 화면 더미데이터
   const [gatherList, setGatherList] = useState([
     {
       id: 1,
