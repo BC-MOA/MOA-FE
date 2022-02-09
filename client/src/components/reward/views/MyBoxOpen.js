@@ -62,7 +62,6 @@ function MyBoxOpen() {
     tempReward.push(newItem);
     localStorage.setItem("userRewardList", JSON.stringify(tempReward));
     getUserRewardList();
-
     setSelectBtnClick(true);
   }
   return (
