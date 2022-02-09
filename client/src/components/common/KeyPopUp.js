@@ -1,20 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { UserData } from "store/User";
 import styled from "styled-components";
 import Container from "./Container";
 import ScrollBox from "./ScrollBox";
 
 function KeyPopUp() {
   const { state: keyInfo } = useLocation();
+  const { userData, updateUserData } = useContext(UserData);
   const history = useNavigate();
-  // todo 사용자 키 값 변경하는 함수 넣기
+
+  function updateUserKeyNum() {
+    const newKeyNum = userData.key + keyInfo.num;
+    updateUserData({ key: newKeyNum });
+  }
   return (
     <Container>
       <Header>
         <img
           onClick={() => {
-            // 사용자 키 값 변경하는 함수 실행
-            history(-1);
+            updateUserKeyNum();
+            history(keyInfo.nextPath);
           }}
           src={require("assets/ic_close.svg").default}
           alt="나가기"
@@ -48,8 +54,8 @@ function KeyPopUp() {
         </MessageCard>
         <SaveBtn
           onClick={() => {
-            // 사용자 키 값 변경하는 함수 실행
-            history(-1);
+            updateUserKeyNum();
+            history(keyInfo.nextPath);
           }}
         >
           확인

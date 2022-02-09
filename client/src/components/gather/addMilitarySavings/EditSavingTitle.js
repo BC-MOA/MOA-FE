@@ -36,7 +36,13 @@ function EditSavingTitle() {
         <div>
           <span
             onClick={() => {
-              history("/gather");
+              history("/key", {
+                state: {
+                  num: 3,
+                  message: "군적금에 가입하셨네요",
+                  nextPath: "/gather",
+                },
+              });
             }}
           >
             다음에 하기
@@ -55,7 +61,13 @@ function EditSavingTitle() {
           <SubmitButton
             title={"목표 설정 완료"}
             onClickFunc={() => {
-              history("/gather");
+              history("/key", {
+                state: {
+                  num: 3,
+                  message: "군적금에 가입하셨네요",
+                  nextPath: "/gather",
+                },
+              });
             }}
             isActive={isInputChange}
           />
