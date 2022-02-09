@@ -83,7 +83,6 @@ function EditComplete() {
   const { state } = useLocation();
   const { prev, newInputs, whatEdit } = state;
   const { setGatherList } = useContext(GatherList);
-
   const editCates = {
     goal: "목표를 수정했어요",
     deposit: `${

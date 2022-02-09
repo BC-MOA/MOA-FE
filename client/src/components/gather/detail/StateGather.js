@@ -9,9 +9,8 @@ import { calc_dDay } from "components/gather/addGoal/utils";
 
 const Container = styled.div`
   position: relative;
-  margin: 0 -4px;
   height: fit-content;
-  padding: 20px 0 12px;
+  padding: 20px 20px 12px;
   ${({ editToggle }) =>
     editToggle &&
     css`
@@ -28,8 +27,6 @@ const Container = styled.div`
     completed === true &&
     css`
       pointer-events: none;
-      padding: 20px 20px 12px;
-      margin: 0;
       border-radius: 12px;
       & + & {
         margin-top: 16px;
@@ -39,7 +36,6 @@ const Container = styled.div`
     completed !== true &&
     css`
       & + & {
-        /* margin-top: 4px; */
         border-top: 1px solid var(--Line_03);
       }
       &:last-child {
@@ -202,7 +198,7 @@ function StateGather({ props, completed, editToggle }) {
             <div className="name">
               {props.goalName ? props.goalName : props.account.productName}
             </div>
-            {!editToggle && (
+            {!editToggle && !completed && (
               <img
                 className="sortHandle"
                 src={require("assets/ic_sort_handle.svg").default}

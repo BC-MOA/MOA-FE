@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { ReactSortable } from "react-sortablejs";
 
 const Container = styled.div`
-  padding: 16px 24px;
+  padding: 16px 0;
   background-color: #fff;
   box-shadow: 0px 1px 2px rgba(33, 33, 33, 0.08);
   border-radius: 12px;
@@ -16,7 +16,7 @@ const Container = styled.div`
     font-family: "Pretendard-SemiBold";
     font-size: 18px;
     line-height: 28px;
-    margin-bottom: 2px;
+    margin: 0 24px 2px;
 
     display: flex;
     justify-content: space-between;
@@ -29,6 +29,7 @@ const Container = styled.div`
     }
   }
   .adText {
+    margin-left: 24px;
     color: var(--Body_01);
     font-family: "Pretendard-Regular";
     font-size: 14px;
@@ -78,7 +79,7 @@ function AddBtn({ name, gatherList, editToggle, isFirst, children }) {
       <div className="adText">{children}</div>
       {filteredList && (
         <ReactSortable
-          group="filtered"
+          group={movePages[name]}
           handle=".sortHandle"
           list={filteredList}
           setList={setFilteredList}
