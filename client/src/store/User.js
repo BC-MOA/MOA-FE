@@ -17,8 +17,12 @@ function User({ children }) {
   }, []);
   // 로그인 함수
   function login(newData) {
-    localStorage.setItem("userData", JSON.stringify(newData));
-    setUserData(newData);
+    const temp = JSON.parse(localStorage.getItem("userData"))
+      ? JSON.parse(localStorage.getItem("userData"))
+      : { id: "", key: 0 };
+    const newUserData = { ...temp, ...newData };
+    localStorage.setItem("userData", JSON.stringify(newUserData));
+    setUserData(newUserData);
   }
   // 유저 정보 수정 함수
   function updateUserData(newData) {
