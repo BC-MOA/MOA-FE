@@ -63,15 +63,15 @@ function EditDeposit() {
 
   const [newInputs, setNewInputs] = useState({
     ...props,
-    amountPerCycle: "",
+    amountPerCycle: 0,
   });
 
   useEffect(() => {
     if (newInputs.depositMethod === "자유입금") {
       setNewInputs({
         ...newInputs,
-        limitCycle: "-",
-        amountPerCycle: "",
+        limitCycle: "",
+        amountPerCycle: 0,
       });
     }
   }, [newInputs.depositMethod]);
@@ -80,7 +80,7 @@ function EditDeposit() {
     const { name, value } = event.target;
     setNewInputs({
       ...newInputs,
-      [name]: value,
+      [name]: name === "amountPerCycle" ? Number(value) : value,
     });
   };
 
@@ -89,9 +89,11 @@ function EditDeposit() {
       props.category === "군적금"
         ? ["depositMethod", "amountPerCycle"]
         : ["depositMethod", "limitCycle", "amountPerCycle"];
+
     return (
-      editableEls.filter((x) => newInputs[x] !== "" && newInputs[x] !== prev[x])
-        .length > 0
+      editableEls.filter(
+        (x) => !["", 0].includes(newInputs[x]) && newInputs[x] !== prev[x]
+      ).length > 0
     );
   };
 
@@ -151,9 +153,14 @@ function EditDeposit() {
               <>
                 <div className="subTitle">월 납입액</div>
                 <CustomInput
+                  type="number"
                   name="amountPerCycle"
                   placeholder={prev.amountPerCycle}
-                  value={newInputs.amountPerCycle}
+                  value={
+                    newInputs.amountPerCycle === 0
+                      ? ""
+                      : newInputs.amountPerCycle
+                  }
                   onChange={onChange}
                   unit={"원"}
                 />
@@ -167,34 +174,31 @@ function EditDeposit() {
                 <InputEl>
                   <div className="subTitle">납입액</div>
                   <CustomInput
+                    type="number"
                     name="amountPerCycle"
                     placeholder={prev.amountPerCycle}
-                    value={newInputs.amountPerCycle}
+                    value={
+                      newInputs.amountPerCycle === 0
+                        ? ""
+                        : newInputs.amountPerCycle
+                    }
                     onChange={onChange}
                     unit={"원"}
                   />
                 </InputEl>
                 <InputEl>
                   <div className="subTitle">출금계좌</div>
-                  <CustomSelect
-                    name="account"
-                    onChange={onChange}
-                    accounts={accountList}
-                    selected={accountList[0]}
-                  ></CustomSelect>
+                  <CustomInput
+                    disabled={true}
+                    value={accountList[0].accountName}
+                  />
                 </InputEl>
               </>
             )
           ) : (
-            // Todo: 출금계좌 선택 박스 수정하기
             <InputEl>
               <div className="subTitle">출금계좌</div>
-              <CustomSelect
-                name="account"
-                onChange={onChange}
-                accounts={accountList}
-                selected={accountList[0]}
-              ></CustomSelect>
+              <CustomInput disabled={true} value={accountList[0].accountName} />
             </InputEl>
           )}
         </InputEl>

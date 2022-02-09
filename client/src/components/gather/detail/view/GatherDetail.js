@@ -133,7 +133,7 @@ function GatherDetail() {
         ) : (
           <TransZero>
             <img
-              src={require("assets/gather/character_head.svg").default}
+              src={require("assets/character_head.svg").default}
               alt="캐릭터 얼굴"
             />
             <div className="zeroText">아직 거래내역이 없어요</div>

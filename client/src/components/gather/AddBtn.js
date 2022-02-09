@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import StateGather from "components/gather/detail/StateGather";
 import { useNavigate } from "react-router-dom";
+import { ReactSortable } from "react-sortablejs";
 
 const Container = styled.div`
-  padding: 16px 24px;
+  padding: 16px 0;
   background-color: #fff;
   box-shadow: 0px 1px 2px rgba(33, 33, 33, 0.08);
   border-radius: 12px;
@@ -15,7 +16,7 @@ const Container = styled.div`
     font-family: "Pretendard-SemiBold";
     font-size: 18px;
     line-height: 28px;
-    margin-bottom: 2px;
+    margin: 0 24px 2px;
 
     display: flex;
     justify-content: space-between;
@@ -28,6 +29,7 @@ const Container = styled.div`
     }
   }
   .adText {
+    margin-left: 24px;
     color: var(--Body_01);
     font-family: "Pretendard-Regular";
     font-size: 14px;
@@ -35,7 +37,7 @@ const Container = styled.div`
     text-align: left;
   }
 `;
-function AddBtn({ name, gatherList, children }) {
+function AddBtn({ name, gatherList, editToggle, isFirst, children }) {
   const history = useNavigate();
   const movePages = {
     군적금: "add-militarySaving",
@@ -43,13 +45,17 @@ function AddBtn({ name, gatherList, children }) {
     비상금: "add-safebox",
   };
 
-  const filterdLists = gatherList.filter((x) => x.savingMode === name);
+  const [filteredList, setFilteredList] = useState(
+    gatherList.filter((x) => x.savingMode === name)
+  );
+
+  // const filterdList = gatherList.filter((x) => x.savingMode === name);/
 
   return (
     <Container>
       <div className="btnName">
         <div>{name}</div>
-        {name === "군적금" && filterdLists.length < 2 ? (
+        {name === "군적금" && filteredList.length < 2 ? (
           <button
             onClick={() => {
               history(movePages[name]);
@@ -63,7 +69,7 @@ function AddBtn({ name, gatherList, children }) {
         {name !== "군적금" && (
           <button
             onClick={() => {
-              history(movePages[name]);
+              isFirst ? history("add-moa") : history(movePages[name]);
             }}
           >
             <img src={require("assets/gather/ic_add.svg").default} alt="" />
@@ -71,8 +77,20 @@ function AddBtn({ name, gatherList, children }) {
         )}
       </div>
       <div className="adText">{children}</div>
-      {filterdLists &&
-        filterdLists.map((x, idx) => <StateGather key={idx} props={x} />)}
+      {filteredList && (
+        <ReactSortable
+          group={movePages[name]}
+          handle=".sortHandle"
+          list={filteredList}
+          setList={setFilteredList}
+          disabled={editToggle}
+          animation={500}
+        >
+          {filteredList.map((x, idx) => (
+            <StateGather key={idx} props={x} editToggle={editToggle} />
+          ))}
+        </ReactSortable>
+      )}
     </Container>
   );
 }

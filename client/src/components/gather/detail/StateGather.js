@@ -9,11 +9,13 @@ import { calc_dDay } from "components/gather/addGoal/utils";
 
 const Container = styled.div`
   position: relative;
-  margin: 0 -4px;
   height: fit-content;
-  padding: 20px 0 12px;
-  cursor: pointer;
-
+  padding: 20px 20px 12px;
+  ${({ editToggle }) =>
+    editToggle &&
+    css`
+      cursor: pointer;
+    `}
   box-sizing: border-box;
   background-color: #fff;
 
@@ -25,8 +27,6 @@ const Container = styled.div`
     completed === true &&
     css`
       pointer-events: none;
-      padding: 20px 20px 12px;
-      margin: 0;
       border-radius: 12px;
       & + & {
         margin-top: 16px;
@@ -36,7 +36,7 @@ const Container = styled.div`
     completed !== true &&
     css`
       & + & {
-        margin-top: 4px;
+        border-top: 1px solid var(--Line_03);
       }
       &:last-child {
         padding-bottom: 0;
@@ -71,6 +71,7 @@ const Content = styled.div`
 `;
 
 const Main = styled.div`
+  position: relative;
   display: flex;
   font-family: "Pretendard-SemiBold";
   color: #333333;
@@ -86,6 +87,12 @@ const Main = styled.div`
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+    .sortHandle {
+      cursor: pointer;
+      position: absolute;
+      top: 0;
+      right: 0;
     }
   }
   .dDay {
@@ -160,17 +167,19 @@ const State = styled.div`
   }
 `;
 
-function StateGather({ props, completed }) {
+function StateGather({ props, completed, editToggle }) {
   const history = useNavigate();
   return (
     <Container
+      editToggle={editToggle}
       className={props.savingMode === "비상금" ? "safebox" : ""}
       category={props.savingMode}
       completed={completed}
       onClick={() => {
-        history("detail", {
-          state: props,
-        });
+        editToggle &&
+          history("detail", {
+            state: props,
+          });
       }}
     >
       <Content completed={completed}>
@@ -189,6 +198,13 @@ function StateGather({ props, completed }) {
             <div className="name">
               {props.goalName ? props.goalName : props.account.productName}
             </div>
+            {!editToggle && !completed && (
+              <img
+                className="sortHandle"
+                src={require("assets/ic_sort_handle.svg").default}
+                alt="순서변경 버튼"
+              />
+            )}
             {props.savingMode !== "비상금" && (
               <div className={completed ? "dDay none" : "dDay"}>
                 D-{calc_dDay(props.eDate)}
