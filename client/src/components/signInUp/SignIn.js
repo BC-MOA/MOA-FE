@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import styled from "styled-components";
 import {
   styleTitle,
@@ -135,7 +135,7 @@ function SignIn() {
     else return false;
   };
 
-  const { login: funcLogin, updateUserData } = useContext(UserData);
+  const { login: funcLogin, userData, updateUserData } = useContext(UserData);
   const { setGatherList } = useContext(GatherList);
 
   const gatherFormat = (input) => {
@@ -161,6 +161,11 @@ function SignIn() {
     };
   };
 
+  useEffect(() => {
+    if (!userData.id) {
+      history("/home");
+    }
+  }, []);
   return (
     <Container>
       <Header>
