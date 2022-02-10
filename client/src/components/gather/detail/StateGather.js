@@ -11,14 +11,21 @@ const Container = styled.div`
   position: relative;
   height: fit-content;
   padding: 20px 20px 12px;
+  box-sizing: border-box;
+  background-color: #fff;
+  ${({ noneClick }) =>
+    noneClick &&
+    css`
+      box-shadow: 0px 1px 2px rgba(33, 33, 33, 0.08);
+      border-radius: 12px;
+      pointer-events: none;
+    `}
   ${({ editToggle }) =>
-    editToggle &&
+    !editToggle &&
     css`
       cursor: pointer;
     `}
-  box-sizing: border-box;
-  background-color: #fff;
-
+  
   .safebox {
     padding: 20px 0;
   }
@@ -66,7 +73,7 @@ const Content = styled.div`
   ${({ completed }) =>
     completed === true &&
     css`
-      filter: grayscale(100%);
+      filter: grayscale(1);
     `}
 `;
 
@@ -167,16 +174,18 @@ const State = styled.div`
   }
 `;
 
-function StateGather({ props, completed, editToggle }) {
+function StateGather({ props, completed, editToggle, noneClick }) {
   const history = useNavigate();
   return (
     <Container
+      noneClick={noneClick}
       editToggle={editToggle}
       className={props.savingMode === "비상금" ? "safebox" : ""}
       category={props.savingMode}
       completed={completed}
       onClick={() => {
-        editToggle &&
+        !noneClick &&
+          !editToggle &&
           history("detail", {
             state: props,
           });
@@ -198,7 +207,7 @@ function StateGather({ props, completed, editToggle }) {
             <div className="name">
               {props.goalName ? props.goalName : props.account.productName}
             </div>
-            {!editToggle && !completed && (
+            {editToggle && !completed && (
               <img
                 className="sortHandle"
                 src={require("assets/ic_sort_handle.svg").default}
@@ -223,7 +232,11 @@ function StateGather({ props, completed, editToggle }) {
               </State>
             )}
           </div>
-          {completed ? <Tag className="tag">{props.savingMode}</Tag> : <></>}
+          {completed || noneClick ? (
+            <Tag className="tag">{props.savingMode}</Tag>
+          ) : (
+            <></>
+          )}
         </Main>
         {props.savingMode !== "비상금" && (
           <State>

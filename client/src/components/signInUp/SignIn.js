@@ -10,6 +10,8 @@ import CustomBtn from "components/gather/addGoal/CustomBtn";
 import CustomInput from "components/common/CustomInput";
 import { useNavigate } from "react-router-dom";
 import { UserData } from "store/User";
+import { userAccountList, userSavingList } from "components/common/dummyData";
+import { GatherList } from "store/GatherListContext";
 
 const Container = styled.div`
   width: 100%;
@@ -133,7 +135,31 @@ function SignIn() {
     else return false;
   };
 
-  const { login: funcLogin } = useContext(UserData);
+  const { login: funcLogin, updateUserData } = useContext(UserData);
+  const { setGatherList } = useContext(GatherList);
+
+  const gatherFormat = (input) => {
+    return {
+      savingMode: "군적금",
+      goalName: "",
+      category: "",
+      currentAmount: input.currentAmount,
+      goalAmount: input.goalAmount,
+      account: {
+        bankName: input.bankName,
+        productName: input.productName,
+        accountNumber: input.accountNumber,
+        accountCurrentAmount: 0,
+        bankImageUrl: "",
+      },
+      sDate: input.createdDate,
+      eDate: input.expirationDate,
+      depositMethod: "자유입금",
+      limitCycle: "",
+      amountPerCycle: 0,
+      transactions: [],
+    };
+  };
 
   return (
     <Container>
@@ -203,6 +229,13 @@ function SignIn() {
                   name: "박영찬",
                 })
               : setIsSuccess(false);
+            updateUserData({
+              userAccountList: userAccountList,
+              userSavingList: userSavingList,
+            });
+            userSavingList.map((x) =>
+              setGatherList((prev) => [...prev, gatherFormat(x)])
+            );
           }}
         >
           로그인

@@ -30,7 +30,7 @@ function AddMoaSavingSuccess() {
       <SubmitButton
         title={"확인"}
         onClickFunc={() => {
-          history("/gather");
+          history("/gather/add-goal");
         }}
         isActive={true}
       ></SubmitButton>

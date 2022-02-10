@@ -10,10 +10,13 @@ import { v1 as uuid } from "uuid";
 import BubbleContent from "./BubbleContent";
 import StoreSvg from "components/gather/addGoal/StoreSvg";
 import { UserData } from "store/User";
+import StateGather from "components/gather/detail/StateGather";
+import { GatherList } from "store/GatherListContext";
 
 const PROXY = window.location.hostname === "localhost" ? "" : "/api";
 function Home() {
   const { userData } = useContext(UserData);
+  const { gatherList } = useContext(GatherList);
   const history = useNavigate();
   const [challengeList, setChallengeList] = useState([]);
   const [gather, setGather] = useState([
@@ -96,6 +99,10 @@ function Home() {
                 <div className="adText">{x.adText}</div>
               </div>
             </AboutGather>
+          ))}
+        {userData.id &&
+          gatherList.map((x) => (
+            <StateGather key={uuid()} props={x} noneClick={true} />
           ))}
         <Btn
           onClick={() => {
