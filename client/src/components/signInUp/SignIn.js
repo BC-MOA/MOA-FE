@@ -164,7 +164,7 @@ function SignIn() {
   };
 
   useEffect(() => {
-    if (!userData.id) {
+    if (userData.id) {
       history("/home");
     }
   }, []);
