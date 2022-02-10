@@ -10,7 +10,9 @@ export const UserData = createContext({
 });
 
 function User({ children }) {
-  const [userData, setUserData] = useState({ id: "", key: 0 });
+  const [userData, setUserData] = useState(
+    JSON.parse(localStorage.getItem("userData")) || { id: "", key: 0 }
+  );
   useEffect(() => {
     getUserInfo();
   }, []);
