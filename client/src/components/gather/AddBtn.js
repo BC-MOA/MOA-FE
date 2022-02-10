@@ -83,7 +83,7 @@ function AddBtn({ name, gatherList, editToggle, isFirst, children }) {
           handle=".sortHandle"
           list={filteredList}
           setList={setFilteredList}
-          disabled={editToggle}
+          disabled={!editToggle}
           animation={500}
         >
           {filteredList.map((x, idx) => (
