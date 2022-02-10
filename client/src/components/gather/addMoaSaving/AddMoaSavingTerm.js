@@ -3,7 +3,7 @@ import Container from "components/common/Container";
 import ScrollBox from "components/common/ScrollBox";
 import SubmitButton from "components/common/SubmitButton";
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import TermCheckBox from "../addMilitarySavings/TermCheckBox";
 const checkLists = [
@@ -22,6 +22,7 @@ function AddMoaSavingTerm() {
   const [isAllChecked, setIsAllChecked] = useState(false);
   const [checkList, setCheckList] = useState(checkLists);
   const history = useNavigate();
+  const { state: savingType } = useLocation();
   useEffect(() => {
     resetAllCheck();
   }, []);
@@ -59,7 +60,7 @@ function AddMoaSavingTerm() {
       <SubmitButton
         title={"다음"}
         onClickFunc={() => {
-          history("passward");
+          history("passward", { state: savingType });
         }}
         isActive={isAllChecked}
       ></SubmitButton>

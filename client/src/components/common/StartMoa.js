@@ -22,7 +22,7 @@ const Content = styled.div`
 function StartMoa() {
   const history = useNavigate();
   useEffect(() => {
-    setTimeout(() => history("login"), 1500);
+    setTimeout(() => history("/home"), 1500);
   }, []);
   return (
     <Container>
