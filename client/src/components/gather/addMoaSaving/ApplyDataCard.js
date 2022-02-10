@@ -6,12 +6,12 @@ function ApplyDataCard() {
     <ApplyDataCardStyle>
       <div className="cardItem">
         <span>계좌명</span>
-        <span className="bold">{"통장명표시하기"}</span>
+        <span className="bold">{"모아(MOA)입출금통장"}</span>
       </div>
       <div className="cardItem">
         <span>은행</span>
         <div>
-          <span className="bold">{"은행명표시"}</span>
+          <span className="bold">{"KEB 하나은행"}</span>
         </div>
       </div>
       <div className="cardItem">

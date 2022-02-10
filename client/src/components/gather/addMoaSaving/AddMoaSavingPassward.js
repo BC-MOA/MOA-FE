@@ -2,12 +2,13 @@ import BackHeader from "components/common/BackHeader";
 import Container from "components/common/Container";
 import ScrollBox from "components/common/ScrollBox";
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { v1 as uuid } from "uuid";
 
 function AddMoaSavingPassward() {
   const history = useNavigate();
+  const { state: savingType } = useLocation();
   const [userPassword, setUserPassword] = useState(["", "", "", ""]);
   const [userPasswordCheck, setUserPasswordCheck] = useState(["", "", "", ""]);
   const [passwordCnt, setPasswordCnt] = useState(0);
@@ -35,7 +36,7 @@ function AddMoaSavingPassward() {
     if (4 === passwordCheckCnt) {
       if (JSON.stringify(userPasswordCheck) === JSON.stringify(userPassword)) {
         setIsSame("true");
-        history("success");
+        history("success", { state: savingType });
       } else {
         setUserPasswordCheck(["", "", "", ""]);
         setIsSame("false");
