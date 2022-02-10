@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Background = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
   width: 100%;
-  height: 100%;
+  height: 100vh;
 
   position: absolute;
   top: 0;
@@ -16,16 +16,22 @@ const Background = styled.div`
   justify-content: flex-end;
 
   z-index: 1;
+
+  overflow: hidden;
 `;
 
 //[styled comp] : 팝업 카드
 const Modal = styled.div`
-  width: 340px;
+  width: 460px;
 
-  height: 148px;
+  @media (min-width: 280px) and (max-width: 500px) {
+    width: 340px;
+  }
+
+  height: 150px;
   background-color: white;
   border-radius: 12px 12px 0 0;
-  padding: 15px 5%;
+  padding: 15px 20px;
   margin: 0 auto;
 
   display: flex;

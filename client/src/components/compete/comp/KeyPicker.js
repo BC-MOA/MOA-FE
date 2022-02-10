@@ -5,7 +5,7 @@ import React from "react";
 //[styled comp] : 배팅 키 개수 선택용 디자인
 const KeySelctor = styled.div`
   height: 130px;
-  padding: 15px;
+  padding: 5px 15px;
 
   display: flex;
   align-items: center;

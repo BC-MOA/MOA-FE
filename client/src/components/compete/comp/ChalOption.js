@@ -17,6 +17,11 @@ const Pickupbox = styled.div`
     img {
       width: 72px;
       height: 72px;
+
+      @media (min-width: 280px) and (max-width: 500px) {
+        width: 48px;
+        height: 48px;
+      }
     }
   }
 
