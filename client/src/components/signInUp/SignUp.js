@@ -114,7 +114,7 @@ function SignUp() {
     const { id, value } = e.target;
     setSignUp({
       ...signUp,
-      [id]: value,
+      [id]: `${id === "rrNumber2" ? value.slice(0, 1) : value}`,
     });
   };
   const focus1 = useRef();
@@ -154,6 +154,7 @@ function SignUp() {
             <input
               className="first"
               id="rrNumber1"
+              type="number"
               placeholder="생년월일"
               onChange={onChange}
               onKeyUp={(e) => {
@@ -165,6 +166,9 @@ function SignUp() {
             <span>-</span>
             {/* Todo: 주민등록번호 뒷자리는 한자리만 입력받은 -> 뒷자리 X 표시 추가 필요 */}
             <input
+              type="number"
+              maxLength="1"
+              value={signUp.rrNumber2}
               className="second"
               id="rrNumber2"
               placeholder=""
@@ -182,6 +186,7 @@ function SignUp() {
           </label>
           <div className="dividedInput">
             <input
+              type="number"
               className="first"
               id="serviceNumber1"
               placeholder="연도 뒤 2자리"
@@ -194,6 +199,7 @@ function SignUp() {
             />
             <span>-</span>
             <input
+              type="number"
               className="second"
               id="serviceNumber2"
               placeholder="군번 8자리를 입력해주세요"
@@ -207,6 +213,7 @@ function SignUp() {
             핸드폰 번호
           </label>
           <CustomInput
+            type="number"
             id="phoneNumber"
             placeholder="01012345670"
             onChange={onChange}
@@ -291,7 +298,7 @@ function SignUp() {
         path={"/loading"}
         addFunc={() => {
           funcLogin({
-            id: signUp.serviceNumber1 + signUp.serviceNumber2,
+            id: [signUp.serviceNumber1, signUp.serviceNumber2].join("-"),
             name: signUp.name,
           });
         }}

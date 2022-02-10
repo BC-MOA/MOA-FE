@@ -155,6 +155,7 @@ function SignIn() {
           </label>
           <div className="dividedInput">
             <input
+              type="number"
               className="first"
               id="serviceNumber1"
               placeholder="연도 뒤 2자리"
@@ -167,6 +168,7 @@ function SignIn() {
             />
             <span>-</span>
             <input
+              type="number"
               className="second"
               id="serviceNumber2"
               placeholder="군번 8자리를 입력해주세요"
@@ -197,7 +199,7 @@ function SignIn() {
           addFunc={() => {
             checkLogin(login)
               ? funcLogin({
-                  id: login.serviceNumber1 + login.serviceNumber2,
+                  id: [login.serviceNumber1, login.serviceNumber2].join("-"),
                   name: "박영찬",
                 })
               : setIsSuccess(false);
