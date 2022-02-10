@@ -109,6 +109,7 @@ const Content = styled.div`
   }
 `;
 function SignIn() {
+  const [isSuccess, setIsSuccess] = useState(true);
   const [login, setLogin] = useState({
     serviceNumber1: "",
     serviceNumber2: "",
@@ -123,8 +124,17 @@ function SignIn() {
   };
   const inputFocus = useRef();
   const history = useNavigate();
-  const isSuccess = true;
+  const checkLogin = (login) => {
+    if (
+      login.serviceNumber1 + login.serviceNumber2 === "2171264703" &&
+      login.password === "12345asdfg"
+    )
+      return true;
+    else return false;
+  };
+
   const { login: funcLogin } = useContext(UserData);
+
   return (
     <Container>
       <Header>
@@ -145,6 +155,7 @@ function SignIn() {
           </label>
           <div className="dividedInput">
             <input
+              type="number"
               className="first"
               id="serviceNumber1"
               placeholder="연도 뒤 2자리"
@@ -157,6 +168,7 @@ function SignIn() {
             />
             <span>-</span>
             <input
+              type="number"
               className="second"
               id="serviceNumber2"
               placeholder="군번 8자리를 입력해주세요"
@@ -183,9 +195,14 @@ function SignIn() {
         )}
         <CustomBtn
           active={!Object.keys(login).filter((x) => login[x] === "").length}
-          path={isSuccess ? "/home" : ""}
+          path={checkLogin(login) ? "/home" : ""}
           addFunc={() => {
-            funcLogin({ id: "1234", name: "zz" });
+            checkLogin(login)
+              ? funcLogin({
+                  id: [login.serviceNumber1, login.serviceNumber2].join("-"),
+                  name: "박영찬",
+                })
+              : setIsSuccess(false);
           }}
         >
           로그인
