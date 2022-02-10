@@ -135,7 +135,7 @@ function SignUp() {
   const { login: funcLogin, userData } = useContext(UserData);
   const history = useNavigate();
   useEffect(() => {
-    if (!userData.id) {
+    if (userData.id) {
       history("/home");
     }
   }, []);
