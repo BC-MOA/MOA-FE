@@ -1,7 +1,8 @@
-import React from "react";
 import styled from "styled-components";
 import StyledLink from "components/common/StyledLink";
 import kFormatter from "../compete/function/kFormatter";
+import { UserData } from "store/User";
+import React, { useContext } from "react";
 
 //Header-상단공간
 const StyledHeader = styled.div`
@@ -52,9 +53,16 @@ const NotLinkedKey = ({ count }) => (
   </StyledKeyBox>
 );
 
+const BellWrapper = ({ alarm, children }) =>
+  alarm ? (
+    <StyledLink to="/notice">{children}</StyledLink>
+  ) : (
+    <div>{children}</div>
+  );
+
 //알람
 const Bell = ({ alarm }) => (
-  <StyledLink to="/notice">
+  <BellWrapper alarm={alarm}>
     <img
       src={
         alarm
@@ -62,16 +70,19 @@ const Bell = ({ alarm }) => (
           : require("assets/compete/alarm-off.svg").default
       }
     />
-  </StyledLink>
+  </BellWrapper>
 );
 
-function Header({ $title, keys, alarm }) {
+function Header({ $title }) {
+  const User = useContext(UserData);
+  const userData = User.userData;
+
   return (
     <StyledHeader $title={$title}>
       {$title && <img src={require("assets/compete/moa.svg").default} />}
       <div className="content">
-        <LinkedKey count={kFormatter(keys)}></LinkedKey>
-        <Bell alarm={alarm}></Bell>
+        <LinkedKey count={kFormatter(userData.key)}></LinkedKey>
+        <Bell alarm={userData.id !== ""}></Bell>
       </div>
     </StyledHeader>
   );
