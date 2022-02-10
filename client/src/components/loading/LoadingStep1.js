@@ -7,7 +7,7 @@ function LoadingStep1() {
   return (
     <Content>
       <Title>
-        <span className="num">{"21-71264703"}</span>
+        <span className="num">{userData.id}</span>
         <div className="bold">
           <span className="green">{userData.name}</span>
           <span>님</span>
