@@ -112,7 +112,8 @@ function Gather() {
 
   const controlNameList = ["진행중", "완료"];
   const [listControl, setListControl] = useState(controlNameList[0]);
-  const [editToggle, setEditToggle] = useState(true);
+  const [editToggle, setEditToggle] = useState(false);
+
   const [gather, setGather] = useState([
     {
       id: 1,
@@ -149,13 +150,13 @@ function Gather() {
           onClick={() => {
             setEditToggle(!editToggle);
           }}
-          className={editToggle ? "" : "Active"}
+          className={editToggle ? "Active" : ""}
         >
           <img
             src={require("assets/gather/Sort_arrow_light.svg").default}
             alt="순서변경 아이콘"
           />
-          {editToggle ? "순서 편집하기" : "편집완료"}
+          {editToggle ? "편집완료" : "순서 편집하기"}
         </EditBtn>
       </div>
       <Content>
@@ -163,7 +164,7 @@ function Gather() {
           <ReactSortable
             list={gather}
             setList={setGather}
-            disabled={editToggle}
+            disabled={!editToggle}
             animation={500}
           >
             {gather.map((x) => (
