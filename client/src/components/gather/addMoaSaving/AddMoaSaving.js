@@ -1,16 +1,18 @@
 import BackHeader from "components/common/BackHeader";
 import Container from "components/common/Container";
 import SubmitButton from "components/common/SubmitButton";
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserData } from "store/User";
 import styled from "styled-components";
 
 function AddMoaSaving() {
   const history = useNavigate();
+  const { userData } = useContext(UserData);
   return (
     <Container>
       <BackHeader path={-1} isScrolled={true} title={""} />
-      <Title className="first">{"민수"}님,</Title>
+      <Title className="first">{userData.name}님,</Title>
       <Title>첫 {"목표"}를 세우시는군요!</Title>
       <SubTitle>
         목표 금액과 비상금은 KEB 하나은행과 모아(MOA)가 함께 제휴해 제공하는

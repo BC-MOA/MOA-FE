@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Container from "components/common/Container";
 import SubmitButton from "components/common/SubmitButton";
 import ScrollBox from "components/common/ScrollBox";
-import EditTitle from "../EditTitle";
+import EditTitle from "../../EditTitle";
 function EditSavingTitle() {
   const history = useNavigate();
+  const { state: applyData } = useLocation();
   const startTitle = "";
   const [isInputChange, setIsInputChange] = useState(false);
   const [newTitle, setNewTitle] = useState(startTitle);
@@ -57,10 +58,11 @@ function EditSavingTitle() {
             setNewTitle={setNewTitle}
             setIsInputChange={setIsInputChange}
           />
-          {/* todo - 버튼 클릭시 군적금 신청 set api 호출필요 - 호출이후 gather/mili-detail로 이동*/}
           <SubmitButton
             title={"목표 설정 완료"}
             onClickFunc={() => {
+              // todo - 목표명 변경하는 api 호출 해야함
+              // 성공시 아래코드
               history("/key", {
                 state: {
                   num: 3,

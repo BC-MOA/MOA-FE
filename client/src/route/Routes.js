@@ -31,7 +31,7 @@ import SignIn from "components/signInUp/SignIn";
 import SignUp from "components/signInUp/SignUp";
 import ResetPassword from "components/signInUp/ResetPassword";
 import MilitaryDetailEdit from "components/gather/MilitaryDetailEdit";
-import EditSavingTitle from "components/gather/addMilitarySavings/EditSavingTitle";
+import EditSavingTitle from "components/gather/addMilitarySavings/views/EditSavingTitle";
 import AddMilitarySavingsPassward from "components/gather/addMilitarySavings/views/AddMilitarySavingsPassward";
 import AboutReward from "components/reward/views/AboutReward";
 import CheckPassword from "components/gather/detail/view/CheckPassword";

@@ -1,12 +1,14 @@
 import Container from "components/common/Container";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SyncLoader from "react-spinners/SyncLoader";
+import { UserData } from "store/User";
 import styled from "styled-components";
 
 function LoadingStep3() {
   const history = useNavigate();
   const [isFound, setIsFound] = useState(false);
+  const { userData } = useContext(UserData);
   useEffect(() => {
     getUserAccountAll();
   }, []);
@@ -28,7 +30,7 @@ function LoadingStep3() {
   return (
     <Container>
       <Content>
-        <div>{"민수"}님의 군 관련 계좌를</div>
+        <div>{userData.name}님의 군 관련 계좌를</div>
         <div className="last">열심히 찾고 있어요</div>
         <SyncLoader
           size={15}

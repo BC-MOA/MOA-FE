@@ -1,10 +1,12 @@
 import BackHeader from "components/common/BackHeader";
 import Container from "components/common/Container";
 import ScrollBox from "components/common/ScrollBox";
+import StyleClipLoader from "components/common/StyleClipLoader";
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { v1 as uuid } from "uuid";
+
 function AddMilitarySavingsPassward() {
   const { state: applyData } = useLocation();
   const history = useNavigate();
@@ -13,6 +15,7 @@ function AddMilitarySavingsPassward() {
   const [passwordCnt, setPasswordCnt] = useState(0);
   const [passwordCheckCnt, setPasswordCheckCnt] = useState(0);
   const [isSame, setIsSame] = useState("");
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     let num = 0;
     for (let index = 0; index < userPassword.length; index++) {
@@ -34,8 +37,14 @@ function AddMilitarySavingsPassward() {
   useEffect(() => {
     if (4 === passwordCheckCnt) {
       if (JSON.stringify(userPasswordCheck) === JSON.stringify(userPassword)) {
+        setLoading(true);
         setIsSame("true");
-        history("success", { state: { ...applyData, userPassword } });
+        // todo 군적금 신청 api 호출
+        // 응답 데이터를 성공 라우터로 보낼 것
+        setTimeout(() => {
+          setLoading(false);
+          history("success", { state: { ...applyData, userPassword } });
+        }, 1000);
       } else {
         setUserPasswordCheck(["", "", "", ""]);
         setIsSame("false");
@@ -69,6 +78,7 @@ function AddMilitarySavingsPassward() {
 
   return (
     <Container>
+      {loading && <StyleClipLoader />}
       <BackHeader path={-1} isScrolled={true} title={"신한 장병내일준비적금"} />
       <ScrollBox paddingValue={"140px 0"}>
         {4 !== passwordCnt && (
@@ -110,19 +120,21 @@ function AddMilitarySavingsPassward() {
               )}
             </div>
 
-            <div className="password">
-              {userPasswordCheck.map((item, index) => (
-                <img
-                  key={uuid()}
-                  src={
-                    "" !== item
-                      ? require("assets/gather/ic_password_green.svg").default
-                      : require("assets/gather/ic_password.svg").default
-                  }
-                  alt={item}
-                />
-              ))}
-            </div>
+            {"true" !== isSame && (
+              <div className="password">
+                {userPasswordCheck.map((item, index) => (
+                  <img
+                    key={uuid()}
+                    src={
+                      "" !== item
+                        ? require("assets/gather/ic_password_green.svg").default
+                        : require("assets/gather/ic_password.svg").default
+                    }
+                    alt={item}
+                  />
+                ))}
+              </div>
+            )}
             {"false" === isSame && (
               <button
                 onClick={() => {
@@ -136,66 +148,69 @@ function AddMilitarySavingsPassward() {
             )}
           </MessageBox>
         )}
-        <KeyPad>
-          {[0, 1, 2].map((num) => {
-            const list = [3 * num + 1, 3 * num + 2, 3 * num + 3];
-            return (
-              <div key={uuid()} className="row">
-                {list.map((numX) => {
-                  return (
-                    <div
-                      onClick={() => {
-                        if (4 === passwordCnt) {
-                          funcSetPasswordCheck(numX, "plus");
-                        } else {
-                          funcSetPassword(numX, "plus");
-                        }
-                      }}
-                      key={uuid()}
-                      className="item"
-                    >
-                      {numX}
-                    </div>
-                  );
-                })}
+        {"true" !== isSame && (
+          <KeyPad>
+            {[0, 1, 2].map((num) => {
+              const list = [3 * num + 1, 3 * num + 2, 3 * num + 3];
+              return (
+                <div key={uuid()} className="row">
+                  {list.map((numX) => {
+                    return (
+                      <div
+                        onClick={() => {
+                          if (4 === passwordCnt) {
+                            funcSetPasswordCheck(numX, "plus");
+                          } else {
+                            funcSetPassword(numX, "plus");
+                          }
+                        }}
+                        key={uuid()}
+                        className="item"
+                      >
+                        {numX}
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })}
+            <div className="row">
+              <div className="item"></div>
+              <div
+                className="item"
+                onClick={() => {
+                  if (4 === passwordCnt) {
+                    funcSetPasswordCheck(0, "plus");
+                  } else {
+                    funcSetPassword(0, "plus");
+                  }
+                }}
+              >
+                0
               </div>
-            );
-          })}
-          <div className="row">
-            <div className="item"></div>
-            <div
-              className="item"
-              onClick={() => {
-                if (4 === passwordCnt) {
-                  funcSetPasswordCheck(0, "plus");
-                } else {
-                  funcSetPassword(0, "plus");
-                }
-              }}
-            >
-              0
+              <div
+                className="item"
+                onClick={() => {
+                  if (4 === passwordCnt) {
+                    funcSetPasswordCheck("", "minus");
+                  } else {
+                    funcSetPassword("", "minus");
+                  }
+                }}
+              >
+                <img
+                  src={require("assets/ic_keypad_delete.svg").default}
+                  alt={"취소"}
+                />
+              </div>
             </div>
-            <div
-              className="item"
-              onClick={() => {
-                if (4 === passwordCnt) {
-                  funcSetPasswordCheck("", "minus");
-                } else {
-                  funcSetPassword("", "minus");
-                }
-              }}
-            >
-              <img
-                src={require("assets/ic_keypad_delete.svg").default}
-                alt={"취소"}
-              />
-            </div>
-          </div>
-        </KeyPad>
+          </KeyPad>
+        )}
       </ScrollBox>
     </Container>
   );
 }
+
 const MessageBox = styled.div`
   display: flex;
   flex-direction: column;
