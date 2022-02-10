@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserData } from "store/User";
 import styled from "styled-components";
 
 function LoadingStep1() {
+  const { userData } = useContext(UserData);
   return (
     <Content>
       <Title>
-        <span className="num">{"21-71264703"}</span>
+        <span className="num">{userData.id}</span>
         <div className="bold">
-          <span className="green">{"최민수"}</span>
+          <span className="green">{userData.name}</span>
           <span>님</span>
         </div>
         <span className="bold">모아(MOA) 가입을 환영합니다!</span>
