@@ -81,7 +81,7 @@ function AddBtn({ name, gatherList, editToggle, isFirst, children }) {
       <div className="adText">{children}</div>
       {filteredList && (
         <ReactSortable
-          group={movePages[name]}
+          group={name}
           handle=".sortHandle"
           list={filteredList}
           setList={setFilteredList}

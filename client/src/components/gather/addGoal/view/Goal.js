@@ -5,11 +5,11 @@ import Category from "components/gather/addGoal/Category";
 import SelectBox from "components/gather/addGoal/SelectBox";
 import CustomBtn from "components/gather/addGoal/CustomBtn";
 import { calcAmount } from "components/gather/addGoal/utils";
-import CustomSelect from "components/gather/addGoal/CustomSelect";
 import BackHeader from "components/common/BackHeader";
 import { hideScrollBar } from "style/common";
 import DatePick from "../DatePick";
 import { accountList } from "components/common/dummyData";
+import { v1 as uuid } from "uuid";
 
 const Container = styled.div`
   width: 100%;
@@ -97,6 +97,7 @@ function Goal() {
   const avgCnt = 2;
 
   const [inputs, setInputs] = useState({
+    id: uuid(),
     savingMode: "목표",
     goalName: "",
     category: "여행",

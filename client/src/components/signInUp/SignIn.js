@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { UserData } from "store/User";
 import { userAccountList, userSavingList } from "components/common/dummyData";
 import { GatherList } from "store/GatherListContext";
+import { v1 as uuid } from "uuid";
 
 const Container = styled.div`
   width: 100%;
@@ -140,6 +141,7 @@ function SignIn() {
 
   const gatherFormat = (input) => {
     return {
+      id: uuid(),
       savingMode: "군적금",
       goalName: "",
       category: "",
@@ -228,19 +230,21 @@ function SignIn() {
           active={!Object.keys(login).filter((x) => login[x] === "").length}
           path={checkLogin(login) ? "/home" : ""}
           addFunc={() => {
-            checkLogin(login)
-              ? funcLogin({
-                  id: [login.serviceNumber1, login.serviceNumber2].join("-"),
-                  name: "박영찬",
-                })
-              : setIsSuccess(false);
-            updateUserData({
-              userAccountList: userAccountList,
-              userSavingList: userSavingList,
-            });
-            userSavingList.map((x) =>
-              setGatherList((prev) => [...prev, gatherFormat(x)])
-            );
+            if (checkLogin(login)) {
+              funcLogin({
+                id: [login.serviceNumber1, login.serviceNumber2].join("-"),
+                name: "박영찬",
+              });
+              userSavingList.map((x) =>
+                setGatherList((prev) => [...prev, gatherFormat(x)])
+              );
+              updateUserData({
+                userAccountList: userAccountList,
+                userSavingList: userSavingList,
+              });
+            } else {
+              setIsSuccess(false);
+            }
           }}
         >
           로그인

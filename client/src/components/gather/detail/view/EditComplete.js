@@ -5,6 +5,7 @@ import CustomBtn from "components/gather/addGoal/CustomBtn";
 import { useLocation } from "react-router-dom";
 import moment from "moment";
 import { GatherList } from "store/GatherListContext";
+import { UserData } from "store/User";
 
 const styleText = css`
   ${styleSubTitle}
@@ -83,6 +84,7 @@ function EditComplete() {
   const { state } = useLocation();
   const { prev, newInputs, whatEdit } = state;
   const { setGatherList } = useContext(GatherList);
+  const { updateUserData } = useContext(UserData);
   const editCates = {
     goal: "목표를 수정했어요",
     deposit: `${
@@ -235,7 +237,7 @@ function EditComplete() {
       <CustomBtn
         addFunc={() =>
           setGatherList((prevList) =>
-            prevList.map((x) => (x.goalName === prev.goalName ? newInputs : x))
+            prevList.map((x) => (x.id === prev.id ? newInputs : x))
           )
         }
         active={true}

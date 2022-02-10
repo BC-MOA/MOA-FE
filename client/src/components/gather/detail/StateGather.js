@@ -19,6 +19,9 @@ const Container = styled.div`
       box-shadow: 0px 1px 2px rgba(33, 33, 33, 0.08);
       border-radius: 12px;
       pointer-events: none;
+      & + & {
+        margin-top: 14px;
+      }
     `}
   ${({ editToggle }) =>
     !editToggle &&
