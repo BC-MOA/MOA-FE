@@ -36,9 +36,7 @@ const BetCard = styled.div`
  * [props]
  * 챌린지 정보
  */
-function BetCompeteCard(props) {
-  const obj = props.obj;
-
+function BetCompeteCard({ obj }) {
   const [pop, setPop] = useState(false);
 
   const togglePop = () => {
@@ -63,7 +61,7 @@ function BetCompeteCard(props) {
           <Count>{kFormatter(obj.total)}명 참여</Count>
         </div>
       </ContentBox>
-      {pop && <PopUp func={togglePop} title={obj.title} type={true}></PopUp>}
+      {pop && <PopUp func={togglePop} obj={obj} type={true}></PopUp>}
       <StyledBetButtonBox>
         <StyledLink to={"/compete/" + obj.key} state={obj}>
           <StyledBetButton>배팅 수정</StyledBetButton>

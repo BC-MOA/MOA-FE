@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { UserData } from "store/User";
 
 const StyledLinkButton = styled.div`
   width: 90%;
@@ -33,9 +35,11 @@ const StyledLinkButton = styled.div`
 
 function LinkButton({ title, to, trans }) {
   const navigate = useNavigate();
+  const User = useContext(UserData);
 
   const logout = () => {
-    console.log("logout!");
+    User.logOut();
+    navigate("/login");
   };
 
   return (

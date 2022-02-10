@@ -17,7 +17,7 @@ const TimerBox = styled.div`
 //[args] : due-만료시간
 const renderer = ({ days, hours, minutes, seconds, completed }) => {
   if (completed) {
-    //완료시 처리할 내용
+    //완료시 처리할 내용 : 만료 처리/ 알람 트리거
     return <>done!</>;
   } else {
     //카운트 다운 출력
@@ -32,21 +32,10 @@ const renderer = ({ days, hours, minutes, seconds, completed }) => {
   }
 };
 
-/**
- * [comp]
- * Timer
- *
- * [state]
- * none
- *
- * [props]
- * 챌린지 정보-만료일
- */
-
-const Timer = (props) => {
+const Timer = ({ due }) => {
   const now = moment();
 
-  return <Countdown date={now + (props.due - now)} renderer={renderer} />;
+  return <Countdown date={now + (due - now)} renderer={renderer} />;
 };
 
 export { Timer, TimerBox };

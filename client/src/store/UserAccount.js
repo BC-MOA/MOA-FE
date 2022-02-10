@@ -1,13 +1,6 @@
-/**
- * [계좌 정보]
- *
- * 월급 계좌 1개
- * 군 적금 : 0개~2개
- *
- * account_deposit : 월급
- * account_install : 적금
- * account_partner : 제휴
- */
+import { createContext, useState } from "react";
+
+//data
 const data_case1 = {
   account_deposit: [
     {
@@ -73,9 +66,24 @@ const data_case3 = {
   account_partner: [],
 };
 
-//사용자 정보
-const user_data = {
-  name: "민수",
-};
+//context
+const UserAccount = createContext({
+  userAccount: {},
+  setCompListWrapper: () => {},
+});
 
-export { data_case1, data_case2, data_case3, user_data };
+function UserAccountContext({ children }) {
+  const [userAccount, setUserAccount] = useState(data_case2);
+
+  function setUserAccountWrapper(accounts) {
+    setUserAccount(accounts);
+  }
+
+  return (
+    <UserAccount.Provider value={{ userAccount, setUserAccountWrapper }}>
+      {children}
+    </UserAccount.Provider>
+  );
+}
+
+export { UserAccountContext, UserAccount };

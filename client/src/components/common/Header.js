@@ -1,7 +1,8 @@
-import React from "react";
 import styled from "styled-components";
 import StyledLink from "components/common/StyledLink";
 import kFormatter from "../compete/function/kFormatter";
+import { UserData } from "store/User";
+import React, { useContext } from "react";
 
 //Header-상단공간
 const StyledHeader = styled.div`
@@ -35,43 +36,53 @@ const StyledKeyBox = styled.div`
 `;
 
 //링크인 키
-const LinkedKey = (props) => (
+const LinkedKey = ({ count }) => (
   <StyledLink to="/reward">
     <StyledKeyBox>
       <img src={require("assets/compete/key.svg").default} />
-      <div className="text">{props.count}개</div>
+      <div className="text">{count}개</div>
     </StyledKeyBox>
   </StyledLink>
 );
 
 //링크가 아닌 키
-const NotLinkedKey = (props) => (
+const NotLinkedKey = ({ count }) => (
   <StyledKeyBox>
     <img src={require("assets/compete/key.svg").default} />
-    <div className="text">{props.count}개</div>
+    <div className="text">{count}개</div>
   </StyledKeyBox>
 );
 
+const BellWrapper = ({ alarm, children }) =>
+  alarm ? (
+    <StyledLink to="/notice">{children}</StyledLink>
+  ) : (
+    <div>{children}</div>
+  );
+
 //알람
-const Bell = (props) => (
-  <StyledLink to="/notice">
+const Bell = ({ alarm }) => (
+  <BellWrapper alarm={alarm}>
     <img
       src={
-        props.alarm
+        alarm
           ? require("assets/compete/alarm-on.svg").default
           : require("assets/compete/alarm-off.svg").default
       }
     />
-  </StyledLink>
+  </BellWrapper>
 );
 
-function Header(props) {
+function Header({ $title }) {
+  const User = useContext(UserData);
+  const userData = User.userData;
+
   return (
-    <StyledHeader $title={props.$title}>
-      {props.$title && <img src={require("assets/compete/moa.svg").default} />}
+    <StyledHeader $title={$title}>
+      {$title && <img src={require("assets/compete/moa.svg").default} />}
       <div className="content">
-        <LinkedKey count={kFormatter(props.keys)}></LinkedKey>
-        <Bell alarm={props.alarm}></Bell>
+        <LinkedKey count={kFormatter(userData.key)}></LinkedKey>
+        <Bell alarm={userData.id !== ""}></Bell>
       </div>
     </StyledHeader>
   );

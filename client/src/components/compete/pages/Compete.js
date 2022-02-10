@@ -1,13 +1,12 @@
 import { Header } from "components/common/Header";
-import AllCompContext from "../context/AllCompContext";
-import MyCompeteContext from "../context/MyCompContext";
 import NavBar from "components/common/NavBar";
 import styled from "styled-components";
-import { allCompList, myCompList } from "../context/data";
 import React, { useState } from "react";
 import CompLists from "./CompLists";
 import Banner from "../comp/BannerSwiper";
 import CategoryButton from "../comp/CategoryButton";
+
+import { useLocation } from "react-router-dom";
 
 const StyleNavBar = styled(NavBar)`
   position: fixed;
@@ -22,18 +21,10 @@ const IgnorePaddingBox = styled.div`
   flex-direction: column;
 `;
 
-/**
- * [comp]
- * Compete
- *
- * [state]
- * isAll : 카테고리 설정을 위한 state
- *
- * [props]
- * none
- */
+//isAll : 카테고리 설정을 위한 state
 function Compete() {
-  const [isAll, setisAll] = useState(true);
+  const { state } = useLocation();
+  const [isAll, setisAll] = useState(state !== null ? state.type : true);
 
   function setCategoryWrapper(input) {
     setisAll(input);
@@ -41,31 +32,27 @@ function Compete() {
 
   return (
     <>
-      <MyCompeteContext.Provider value={myCompList.compList}>
-        <AllCompContext.Provider value={allCompList.compList}>
-          <Header $title={false} keys={3000} alarm={true}></Header>
-          <IgnorePaddingBox>
-            <div>
-              <CategoryButton
-                disabled={isAll}
-                onClick={() => setCategoryWrapper(true)}
-              >
-                전체 챌린지
-              </CategoryButton>
-              <CategoryButton
-                disabled={!isAll}
-                onClick={() => setCategoryWrapper(false)}
-              >
-                내 챌린지
-              </CategoryButton>
+      <Header $title={false}></Header>
+      <IgnorePaddingBox>
+        <div>
+          <CategoryButton
+            disabled={isAll}
+            onClick={() => setCategoryWrapper(true)}
+          >
+            전체 챌린지
+          </CategoryButton>
+          <CategoryButton
+            disabled={!isAll}
+            onClick={() => setCategoryWrapper(false)}
+          >
+            내 챌린지
+          </CategoryButton>
 
-              {isAll ? <Banner></Banner> : <></>}
-              <CompLists category={isAll}></CompLists>
-            </div>
-          </IgnorePaddingBox>
-          <StyleNavBar></StyleNavBar>
-        </AllCompContext.Provider>
-      </MyCompeteContext.Provider>
+          {isAll ? <Banner></Banner> : <></>}
+          <CompLists category={isAll}></CompLists>
+        </div>
+      </IgnorePaddingBox>
+      <StyleNavBar></StyleNavBar>
     </>
   );
 }

@@ -5,7 +5,7 @@ import React from "react";
 //[styled comp] : 배팅 키 개수 선택용 디자인
 const KeySelctor = styled.div`
   height: 130px;
-  padding: 15px;
+  padding: 5px 15px;
 
   display: flex;
   align-items: center;
@@ -55,17 +55,10 @@ const options = {
 };
 
 /**
- * [comp]
- * KeyPicker
- *
- * [state]
- * none
- *
- * [props]
  * onchange : state 변경용 함수
  * count : keyCount = optionGroups, valueGroups을 가지는 객체
  */
-const KeyPicker = (props) => {
+const KeyPicker = ({ onchange, count }) => {
   return (
     <KeySelctor>
       <img
@@ -79,9 +72,9 @@ const KeyPicker = (props) => {
       </div>
       <div className="pickerWrapper">
         <Picker
-          optionGroups={props.count.optionGroups}
-          valueGroups={props.count.valueGroups}
-          onChange={props.onchange}
+          optionGroups={count.optionGroups}
+          valueGroups={count.valueGroups}
+          onChange={onchange}
           height={150}
         />
       </div>

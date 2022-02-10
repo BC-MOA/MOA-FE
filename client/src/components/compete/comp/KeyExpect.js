@@ -47,25 +47,19 @@ const Expect = styled.div`
 `;
 
 /**
- * [comp]
- * ExpectKey
- *
- * [state]
- * pop : 팝업 관련 state
- *
  * [props]
  * bet : int/ 베팅한 개수
  * pick : bool/선택한 대상
  * keys: 전체 베팅된 키 리스트
  */
-const ExpectedKey = (props) => {
+const ExpectedKey = ({ bet, pick, keys }) => {
   const [pop, setPop] = useState(false);
 
   const handleClick = () => {
     setPop(!pop);
   };
 
-  const expect = prediction(props.keys, props.pick, props.bet);
+  const expect = prediction(keys, pick, bet);
 
   return (
     <Expect>

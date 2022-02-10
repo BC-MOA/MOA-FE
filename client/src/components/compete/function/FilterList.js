@@ -4,15 +4,11 @@ import BasicCompeteCard from "../comp/Card/BasicCompeteCard";
 import Empty from "../comp/Empty";
 
 /**
- * [function] : filterExpired
  * 만료된 챌린지 분류
  *
  * [args]
  * done : bool - 만료 filter 여부
  * compList : 챌린지 리스트
- *
- * [return]
- * 분류된 챌린지 리스트
  */
 function filterExpired(done, compList) {
   let filterdList;
@@ -32,8 +28,7 @@ function filterExpired(done, compList) {
 }
 
 /**
- * [function] : filterList
- * 만료된 챌린지 분류 -> 컴포넌트 생성
+ * 챌린지 카드 컴포넌트 생성
  *
  * [args]
  * condition : bool/string - filter 되는 조건
@@ -51,7 +46,7 @@ function createCardList(condition, compList) {
       //만료일 filter
       filterdList = filterExpired(condition, compList);
       //최신순으로 정렬
-      filterdList = filterdList.sort((a, b) => b.due - a.due);
+      filterdList = filterdList.sort((a, b) => a.due - b.due);
       for (const obj of filterdList) {
         cardList.push(
           condition ? (
@@ -79,7 +74,7 @@ function createCardList(condition, compList) {
           break;
         case "recent":
           filterdList = filterExpired(false, compList);
-          filterdList = filterdList.sort((a, b) => b.due - a.due);
+          filterdList = filterdList.sort((a, b) => a.due - b.due);
           break;
       }
       for (const obj of filterdList) {

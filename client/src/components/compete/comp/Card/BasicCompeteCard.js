@@ -14,7 +14,6 @@ import {
   Versus,
 } from "./CardComps";
 
-//[styled comp] : 기본 카드
 const Card = styled.div`
   ${CardDesign}
   transition: 0.1s all;
@@ -25,20 +24,7 @@ const Card = styled.div`
   }
 `;
 
-/**
- * [comp]
- * BasicCompeteCard
- *
- * [state]
- * none
- *
- * [props]
- * 챌린지 정보
- */
-
-function BasicCompeteCard(props) {
-  const obj = props.obj;
-
+function BasicCompeteCard({ obj }) {
   return (
     <StyledLink to={"/compete/" + obj.key} state={obj}>
       <Card>

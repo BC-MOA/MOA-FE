@@ -58,17 +58,11 @@ const BetCard = styled.div`
 `;
 
 /**
- * [comp]
- * CompDetail
- *
  * [state]
  * isBetted : 베팅 여부 관련 state
  * pickUped : 선택 여부 관련 state
  * state : 챌린지 정보 - useLocation 통해 정보전달
  * keyCount: 열쇠 선택 관련 state
- *
- * [props]
- * none
  */
 function CompDetail() {
   //챌린지 정보 state
@@ -104,17 +98,18 @@ function CompDetail() {
     }));
   };
 
+  //팝업창
   const [pop, setPop] = useState(false);
 
   const togglePop = () => {
     setPop(!pop);
   };
 
-  //베팅 버튼 클릭
-  //API 추가 필요
-  const clickBet = () => {
-    console.log("bet!");
-    togglePop();
+  //전달되는 현재 배팅 정보
+  const betinfo = {
+    pick: pick,
+    betkey: keyCount.valueGroups.number,
+    compkey: comp.key,
   };
 
   return (
@@ -171,12 +166,17 @@ function CompDetail() {
           </TimerBox>
           <SubmitButton
             isActive={isBetted}
-            onClickFunc={clickBet}
+            onClickFunc={togglePop}
             title={"배팅하기"}
           ></SubmitButton>
         </div>
         {pop && (
-          <PopUp func={togglePop} title={comp.title} type={false}></PopUp>
+          <PopUp
+            betinfo={betinfo}
+            func={togglePop}
+            obj={comp}
+            type={false}
+          ></PopUp>
         )}
       </Detail>
     </>

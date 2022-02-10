@@ -1,5 +1,4 @@
 /**
- * [function] : prediction
  * 예상획득 열쇠를 계산
  *
  * [args]

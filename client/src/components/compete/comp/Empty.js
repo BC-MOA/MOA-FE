@@ -15,6 +15,7 @@ const Box = styled.div`
   }
 `;
 
+//type: 전체/내 챌린지 구분용
 const Empty = ({ type }) => {
   return (
     <Box>
