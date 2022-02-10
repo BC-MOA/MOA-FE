@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { AllCompete } from "store/CompeteAll";
 import { MyCompete } from "store/CompeteMy";
 import { useContext } from "react";
 
@@ -94,7 +93,6 @@ const Modal = styled.div`
  */
 
 function PopUp({ betinfo, obj, func, type }) {
-  const allContext = useContext(AllCompete);
   const myContext = useContext(MyCompete);
   const navigate = useNavigate();
 

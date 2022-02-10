@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import BackHeader from "components/common/BackHeader";
+import { UserData } from "store/User";
+import React, { useContext } from "react";
 
 const StyledBody = styled.div`
   font-family: "Pretendard-Regular";
@@ -97,7 +99,8 @@ const Box = styled.div`
 
 const ProfileEdit = () => {
   //context에서 가져온다고 가정
-  const default_phone = "01088889999";
+  const User = useContext(UserData);
+  const default_phone = User.userData.phone;
 
   const {
     register,
@@ -131,7 +134,7 @@ const ProfileEdit = () => {
               <img
                 alt="none"
                 src={
-                  getValues("password") == "" || errors.password
+                  getValues("password") === "" || errors.password
                     ? require("assets/profile/uncheck.svg").default
                     : require("assets/profile/check.svg").default
                 }
@@ -155,7 +158,7 @@ const ProfileEdit = () => {
             <div className="input">
               <input
                 {...register("passwordck", {
-                  validate: (value) => value == getValues("password"),
+                  validate: (value) => value === getValues("password"),
                 })}
                 placeholder="새 비밀번호를 다시 입력해주세요"
                 type={"password"}
@@ -163,7 +166,7 @@ const ProfileEdit = () => {
               <img
                 alt="none"
                 src={
-                  getValues("passwordck") == "" || errors.passwordck
+                  getValues("passwordck") === "" || errors.passwordck
                     ? require("assets/profile/uncheck.svg").default
                     : require("assets/profile/check.svg").default
                 }
@@ -191,7 +194,7 @@ const ProfileEdit = () => {
               <img
                 alt="none"
                 src={
-                  getValues("phone") == "" || errors.phone
+                  getValues("phone") === "" || errors.phone
                     ? require("assets/profile/uncheck.svg").default
                     : require("assets/profile/check.svg").default
                 }
@@ -210,7 +213,7 @@ const ProfileEdit = () => {
           </Box>
           <input
             disabled={
-              getValues("phone") == default_phone ||
+              getValues("phone") === default_phone ||
               errors.phone ||
               errors.password ||
               errors.passwordck

@@ -46,22 +46,9 @@ const Info = styled.div`
   }
 `;
 
-const ProfileCard = (props) => {
-  //부대, 입영일, 이름
-
-  const user = {
-    name: "최민수",
-    unit: "11사단 화랑부대",
-    join_date: "2021-09-16",
-    //type: "육군",
-  };
-
-  //전역일, 호봉, 계급
-  const now = new Date("2021-01-16");
-
-  //const user = userInfo(props);
-  //params : 입대일, 현재
-  const info = userInfo("2019-12-16", now);
+const ProfileCard = ({ join, name, unit }) => {
+  const now = new Date();
+  const info = userInfo(join, now);
 
   return (
     <Card>
@@ -70,7 +57,7 @@ const ProfileCard = (props) => {
           <FileUploader></FileUploader>
         </div>
         <div className="profileinfo">
-          <p className="name">{user.name}</p>
+          <p className="name">{name}</p>
           <div className="rank">
             <img
               alt="none"
@@ -80,7 +67,7 @@ const ProfileCard = (props) => {
               {info.rank} {info.step}호봉
             </span>
           </div>
-          <p>{user.unit}</p>
+          <p>{unit}</p>
         </div>
       </Info>
       <DueProgressBar

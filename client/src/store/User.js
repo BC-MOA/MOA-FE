@@ -10,16 +10,22 @@ export const UserData = createContext({
 });
 
 function User({ children }) {
-  const [userData, setUserData] = useState({ id: "", key: 0 });
+  const [userData, setUserData] = useState({
+    id: "",
+    key: 0,
+  });
+
   useEffect(() => {
     getUserInfo();
   }, []);
+
   // 로그인 함수
   function login(newData) {
     const newUserData = { ...userData, ...newData };
     localStorage.setItem("userData", JSON.stringify(newUserData));
     setUserData(newUserData);
   }
+
   // 유저 정보 수정 함수
   function updateUserData(newData) {
     const temp = JSON.parse(localStorage.getItem("userData"))
@@ -29,6 +35,7 @@ function User({ children }) {
     localStorage.setItem("userData", JSON.stringify(newUserData));
     setUserData(newUserData);
   }
+
   // 로그아웃 함수
   function logOut() {
     localStorage.removeItem("userData");

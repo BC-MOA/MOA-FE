@@ -9,10 +9,13 @@ const StyledFileInput = styled.label`
 
   img {
     width: 80px;
+    height: 80px;
+
+    border-radius: 50%;
   }
 `;
 
-const FileUploader = ({ onFileSelect }) => {
+const FileUploader = () => {
   const [file, setFile] = useState(null);
 
   const changeHandler = (event) => {
@@ -29,8 +32,7 @@ const FileUploader = ({ onFileSelect }) => {
         alt="none"
         src={
           file
-            ? //실제로는 업로드후 다시 가져오는 과정 필요
-              URL.createObjectURL(file)
+            ? URL.createObjectURL(file)
             : require("assets/profile/fileinput.png")
         }
       ></img>

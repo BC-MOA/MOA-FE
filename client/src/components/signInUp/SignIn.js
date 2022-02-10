@@ -201,6 +201,9 @@ function SignIn() {
               ? funcLogin({
                   id: [login.serviceNumber1, login.serviceNumber2].join("-"),
                   name: "박영찬",
+                  join_date: "2021-08-01",
+                  unit: "11사단 화랑부대",
+                  phone: "01012345678",
                 })
               : setIsSuccess(false);
           }}
