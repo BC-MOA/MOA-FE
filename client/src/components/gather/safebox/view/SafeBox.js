@@ -7,6 +7,7 @@ import SliderInput from "../SliderInput";
 import CustomInput from "components/common/CustomInput";
 import CustomBtn from "../../addGoal/CustomBtn";
 import { accountList } from "components/common/dummyData";
+import { v1 as uuid } from "uuid";
 
 const Container = styled.div`
   width: 100%;
@@ -65,6 +66,7 @@ function SafeBox() {
   const { state } = useLocation();
 
   const [safeInputs, setSafeInputs] = useState({
+    id: uuid(),
     savingMode: "비상금",
     goalName: "비상금 모으기",
     category: "",

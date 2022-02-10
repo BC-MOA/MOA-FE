@@ -119,7 +119,7 @@ function DetailCard({ props }) {
           {props.account.bankName}
           <span className="number">{props.account.accountNumber}</span>
         </div>
-        {props.savingMode === "군적금" && props.name === "" && (
+        {props.savingMode === "군적금" && props.goalName === "" && (
           <div
             className="setGoalName"
             onClick={() => {

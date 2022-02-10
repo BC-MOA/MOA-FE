@@ -1,21 +1,24 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState, useContext } from "react";
+import { UserData } from "store/User";
 
 export const GatherList = createContext({
   gatherList: [],
   setGatherList: () => {},
-  editGatherList: () => {},
 });
 
 function GatherListContext({ children }) {
   // 초기 화면 더미데이터
-  const [gatherList, setGatherList] = useState([]);
+  const { updateUserData } = useContext(UserData);
+  const [gatherList, setGatherList] = useState(
+    JSON.parse(localStorage.getItem("userData"))?.userGatherList || []
+  );
 
-  function editGatherList(prev) {
-    console.log("값 변경하기 전", prev.goalName);
-  }
+  useEffect(() => {
+    updateUserData({ userGatherList: gatherList });
+  }, [gatherList]);
 
   return (
-    <GatherList.Provider value={{ gatherList, setGatherList, editGatherList }}>
+    <GatherList.Provider value={{ gatherList, setGatherList }}>
       {children}
     </GatherList.Provider>
   );

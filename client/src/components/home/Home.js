@@ -101,9 +101,9 @@ function Home() {
             </AboutGather>
           ))}
         {userData.id &&
-          gatherList.map((x) => (
-            <StateGather key={uuid()} props={x} noneClick={true} />
-          ))}
+          gatherList
+            .slice(0, 3)
+            .map((x) => <StateGather key={x.id} props={x} noneClick={true} />)}
         <Btn
           onClick={() => {
             if (!userData.id) {
