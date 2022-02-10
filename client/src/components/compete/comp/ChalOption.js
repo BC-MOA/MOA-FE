@@ -13,6 +13,11 @@ const Pickupbox = styled.div`
 
   .thumb {
     $filter: ${({ $filter }) => ($filter ? "none" : "grayscale(80%)")};
+
+    img {
+      width: 72px;
+      height: 72px;
+    }
   }
 
   transition: 1s all;
@@ -49,7 +54,7 @@ const PickUp = (props) => {
   return (
     //조건에 따라 grayscale 필터 설정
     <Pickupbox $filter={!props.isbet || buttonState ? true : false}>
-      <div className="img">
+      <div>
         <img
           alt="none"
           src={
@@ -64,9 +69,7 @@ const PickUp = (props) => {
           alt="none"
           src={
             //챌린지 대상 이미지 url 적용해야함
-            props.type
-              ? "https://cdn.jsdelivr.net/gh/BuenCamino3rd/test/image/맨시티.png"
-              : require("assets/compete/v1.png")
+            require("assets/compete/options/" + props.versus + ".png")
           }
         ></img>
         <p>{props.versus}</p>

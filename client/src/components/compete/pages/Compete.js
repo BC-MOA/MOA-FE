@@ -1,9 +1,6 @@
 import { Header } from "components/common/Header";
-import AllCompContext from "../context/AllCompContext";
-import MyCompeteContext from "../context/MyCompContext";
 import NavBar from "components/common/NavBar";
 import styled from "styled-components";
-import { allCompList, myCompList } from "../context/data";
 import React, { useState } from "react";
 import CompLists from "./CompLists";
 import Banner from "../comp/BannerSwiper";
@@ -41,31 +38,27 @@ function Compete() {
 
   return (
     <>
-      <MyCompeteContext.Provider value={myCompList.compList}>
-        <AllCompContext.Provider value={allCompList.compList}>
-          <Header $title={false} keys={3000} alarm={true}></Header>
-          <IgnorePaddingBox>
-            <div>
-              <CategoryButton
-                disabled={isAll}
-                onClick={() => setCategoryWrapper(true)}
-              >
-                전체 챌린지
-              </CategoryButton>
-              <CategoryButton
-                disabled={!isAll}
-                onClick={() => setCategoryWrapper(false)}
-              >
-                내 챌린지
-              </CategoryButton>
+      <Header $title={false} keys={3000} alarm={true}></Header>
+      <IgnorePaddingBox>
+        <div>
+          <CategoryButton
+            disabled={isAll}
+            onClick={() => setCategoryWrapper(true)}
+          >
+            전체 챌린지
+          </CategoryButton>
+          <CategoryButton
+            disabled={!isAll}
+            onClick={() => setCategoryWrapper(false)}
+          >
+            내 챌린지
+          </CategoryButton>
 
-              {isAll ? <Banner></Banner> : <></>}
-              <CompLists category={isAll}></CompLists>
-            </div>
-          </IgnorePaddingBox>
-          <StyleNavBar></StyleNavBar>
-        </AllCompContext.Provider>
-      </MyCompeteContext.Provider>
+          {isAll ? <Banner></Banner> : <></>}
+          <CompLists category={isAll}></CompLists>
+        </div>
+      </IgnorePaddingBox>
+      <StyleNavBar></StyleNavBar>
     </>
   );
 }
