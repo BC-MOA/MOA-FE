@@ -8,6 +8,7 @@ import StateGather from "components/gather/detail/StateGather";
 import { ReactSortable } from "react-sortablejs";
 import moment from "moment";
 import { GatherList } from "store/GatherListContext";
+import { UserData } from "store/User";
 
 const Container = styled.div`
   width: 100%;
@@ -88,7 +89,7 @@ const EditBtn = styled.button`
 `;
 
 function Gather() {
-  const userName = "민수";
+  const { userData } = useContext(UserData);
   const { gatherList } = useContext(GatherList) || [];
   let inProgressList = [];
   let completedList = [];
@@ -111,7 +112,7 @@ function Gather() {
 
   const controlNameList = ["진행중", "완료"];
   const [listControl, setListControl] = useState(controlNameList[0]);
-  const [editToggle, setEditToggle] = useState(true);
+  const [editToggle, setEditToggle] = useState(false);
 
   const [gather, setGather] = useState([
     {
@@ -133,7 +134,7 @@ function Gather() {
 
   return (
     <Container>
-      <div className="Title">{userName}님이 현재 모으고 있는 금액은?</div>
+      <div className="Title">{userData.name}님이 현재 모으고 있는 금액은?</div>
       <div className="TotalAmount">
         <span className="green">{totalAmount.toLocaleString()}</span> 원
       </div>
@@ -149,13 +150,13 @@ function Gather() {
           onClick={() => {
             setEditToggle(!editToggle);
           }}
-          className={editToggle ? "" : "Active"}
+          className={editToggle ? "Active" : ""}
         >
           <img
             src={require("assets/gather/Sort_arrow_light.svg").default}
             alt="순서변경 아이콘"
           />
-          {editToggle ? "순서 편집하기" : "편집완료"}
+          {editToggle ? "편집완료" : "순서 편집하기"}
         </EditBtn>
       </div>
       <Content>
@@ -163,7 +164,7 @@ function Gather() {
           <ReactSortable
             list={gather}
             setList={setGather}
-            disabled={editToggle}
+            disabled={!editToggle}
             animation={500}
           >
             {gather.map((x) => (

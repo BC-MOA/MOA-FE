@@ -2,12 +2,13 @@ import Container from "components/common/Container";
 import ScrollBox from "components/common/ScrollBox";
 import SubmitButton from "components/common/SubmitButton";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import ApplyDataCard from "./ApplyDataCard";
 
 function AddMoaSavingSuccess() {
   const history = useNavigate();
+  const { state: savingType } = useLocation();
   return (
     <Container>
       <ScrollBox paddingValue={"80px 0 114px "}>
@@ -30,7 +31,11 @@ function AddMoaSavingSuccess() {
       <SubmitButton
         title={"확인"}
         onClickFunc={() => {
-          history("/gather");
+          if ("목표" === savingType) {
+            history("/gather/add-goal");
+          } else {
+            history("/gather/add-safebox");
+          }
         }}
         isActive={true}
       ></SubmitButton>

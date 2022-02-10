@@ -160,3 +160,41 @@ export const noticeList = [
     content: "첫 목표 ‘뉴욕여행 준비'를 개설했어요",
   },
 ];
+
+export const userAccountList = [
+  {
+    id: 1,
+    bankName: "KB국민",
+    accountName: "KB나라사랑우대통장",
+    accountNumber: "112-0330-0201",
+    currentAmount: 500000,
+    accountType: "입출금",
+    bankImageUrl: "",
+  },
+];
+export const userSavingList = [
+  {
+    id: 1,
+    bankName: "KB국민",
+    productName: "KB장병내일준비적금",
+    accountNumber: "112-0330-0201",
+    currentAmount: 200000,
+    goalAmount: 3600000,
+    accountType: "예적금",
+    bankImageUrl: "",
+    createdDate: "Sun Oct 10 2021 15:11:39 GMT+0900",
+    expirationDate: "Fri Mar 10 2023 23:59:59 GMT+0900",
+  },
+  {
+    id: 2,
+    bankName: "IBK기업",
+    productName: "IBK군인적금",
+    accountNumber: "112-0330-0201",
+    currentAmount: 100000,
+    goalAmount: 2500000,
+    accountType: "예적금",
+    bankImageUrl: "",
+    createdDate: "Sun Oct 10 2021 15:11:39 GMT+0900",
+    expirationDate: "Fri Mar 10 2023 23:59:59 GMT+0900",
+  },
+];

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import styled from "styled-components";
 import {
   styleTitle,
@@ -10,6 +10,7 @@ import CustomBtn from "components/gather/addGoal/CustomBtn";
 import { hideScrollBar } from "style/common";
 import CustomInput from "components/common/CustomInput";
 import { UserData } from "store/User";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 100%;
@@ -131,8 +132,13 @@ function SignUp() {
     ),
   };
 
-  const { login: funcLogin } = useContext(UserData);
-
+  const { login: funcLogin, userData } = useContext(UserData);
+  const history = useNavigate();
+  useEffect(() => {
+    if (userData.id) {
+      history("/home");
+    }
+  }, []);
   return (
     <Container>
       <Header>

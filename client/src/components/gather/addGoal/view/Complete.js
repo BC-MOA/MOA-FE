@@ -183,7 +183,12 @@ function Complete() {
         addFunc={() => {
           setGatherList((prev) => [...prev, props]);
         }}
-        path={"/gather"}
+        path={"/key"}
+        data={{
+          num: 3,
+          message: `${name}을 개설하셨네요`,
+          nextPath: "/gather",
+        }}
         active={true}
       >
         확인

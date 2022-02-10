@@ -69,7 +69,9 @@ function AddBtn({ name, gatherList, editToggle, isFirst, children }) {
         {name !== "군적금" && (
           <button
             onClick={() => {
-              isFirst ? history("add-moa") : history(movePages[name]);
+              isFirst
+                ? history("add-moa", { state: name })
+                : history(movePages[name]);
             }}
           >
             <img src={require("assets/gather/ic_add.svg").default} alt="" />
@@ -79,11 +81,11 @@ function AddBtn({ name, gatherList, editToggle, isFirst, children }) {
       <div className="adText">{children}</div>
       {filteredList && (
         <ReactSortable
-          group={movePages[name]}
+          group={name}
           handle=".sortHandle"
           list={filteredList}
           setList={setFilteredList}
-          disabled={editToggle}
+          disabled={!editToggle}
           animation={500}
         >
           {filteredList.map((x, idx) => (

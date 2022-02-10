@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import styled from "styled-components";
 import {
   styleTitle,
@@ -10,6 +10,9 @@ import CustomBtn from "components/gather/addGoal/CustomBtn";
 import CustomInput from "components/common/CustomInput";
 import { useNavigate } from "react-router-dom";
 import { UserData } from "store/User";
+import { userAccountList, userSavingList } from "components/common/dummyData";
+import { GatherList } from "store/GatherListContext";
+import { v1 as uuid } from "uuid";
 
 const Container = styled.div`
   width: 100%;
@@ -133,8 +136,38 @@ function SignIn() {
     else return false;
   };
 
-  const { login: funcLogin } = useContext(UserData);
+  const { login: funcLogin, userData, updateUserData } = useContext(UserData);
+  const { setGatherList } = useContext(GatherList);
 
+  const gatherFormat = (input) => {
+    return {
+      id: uuid(),
+      savingMode: "군적금",
+      goalName: "",
+      category: "",
+      currentAmount: input.currentAmount,
+      goalAmount: input.goalAmount,
+      account: {
+        bankName: input.bankName,
+        productName: input.productName,
+        accountNumber: input.accountNumber,
+        accountCurrentAmount: 0,
+        bankImageUrl: "",
+      },
+      sDate: input.createdDate,
+      eDate: input.expirationDate,
+      depositMethod: "자유입금",
+      limitCycle: "",
+      amountPerCycle: 0,
+      transactions: [],
+    };
+  };
+
+  useEffect(() => {
+    if (userData.id !== "") {
+      history("/home");
+    }
+  }, []);
   return (
     <Container>
       <Header>
@@ -197,16 +230,25 @@ function SignIn() {
           active={!Object.keys(login).filter((x) => login[x] === "").length}
           path={checkLogin(login) ? "/home" : ""}
           addFunc={() => {
-            checkLogin(login)
-              ? funcLogin({
-                  id: [login.serviceNumber1, login.serviceNumber2].join("-"),
-                  name: "박영찬",
-                  join_date: "2021-08-01",
-                  unit: "11사단 화랑부대",
-                  phone: "01012345678",
-                  key: 45,
-                })
-              : setIsSuccess(false);
+            if (checkLogin(login)) {
+              funcLogin({
+                id: [login.serviceNumber1, login.serviceNumber2].join("-"),
+                name: "박영찬",
+                join_date: "2021-08-01",
+                unit: "11사단 화랑부대",
+                phone: "01012345678",
+                key: 45,
+              });
+              userSavingList.map((x) =>
+                setGatherList((prev) => [...prev, gatherFormat(x)])
+              );
+              updateUserData({
+                userAccountList: userAccountList,
+                userSavingList: userSavingList,
+              });
+            } else {
+              setIsSuccess(false);
+            }
           }}
         >
           로그인
