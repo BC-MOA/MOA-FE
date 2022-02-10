@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import styled from "styled-components";
 import {
   styleTitle,
@@ -9,6 +9,7 @@ import {
 import CustomBtn from "components/gather/addGoal/CustomBtn";
 import { hideScrollBar } from "style/common";
 import CustomInput from "components/common/CustomInput";
+import { UserData } from "store/User";
 
 const Container = styled.div`
   width: 100%;
@@ -129,6 +130,8 @@ function SignUp() {
       signUp.phoneNumber
     ),
   };
+
+  const { login: funcLogin } = useContext(UserData);
 
   return (
     <Container>
@@ -285,6 +288,13 @@ function SignUp() {
           !Object.keys(validationFunc).filter((x) => validationFunc[x] !== true)
             .length
         }
+        path={"/loading"}
+        addFunc={() => {
+          funcLogin({
+            id: signUp.serviceNumber1 + signUp.serviceNumber2,
+            name: signUp.name,
+          });
+        }}
       >
         회원가입
       </CustomBtn>
