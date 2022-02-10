@@ -8,6 +8,7 @@ import StateGather from "components/gather/detail/StateGather";
 import { ReactSortable } from "react-sortablejs";
 import moment from "moment";
 import { GatherList } from "store/GatherListContext";
+import { UserData } from "store/User";
 
 const Container = styled.div`
   width: 100%;
@@ -88,7 +89,7 @@ const EditBtn = styled.button`
 `;
 
 function Gather() {
-  const userName = "민수";
+  const { userData } = useContext(UserData);
   const { gatherList } = useContext(GatherList) || [];
   let inProgressList = [];
   let completedList = [];
@@ -112,7 +113,6 @@ function Gather() {
   const controlNameList = ["진행중", "완료"];
   const [listControl, setListControl] = useState(controlNameList[0]);
   const [editToggle, setEditToggle] = useState(true);
-
   const [gather, setGather] = useState([
     {
       id: 1,
@@ -133,7 +133,7 @@ function Gather() {
 
   return (
     <Container>
-      <div className="Title">{userName}님이 현재 모으고 있는 금액은?</div>
+      <div className="Title">{userData.name}님이 현재 모으고 있는 금액은?</div>
       <div className="TotalAmount">
         <span className="green">{totalAmount.toLocaleString()}</span> 원
       </div>
