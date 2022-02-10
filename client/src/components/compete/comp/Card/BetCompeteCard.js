@@ -61,7 +61,7 @@ function BetCompeteCard({ obj }) {
           <Count>{kFormatter(obj.total)}명 참여</Count>
         </div>
       </ContentBox>
-      {pop && <PopUp func={togglePop} title={obj.title} type={true}></PopUp>}
+      {pop && <PopUp func={togglePop} obj={obj} type={true}></PopUp>}
       <StyledBetButtonBox>
         <StyledLink to={"/compete/" + obj.key} state={obj}>
           <StyledBetButton>배팅 수정</StyledBetButton>

@@ -35,29 +35,29 @@ const StyledKeyBox = styled.div`
 `;
 
 //링크인 키
-const LinkedKey = (props) => (
+const LinkedKey = ({ count }) => (
   <StyledLink to="/reward">
     <StyledKeyBox>
       <img src={require("assets/compete/key.svg").default} />
-      <div className="text">{props.count}개</div>
+      <div className="text">{count}개</div>
     </StyledKeyBox>
   </StyledLink>
 );
 
 //링크가 아닌 키
-const NotLinkedKey = (props) => (
+const NotLinkedKey = ({ count }) => (
   <StyledKeyBox>
     <img src={require("assets/compete/key.svg").default} />
-    <div className="text">{props.count}개</div>
+    <div className="text">{count}개</div>
   </StyledKeyBox>
 );
 
 //알람
-const Bell = (props) => (
+const Bell = ({ alarm }) => (
   <StyledLink to="/notice">
     <img
       src={
-        props.alarm
+        alarm
           ? require("assets/compete/alarm-on.svg").default
           : require("assets/compete/alarm-off.svg").default
       }
@@ -65,13 +65,13 @@ const Bell = (props) => (
   </StyledLink>
 );
 
-function Header(props) {
+function Header({ $title, keys, alarm }) {
   return (
-    <StyledHeader $title={props.$title}>
-      {props.$title && <img src={require("assets/compete/moa.svg").default} />}
+    <StyledHeader $title={$title}>
+      {$title && <img src={require("assets/compete/moa.svg").default} />}
       <div className="content">
-        <LinkedKey count={kFormatter(props.keys)}></LinkedKey>
-        <Bell alarm={props.alarm}></Bell>
+        <LinkedKey count={kFormatter(keys)}></LinkedKey>
+        <Bell alarm={alarm}></Bell>
       </div>
     </StyledHeader>
   );

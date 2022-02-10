@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { AllCompete } from "store/CompeteAll";
+import { MyCompete } from "store/CompeteMy";
+import { useContext } from "react";
 
 //[styled comp] : 팝업 카드 배경
 const Background = styled.div`
@@ -84,31 +87,31 @@ const Modal = styled.div`
 `;
 
 /**
- * [comp]
- * PopUp
- *
- * [state]
- * none
- *
  * [props]
- * 챌린지 정보
- * state 변경용 함수
+ * title: 챌린지 정보
+ * func: state 변경용 함수
+ * type: 버튼 순서 구분을 위해서
  */
 
-function PopUp({ title, func, type }) {
-  const clickYes = () => {
-    func();
-
-    if (!type) {
-      navigate("../compete");
-    }
-
-    //추가 API 작업
-  };
-
+function PopUp({ betinfo, obj, func, type }) {
+  const allContext = useContext(AllCompete);
+  const myContext = useContext(MyCompete);
   const navigate = useNavigate();
 
-  const clickNo = () => {
+  const clickYes = () => {
+    if (type) {
+      //취소하기
+      myContext.removeItem(obj.key);
+    } else {
+      //확인
+      if (betinfo) {
+        navigate("/compete", { state: { type: true } });
+      } else {
+        myContext.updateItem(betinfo);
+        navigate("/compete", { state: { type: false } });
+      }
+    }
+
     func();
   };
 
@@ -118,9 +121,9 @@ function PopUp({ title, func, type }) {
         <p className="text">
           {type ? "베팅을 정말 취소하시겠어요?" : "배팅이 완료되었어요!"}
         </p>
-        <p className="title">{title}</p>
+        <p className="title">{obj.title}</p>
         <div className="buttonbox">
-          <button onClick={clickNo}>{type ? "계속하기" : "수정하기"}</button>
+          <button onClick={func}>{type ? "계속하기" : "수정하기"}</button>
           <button onClick={clickYes}>{type ? "취소하기" : "확인"}</button>
         </div>
       </Modal>

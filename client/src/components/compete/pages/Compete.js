@@ -6,6 +6,8 @@ import CompLists from "./CompLists";
 import Banner from "../comp/BannerSwiper";
 import CategoryButton from "../comp/CategoryButton";
 
+import { useLocation } from "react-router-dom";
+
 const StyleNavBar = styled(NavBar)`
   position: fixed;
   bottom: 0;
@@ -21,7 +23,8 @@ const IgnorePaddingBox = styled.div`
 
 //isAll : 카테고리 설정을 위한 state
 function Compete() {
-  const [isAll, setisAll] = useState(true);
+  const { state } = useLocation();
+  const [isAll, setisAll] = useState(state !== null ? state.type : true);
 
   function setCategoryWrapper(input) {
     setisAll(input);
@@ -29,7 +32,7 @@ function Compete() {
 
   return (
     <>
-      <Header $title={false} keys={3000} alarm={true}></Header>
+      <Header $title={false} keys={30} alarm={true}></Header>
       <IgnorePaddingBox>
         <div>
           <CategoryButton

@@ -72,12 +72,26 @@ const MyCompete = createContext({
 function MyCompeteContext({ children }) {
   const [myCompList, setMyCompList] = useState(data);
 
-  function setMyCompListWrapper(newCompList) {
-    setMyCompList(newCompList);
+  function removeItem(key) {
+    const result = myCompList.filter((obj) => {
+      return obj.key !== key;
+    });
+
+    setMyCompList(result);
+  }
+
+  function updateItem({ pick, betkey, compkey }) {
+    console.log(pick, betkey, compkey);
+
+    let temp = [...myCompList];
+    temp[parseInt(compkey) - 1].pick = pick;
+    temp[parseInt(compkey) - 1].bet = betkey;
+
+    setMyCompList(temp);
   }
 
   return (
-    <MyCompete.Provider value={{ myCompList, setMyCompListWrapper }}>
+    <MyCompete.Provider value={{ myCompList, removeItem, updateItem }}>
       {children}
     </MyCompete.Provider>
   );
