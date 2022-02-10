@@ -28,32 +28,26 @@ const Pickupbox = styled.div`
 `;
 
 /**
- * [comp]
- * PickUp
- *
- * [state]
- * none
- *
  * [props]
  * versus : list of string / 챌린지 대상
  * type: bool/ 선택지 순서 구분
  * pick : bool/ 선택한 대상
  * bet : bool/ 베팅 여부
  */
-const PickUp = (props) => {
+const PickUp = ({ versus, type, pick, isbet }) => {
   let buttonState = false;
 
   /**
    * 베팅 되있을 때
    * 순서에 따라서 pick값에 따른 버튼 활성화 조건 설정
    * */
-  if (props.isbet) {
-    buttonState = props.type ? props.pick : !props.pick;
+  if (isbet) {
+    buttonState = type ? pick : !pick;
   }
 
   return (
     //조건에 따라 grayscale 필터 설정
-    <Pickupbox $filter={!props.isbet || buttonState ? true : false}>
+    <Pickupbox $filter={!isbet || buttonState ? true : false}>
       <div>
         <img
           alt="none"
@@ -67,12 +61,9 @@ const PickUp = (props) => {
       <div className="thumb">
         <img
           alt="none"
-          src={
-            //챌린지 대상 이미지 url 적용해야함
-            require("assets/compete/options/" + props.versus + ".png")
-          }
+          src={require("assets/compete/options/" + versus + ".png")}
         ></img>
-        <p>{props.versus}</p>
+        <p>{versus}</p>
       </div>
     </Pickupbox>
   );

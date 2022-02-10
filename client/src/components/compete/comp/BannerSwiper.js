@@ -3,36 +3,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Link } from "react-router-dom";
 import "swiper/css";
 
-/**
- * [comp]
- * Banner
- *
- * [state]
- * none
- *
- * [props]
- * to : 이동할 router 주소/url
- * src : 이미지 src 주소
- */
-
-function Banner(props) {
+//Swiper
+function Banner({ to, src }) {
   return (
-    <Link to={props.to}>
-      <img alt="none" src={props.src} />
+    <Link to={to}>
+      <img alt="none" src={src} />
     </Link>
   );
 }
-
-/**
- * [comp]
- * BannerSwiper
- *
- * [state]
- * none
- *
- * [props]
- * none
- */
 
 //Swiper 컨테이너
 const SwiperBox = styled.div`

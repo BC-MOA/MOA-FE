@@ -58,17 +58,11 @@ const BetCard = styled.div`
 `;
 
 /**
- * [comp]
- * CompDetail
- *
  * [state]
  * isBetted : 베팅 여부 관련 state
  * pickUped : 선택 여부 관련 state
  * state : 챌린지 정보 - useLocation 통해 정보전달
  * keyCount: 열쇠 선택 관련 state
- *
- * [props]
- * none
  */
 function CompDetail() {
   //챌린지 정보 state

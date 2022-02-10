@@ -4,15 +4,11 @@ import BasicCompeteCard from "../comp/Card/BasicCompeteCard";
 import Empty from "../comp/Empty";
 
 /**
- * [function] : filterExpired
  * 만료된 챌린지 분류
  *
  * [args]
  * done : bool - 만료 filter 여부
  * compList : 챌린지 리스트
- *
- * [return]
- * 분류된 챌린지 리스트
  */
 function filterExpired(done, compList) {
   let filterdList;
@@ -32,8 +28,7 @@ function filterExpired(done, compList) {
 }
 
 /**
- * [function] : filterList
- * 만료된 챌린지 분류 -> 컴포넌트 생성
+ * 챌린지 카드 컴포넌트 생성
  *
  * [args]
  * condition : bool/string - filter 되는 조건

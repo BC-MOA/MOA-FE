@@ -36,9 +36,7 @@ const BetCard = styled.div`
  * [props]
  * 챌린지 정보
  */
-function BetCompeteCard(props) {
-  const obj = props.obj;
-
+function BetCompeteCard({ obj }) {
   const [pop, setPop] = useState(false);
 
   const togglePop = () => {

@@ -19,16 +19,7 @@ const IgnorePaddingBox = styled.div`
   flex-direction: column;
 `;
 
-/**
- * [comp]
- * Compete
- *
- * [state]
- * isAll : 카테고리 설정을 위한 state
- *
- * [props]
- * none
- */
+//isAll : 카테고리 설정을 위한 state
 function Compete() {
   const [isAll, setisAll] = useState(true);
 

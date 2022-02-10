@@ -43,10 +43,10 @@ const renderer = ({ days, hours, minutes, seconds, completed }) => {
  * 챌린지 정보-만료일
  */
 
-const Timer = (props) => {
+const Timer = ({ due }) => {
   const now = moment();
 
-  return <Countdown date={now + (props.due - now)} renderer={renderer} />;
+  return <Countdown date={now + (due - now)} renderer={renderer} />;
 };
 
 export { Timer, TimerBox };

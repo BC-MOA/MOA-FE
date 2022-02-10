@@ -12,22 +12,13 @@ const StyledAllList = styled.div`
   height: calc(100vh - 280px);
 `;
 
-/**
- * [comp]
- * AllList
- *
- * [state]
- * none
- *
- * [props]
- * cond : 챌린지 필터링 조건
- */
-const AllList = (props) => {
+//cond : 챌린지 필터링 조건
+const AllList = ({ cond }) => {
   const compList = useContext(AllCompete).allCompList;
   //챌린지 없을 때 테스트
   // const compList = [];
 
-  return <StyledAllList>{FilterList(props.cond, compList)}</StyledAllList>;
+  return <StyledAllList>{FilterList(cond, compList)}</StyledAllList>;
 };
 
 export default AllList;
