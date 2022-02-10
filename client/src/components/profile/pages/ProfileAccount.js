@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import BackHeader from "components/common/BackHeader";
 import Account from "../comp/Account";
-import { data_case3 } from "components/interlock/data";
-
-//계좌연동(interlock) data를 가져다 쓰고 있음!
+import { UserAccount } from "store/UserAccount";
+import { useContext } from "react";
 
 const Title = styled.p`
   font-family: "Pretendard-Regular";
@@ -28,17 +27,19 @@ const Type = styled.p`
 `;
 
 const ProfileAccount = () => {
+  const account_data = useContext(UserAccount).userAccount;
+
   return (
     <>
       <BackHeader isScrolled={false} title={false} path={-1}></BackHeader>
       <Box>
         <Title>내 계좌</Title>
         <Type>입출금 통장</Type>
-        <Account list={data_case3.account_deposit}></Account>
+        <Account list={account_data.account_deposit}></Account>
         <Type>군적금</Type>
-        <Account list={data_case3.account_install}></Account>
+        <Account list={account_data.account_install}></Account>
         <Type>제휴 통장</Type>
-        <Account list={data_case3.account_partner}></Account>
+        <Account list={account_data.account_partner}></Account>
       </Box>
     </>
   );

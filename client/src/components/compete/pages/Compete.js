@@ -32,7 +32,7 @@ function Compete() {
 
   return (
     <>
-      <Header $title={false} keys={30} alarm={true}></Header>
+      <Header $title={false}></Header>
       <IgnorePaddingBox>
         <div>
           <CategoryButton

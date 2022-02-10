@@ -7,13 +7,13 @@ import ProfileCard from "../comp/ProfileCard";
 import LinkButton from "../comp/NavButton";
 import { UserData } from "store/User";
 
-function Profile(props) {
+function Profile() {
   const User = useContext(UserData);
   const userData = User.userData;
 
   return (
     <Container>
-      <Header $title={false} keys={userData.key} alarm={true}></Header>
+      <Header $title={false}></Header>
       <ScrollBox>
         <ProfileCard
           profile={userData.profilethumb}

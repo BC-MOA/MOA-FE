@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import AccountFound from "../comp/AccountFound";
 import AccountInfo from "../comp/AccountInfo";
 import SetGoal from "../comp/SetGoal";
-import { data_case1, data_case2, data_case3, user_data } from "../data";
-
-//계좌 정보 설정 변경
-const account_data = data_case2;
+import { UserData } from "store/User";
+import { UserAccount } from "store/UserAccount";
 
 const InterLock = () => {
   const [step, setStep] = useState(1);
@@ -14,12 +12,17 @@ const InterLock = () => {
     setStep(input);
   };
 
+  const account_data = useContext(UserAccount).userAccount;
+
+  const User = useContext(UserData);
+  const userData = User.userData;
+
   return (
     <div>
       {step === 1 && (
         <AccountFound
           func={setStepWrapper}
-          name={user_data.name}
+          name={userData.name}
           count={
             account_data.account_deposit.length +
             account_data.account_install.length
@@ -34,7 +37,10 @@ const InterLock = () => {
         ></AccountInfo>
       )}
       {step === 3 && (
-        <SetGoal name="민수" ins_list={account_data.account_install}></SetGoal>
+        <SetGoal
+          name={userData.name}
+          ins_list={account_data.account_install}
+        ></SetGoal>
       )}
     </div>
   );
