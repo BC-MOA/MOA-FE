@@ -33,7 +33,7 @@ function AddMilitarySavingSuccess() {
       <SubmitButton
         title={"확인"}
         onClickFunc={() => {
-          history("edit");
+          history("edit", { state: applyData });
         }}
         isActive={true}
       ></SubmitButton>

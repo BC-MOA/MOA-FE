@@ -1,16 +1,16 @@
 import BackHeader from "components/common/BackHeader";
 import Container from "components/common/Container";
 import ScrollBox from "components/common/ScrollBox";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import AvailableSavingList from "../AvailableSavingList";
 import ContentControlBtn from "components/common/ContentControlBtn";
+import { UserData } from "store/User";
 function AddMilitarySavings() {
   const controlNameList = ["최고금리순", "기본금리순"];
   const [listControl, setListControl] = useState(controlNameList[0]);
-
+  const { userData } = useContext(UserData);
   // todo - api datas
-  const userName = "민수";
   const avgApplyNum = 1234;
 
   return (
@@ -19,7 +19,7 @@ function AddMilitarySavings() {
       <ScrollBox>
         <MessageBox>
           <div className="title">
-            <span>{userName}님이 가입 가능한</span>
+            <span>{userData.name}님이 가입 가능한</span>
             <span>군적금 상품들이에요.</span>
           </div>
           <div className="notice">
