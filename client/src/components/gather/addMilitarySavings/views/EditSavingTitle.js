@@ -59,7 +59,7 @@ function EditSavingTitle() {
           productName: `${applyData.savingData.bank.bankName} ${applyData.savingData.productName}`,
           accountNumber: "112-0330-0201",
           accountCurrentAmount: 0,
-          bankImageUrl: applyData.savingData.bankImageUrl,
+          bankImageUrl: applyData.savingData.bank.bankImageUrl,
         },
         sDate: sDate,
         eDate: eDate,
