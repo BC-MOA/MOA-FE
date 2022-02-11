@@ -11,9 +11,6 @@ import { hideScrollBar } from "style/common";
 import CustomInput from "components/common/CustomInput";
 import { UserData } from "store/User";
 import { useNavigate } from "react-router-dom";
-import { gatherFormat } from "components/common/dummyData";
-import { GatherList } from "store/GatherListContext";
-import { UserAccount } from "store/UserAccount";
 
 const Container = styled.div`
   width: 100%;
@@ -135,9 +132,7 @@ function SignUp() {
     ),
   };
 
-  const { login: funcLogin, userData, updateUserData } = useContext(UserData);
-  const { userAccount } = useContext(UserAccount);
-  const { setGatherList } = useContext(GatherList);
+  const { login: funcLogin, userData } = useContext(UserData);
   const history = useNavigate();
 
   useEffect(() => {
@@ -177,7 +172,6 @@ function SignUp() {
               }}
             />
             <span>-</span>
-            {/* Todo: 주민등록번호 뒷자리는 한자리만 입력받은 -> 뒷자리 X 표시 추가 필요 */}
             <input
               type="number"
               maxLength="1"
@@ -316,14 +310,6 @@ function SignUp() {
             unit: "11사단 화랑부대",
             phone: signUp.phoneNumber,
             key: 0,
-          });
-          userAccount.install.map((x) =>
-            setGatherList((prev) => [...prev, gatherFormat(x)])
-          );
-          updateUserData({
-            userAccountList: userAccount.inout,
-            userSavingList: userAccount.install,
-            userInterlock: userAccount.interlock,
           });
         }}
       >
