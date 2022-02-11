@@ -99,7 +99,13 @@ const SetGoal = ({ name, accounts }) => {
     //api 호출
     //home으로 navigatge
     //열쇠 적용
-    navigate("/home");
+    navigate("/key", {
+      state: {
+        num: 3,
+        message: "모아(MOA)회원이 되셨네요",
+        nextPath: "/home",
+      },
+    });
     console.log(data);
   };
 
@@ -109,7 +115,19 @@ const SetGoal = ({ name, accounts }) => {
   return (
     <Box>
       <HeaderButton>
-        <button onClick={() => navigate("/home")}>다음에하기</button>
+        <button
+          onClick={() => {
+            navigate("/key", {
+              state: {
+                num: 3,
+                message: "모아(MOA)회원이 되셨네요",
+                nextPath: "/home",
+              },
+            });
+          }}
+        >
+          다음에하기
+        </button>
       </HeaderButton>
       <div className="text">
         {name}님!<br></br>
