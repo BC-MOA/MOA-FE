@@ -6,8 +6,8 @@ import styled from "styled-components";
 import AvailableSavingList from "../AvailableSavingList";
 import ContentControlBtn from "components/common/ContentControlBtn";
 import { UserData } from "store/User";
+const controlNameList = ["최고금리순", "기본금리순"];
 function AddMilitarySavings() {
-  const controlNameList = ["최고금리순", "기본금리순"];
   const [listControl, setListControl] = useState(controlNameList[0]);
   const { userData } = useContext(UserData);
   // todo - api datas

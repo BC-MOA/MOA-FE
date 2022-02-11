@@ -7,7 +7,6 @@ function MilitaryFreeSavingForm({
   savingType,
   formData,
   setFormData,
-  userAccountList,
 }) {
   return (
     <FreeSavingForm className={savingType === "자유입금" ? "isSelect" : ""}>
@@ -30,8 +29,7 @@ function MilitaryFreeSavingForm({
       </div>
 
       <div className="title">출금계좌</div>
-      {/* todo 유저에서 계좌 정보 불러와서 넣기*/}
-      <div className="fixData">{userAccountList[0]}</div>
+      <div className="fixData">{formData.formDataAccount.accountName}</div>
     </FreeSavingForm>
   );
 }

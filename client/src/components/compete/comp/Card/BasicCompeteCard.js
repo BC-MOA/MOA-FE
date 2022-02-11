@@ -2,6 +2,8 @@ import styled from "styled-components";
 import formatDate from "../../function/DateChanger";
 import StyledLink from "components/common/StyledLink";
 import kFormatter from "../../function/kFormatter";
+import { MyCompete } from "store/CompeteMy";
+import { useContext } from "react";
 
 import {
   ContentBox,
@@ -25,8 +27,14 @@ const Card = styled.div`
 `;
 
 function BasicCompeteCard({ obj }) {
+  const myContext = useContext(MyCompete);
+  const result = myContext.searchItem(obj.key);
+
   return (
-    <StyledLink to={"/compete/" + obj.key} state={obj}>
+    <StyledLink
+      to={"/compete/" + obj.key}
+      state={result.length !== 0 ? result[0] : obj}
+    >
       <Card>
         <Date>{formatDate(obj.due)} 마감</Date>
         <ContentBox>
