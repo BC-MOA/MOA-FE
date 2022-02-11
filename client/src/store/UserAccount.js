@@ -59,24 +59,26 @@ const UserAccount = createContext({
 
 function UserAccountContext({ children }) {
   const [userAccount, setUserAccount] = useState(
-    localStorage.getItem("useData")
+    localStorage.getItem("userData")
       ? {
           inout: JSON.parse(localStorage.getItem("userData")).userAccountList,
           install: JSON.parse(localStorage.getItem("userData")).userSavingList,
           interlock: JSON.parse(localStorage.getItem("userData")).userInterlock,
         }
-      : filterAccount([data])
+      : filterAccount(data)
   );
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("userData"));
-
+    const userData = JSON.parse(localStorage.getItem("userData"));
     const accountData = {
-      inout: data.userAccountList,
-      install: data.userSavingList,
-      interlock: data.userInterlock,
+      inout: userData.userAccountList
+        ? userData.userAccountList
+        : filterAccount(data).inout,
+      install: userData.userSavingList
+        ? userData.userSavingList
+        : filterAccount(data).install,
+      interlock: userData.userInterlock ? userData.userInterlock : [],
     };
-
-    setUserAccount(accountData);
+    setUserAccount(userData.id ? accountData : filterAccount(data));
   }, []);
   function setUserAccountWrapper(accounts) {
     setUserAccount(accounts);
