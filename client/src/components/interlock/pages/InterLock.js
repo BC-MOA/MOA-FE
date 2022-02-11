@@ -23,24 +23,17 @@ const InterLock = () => {
         <AccountFound
           func={setStepWrapper}
           name={userData.name}
-          count={
-            account_data.account_deposit.length +
-            account_data.account_install.length
-          }
+          count={account_data.length}
         ></AccountFound>
       )}
       {step === 2 && (
         <AccountInfo
-          depo_list={account_data.account_deposit}
-          ins_list={account_data.account_install}
+          accounts={account_data}
           func={setStepWrapper}
         ></AccountInfo>
       )}
       {step === 3 && (
-        <SetGoal
-          name={userData.name}
-          ins_list={account_data.account_install}
-        ></SetGoal>
+        <SetGoal name={userData.name} accounts={account_data}></SetGoal>
       )}
     </div>
   );

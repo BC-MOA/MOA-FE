@@ -44,14 +44,16 @@ const Card = styled.div`
 
 const AccountCard = ({ id, obj }) => {
   const moneyFormatter = new Intl.NumberFormat();
-  const styledSum = moneyFormatter.format(obj.sum);
+  const styledSum = moneyFormatter.format(obj.currentAmount);
 
   return (
     <Card key={id}>
-      <img src={obj.thumb}></img>
+      <img src={obj.bankImageUrl}></img>
       <div className="content">
         <div className="sum">{styledSum}원</div>
-        <div className="account">{obj.account}</div>
+        <div className="account">
+          {obj.accountName ? obj.accountName : obj.productName}
+        </div>
       </div>
     </Card>
   );

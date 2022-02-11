@@ -30,10 +30,10 @@ const AccountGoal = (ins_list, reg) => {
     const obj = ins_list[i];
 
     insList.push(
-      <div key={obj.key}>
+      <div key={obj.id}>
         <AccountCard obj={obj}></AccountCard>
         <StyledInput
-          {...reg(`${obj.key}`)}
+          {...reg(`${obj.id}`, { required: true })}
           type={"text"}
           placeholder="목표를 입력해주세요"
         ></StyledInput>
