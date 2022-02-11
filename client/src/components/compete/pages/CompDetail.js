@@ -108,8 +108,8 @@ function CompDetail() {
   //전달되는 현재 배팅 정보
   const betinfo = {
     pick: pick,
-    betkey: keyCount.valueGroups.number,
-    compkey: comp.key,
+    bet: keyCount.valueGroups.number,
+    key: comp.key,
   };
 
   return (

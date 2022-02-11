@@ -1,12 +1,12 @@
 import { Header } from "components/common/Header";
 import NavBar from "components/common/NavBar";
 import styled from "styled-components";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import CompLists from "./CompLists";
 import Banner from "../comp/BannerSwiper";
 import CategoryButton from "../comp/CategoryButton";
-
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { UserData } from "store/User";
 
 const StyleNavBar = styled(NavBar)`
   position: fixed;
@@ -30,6 +30,10 @@ function Compete() {
     setisAll(input);
   }
 
+  const user = useContext(UserData);
+
+  const navigate = useNavigate();
+
   return (
     <>
       <Header $title={false}></Header>
@@ -43,7 +47,11 @@ function Compete() {
           </CategoryButton>
           <CategoryButton
             disabled={!isAll}
-            onClick={() => setCategoryWrapper(false)}
+            onClick={() =>
+              user.userData.id !== ""
+                ? setCategoryWrapper(false)
+                : navigate("/login")
+            }
           >
             내 챌린지
           </CategoryButton>
