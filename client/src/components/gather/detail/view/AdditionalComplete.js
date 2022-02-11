@@ -80,7 +80,6 @@ function AdditionalComplete() {
   const { props, inOutMoney } = state;
   const { setGatherList } = useContext(GatherList);
   const { inout } = useContext(UserAccount).userAccount;
-  // console.log(props, inOutMoney);
   const trFormat = (props, input) => {
     const formatted = {
       date: moment(new Date()).format("MM월 DD일"),
@@ -140,7 +139,8 @@ function AdditionalComplete() {
       <CustomBtn
         active={true}
         addFunc={() => {
-          props.transactions.push(trFormat(props, inOutMoney));
+          const transactionEl = trFormat(props, inOutMoney);
+          props.transactions.push(transactionEl);
           props.currentAmount =
             Number(props.currentAmount) + Number(inOutMoney);
           setGatherList((prevList) =>
@@ -149,10 +149,7 @@ function AdditionalComplete() {
                 ? {
                     ...x,
                     currentAmount: props.currentAmount,
-                    transactions: [
-                      ...x.transactions,
-                      trFormat(props, inOutMoney),
-                    ],
+                    transactions: [...x.transactions, transactionEl],
                   }
                 : x
             )
