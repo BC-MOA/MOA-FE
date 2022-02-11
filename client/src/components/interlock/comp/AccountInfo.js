@@ -3,7 +3,6 @@ import AccountCard from "components/profile/comp/AccountCard";
 import SubmitButton from "components/common/SubmitButton";
 import { useState } from "react";
 import Modal from "./Modal";
-import filterAccount from "components/profile/function/filterAccount";
 
 const Box = styled.div`
   font-family: "Pretendard-Regular";
@@ -59,9 +58,8 @@ const AccountInfo = ({ accounts, func }) => {
   const bankNameSet = new Set();
 
   //계좌 필터링
-  const accountFiltered = filterAccount(accounts);
-  const depoList = accountFiltered.inout;
-  const insList = accountFiltered.install;
+  const depoList = accounts.inout;
+  const insList = accounts.install;
 
   let depoList_ = [];
   let insList_ = [];
