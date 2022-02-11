@@ -5,6 +5,7 @@ import CustomBtn from "../CustomBtn";
 import { useLocation } from "react-router-dom";
 import moment from "moment";
 import { GatherList } from "store/GatherListContext";
+import { UserAccount } from "store/UserAccount";
 
 const styleText = css`
   ${styleSubTitle}
@@ -86,7 +87,7 @@ function Complete() {
   const { props, name } = state;
 
   const { setGatherList } = useContext(GatherList);
-
+  const { inout } = useContext(UserAccount).userAccount;
   return (
     <Container>
       <Content>
@@ -161,7 +162,7 @@ function Complete() {
           </InfoEl>
           <InfoEl className="Text">
             <div>출금계좌</div>
-            <div className="userInfo">{props.account.bankName}</div>
+            <div className="userInfo">{inout[0].accountName}</div>
           </InfoEl>
           {name !== "목표" && (
             <InfoEl className="Text">

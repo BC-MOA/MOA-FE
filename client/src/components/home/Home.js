@@ -5,7 +5,6 @@ import ScrollBox from "components/common/ScrollBox";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { v1 as uuid } from "uuid";
 import BubbleContent from "./BubbleContent";
 import StoreSvg from "components/gather/addGoal/StoreSvg";
 import { UserData } from "store/User";
