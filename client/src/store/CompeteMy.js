@@ -90,8 +90,17 @@ function MyCompeteContext({ children }) {
     setMyCompList(temp);
   }
 
+  function searchItem(key) {
+    const result = myCompList.filter((obj) => obj.key === key);
+
+    //key와 일치하는걸 찾으면 true
+    return result;
+  }
+
   return (
-    <MyCompete.Provider value={{ myCompList, removeItem, updateItem }}>
+    <MyCompete.Provider
+      value={{ myCompList, removeItem, updateItem, searchItem }}
+    >
       {children}
     </MyCompete.Provider>
   );
