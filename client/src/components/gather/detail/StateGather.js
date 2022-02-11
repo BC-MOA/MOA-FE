@@ -200,8 +200,7 @@ function StateGather({ props, completed, editToggle, noneClick }) {
             {props.category ? (
               <StoreSvg category={props.category} />
             ) : props.savingMode === "군적금" ? (
-              // Todo: 군적금 - 은행 로고로 이미지 바꾸기
-              <StoreSvg category="군적금" />
+              <img src={props.account.bankImageUrl} />
             ) : (
               <StoreSvg category="비상금" />
             )}
