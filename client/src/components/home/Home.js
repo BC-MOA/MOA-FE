@@ -1,4 +1,3 @@
-import axios from "axios";
 import Container from "components/common/Container";
 import { Header } from "components/common/Header";
 import NavBar from "components/common/NavBar";
@@ -12,48 +11,34 @@ import StoreSvg from "components/gather/addGoal/StoreSvg";
 import { UserData } from "store/User";
 import StateGather from "components/gather/detail/StateGather";
 import { GatherList } from "store/GatherListContext";
+import { AllCompete } from "store/CompeteAll";
+const gatherCategorys = [
+  {
+    id: 1,
+    name: "군적금",
+    adText: "은행 최고이율과 국가지원혜택까지 받아보세요.",
+  },
+  {
+    id: 2,
+    name: "목표",
+    adText: "부대 내에서 목표를 잡고 돈을 모아나가보세요.",
+  },
+  {
+    id: 3,
+    name: "비상금",
+    adText: "저축하고 남은 돈을 비상금처럼 따로 보관하세요.",
+  },
+];
 
-const PROXY = window.location.hostname === "localhost" ? "" : "/api";
 function Home() {
   const { userData } = useContext(UserData);
   const { gatherList } = useContext(GatherList);
   const history = useNavigate();
   const [challengeList, setChallengeList] = useState([]);
-  const [gather, setGather] = useState([
-    {
-      id: 1,
-      name: "군적금",
-      adText: "은행 최고이율과 국가지원혜택까지 받아보세요.",
-    },
-    {
-      id: 2,
-      name: "목표",
-      adText: "부대 내에서 목표를 잡고 돈을 모아나가보세요.",
-    },
-    {
-      id: 3,
-      name: "비상금",
-      adText: "저축하고 남은 돈을 비상금처럼 따로 보관하세요.",
-    },
-  ]);
+  const { allCompList } = useContext(AllCompete);
   useEffect(() => {
-    // todo 인기 챌린지 받아오기
-    setChallengeList([
-      { name: "1", type1: "A", type2: "B", 참여자: "100" },
-      { name: "2", type1: "A", type2: "B", 참여자: "200" },
-      { name: "3", type1: "A", type2: "B", 참여자: "300" },
-    ]);
+    setChallengeList([allCompList[0], allCompList[1], allCompList[2]]);
   }, []);
-  // useEffect(() => {
-  //   axios
-  //     .get(`${PROXY}/saving/products/high`)
-  //     .then((res) => {
-  //       console.log(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
 
   return (
     <Container>
@@ -81,7 +66,7 @@ function Home() {
         </UserAmountMsg>
         <BubbleContent isLogin={true} savingNum={0} />
         {!userData.id &&
-          gather.map((x) => (
+          gatherCategorys.map((x) => (
             <AboutGather key={x.id}>
               <div
                 className={`icon ${
@@ -124,15 +109,18 @@ function Home() {
             {challengeList &&
               challengeList.map((item) => (
                 <div className="challengeItem" key={uuid()}>
-                  <img src={require("./example.png")} alt="" />
+                  <img
+                    src={require(`assets/compete/${item.thumb}`)}
+                    alt="itme.title"
+                  />
                   <div className="about">
-                    <div className="title">{item.name}</div>
+                    <div className="title">{item.title}</div>
                     <div className="subtitle">
                       <span>
-                        {item.type1} vs {item.type2}
+                        {item.versus[0]} vs {item.versus[1]}
                       </span>
                       <div className="tag">
-                        <span className="roboto">{item.참여자}</span>명 참여
+                        <span className="roboto">{item.total}</span>명 참여
                       </div>
                     </div>
                   </div>
