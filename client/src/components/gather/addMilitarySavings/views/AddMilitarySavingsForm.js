@@ -18,9 +18,6 @@ function AddMilitarySavingsForm() {
     formDataAccount: userAccountList,
     formDataMonth: "",
   };
-  useEffect(() => {
-    console.log(userAccountList);
-  }, []);
   const AutoSavingFormTemp = {
     savingType: controlNameList[0],
     formDataAccount: userAccountList,
