@@ -107,7 +107,13 @@ function MyCompeteContext({ children }) {
 
   return (
     <MyCompete.Provider
-      value={{ myCompList, removeItem, updateItem, searchItem, addItem }}
+      value={{
+        myCompList,
+        removeItem,
+        updateItem,
+        searchItem,
+        addItem,
+      }}
     >
       {children}
     </MyCompete.Provider>
