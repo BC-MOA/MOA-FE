@@ -10,12 +10,9 @@ import CustomBtn from "components/gather/addGoal/CustomBtn";
 import CustomInput from "components/common/CustomInput";
 import { useNavigate } from "react-router-dom";
 import { UserData } from "store/User";
-import {
-  userAccountList,
-  userSavingList,
-  gatherFormat,
-} from "components/common/dummyData";
+import { gatherFormat } from "components/common/dummyData";
 import { GatherList } from "store/GatherListContext";
+import { UserAccount } from "store/UserAccount";
 
 const Container = styled.div`
   width: 100%;
@@ -141,36 +138,14 @@ function SignIn() {
 
   const { login: funcLogin, userData, updateUserData } = useContext(UserData);
   const { setGatherList } = useContext(GatherList);
-
-  // const gatherFormat = (input) => {
-  //   return {
-  //     id: uuid(),
-  //     savingMode: "군적금",
-  //     goalName: "",
-  //     category: "",
-  //     currentAmount: input.currentAmount,
-  //     goalAmount: input.goalAmount,
-  //     account: {
-  //       bankName: input.bankName,
-  //       productName: input.productName,
-  //       accountNumber: input.accountNumber,
-  //       accountCurrentAmount: 0,
-  //       bankImageUrl: "",
-  //     },
-  //     sDate: input.createdDate,
-  //     eDate: input.expirationDate,
-  //     depositMethod: "자유입금",
-  //     limitCycle: "",
-  //     amountPerCycle: 0,
-  //     transactions: [],
-  //   };
-  // };
+  const { userAccount } = useContext(UserAccount);
 
   useEffect(() => {
     if (userData.id !== "") {
       history("/home");
     }
   }, []);
+
   return (
     <Container>
       <Header>
@@ -242,12 +217,13 @@ function SignIn() {
                 phone: "01012345678",
                 key: 45,
               });
-              userSavingList.map((x) =>
+              userAccount.install.map((x) =>
                 setGatherList((prev) => [...prev, gatherFormat(x)])
               );
               updateUserData({
-                userAccountList: userAccountList,
-                userSavingList: userSavingList,
+                userAccountList: userAccount.inout,
+                userSavingList: userAccount.install,
+                userInterlock: userAccount.interlock,
               });
             } else {
               setIsSuccess(false);

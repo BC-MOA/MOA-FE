@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { styleTitle, styleSubTitle, styleNotice } from "style/common";
 import Category from "components/gather/addGoal/Category";
@@ -8,8 +8,8 @@ import { calcAmount } from "components/gather/addGoal/utils";
 import BackHeader from "components/common/BackHeader";
 import { hideScrollBar } from "style/common";
 import DatePick from "../DatePick";
-import { accountList } from "components/common/dummyData";
 import { v1 as uuid } from "uuid";
+import { UserAccount } from "store/UserAccount";
 
 const Container = styled.div`
   width: 100%;
@@ -95,7 +95,8 @@ const SubSelectBox = styled.div`
 
 function Goal() {
   const avgCnt = 2;
-
+  const { inout } = useContext(UserAccount).userAccount;
+  console.log(inout[0]);
   const [inputs, setInputs] = useState({
     id: uuid(),
     savingMode: "목표",
@@ -104,11 +105,11 @@ function Goal() {
     currentAmount: 0,
     goalAmount: 0,
     account: {
-      bankName: accountList[0].bankName,
+      bankName: inout[0].bankName,
       productName: "",
-      accountNumber: accountList[0].accountNumber,
-      accountCurrentAmount: accountList[0].currentAmount,
-      bankImageUrl: accountList[0].bankImageUrl,
+      accountNumber: inout[0].accountNumber,
+      accountCurrentAmount: inout[0].currentAmount,
+      bankImageUrl: inout[0].bankImageUrl,
     },
     sDate: new Date(),
     eDate: "",
@@ -270,7 +271,7 @@ function Goal() {
         </InputEl>
         <InputEl>
           <div className="SubTitle">출금계좌</div>
-          <CustomInput disabled={true} value={accountList[0].accountName} />
+          <CustomInput disabled={true} value={inout[0].accountName} />
         </InputEl>
       </Content>
 

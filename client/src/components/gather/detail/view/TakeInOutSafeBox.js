@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { styleTitle, styleSubTitle, styleNotice } from "style/common";
 import { useLocation } from "react-router-dom";
@@ -7,7 +7,7 @@ import SliderInput from "components/gather/safebox/SliderInput";
 import CustomInput from "components/common/CustomInput";
 import CustomBtn from "components/gather/addGoal/CustomBtn";
 import KeypadModal from "components/gather/safebox/KeypadModal";
-import { accountList } from "components/common/dummyData";
+import { UserAccount } from "store/UserAccount";
 
 const Container = styled.div`
   position: relative;
@@ -64,17 +64,18 @@ const InputEl = styled.div`
 
 function TakeInOutSafeBox() {
   const [modal, setModal] = useState(false);
+  const { inout, interlock } = useContext(UserAccount).userAccount;
   const { state } = useLocation();
   const { props, usage } = state;
 
   const [safeInputs, setSafeInputs] = useState({
     ...props,
     account: {
-      bankName: accountList[0].bankName,
+      bankName: inout[0].bankName,
       productName: "",
-      accountNumber: accountList[0].accountNumber,
-      accountCurrentAmount: accountList[0].currentAmount,
-      bankImageUrl: accountList[0].bankImageUrl,
+      accountNumber: inout[0].accountNumber,
+      accountCurrentAmount: inout[0].currentAmount,
+      bankImageUrl: inout[0].bankImageUrl,
     },
   });
 
@@ -102,7 +103,14 @@ function TakeInOutSafeBox() {
           <div className="SubTitle">
             {usage === "takeIn" ? "출금계좌" : "입금계좌"}
           </div>
-          <CustomInput disabled={true} value={accountList[0].accountName} />
+          <CustomInput
+            disabled={true}
+            value={
+              usage === "takeIn"
+                ? inout[0].accountName
+                : interlock[0].accountName
+            }
+          />
         </InputEl>
       </Content>
       {usage === "takeIn" ? (
