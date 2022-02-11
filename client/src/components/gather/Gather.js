@@ -9,6 +9,7 @@ import { ReactSortable } from "react-sortablejs";
 import moment from "moment";
 import { GatherList } from "store/GatherListContext";
 import { UserData } from "store/User";
+import { Header } from "components/common/Header";
 
 const Container = styled.div`
   width: 100%;
@@ -134,6 +135,7 @@ function Gather() {
 
   return (
     <Container>
+      <Header $title={false} keys={30} alarm={false}></Header>
       <div className="Title">{userData.name}님이 현재 모으고 있는 금액은?</div>
       <div className="TotalAmount">
         <span className="green">{totalAmount.toLocaleString()}</span> 원

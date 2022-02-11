@@ -5,6 +5,7 @@ import CustomBtn from "components/gather/addGoal/CustomBtn";
 import { useLocation } from "react-router-dom";
 import moment from "moment";
 import { GatherList } from "store/GatherListContext";
+import { UserAccount } from "store/UserAccount";
 
 const Container = styled.div`
   width: 100%;
@@ -78,6 +79,7 @@ function AdditionalComplete() {
   const { state } = useLocation();
   const { props, inOutMoney } = state;
   const { setGatherList } = useContext(GatherList);
+  const { inout } = useContext(UserAccount).userAccount;
   console.log(props, inOutMoney);
   const trFormat = (props, input) => {
     const formatted = {
@@ -117,7 +119,7 @@ function AdditionalComplete() {
           </InfoEl>
           <InfoEl className="Text">
             <div>{inOutMoney > 0 ? "출금계좌" : "입금계좌"}</div>
-            <div className="bold">{props.account.bankName}</div>
+            <div className="bold">{inout[0].accountName}</div>
           </InfoEl>
           <InfoEl className="Text">
             <div>총 금액</div>
