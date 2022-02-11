@@ -12,6 +12,8 @@ import { UserData } from "store/User";
 import StateGather from "components/gather/detail/StateGather";
 import { GatherList } from "store/GatherListContext";
 import { AllCompete } from "store/CompeteAll";
+import { groupBy } from "components/common/utils";
+
 const gatherCategorys = [
   {
     id: 1,
@@ -40,6 +42,21 @@ function Home() {
     setChallengeList([allCompList[0], allCompList[1], allCompList[2]]);
   }, []);
 
+  const filtered = groupBy(gatherList, "savingMode");
+  const filteredList = {
+    army: filtered["군적금"] ? filtered["군적금"] : [],
+    goal: filtered["목표"] ? filtered["목표"] : [],
+    safebox: filtered["비상금"] ? filtered["비상금"] : [],
+  };
+  const [gatherNumList, setGathersNumList] = useState({});
+  useEffect(() => {
+    setGathersNumList({
+      army: filteredList.army.length,
+      goal: filteredList.goal.length,
+      safeBox: filteredList.safebox.length,
+    });
+  }, []);
+
   return (
     <Container>
       <Header $title={true} keys={30} alarm={false}></Header>
@@ -64,7 +81,7 @@ function Home() {
             </>
           )}
         </UserAmountMsg>
-        <BubbleContent isLogin={true} savingNum={0} />
+        <BubbleContent gatherNumList={gatherNumList} isLogin={true} />
         {!userData.id &&
           gatherCategorys.map((x) => (
             <AboutGather key={x.id}>
@@ -85,10 +102,26 @@ function Home() {
               </div>
             </AboutGather>
           ))}
-        {userData.id &&
-          gatherList
-            .slice(0, 3)
-            .map((x) => <StateGather key={x.id} props={x} noneClick={true} />)}
+        {userData.id && (
+          <>
+            {0 !==
+            (filteredList.army.length &&
+              filteredList.goal.length &&
+              filteredList.safebox.length)
+              ? [
+                  filteredList.army[0],
+                  filteredList.goal[0],
+                  filteredList.safebox[0],
+                ].map((x) => (
+                  <StateGather key={x.id} props={x} noneClick={true} />
+                ))
+              : gatherList
+                  .slice(0, 3)
+                  .map((x) => (
+                    <StateGather key={x.id} props={x} noneClick={true} />
+                  ))}
+          </>
+        )}
         <Btn
           onClick={() => {
             if (!userData.id) {

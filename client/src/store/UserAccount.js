@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import filterAccount from "components/profile/function/filterAccount";
 
 /**
  *  id: 1,
@@ -50,11 +51,12 @@ const data = [
 //context
 const UserAccount = createContext({
   userAccount: {},
-  setCompListWrapper: () => {},
+  setUserAccountWrapper: () => {},
 });
 
 function UserAccountContext({ children }) {
-  const [userAccount, setUserAccount] = useState(data);
+  // console.log(filterAccount(data));
+  const [userAccount, setUserAccount] = useState(filterAccount(data));
 
   function setUserAccountWrapper(accounts) {
     setUserAccount(accounts);

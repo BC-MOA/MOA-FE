@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { styleTitle, styleSubTitle, styleNotice } from "style/common";
 import { useLocation } from "react-router-dom";
@@ -8,6 +8,7 @@ import CustomInput from "components/common/CustomInput";
 import CustomBtn from "../../addGoal/CustomBtn";
 import { accountList } from "components/common/dummyData";
 import { v1 as uuid } from "uuid";
+import { UserAccount } from "store/UserAccount";
 
 const Container = styled.div`
   width: 100%;
@@ -63,6 +64,7 @@ const InputEl = styled.div`
 
 function SafeBox() {
   const avgSafeAmount = 200000;
+  const { inout } = useContext(UserAccount).userAccount;
   const { state } = useLocation();
 
   const [safeInputs, setSafeInputs] = useState({
@@ -73,11 +75,11 @@ function SafeBox() {
     currentAmount: 0,
     goalAmount: 0,
     account: {
-      bankName: accountList[0].bankName,
+      bankName: inout[0].bankName,
       productName: "",
-      accountNumber: accountList[0].accountNumber,
-      accountCurrentAmount: accountList[0].currentAmount,
-      bankImageUrl: accountList[0].bankImageUrl,
+      accountNumber: inout[0].accountNumber,
+      accountCurrentAmount: inout[0].currentAmount,
+      bankImageUrl: inout[0].bankImageUrl,
     },
     sDate: "",
     eDate: "",
@@ -116,7 +118,7 @@ function SafeBox() {
         </InputEl>
         <InputEl>
           <div className="SubTitle">출금계좌</div>
-          <CustomInput disabled={true} value={accountList[0].accountName} />
+          <CustomInput disabled={true} value={inout[0].accountName} />
         </InputEl>
       </Content>
       <CustomBtn

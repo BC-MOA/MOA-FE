@@ -11,12 +11,9 @@ import { hideScrollBar } from "style/common";
 import CustomInput from "components/common/CustomInput";
 import { UserData } from "store/User";
 import { useNavigate } from "react-router-dom";
-import {
-  userAccountList,
-  userSavingList,
-  gatherFormat,
-} from "components/common/dummyData";
+import { gatherFormat } from "components/common/dummyData";
 import { GatherList } from "store/GatherListContext";
+import { UserAccount } from "store/UserAccount";
 
 const Container = styled.div`
   width: 100%;
@@ -139,13 +136,16 @@ function SignUp() {
   };
 
   const { login: funcLogin, userData, updateUserData } = useContext(UserData);
+  const { userAccount } = useContext(UserAccount);
   const { setGatherList } = useContext(GatherList);
   const history = useNavigate();
+
   useEffect(() => {
     if (userData.id) {
       history("/home");
     }
   }, []);
+
   return (
     <Container>
       <Header>
@@ -301,7 +301,6 @@ function SignUp() {
           )}
         </div>
       </Content>
-      {/* Todo: 회원가입 버튼 클릭시, 이동할 라우터 경로 추가 */}
       <CustomBtn
         active={
           !Object.keys(signUp).filter((x) => signUp[x] === "").length &&
@@ -318,12 +317,13 @@ function SignUp() {
             phone: signUp.phoneNumber,
             key: 0,
           });
-          userSavingList.map((x) =>
+          userAccount.install.map((x) =>
             setGatherList((prev) => [...prev, gatherFormat(x)])
           );
           updateUserData({
-            userAccountList: userAccountList,
-            userSavingList: userSavingList,
+            userAccountList: userAccount.inout,
+            userSavingList: userAccount.install,
+            userInterlock: userAccount.interlock,
           });
         }}
       >
