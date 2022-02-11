@@ -80,7 +80,7 @@ function AdditionalComplete() {
   const { props, inOutMoney } = state;
   const { setGatherList } = useContext(GatherList);
   const { inout } = useContext(UserAccount).userAccount;
-  console.log(props, inOutMoney);
+  // console.log(props, inOutMoney);
   const trFormat = (props, input) => {
     const formatted = {
       date: moment(new Date()).format("MM월 DD일"),
