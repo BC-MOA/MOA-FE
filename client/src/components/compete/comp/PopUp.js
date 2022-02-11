@@ -107,7 +107,7 @@ function PopUp({ betinfo, obj, func, type }) {
       user.updateUserData({ key: user.userData.key + betted_key });
       myContext.removeItem(obj.key);
     } else {
-      //기존에 있던 건지 확인
+      //기존 배팅
       const item = myContext.searchItem(obj.key);
 
       if (item.length !== 0) {
@@ -116,8 +116,7 @@ function PopUp({ betinfo, obj, func, type }) {
         myContext.updateItem(betinfo, prevbet);
       } else {
         //새로운 배팅일 경우
-        //챌린지 정보 가져옴
-        //챌린지 추가
+        user.updateUserData({ key: user.userData.key - betinfo.bet });
         const newComp = { ...obj, ...betinfo };
         myContext.addItem(newComp);
       }
