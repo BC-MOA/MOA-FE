@@ -7,23 +7,23 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { UserAccount } from "store/UserAccount";
 import styled from "styled-components";
 import MilitaryFormBox from "../MilitaryFormBox";
-import filterAccount from "components/profile/function/filterAccount";
 const controlNameList = ["자동이체", "자유입금"];
 
 function AddMilitarySavingsForm() {
   const { state: savingData } = useLocation();
   const history = useNavigate();
-  const { inout: userAccountList } = filterAccount(
-    useContext(UserAccount).userAccount
-  );
+  const userAccountList = useContext(UserAccount).userAccount[0];
   const FreeSavingFormTemp = {
     savingType: controlNameList[1],
-    formDataAccount: userAccountList[0],
+    formDataAccount: userAccountList,
     formDataMonth: "",
   };
+  useEffect(() => {
+    console.log(userAccountList);
+  }, []);
   const AutoSavingFormTemp = {
     savingType: controlNameList[0],
-    formDataAccount: userAccountList[0],
+    formDataAccount: userAccountList,
     limitCycle: "매월 10일",
     formDataMonth: "",
     formDataAmount: "",

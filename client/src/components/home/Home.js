@@ -13,7 +13,7 @@ import StateGather from "components/gather/detail/StateGather";
 import { GatherList } from "store/GatherListContext";
 import { AllCompete } from "store/CompeteAll";
 import { groupBy } from "components/common/utils";
-
+import createCardList from "components/compete/function/FilterList";
 const gatherCategorys = [
   {
     id: 1,
@@ -139,26 +139,7 @@ function Home() {
             <span className="green">인기 챌린지</span>
           </div>
           <div className="challengeList">
-            {challengeList &&
-              challengeList.map((item) => (
-                <div className="challengeItem" key={uuid()}>
-                  <img
-                    src={require(`assets/compete/${item.thumb}`)}
-                    alt="itme.title"
-                  />
-                  <div className="about">
-                    <div className="title">{item.title}</div>
-                    <div className="subtitle">
-                      <span>
-                        {item.versus[0]} vs {item.versus[1]}
-                      </span>
-                      <div className="tag">
-                        <span className="roboto">{item.total}</span>명 참여
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
+            {createCardList("popular", allCompList).slice(0, 3)}
           </div>
           <Btn
             onClick={() => {
@@ -257,52 +238,10 @@ const AboutChallenge = styled.div`
   .challengeList {
     display: flex;
     flex-direction: column;
-    gap: 12px;
     margin-bottom: 4px;
-  }
 
-  .challengeItem {
-    display: flex;
-    align-items: center;
-    background: #ffffff;
-    box-shadow: 0px 1px 2px rgba(33, 33, 33, 0.08);
-    border-radius: 12px;
-    padding: 16px 20px;
-
-    .about {
-      margin-left: 12px;
-      text-align: start;
-      flex-grow: 1;
-      .title {
-        font-family: "Pretendard-SemiBold";
-        font-size: 16px;
-        line-height: 25px;
-        color: var(--Title_01);
-      }
-      .subtitle {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        font-family: "Pretendard-Medium";
-        color: var(--Body_01);
-        font-size: 14px;
-        line-height: 22px;
-        .tag {
-          display: flex;
-          align-items: center;
-          background: rgba(76, 175, 91, 0.15);
-          border-radius: 8px;
-          font-family: "Pretendard-Medium";
-          font-size: 12px;
-          color: var(--a2);
-          padding: 0 8px;
-          .roboto {
-            font-family: "Roboto";
-            font-weight: 500;
-            font-size: 13px;
-          }
-        }
-      }
+    * {
+      margin-top: 0;
     }
   }
 `;

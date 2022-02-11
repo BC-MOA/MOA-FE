@@ -107,7 +107,6 @@ const SetGoal = ({ name, accounts }) => {
     //api 호출
     //home으로 navigatge
     //열쇠 적용
-    navigate("/home");
     userAccount.install.map((x) =>
       setGatherList((prev) => [
         ...prev,
@@ -122,6 +121,13 @@ const SetGoal = ({ name, accounts }) => {
       userSavingList: userAccount.install,
       userInterlock: userAccount.interlock,
     });
+    navigate("/key", {
+      state: {
+        num: 3,
+        message: "모아(MOA)회원이 되셨네요",
+        nextPath: "/home",
+      },
+    });
   };
 
   //컴포넌트 리스트 생성
@@ -132,7 +138,6 @@ const SetGoal = ({ name, accounts }) => {
       <HeaderButton>
         <button
           onClick={() => {
-            navigate("/home");
             userAccount.install.map((x) =>
               setGatherList((prev) => [...prev, gatherFormat(x)])
             );
@@ -140,6 +145,13 @@ const SetGoal = ({ name, accounts }) => {
               userAccountList: userAccount.inout,
               userSavingList: userAccount.install,
               userInterlock: userAccount.interlock,
+            });
+            navigate("/key", {
+              state: {
+                num: 3,
+                message: "모아(MOA)회원이 되셨네요",
+                nextPath: "/home",
+              },
             });
           }}
         >
