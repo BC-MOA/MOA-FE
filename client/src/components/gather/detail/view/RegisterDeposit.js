@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import BackHeader from "components/common/BackHeader";
 import { styleTitle, styleSubTitle, styleNotice } from "style/common";
@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 import CustomInput from "components/common/CustomInput";
 import CustomBtn from "components/gather/addGoal/CustomBtn";
 import SelectBox from "components/gather/addGoal/SelectBox";
-import { accountList } from "components/common/dummyData";
+import { UserAccount } from "store/UserAccount";
 
 const Container = styled.div`
   width: 100%;
@@ -54,6 +54,7 @@ const InputEl = styled.div`
 
 function RegisterDeposit() {
   const { state: props } = useLocation();
+  const { inout } = useContext(UserAccount).userAccount;
   const prev = props;
 
   const [newInputs, setNewInputs] = useState({
@@ -144,13 +145,7 @@ function RegisterDeposit() {
         </InputEl>
         <InputEl>
           <div className="subTitle">출금계좌</div>
-          <CustomInput
-            disabled={true}
-            value={
-              accountList.find((x) => x.bankName === newInputs.account.bankName)
-                .accountName
-            }
-          />
+          <CustomInput disabled={true} value={inout[0].accountName} />
         </InputEl>
       </Content>
 

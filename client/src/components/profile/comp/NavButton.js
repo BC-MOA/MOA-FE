@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import React, { useContext } from "react";
 import { UserData } from "store/User";
+import { GatherList } from "store/GatherListContext";
 
 const StyledLinkButton = styled.div`
   width: 90%;
@@ -36,9 +37,11 @@ const StyledLinkButton = styled.div`
 function LinkButton({ title, to, trans }) {
   const navigate = useNavigate();
   const User = useContext(UserData);
+  const { setGatherList } = useContext(GatherList);
 
   const logout = () => {
     User.logOut();
+    setGatherList([]);
     navigate("/login");
   };
 

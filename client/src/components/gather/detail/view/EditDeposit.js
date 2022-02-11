@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import BackHeader from "components/common/BackHeader";
 import { styleTitle, styleSubTitle, styleNotice } from "style/common";
 import { useLocation } from "react-router-dom";
 import CustomInput from "components/common/CustomInput";
 import CustomBtn from "components/gather/addGoal/CustomBtn";
-import CustomSelect from "components/gather/addGoal/CustomSelect";
 import SelectBox from "components/gather/addGoal/SelectBox";
-import { accountList } from "components/common/dummyData";
+import { UserAccount } from "store/UserAccount";
 
 const Container = styled.div`
   width: 100%;
@@ -96,6 +95,8 @@ function EditDeposit() {
       ).length > 0
     );
   };
+
+  const { inout } = useContext(UserAccount).userAccount;
 
   return (
     <Container>
@@ -188,17 +189,14 @@ function EditDeposit() {
                 </InputEl>
                 <InputEl>
                   <div className="subTitle">출금계좌</div>
-                  <CustomInput
-                    disabled={true}
-                    value={accountList[0].accountName}
-                  />
+                  <CustomInput disabled={true} value={inout[0].accountName} />
                 </InputEl>
               </>
             )
           ) : (
             <InputEl>
               <div className="subTitle">출금계좌</div>
-              <CustomInput disabled={true} value={accountList[0].accountName} />
+              <CustomInput disabled={true} value={inout[0].accountName} />
             </InputEl>
           )}
         </InputEl>

@@ -69,9 +69,7 @@ const SetGoal = ({ name, accounts }) => {
   const [valid, setValid] = useState(false);
 
   //적금 통장 필터링
-  const ins_list = accounts.filter((obj) => {
-    return obj.accountType === "예적금";
-  });
+  const ins_list = accounts.install;
 
   //id 추출
   const id_list = [...idListGetter(ins_list)];
