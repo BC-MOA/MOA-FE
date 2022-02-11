@@ -78,18 +78,19 @@ function AdditionalComplete() {
   const { state } = useLocation();
   const { props, inOutMoney } = state;
   const { setGatherList } = useContext(GatherList);
+  console.log(props, inOutMoney);
   const trFormat = (props, input) => {
     const formatted = {
       date: moment(new Date()).format("MM월 DD일"),
       name: props.account.bankName,
       time: moment(new Date()).format("hh:mm"),
       amount: input,
-      // Todo: 추가 입금 시, 잔액 처리
       total: Number(props.currentAmount) + Number(input),
     };
 
     return formatted;
   };
+
   return (
     <Container>
       <Content>
@@ -142,10 +143,10 @@ function AdditionalComplete() {
             Number(props.currentAmount) + Number(inOutMoney);
           setGatherList((prevList) =>
             prevList.map((x) =>
-              x.goalName === props.goalName
+              x.id === props.id
                 ? {
                     ...x,
-                    currentAmount: Number(x.currentAmount) + Number(inOutMoney),
+                    currentAmount: props.currentAmount,
                     transactions: [
                       ...x.transactions,
                       trFormat(props, inOutMoney),

@@ -11,6 +11,12 @@ import { hideScrollBar } from "style/common";
 import CustomInput from "components/common/CustomInput";
 import { UserData } from "store/User";
 import { useNavigate } from "react-router-dom";
+import {
+  userAccountList,
+  userSavingList,
+  gatherFormat,
+} from "components/common/dummyData";
+import { GatherList } from "store/GatherListContext";
 
 const Container = styled.div`
   width: 100%;
@@ -132,7 +138,8 @@ function SignUp() {
     ),
   };
 
-  const { login: funcLogin, userData } = useContext(UserData);
+  const { login: funcLogin, userData, updateUserData } = useContext(UserData);
+  const { setGatherList } = useContext(GatherList);
   const history = useNavigate();
   useEffect(() => {
     if (userData.id) {
@@ -306,6 +313,17 @@ function SignUp() {
           funcLogin({
             id: [signUp.serviceNumber1, signUp.serviceNumber2].join("-"),
             name: signUp.name,
+            join_date: "2021-08-01",
+            unit: "11사단 화랑부대",
+            phone: signUp.phoneNumber,
+            key: 0,
+          });
+          userSavingList.map((x) =>
+            setGatherList((prev) => [...prev, gatherFormat(x)])
+          );
+          updateUserData({
+            userAccountList: userAccountList,
+            userSavingList: userSavingList,
           });
         }}
       >
