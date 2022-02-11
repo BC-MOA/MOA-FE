@@ -96,7 +96,6 @@ const SubSelectBox = styled.div`
 function Goal() {
   const avgCnt = 2;
   const { inout } = useContext(UserAccount).userAccount;
-  console.log(inout[0]);
   const [inputs, setInputs] = useState({
     id: uuid(),
     savingMode: "목표",
