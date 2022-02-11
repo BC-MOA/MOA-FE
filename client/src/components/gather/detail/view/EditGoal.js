@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { styleTitle, styleSubTitle, styleNotice } from "style/common";
 import BackHeader from "components/common/BackHeader";
@@ -8,6 +8,7 @@ import CustomBtn from "components/gather/addGoal/CustomBtn";
 import Category from "components/gather/addGoal/Category";
 import DatePick from "components/gather/addGoal/DatePick";
 import moment from "moment";
+import { UserData } from "store/User";
 
 const Container = styled.div`
   width: 100%;
@@ -51,9 +52,7 @@ const InputEl = styled.div`
 `;
 
 function EditGoal() {
-  const userInfo = {
-    name: "김민수",
-  };
+  const { userData } = useContext(UserData);
 
   const { state: props } = useLocation();
   const prev = props;
@@ -101,7 +100,7 @@ function EditGoal() {
       {props.savingMode === "군적금" ? (
         <Content>
           <div className="title">
-            <div>{userInfo.name}님!</div>
+            <div>{userData.name}님!</div>
             <div>군적금을 통해 무엇을 하고 싶나요?</div>
           </div>
 
