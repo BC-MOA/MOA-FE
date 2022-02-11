@@ -119,13 +119,17 @@ function CompDetail() {
   useEffect(() => {
     const interval = setInterval(() => {
       const temp = totalkey;
+      temp[0] += 1;
+      temp[1] -= 1;
+      setTotalkey(temp);
       console.log(totalkey);
-    }, 1000);
+    }, 2000);
     return () => clearInterval(interval);
   }, []);
 
   return (
     <>
+      {totalkey}
       <BackHeader isScrolled={false} title={false} path={-1}></BackHeader>
       <Detail>
         <BetCard>
@@ -160,14 +164,14 @@ function CompDetail() {
               ></PickUp>
             </div>
           </div>
-          <PercentBar totalkey={comp.totalkey}></PercentBar>
+          <PercentBar totalkey={totalkey}></PercentBar>
         </BetCard>
         {isBetted && (
           <>
             <ExpectedKey
               bet={keyCount.valueGroups.number}
               pick={pick}
-              keys={comp.totalkey}
+              keys={totalkey}
             ></ExpectedKey>
             <KeyPicker onchange={handleChange} count={keyCount}></KeyPicker>
           </>
