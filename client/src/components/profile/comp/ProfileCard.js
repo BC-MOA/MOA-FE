@@ -5,7 +5,7 @@ import userInfo from "../function/userInfo";
 
 const Card = styled.div`
   width: 100%;
-  height: 231px;
+  height: 241px;
   border-radius: 12px;
   background-color: white;
 `;

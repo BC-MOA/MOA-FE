@@ -62,11 +62,12 @@ const Date_ = styled.div`
   display: flex;
   justify-content: space-between;
 
-  padding: 10px 15px;
+  padding: 6px 15px 24px;
 
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
+  line-height: 22px;
   font-size: 14px;
 
   .left {
@@ -79,7 +80,7 @@ const Date_ = styled.div`
 
   .type {
     color: var(--Body_02);
-    margin-bottom: 3px;
+    font-family: "Pretendard-Regular";
   }
 `;
 
