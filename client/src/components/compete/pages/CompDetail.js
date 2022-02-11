@@ -126,8 +126,7 @@ function CompDetail() {
       let temp = [...comp.totalkey];
       temp = temp.map((int) => int + getRandomInt());
       setRatio(temp);
-      console.log(ratio);
-    }, 1000);
+    }, 500);
     return () => clearInterval(interval);
   }, [ratio, setRatio]);
 
