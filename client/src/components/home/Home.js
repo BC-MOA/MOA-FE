@@ -239,6 +239,10 @@ const AboutChallenge = styled.div`
     display: flex;
     flex-direction: column;
     margin-bottom: 4px;
+
+    * {
+      margin-top: 0;
+    }
   }
 `;
 const UserAmountMsg = styled.div`
