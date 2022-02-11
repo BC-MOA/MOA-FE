@@ -16,11 +16,14 @@ function AddMilitarySavingsForm() {
   // ---
   const FreeSavingFormTemp = {
     savingType: controlNameList[1],
+    limitCycle: "",
     formDataMonth: "",
     formDataAccount: userAccountList[0],
+    formDataAmount: 0,
   };
   const AutoSavingFormTemp = {
     savingType: controlNameList[0],
+    limitCycle: "매월 10일",
     formDataMonth: "",
     formDataAmount: "",
   };

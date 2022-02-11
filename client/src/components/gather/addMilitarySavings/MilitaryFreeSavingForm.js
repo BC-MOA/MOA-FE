@@ -5,7 +5,6 @@ import styled from "styled-components";
 function MilitaryFreeSavingForm({
   userMonthOptions,
   savingType,
-  savingData,
   formData,
   setFormData,
   userAccountList,
