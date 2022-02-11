@@ -4,7 +4,7 @@ import SubmitButton from "components/common/SubmitButton";
 
 const StyledModal = styled.div`
   background-color: white;
-  width: calc(100%);
+  width: 100%;
   height: 215px;
   font-family: "Pretendard-Regular";
 
@@ -12,8 +12,10 @@ const StyledModal = styled.div`
   flex-direction: column;
   align-items: flex-start;
 
-  padding: 20px 5%;
-  margin: auto 0 -16px -20px;
+  padding: 20px;
+  margin-left: -20px;
+  margin-top: auto;
+  margin-bottom: -36px;
   border-radius: 14px 14px 0 0;
   text-align: left;
 
@@ -85,9 +87,9 @@ const Modal = ({ length, func }) => {
       {length == 1 && (
         <>
           <div className="big">
-            모아(MOA)에서 <p className="colored">첫 군적금</p>을 시작해보세요
+            <p className="colored">군적금 계좌</p>는 이제부터
           </div>
-          <p className="big">쉽고 간편하게 가입이 가능해요</p>
+          <p className="big"> 모아(MOA)에서 따로 볼 수 있어요</p>
           <p className="small">
             나라사랑계좌는 연동되어 출금계좌로 설정되지만
             <br />
