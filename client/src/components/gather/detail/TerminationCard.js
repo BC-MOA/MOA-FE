@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import moment from "moment";
+import { UserAccount } from "store/UserAccount";
 
 const Container = styled.div`
   padding: 20px;
@@ -55,14 +56,12 @@ const Container = styled.div`
 `;
 
 function TerminationCard({ props }) {
+  const { inout } = useContext(UserAccount).userAccount;
   return (
     <Container>
       <div className="accountInfo">
         <div className="bgIcon">
-          <img
-            src={require("assets/gather/ic_banklogo_국민.svg").default}
-            alt="logo"
-          />
+          <img src={props.account.bankImageUrl} alt="logo" />
         </div>
         <div className="account">
           {props.savingMode === "군적금" ? (
@@ -89,11 +88,11 @@ function TerminationCard({ props }) {
       </div>
       <div className="InfoEl text">
         <div className="txt_body1">해지예상금액</div>
-        <div className="txt_green">{800260} 원</div>
+        <div className="txt_green">{Number(800260).toLocaleString()} 원</div>
       </div>
       <div className="InfoEl text">
         <div className="txt_body1">입금계좌</div>
-        <div className="txt_title2">{props.account.bankName}</div>
+        <div className="txt_title2">{inout[0].accountName}</div>
       </div>
     </Container>
   );

@@ -103,7 +103,7 @@ function TerminationComplete() {
               </InfoEl>
               <InfoEl className="Text green">
                 <div>{"해지예상금액"}</div>
-                <div className="bold">{800266} 원</div>
+                <div className="bold">{Number(800266).toLocaleString()} 원</div>
               </InfoEl>
             </>
           ) : (
