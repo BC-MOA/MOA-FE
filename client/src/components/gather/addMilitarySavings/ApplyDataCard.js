@@ -39,7 +39,7 @@ function ApplyDataCard({ applyData }) {
         <div className="cardItem">
           <span>출금계좌</span>
           <span className="bold">
-            {applyData.formData.formDataAccount.accountName}
+            {applyData.formData.formDataAccount[0].accountName}
           </span>
         </div>
       )}
