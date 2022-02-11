@@ -51,6 +51,7 @@ const data = [
 //context
 const UserAccount = createContext({
   userAccount: {},
+  setUserAccount: () => {},
   setUserAccountWrapper: () => {},
 });
 
@@ -63,7 +64,9 @@ function UserAccountContext({ children }) {
   }
 
   return (
-    <UserAccount.Provider value={{ userAccount, setUserAccountWrapper }}>
+    <UserAccount.Provider
+      value={{ setUserAccount, userAccount, setUserAccountWrapper }}
+    >
       {children}
     </UserAccount.Provider>
   );
