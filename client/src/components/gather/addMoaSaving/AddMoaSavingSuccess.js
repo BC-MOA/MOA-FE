@@ -1,14 +1,18 @@
 import Container from "components/common/Container";
 import ScrollBox from "components/common/ScrollBox";
 import SubmitButton from "components/common/SubmitButton";
-import React from "react";
+import React, { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { UserData } from "store/User";
+import { UserAccount } from "store/UserAccount";
 import styled from "styled-components";
 import ApplyDataCard from "./ApplyDataCard";
 
 function AddMoaSavingSuccess() {
   const history = useNavigate();
   const { state: savingType } = useLocation();
+  const { updateUserData } = useContext(UserData);
+  const { userAccount, setUserAccount } = useContext(UserAccount);
   return (
     <Container>
       <ScrollBox paddingValue={"80px 0 114px "}>
@@ -31,6 +35,19 @@ function AddMoaSavingSuccess() {
       <SubmitButton
         title={"확인"}
         onClickFunc={() => {
+          const data = {
+            accountType: "제휴",
+            accountName: "모아(MOA)입출금 통장",
+            bankName: "KEB 하나은행",
+            accountNumber: "123-456-78-910111",
+            currentAmount: 0,
+            bankImageUrl:
+              "https://raw.githubusercontent.com/BuenCamino3rd/test/d42a6f54e323fa3ed83729e8d294460253d53910/image/hana.svg",
+          };
+          updateUserData({ userInterlock: data });
+          const temp = userAccount;
+          temp.interlock.push(data);
+          setUserAccount(temp);
           if ("목표" === savingType) {
             history("/gather/add-goal");
           } else {
