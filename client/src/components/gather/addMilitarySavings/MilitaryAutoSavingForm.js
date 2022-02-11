@@ -15,7 +15,7 @@ function MilitaryAutoSavingForm({
   useEffect(() => {
     const exAmount =
       Number(formData.formDataAmount) * Number(formData.formDataMonth);
-    const exInterest = exAmount * (33 + savingData.highestInterest);
+    const exInterest = (exAmount * (33 + savingData.highestInterest)) / 100;
     setExpectAmount(exAmount);
     setExpectInterest(exInterest);
   }, [formData.formDataMonth, formData.formDataAmount]);
