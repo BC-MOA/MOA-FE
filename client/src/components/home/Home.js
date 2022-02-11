@@ -48,6 +48,14 @@ function Home() {
     goal: filtered["목표"] ? filtered["목표"] : [],
     safebox: filtered["비상금"] ? filtered["비상금"] : [],
   };
+  const [gatherNumList, setGathersNumList] = useState({});
+  useEffect(() => {
+    setGathersNumList({
+      army: filteredList.army.length,
+      goal: filteredList.goal.length,
+      safeBox: filteredList.safebox.length,
+    });
+  }, [filteredList]);
 
   return (
     <Container>
@@ -73,7 +81,7 @@ function Home() {
             </>
           )}
         </UserAmountMsg>
-        <BubbleContent isLogin={true} savingNum={0} />
+        <BubbleContent gatherNumList={gatherNumList} isLogin={true} />
         {!userData.id &&
           gatherCategorys.map((x) => (
             <AboutGather key={x.id}>
