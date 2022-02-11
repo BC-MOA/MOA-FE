@@ -113,23 +113,26 @@ function CompDetail() {
   };
 
   //totalkey 실시간 예시
+  function getRandomInt() {
+    const min = 1;
+    const max = 10;
+    return Math.floor(Math.random() * (max - min) + min);
+  }
 
-  const [totalkey, setTotalkey] = useState(comp.totalkey);
+  const [ratio, setRatio] = useState(comp.totalkey);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const temp = totalkey;
-      temp[0] += 1;
-      temp[1] -= 1;
-      setTotalkey(temp);
-      console.log(totalkey);
-    }, 2000);
+      let temp = [...comp.totalkey];
+      temp = temp.map((int) => int + getRandomInt());
+      setRatio(temp);
+      console.log(ratio);
+    }, 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [ratio, setRatio]);
 
   return (
     <>
-      {totalkey}
       <BackHeader isScrolled={false} title={false} path={-1}></BackHeader>
       <Detail>
         <BetCard>
@@ -164,14 +167,14 @@ function CompDetail() {
               ></PickUp>
             </div>
           </div>
-          <PercentBar totalkey={totalkey}></PercentBar>
+          <PercentBar totalkey={ratio}></PercentBar>
         </BetCard>
         {isBetted && (
           <>
             <ExpectedKey
               bet={keyCount.valueGroups.number}
               pick={pick}
-              keys={totalkey}
+              keys={ratio}
             ></ExpectedKey>
             <KeyPicker onchange={handleChange} count={keyCount}></KeyPicker>
           </>
