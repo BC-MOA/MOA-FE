@@ -55,7 +55,7 @@ function Home() {
       goal: filteredList.goal.length,
       safeBox: filteredList.safebox.length,
     });
-  }, [filteredList]);
+  }, []);
 
   return (
     <Container>
