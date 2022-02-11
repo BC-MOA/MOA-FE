@@ -59,13 +59,17 @@ function EditSavingTitle() {
           productName: `${applyData.savingData.bank.bankName} ${applyData.savingData.productName}`,
           accountNumber: "112-0330-0201",
           accountCurrentAmount: 0,
-          bankImageUrl: "",
+          bankImageUrl: applyData.savingData.bankImageUrl,
         },
         sDate: sDate,
         eDate: eDate,
         depositMethod: applyData.formData.savingType,
-        limitCycle: applyData.formData.limitCycle,
-        amountPerCycle: Number(applyData.formData.formDataAmount),
+        limitCycle: applyData.formData?.limitCycle
+          ? applyData.formData.limitCycle
+          : "",
+        amountPerCycle: applyData.formData?.formDataAmount
+          ? Number(applyData.formData.formDataAmount)
+          : 0,
         transactions: [],
       },
     ]);
