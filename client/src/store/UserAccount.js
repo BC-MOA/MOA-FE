@@ -25,7 +25,7 @@ const data = [
   // {
   //   id: 2,
   //   bankName: "IBK기업",
-  //   productName: "IBK군인적금",
+  //   productName: "IBK장병내일우대적금",
   //   accountNumber: "112-0330-0201",
   //   currentAmount: 100000,
   //   goalAmount: 2500000,
@@ -37,7 +37,7 @@ const data = [
   {
     id: 3,
     bankName: "KB국민",
-    productName: "KB군인적금",
+    productName: "KB장병내일우대적금",
     accountNumber: "112-0330-0201",
     currentAmount: 100000,
     goalAmount: 2500000,
