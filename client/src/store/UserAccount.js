@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import filterAccount from "components/profile/function/filterAccount";
 
 /**
@@ -58,9 +58,26 @@ const UserAccount = createContext({
 });
 
 function UserAccountContext({ children }) {
-  // console.log(filterAccount(data));
-  const [userAccount, setUserAccount] = useState(filterAccount(data));
+  const [userAccount, setUserAccount] = useState(
+    localStorage.getItem("useData")
+      ? {
+          inout: JSON.parse(localStorage.getItem("userData")).userAccountList,
+          install: JSON.parse(localStorage.getItem("userData")).userSavingList,
+          interlock: JSON.parse(localStorage.getItem("userData")).userInterlock,
+        }
+      : filterAccount([data])
+  );
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("userData"));
 
+    const accountData = {
+      inout: data.userAccountList,
+      install: data.userSavingList,
+      interlock: data.userInterlock,
+    };
+
+    setUserAccount(accountData);
+  }, []);
   function setUserAccountWrapper(accounts) {
     setUserAccount(accounts);
   }
