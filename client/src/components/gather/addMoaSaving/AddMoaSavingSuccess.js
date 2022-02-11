@@ -44,7 +44,7 @@ function AddMoaSavingSuccess() {
             bankImageUrl:
               "https://raw.githubusercontent.com/BuenCamino3rd/test/d42a6f54e323fa3ed83729e8d294460253d53910/image/hana.svg",
           };
-          updateUserData({ userInterlock: data });
+          updateUserData({ userInterlock: [data] });
           const temp = userAccount;
           temp.interlock.push(data);
           setUserAccount(temp);
