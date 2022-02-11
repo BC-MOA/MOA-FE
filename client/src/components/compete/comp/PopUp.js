@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { MyCompete } from "store/CompeteMy";
+import { AllCompete } from "store/CompeteAll";
 import { useContext } from "react";
 
 //[styled comp] : 팝업 카드 배경
@@ -90,6 +91,7 @@ const Modal = styled.div`
  * title: 챌린지 정보
  * func: state 변경용 함수
  * type: 버튼 순서 구분을 위해서
+ * betinfo: 베팅 정보 - 챌린지키, 선택한 대상, 선택한키
  */
 
 function PopUp({ betinfo, obj, func, type }) {
@@ -101,13 +103,19 @@ function PopUp({ betinfo, obj, func, type }) {
       //취소하기
       myContext.removeItem(obj.key);
     } else {
-      //확인
-      if (betinfo) {
-        navigate("/compete", { state: { type: true } });
-      } else {
+      //기존에 있던 건지 확인
+      const result = myContext.searchItem(obj.key).length !== 0;
+
+      if (result) {
         myContext.updateItem(betinfo);
-        navigate("/compete", { state: { type: false } });
+      } else {
+        //새로운 배팅일 경우
+        //챌린지 정보 가져옴
+        //챌린지 추가
+        const newComp = { ...obj, ...betinfo };
+        myContext.addItem(newComp);
       }
+      navigate("/compete", { state: { type: false } });
     }
 
     func();

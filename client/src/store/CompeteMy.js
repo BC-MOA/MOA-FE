@@ -80,13 +80,15 @@ function MyCompeteContext({ children }) {
     setMyCompList(result);
   }
 
-  function updateItem({ pick, betkey, compkey }) {
-    console.log(pick, betkey, compkey);
-
+  function updateItem({ pick, bet, key }) {
     let temp = [...myCompList];
-    temp[parseInt(compkey) - 1].pick = pick;
-    temp[parseInt(compkey) - 1].bet = betkey;
 
+    temp.map((obj) => {
+      if (obj.key === key) {
+        obj.pick = pick;
+        obj.bet = bet;
+      }
+    });
     setMyCompList(temp);
   }
 
@@ -97,9 +99,15 @@ function MyCompeteContext({ children }) {
     return result;
   }
 
+  function addItem(obj) {
+    let temp = [...myCompList];
+    temp.push(obj);
+    setMyCompList(temp);
+  }
+
   return (
     <MyCompete.Provider
-      value={{ myCompList, removeItem, updateItem, searchItem }}
+      value={{ myCompList, removeItem, updateItem, searchItem, addItem }}
     >
       {children}
     </MyCompete.Provider>
