@@ -10,9 +10,12 @@ import CustomBtn from "components/gather/addGoal/CustomBtn";
 import CustomInput from "components/common/CustomInput";
 import { useNavigate } from "react-router-dom";
 import { UserData } from "store/User";
-import { userAccountList, userSavingList } from "components/common/dummyData";
+import {
+  userAccountList,
+  userSavingList,
+  gatherFormat,
+} from "components/common/dummyData";
 import { GatherList } from "store/GatherListContext";
-import { v1 as uuid } from "uuid";
 
 const Container = styled.div`
   width: 100%;
@@ -139,29 +142,29 @@ function SignIn() {
   const { login: funcLogin, userData, updateUserData } = useContext(UserData);
   const { setGatherList } = useContext(GatherList);
 
-  const gatherFormat = (input) => {
-    return {
-      id: uuid(),
-      savingMode: "군적금",
-      goalName: "",
-      category: "",
-      currentAmount: input.currentAmount,
-      goalAmount: input.goalAmount,
-      account: {
-        bankName: input.bankName,
-        productName: input.productName,
-        accountNumber: input.accountNumber,
-        accountCurrentAmount: 0,
-        bankImageUrl: "",
-      },
-      sDate: input.createdDate,
-      eDate: input.expirationDate,
-      depositMethod: "자유입금",
-      limitCycle: "",
-      amountPerCycle: 0,
-      transactions: [],
-    };
-  };
+  // const gatherFormat = (input) => {
+  //   return {
+  //     id: uuid(),
+  //     savingMode: "군적금",
+  //     goalName: "",
+  //     category: "",
+  //     currentAmount: input.currentAmount,
+  //     goalAmount: input.goalAmount,
+  //     account: {
+  //       bankName: input.bankName,
+  //       productName: input.productName,
+  //       accountNumber: input.accountNumber,
+  //       accountCurrentAmount: 0,
+  //       bankImageUrl: "",
+  //     },
+  //     sDate: input.createdDate,
+  //     eDate: input.expirationDate,
+  //     depositMethod: "자유입금",
+  //     limitCycle: "",
+  //     amountPerCycle: 0,
+  //     transactions: [],
+  //   };
+  // };
 
   useEffect(() => {
     if (userData.id !== "") {

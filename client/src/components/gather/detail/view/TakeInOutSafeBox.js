@@ -79,19 +79,6 @@ function TakeInOutSafeBox() {
   });
 
   const [amount, setAmount] = useState(0);
-  useEffect(() => {
-    if (usage === "takeIn") {
-      setSafeInputs({
-        ...safeInputs,
-        currentAmount: safeInputs.currentAmount + amount,
-      });
-    } else {
-      setSafeInputs({
-        ...safeInputs,
-        currentAmount: safeInputs.currentAmount - amount,
-      });
-    }
-  }, [amount]);
 
   return (
     <Container>
