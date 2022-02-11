@@ -10,7 +10,7 @@ const Account = ({ list }) => {
 
   if (list.length != 0) {
     for (const obj of list) {
-      cardList.push(<AccountCard obj={obj} key={obj.key}></AccountCard>);
+      cardList.push(<AccountCard obj={obj} key={obj.id}></AccountCard>);
     }
   }
 
