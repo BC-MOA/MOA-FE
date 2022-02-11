@@ -38,7 +38,9 @@ function ApplyDataCard({ applyData }) {
       {"자유입금" === applyData.formData.savingType && (
         <div className="cardItem">
           <span>출금계좌</span>
-          <span className="bold">{applyData.formData.formDataAccount}</span>
+          <span className="bold">
+            {applyData.formData.formDataAccount.accountName}
+          </span>
         </div>
       )}
     </ApplyDataCardStyle>

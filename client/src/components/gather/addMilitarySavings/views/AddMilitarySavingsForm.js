@@ -2,18 +2,20 @@ import BackHeader from "components/common/BackHeader";
 import Container from "components/common/Container";
 import ScrollBox from "components/common/ScrollBox";
 import SubmitButton from "components/common/SubmitButton";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { UserAccount } from "store/UserAccount";
 import styled from "styled-components";
 import MilitaryFormBox from "../MilitaryFormBox";
+import filterAccount from "components/profile/function/filterAccount";
 const controlNameList = ["자동이체", "자유입금"];
 
 function AddMilitarySavingsForm() {
   const { state: savingData } = useLocation();
   const history = useNavigate();
-  // todo - api 데이터
-  const [userAccountList, setUserAccountList] = useState(["통장1", "통장2"]);
-  // ---
+  const { inout: userAccountList } = filterAccount(
+    useContext(UserAccount).userAccount
+  );
   const FreeSavingFormTemp = {
     savingType: controlNameList[1],
     formDataAccount: userAccountList[0],
@@ -21,6 +23,7 @@ function AddMilitarySavingsForm() {
   };
   const AutoSavingFormTemp = {
     savingType: controlNameList[0],
+    formDataAccount: userAccountList[0],
     limitCycle: "매월 10일",
     formDataMonth: "",
     formDataAmount: "",
@@ -67,7 +70,6 @@ function AddMilitarySavingsForm() {
         <MilitaryFormBox
           resetFormData={resetFormData}
           formData={formData}
-          userAccountList={userAccountList}
           savingType={formData.savingType}
           controlNameList={controlNameList}
           setFormData={setFormData}
