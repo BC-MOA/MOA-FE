@@ -3,6 +3,7 @@ import AccountCard from "components/profile/comp/AccountCard";
 import SubmitButton from "components/common/SubmitButton";
 import { useState } from "react";
 import Modal from "./Modal";
+import filterAccount from "components/profile/function/filterAccount";
 
 const Box = styled.div`
   font-family: "Pretendard-Regular";
@@ -50,24 +51,29 @@ const Box = styled.div`
   }
 `;
 
-const AccountInfo = ({ depo_list, ins_list, func }) => {
+const AccountInfo = ({ accounts, func }) => {
   //step 관리 state
   const [click, setClick] = useState(false);
 
   //중복 은행명 제거
   const bankNameSet = new Set();
 
-  let depoList = [];
-  let insList = [];
+  //계좌 필터링
+  const accountFiltered = filterAccount(accounts);
+  const depoList = accountFiltered.inout;
+  const insList = accountFiltered.install;
 
-  for (const obj of depo_list) {
-    depoList.push(<AccountCard obj={obj} key={obj.key}></AccountCard>);
-    bankNameSet.add(obj.bank);
+  let depoList_ = [];
+  let insList_ = [];
+
+  for (const obj of depoList) {
+    depoList_.push(<AccountCard obj={obj} key={obj.id}></AccountCard>);
+    bankNameSet.add(obj.bankName);
   }
 
-  for (const obj of ins_list) {
-    insList.push(<AccountCard obj={obj} key={obj.key}></AccountCard>);
-    bankNameSet.add(obj.bank);
+  for (const obj of insList) {
+    insList_.push(<AccountCard obj={obj} key={obj.id}></AccountCard>);
+    bankNameSet.add(obj.bankName);
   }
 
   //은행명 모음
@@ -90,7 +96,7 @@ const AccountInfo = ({ depo_list, ins_list, func }) => {
             <span> {banks.next().value}</span>에
           </p>
           <p>
-            월급통장&nbsp; <span>{depo_list.length}</span> 개, 군적금 &nbsp;
+            월급통장&nbsp; <span>{depoList.length}</span> 개, 군적금 &nbsp;
             <span>{insList.length}</span>
             개가
           </p>
@@ -100,19 +106,19 @@ const AccountInfo = ({ depo_list, ins_list, func }) => {
       <div>
         <div>
           <p className="type">군인 월급 통장</p>
-          {depoList}
+          {depoList_}
         </div>
         <div>
           <p className="type">군적금</p>
-          {insList.length == 0 ? (
+          {insList_.length == 0 ? (
             <p className="alert">"군적금은 아직 가입을 안하셨네요!" </p>
           ) : (
-            insList
+            insList_
           )}
         </div>
       </div>
       {click ? (
-        <Modal length={insList.length} func={func}></Modal>
+        <Modal length={insList_.length} func={func}></Modal>
       ) : (
         <div className="button">
           <SubmitButton

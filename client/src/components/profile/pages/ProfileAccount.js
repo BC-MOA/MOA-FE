@@ -3,6 +3,7 @@ import BackHeader from "components/common/BackHeader";
 import Account from "../comp/Account";
 import { UserAccount } from "store/UserAccount";
 import { useContext } from "react";
+import filterAccount from "../function/filterAccount";
 
 const Title = styled.p`
   font-family: "Pretendard-Regular";
@@ -28,6 +29,7 @@ const Type = styled.p`
 
 const ProfileAccount = () => {
   const account_data = useContext(UserAccount).userAccount;
+  const acc_obj = filterAccount(account_data);
 
   return (
     <>
@@ -35,11 +37,11 @@ const ProfileAccount = () => {
       <Box>
         <Title>내 계좌</Title>
         <Type>입출금 통장</Type>
-        <Account list={account_data.account_deposit}></Account>
+        <Account list={acc_obj.inout}></Account>
         <Type>군적금</Type>
-        <Account list={account_data.account_install}></Account>
+        <Account list={acc_obj.install}></Account>
         <Type>제휴 통장</Type>
-        <Account list={account_data.account_partner}></Account>
+        <Account list={acc_obj.interlock}></Account>
       </Box>
     </>
   );

@@ -50,13 +50,13 @@ const idListGetter = (ins_list) => {
   let idList = [];
 
   for (const obj of ins_list) {
-    idList.push(obj.key);
+    idList.push(obj.id);
   }
 
   return idList;
 };
 
-const SetGoal = ({ name, ins_list }) => {
+const SetGoal = ({ name, accounts }) => {
   //react-hook-form
   const { register, handleSubmit, getValues, setValue } = useForm({
     mode: "onChange",
@@ -68,23 +68,32 @@ const SetGoal = ({ name, ins_list }) => {
   //valid check용 state
   const [valid, setValid] = useState(false);
 
+  //적금 통장 필터링
+  const ins_list = accounts.filter((obj) => {
+    return obj.accountType === "예적금";
+  });
+
+  //id 추출
+  const id_list = [...idListGetter(ins_list)];
+
   //onChange
   const onchange = () => {
-    const id_list = idListGetter(ins_list);
     const val_list = [];
 
     id_list.map((id) => {
-      if (getValues(id) != "") {
-        const bytes = new Blob([getValues(id)]).size;
+      const str_id = id.toString();
+
+      if (getValues(str_id) != "") {
+        const bytes = new Blob([getValues(str_id)]).size;
+
         if (bytes > 40) {
-          const str_val = String(getValues(id));
-          setValue(id, str_val.slice(0, -1));
+          const str_val = String(getValues(str_id));
+          setValue(str_id, str_val.slice(0, -1));
         }
-        val_list.push(id);
+        val_list.push(getValues(str_id));
       }
     });
-
-    id_list.length == val_list.length ? setValid(true) : setValid(false);
+    val_list.length === id_list.length ? setValid(true) : setValid(false);
   };
 
   //onClick-submit
