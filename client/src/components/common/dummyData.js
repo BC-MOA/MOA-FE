@@ -1,90 +1,4 @@
-export let gatherList = [
-  {
-    id: 1,
-    savingMode: "군적금",
-    goalName: "1000만원 모으기",
-    category: "",
-    currentAmount: 800000,
-    goalAmount: 3600000,
-    account: {
-      bankName: "KB국민",
-      productName: "KB 장병내일준비적금",
-      accountNumber: "112-0330-0201",
-      accountCurrentAmount: 0,
-      bankImageUrl: "",
-    },
-    sDate: "Sun Oct 10 2021 15:11:39 GMT+0900",
-    eDate: "Fri Mar 10 2023 23:59:59 GMT+0900",
-    depositMethod: "자동이체",
-    limitCycle: "매월 10일",
-    amountPerCycle: 200000,
-    transactions: [],
-  },
-  {
-    id: 2,
-    savingMode: "목표",
-    goalName: "뉴욕여행 준비",
-    category: "여행",
-    currentAmount: 170000,
-    goalAmount: 1000000,
-    account: {
-      bankName: "KEB 하나",
-      productName: "KB 장병내일준비적금",
-      accountNumber: "123-256-78-910111",
-      accountCurrentAmount: 0,
-      bankImageUrl: "",
-    },
-    sDate: "Wed Nov 10 2021 15:11:39 GMT+0900",
-    eDate: "Sat Dec 10 2022 23:59:59 GMT+0900",
-    depositMethod: "자동이체",
-    limitCycle: "매월 10일",
-    amountPerCycle: 50000,
-    transactions: [],
-  },
-  {
-    id: 3,
-    savingMode: "비상금",
-    goalName: "비상금 모으기",
-    category: "",
-    currentAmount: 100000,
-    goalAmount: 0,
-    account: {
-      bankName: "KEB 하나",
-      productName: "KB 장병내일준비적금",
-      accountNumber: "123-356-78-910111",
-      accountCurrentAmount: 0,
-      bankImageUrl: "",
-    },
-    sDate: "Wed Nov 10 2021 15:11:39 GMT+0900",
-    eDate: "Sat Dec 10 2022 23:59:59 GMT+0900",
-    depositMethod: "",
-    limitCycle: "",
-    amountPerCycle: 0,
-    transactions: [],
-  },
-
-  {
-    id: 4,
-    savingMode: "목표",
-    goalName: "조카 선물😎",
-    category: "선물",
-    currentAmount: 150000,
-    goalAmount: 150000,
-    account: {
-      bankName: "KEB 하나",
-      productName: "KB 장병내일준비적금",
-      accountNumber: "123-356-78-910111",
-      accountCurrentAmount: 0,
-      bankImageUrl: "",
-    },
-    sDate: "Wed Nov 10 2021 15:11:39 GMT+0900",
-    eDate: "Wed Jan 26 2022 23:59:59 GMT+0900",
-    depositMethod: "자유입금",
-    limitCycle: "",
-    amountPerCycle: 50000,
-    transactions: [],
-  },
-];
+import { v1 as uuid } from "uuid";
 
 export const accountList = [
   {
@@ -173,18 +87,18 @@ export const userAccountList = [
   },
 ];
 export const userSavingList = [
-  {
-    id: 1,
-    bankName: "KB국민",
-    productName: "KB장병내일준비적금",
-    accountNumber: "112-0330-0201",
-    currentAmount: 200000,
-    goalAmount: 3600000,
-    accountType: "예적금",
-    bankImageUrl: "",
-    createdDate: "Sun Oct 10 2021 15:11:39 GMT+0900",
-    expirationDate: "Fri Mar 10 2023 23:59:59 GMT+0900",
-  },
+  // {
+  //   id: 1,
+  //   bankName: "KB국민",
+  //   productName: "KB장병내일준비적금",
+  //   accountNumber: "112-0330-0201",
+  //   currentAmount: 200000,
+  //   goalAmount: 3600000,
+  //   accountType: "예적금",
+  //   bankImageUrl: "",
+  //   createdDate: "Sun Oct 10 2021 15:11:39 GMT+0900",
+  //   expirationDate: "Fri Mar 10 2023 23:59:59 GMT+0900",
+  // },
   {
     id: 2,
     bankName: "IBK기업",
@@ -198,3 +112,27 @@ export const userSavingList = [
     expirationDate: "Fri Mar 10 2023 23:59:59 GMT+0900",
   },
 ];
+
+export const gatherFormat = (input) => {
+  return {
+    id: uuid(),
+    savingMode: "군적금",
+    goalName: "",
+    category: "",
+    currentAmount: input.currentAmount,
+    goalAmount: input.goalAmount,
+    account: {
+      bankName: input.bankName,
+      productName: input.productName,
+      accountNumber: input.accountNumber,
+      accountCurrentAmount: 0,
+      bankImageUrl: "",
+    },
+    sDate: input.createdDate,
+    eDate: input.expirationDate,
+    depositMethod: "자유입금",
+    limitCycle: "",
+    amountPerCycle: 0,
+    transactions: [],
+  };
+};
