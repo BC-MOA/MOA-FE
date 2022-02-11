@@ -13,9 +13,21 @@ const Card = styled.div`
   //justify-content: center;
   align-items: center;
 
-  img {
+  .img {
     width: 48px;
     height: 48px;
+
+    background-color: var(--Body_04);
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 80%;
+      height: 80%;
+    }
   }
 
   .content {
@@ -48,7 +60,9 @@ const AccountCard = ({ id, obj }) => {
 
   return (
     <Card key={id}>
-      <img src={obj.bankImageUrl}></img>
+      <div className="img">
+        <img src={obj.bankImageUrl}></img>
+      </div>
       <div className="content">
         <div className="sum">{styledSum}원</div>
         <div className="account">
