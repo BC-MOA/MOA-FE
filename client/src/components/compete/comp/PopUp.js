@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { MyCompete } from "store/CompeteMy";
-import { AllCompete } from "store/CompeteAll";
+import { UserData } from "store/User";
 import { useContext } from "react";
 
 //[styled comp] : 팝업 카드 배경
@@ -96,18 +96,24 @@ const Modal = styled.div`
 
 function PopUp({ betinfo, obj, func, type }) {
   const myContext = useContext(MyCompete);
+  const user = useContext(UserData);
   const navigate = useNavigate();
 
   const clickYes = () => {
     if (type) {
       //취소하기
+      //현재 키 더해줌
+      const betted_key = myContext.searchItem(obj.key)[0].bet;
+      user.updateUserData({ key: user.userData.key + betted_key });
       myContext.removeItem(obj.key);
     } else {
       //기존에 있던 건지 확인
-      const result = myContext.searchItem(obj.key).length !== 0;
+      const item = myContext.searchItem(obj.key);
 
-      if (result) {
-        myContext.updateItem(betinfo);
+      if (item.length !== 0) {
+        const prevbet = item[0].bet;
+        user.updateUserData({ key: user.userData.key + prevbet - betinfo.bet });
+        myContext.updateItem(betinfo, prevbet);
       } else {
         //새로운 배팅일 경우
         //챌린지 정보 가져옴

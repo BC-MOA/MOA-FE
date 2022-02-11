@@ -17,7 +17,7 @@ const Card = styled.div`
     width: 48px;
     height: 48px;
 
-    background-color: var(--Body_04);
+    background-color: #edefed;
     border-radius: 50%;
 
     display: flex;
