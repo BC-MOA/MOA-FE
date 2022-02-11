@@ -1,9 +1,13 @@
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import SubmitButton from "components/common/SubmitButton";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AccountGoal from "./AccountGoal";
+import { gatherFormat } from "components/common/dummyData";
+import { GatherList } from "store/GatherListContext";
+import { UserAccount } from "store/UserAccount";
+import { UserData } from "store/User";
 
 const Box = styled.div`
   font-family: "Pretendard-Regular";
@@ -94,13 +98,30 @@ const SetGoal = ({ name, accounts }) => {
     val_list.length === id_list.length ? setValid(true) : setValid(false);
   };
 
+  const { userAccount } = useContext(UserAccount);
+  const { updateUserData } = useContext(UserData);
+  const { setGatherList } = useContext(GatherList);
+
   //onClick-submit
   const onclick = (data) => {
     //api 호출
     //home으로 navigatge
     //열쇠 적용
     navigate("/home");
-    console.log(data);
+    userAccount.install.map((x) =>
+      setGatherList((prev) => [
+        ...prev,
+        gatherFormat(
+          x,
+          data[Object.keys(data).find((y) => y === String(x.id))]
+        ),
+      ])
+    );
+    updateUserData({
+      userAccountList: userAccount.inout,
+      userSavingList: userAccount.install,
+      userInterlock: userAccount.interlock,
+    });
   };
 
   //컴포넌트 리스트 생성
@@ -109,7 +130,21 @@ const SetGoal = ({ name, accounts }) => {
   return (
     <Box>
       <HeaderButton>
-        <button onClick={() => navigate("/home")}>다음에하기</button>
+        <button
+          onClick={() => {
+            navigate("/home");
+            userAccount.install.map((x) =>
+              setGatherList((prev) => [...prev, gatherFormat(x)])
+            );
+            updateUserData({
+              userAccountList: userAccount.inout,
+              userSavingList: userAccount.install,
+              userInterlock: userAccount.interlock,
+            });
+          }}
+        >
+          다음에하기
+        </button>
       </HeaderButton>
       <div className="text">
         {name}님!<br></br>
