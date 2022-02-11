@@ -5,7 +5,7 @@ import { Count, Date } from "../comp/Card/CardComps";
 import kFormatter from "../function/kFormatter";
 import formatDate from "../function/DateChanger";
 import PercentBar from "../comp/PercentBar";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Timer, TimerBox } from "../comp/Timer";
 import { PickUp } from "../comp/ChalOption";
 import { KeyPicker, options } from "../comp/KeyPicker";
@@ -111,6 +111,18 @@ function CompDetail() {
     bet: keyCount.valueGroups.number,
     key: comp.key,
   };
+
+  //totalkey 실시간 예시
+
+  const [totalkey, setTotalkey] = useState(comp.totalkey);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const temp = totalkey;
+      console.log(totalkey);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>
