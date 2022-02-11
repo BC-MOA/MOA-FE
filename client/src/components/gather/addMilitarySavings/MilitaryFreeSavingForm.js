@@ -29,7 +29,7 @@ function MilitaryFreeSavingForm({
       </div>
 
       <div className="title">출금계좌</div>
-      <div className="fixData">{formData.formDataAccount.accountName}</div>
+      <div className="fixData">{formData.formDataAccount[0].accountName}</div>
     </FreeSavingForm>
   );
 }

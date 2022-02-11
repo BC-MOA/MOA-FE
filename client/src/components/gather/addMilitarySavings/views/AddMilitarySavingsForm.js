@@ -12,7 +12,7 @@ const controlNameList = ["자동이체", "자유입금"];
 function AddMilitarySavingsForm() {
   const { state: savingData } = useLocation();
   const history = useNavigate();
-  const userAccountList = useContext(UserAccount).userAccount[0];
+  const { inout: userAccountList } = useContext(UserAccount).userAccount;
   const FreeSavingFormTemp = {
     savingType: controlNameList[1],
     formDataAccount: userAccountList,
