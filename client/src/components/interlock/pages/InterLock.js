@@ -23,7 +23,7 @@ const InterLock = () => {
         <AccountFound
           func={setStepWrapper}
           name={userData.name}
-          count={account_data.length}
+          count={account_data.inout.length + account_data.install.length}
         ></AccountFound>
       )}
       {step === 2 && (
