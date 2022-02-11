@@ -18,6 +18,7 @@ const StyledMyList = styled.div`
 //cond : 챌린지 필터링 조건
 const MyList = ({ cond }) => {
   const compList = useContext(MyCompete).myCompList;
+
   //챌린지 없을 때 테스트
   // const compList = [];
 
