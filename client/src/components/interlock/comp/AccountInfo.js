@@ -86,12 +86,12 @@ const AccountInfo = ({ accounts, func }) => {
           <p>
             {bankNameSet.size > 1 ? (
               <>
-                <span>{banks.next().value}</span>와&nbsp;
+                <span>{banks.next().value}은행</span>과&nbsp;
               </>
             ) : (
               <></>
             )}
-            <span> {banks.next().value}</span>에
+            <span> {banks.next().value}은행</span>에
           </p>
           <p>
             월급통장&nbsp; <span>{depoList.length}</span> 개, 군적금 &nbsp;
