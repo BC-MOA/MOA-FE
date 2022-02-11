@@ -6,7 +6,7 @@ const Background = styled.div`
   margin-left: -20px;
   margin-top: -8px;
   height: calc(100vh);
-  background-color: white;
+  background-color: var(--surface);
   font-size: 24px;
   font-weight: 600;
 
