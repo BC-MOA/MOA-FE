@@ -53,12 +53,6 @@ export const noticeList = [
 ];
 
 export const gatherFormat = (input, newName) => {
-  console.log(input, newName);
-  const newValue = {
-    savingMode: "군적금",
-    goalName: `${newName ? newName : ""}`,
-  };
-  console.log(newValue);
   return {
     id: uuid(),
     savingMode: "군적금",
@@ -71,7 +65,7 @@ export const gatherFormat = (input, newName) => {
       productName: input.productName,
       accountNumber: input.accountNumber,
       accountCurrentAmount: 0,
-      bankImageUrl: "",
+      bankImageUrl: input.bankImageUrl,
     },
     sDate: input.createdDate,
     eDate: input.expirationDate,

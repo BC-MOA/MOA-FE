@@ -56,6 +56,9 @@ function Home() {
       safeBox: filteredList.safebox.length,
     });
   }, []);
+  const totalAmount = gatherList.reduce((acc, cur) => {
+    return (acc += cur.currentAmount);
+  }, 0);
 
   return (
     <Container>
@@ -73,7 +76,7 @@ function Home() {
               <p>{userData.name}님이 지금까지 모은 금액은?</p>
               <div className="num">
                 <span className="roboto">
-                  {Number("2000").toLocaleString()}
+                  {Number(totalAmount).toLocaleString()}
                 </span>
                 <span>원</span>
                 <div className="highlight"></div>
