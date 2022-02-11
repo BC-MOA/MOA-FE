@@ -113,7 +113,7 @@ const ProfileEdit = () => {
     defaultValues: { password: "", passwordck: "", phone: default_phone },
   });
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {};
 
   return (
     <>
