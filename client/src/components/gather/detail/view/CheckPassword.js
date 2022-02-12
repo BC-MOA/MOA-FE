@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import BackHeader from "components/common/BackHeader";
 import { useNavigate, useLocation } from "react-router-dom";
+import { UserAccount } from "store/UserAccount";
 
 const Container = styled.div`
   width: 100%;
@@ -104,6 +105,7 @@ const NumBtn = styled.button`
 function CheckPassword() {
   const history = useNavigate();
   const { state: props } = useLocation();
+  const { interlock } = useContext(UserAccount).userAccount;
 
   const [input, setInput] = useState("");
   const [result, setResult] = useState(true);
@@ -119,11 +121,10 @@ function CheckPassword() {
   const cancel = () => {
     setInput(input.slice(0, -1));
   };
-  const correctPassword = "2309";
 
   useEffect(() => {
     if (input.length === 4) {
-      if (correctPassword === input) {
+      if (interlock[0].password === input) {
         setTimeout(() => {
           history("complete", {
             state: props,
