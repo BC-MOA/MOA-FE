@@ -210,7 +210,7 @@ function Goal() {
           </div>
         </InputEl>
         <InputEl>
-          <div className="SubTitle">이제 방식</div>
+          <div className="SubTitle">이체 방식</div>
           <SelectBox name="depositMethod" inputs={inputs} setInputs={setInputs}>
             <div>자동이체</div>
             <div>자유입금</div>
