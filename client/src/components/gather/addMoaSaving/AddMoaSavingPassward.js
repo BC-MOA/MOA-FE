@@ -36,7 +36,9 @@ function AddMoaSavingPassward() {
     if (4 === passwordCheckCnt) {
       if (JSON.stringify(userPasswordCheck) === JSON.stringify(userPassword)) {
         setIsSame("true");
-        history("success", { state: savingType });
+        history("success", {
+          state: { savingType, password: userPasswordCheck.join("") },
+        });
       } else {
         setUserPasswordCheck(["", "", "", ""]);
         setIsSame("false");
