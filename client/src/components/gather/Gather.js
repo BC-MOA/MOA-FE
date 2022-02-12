@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import AddBtn from "components/gather/AddBtn";
 import ContentControlBtn from "components/common/ContentControlBtn";
 import { hideScrollBar } from "style/common";
 import NavBar from "components/common/NavBar";
-import StateGather from "components/gather/StateGather";
+import StateGather from "components/gather/detail/StateGather";
 import { ReactSortable } from "react-sortablejs";
 import moment from "moment";
+import { GatherList } from "store/GatherListContext";
+import { UserData } from "store/User";
+import { Header } from "components/common/Header";
 
 const Container = styled.div`
   width: 100%;
@@ -43,6 +46,22 @@ const Container = styled.div`
 const Content = styled.div`
   ${hideScrollBar}
   flex: 1;
+
+  .zeroCompleted {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Pretendard-Regular";
+    font-size: 16px;
+    line-height: 25px;
+    color: var(--Body_01);
+
+    img {
+      filter: grayscale(1);
+      margin-bottom: 12px;
+    }
+  }
 `;
 const EditBtn = styled.button`
   position: absolute;
@@ -71,34 +90,30 @@ const EditBtn = styled.button`
 `;
 
 function Gather() {
-  const userName = "민수";
-  const gatherList = JSON.parse(localStorage.getItem("gatherList")) || [
-    {
-      id: 1,
-      category: "군적금",
-      name: "",
-      currentAmount: 800000,
-      targetAmount: 3200000,
-      account: {
-        name: "KB국민",
-        number: "112-0330-0201",
-      },
-      sDate: "Sun Oct 10 2021 15:11:39 GMT+0900",
-      eDate: "Fri Mar 10 2023 23:59:59 GMT+0900",
-      depositMethod: "자동이체",
-      howOften: "매월 10일",
-      amount: "200000",
-      transactions: [],
-    },
-  ];
-  const inProgressList = gatherList.filter((x) => !moment().isAfter(x.eDate));
-  const completedList = gatherList.filter((x) => moment().isAfter(x.eDate));
+  const { userData } = useContext(UserData);
+  const { gatherList } = useContext(GatherList) || [];
+  let inProgressList = [];
+  let completedList = [];
+  // 모으기 진행 상태 분류
+  gatherList.map((x) => {
+    if (x.savingMode === "비상금") {
+      inProgressList.push(x);
+    } else {
+      if (!moment().isAfter(x.eDate) && x.currentAmount < x.goalAmount) {
+        inProgressList.push(x);
+      } else {
+        completedList.push(x);
+      }
+    }
+  });
+  const isFirst = !gatherList.filter((x) => x.savingMode !== "군적금").length;
   const totalAmount = inProgressList.reduce((acc, cur) => {
     return (acc += cur.currentAmount);
   }, 0);
+
   const controlNameList = ["진행중", "완료"];
   const [listControl, setListControl] = useState(controlNameList[0]);
-  const [editToggle, setEditToggle] = useState(true);
+  const [editToggle, setEditToggle] = useState(false);
 
   const [gather, setGather] = useState([
     {
@@ -117,9 +132,11 @@ function Gather() {
       adText: "저축하고 남은 돈을 비상금처럼 따로 보관하세요.",
     },
   ]);
+
   return (
     <Container>
-      <div className="Title">{userName}님이 현재 모으고 있는 금액은?</div>
+      <Header $title={false} keys={30} alarm={false}></Header>
+      <div className="Title">{userData.name}님이 현재 모으고 있는 금액은?</div>
       <div className="TotalAmount">
         <span className="green">{totalAmount.toLocaleString()}</span> 원
       </div>
@@ -135,13 +152,13 @@ function Gather() {
           onClick={() => {
             setEditToggle(!editToggle);
           }}
-          className={editToggle ? "" : "Active"}
+          className={editToggle ? "Active" : ""}
         >
           <img
             src={require("assets/gather/Sort_arrow_light.svg").default}
             alt="순서변경 아이콘"
           />
-          {editToggle ? "순서 편집하기" : "편집완료"}
+          {editToggle ? "편집완료" : "순서 편집하기"}
         </EditBtn>
       </div>
       <Content>
@@ -149,20 +166,35 @@ function Gather() {
           <ReactSortable
             list={gather}
             setList={setGather}
-            disabled={editToggle}
+            disabled={!editToggle}
             animation={500}
           >
             {gather.map((x) => (
-              <AddBtn key={x.id} name={x.name} gatherList={inProgressList}>
+              <AddBtn
+                key={x.id}
+                name={x.name}
+                gatherList={inProgressList}
+                editToggle={editToggle}
+                isFirst={isFirst}
+              >
                 {x.adText}
               </AddBtn>
             ))}
           </ReactSortable>
         ) : (
           <>
-            {completedList.map((x, idx) => (
-              <StateGather key={idx} props={x} completed />
-            ))}
+            {completedList.length ? (
+              completedList.map((x, idx) => (
+                <StateGather key={idx} props={x} completed />
+              ))
+            ) : (
+              <div className="zeroCompleted">
+                <div>
+                  <img src={require("assets/character_head.svg").default} />
+                  <div>아직 완료한 모으기가 없어요</div>
+                </div>
+              </div>
+            )}
           </>
         )}
       </Content>

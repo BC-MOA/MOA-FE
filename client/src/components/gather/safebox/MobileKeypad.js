@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import CustomBtn from "components/gather/addGoal/CustomBtn";
 import BackHeader from "components/common/BackHeader";
-import moment from "moment";
-import { accountList } from "components/common/dummyData";
-import AccountModal from "./AccountModal";
 
 const Container = styled.div`
   width: 100%;
@@ -14,9 +11,10 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const SelectAccount = styled.div`
+const SelectedAccount = styled.div`
   position: absolute;
   top: 56px;
+  left: 6px;
   text-align: left;
   .title {
     font-family: "Pretendard-Regular";
@@ -24,18 +22,11 @@ const SelectAccount = styled.div`
     line-height: 22px;
     color: var(--Body_02);
   }
-  .inputBox {
-    display: flex;
-    gap: 4px;
-  }
-  input {
+  .account {
     margin-top: 2px;
-    border: none;
-    background: none;
     font-family: "Pretendard-Regular";
     font-size: 16px;
     line-height: 25px;
-    padding: 0;
   }
 `;
 
@@ -63,7 +54,7 @@ const Content = styled.div`
 
 const Box = styled.div`
   position: relative;
-  margin-top: 24px;
+  margin: 24px 0;
   div {
     display: flex;
     justify-content: space-between;
@@ -98,8 +89,6 @@ const NumBtn = styled.button`
 
 function MobileKeypad({ path, props }) {
   const [input, setInput] = useState("");
-  const [modal, setModal] = useState(false);
-  const [selectedAccount, setSelectedAccount] = useState(accountList[0]);
 
   const onClick = (event) => {
     setInput(input + event.target.innerText);
@@ -109,43 +98,14 @@ function MobileKeypad({ path, props }) {
     setInput(input.slice(0, -1));
   };
 
-  const trFormat = (input) => {
-    const formatted = {
-      date: moment(new Date()).format("MM월 DD일"),
-      lists: [
-        {
-          name: "국군재정단",
-          time: moment(new Date()).format("hh:mm"),
-          amount: input,
-          // Todo: 추가 입금 시, 잔액 처리
-          total: 10000,
-        },
-      ],
-    };
-
-    return formatted;
-  };
-
   return (
     <Container>
       <BackHeader path={-1} />
       {path ? (
-        <SelectAccount>
+        <SelectedAccount>
           <div className="title">출금계좌</div>
-          <div className="inputBox">
-            <input
-              type="button"
-              value={selectedAccount.accountName}
-              onClick={() => {
-                setModal(true);
-              }}
-            />
-            <img
-              src={require("assets/gather/ic_select_arrow.svg").default}
-              alt="드롭다운 아이콘"
-            />
-          </div>
-        </SelectAccount>
+          <div className="account">KB나라사랑우대통장</div>
+        </SelectedAccount>
       ) : (
         <></>
       )}
@@ -157,29 +117,9 @@ function MobileKeypad({ path, props }) {
         />
       </Content>
       <CustomBtn
-        addFunc={
-          path
-            ? () => {
-                props.transactions.push(trFormat(input));
-                localStorage.setItem(
-                  "gatherList",
-                  JSON.stringify([
-                    ...JSON.parse(localStorage.getItem("gatherList")).map((x) =>
-                      x.name === props.name
-                        ? {
-                            ...x,
-                            transactions: [...x.transactions, trFormat(input)],
-                          }
-                        : x
-                    ),
-                  ])
-                );
-              }
-            : ""
-        }
-        path={path ? path : "/gather/add-safebox"}
+        path={path ? "complete" : "/gather/add-safebox"}
         active={input !== ""}
-        data={path ? props : input}
+        data={path ? { props: props, inOutMoney: input } : input}
       >
         입력 완료
       </CustomBtn>
@@ -212,15 +152,6 @@ function MobileKeypad({ path, props }) {
           <img src={require("assets/goal/cancel.svg").default} alt="cancel" />
         </NumBtn>
       </Box>
-      {modal ? (
-        <AccountModal
-          setModal={setModal}
-          props={accountList}
-          setAccount={setSelectedAccount}
-        />
-      ) : (
-        <></>
-      )}
     </Container>
   );
 }

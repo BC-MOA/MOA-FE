@@ -1,21 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 
-function RewardItemCard({ itemName, selectedItem, setSelectedItem }) {
+function RewardItemCard({ item, selectedItem, setSelectedItem }) {
   return (
     <ItemCard
       onClick={() => {
-        setSelectedItem(itemName);
+        setSelectedItem(item);
       }}
-      className={itemName === selectedItem ? "isSelect" : ""}
+      className={
+        item.productName === selectedItem.productName ? "isSelect" : ""
+      }
     >
-      <img
-        src={require("assets/reward/reward_item_coffee.png")}
-        alt={itemName}
-      />
-      <span>{itemName}</span>
-      <button className={itemName === selectedItem ? "isSelect" : ""}>
-        {itemName === selectedItem ? "선택됨" : "선택"}
+      <img src={item.productImageUrl} alt={item.productName} />
+      <div className="itemName">{item.productName}</div>
+      <button
+        className={
+          item.productName === selectedItem.productName ? "isSelect" : ""
+        }
+      >
+        {item.productName === selectedItem.productName ? "선택됨" : "선택"}
       </button>
     </ItemCard>
   );
@@ -33,13 +36,14 @@ const ItemCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
-  img {
-    width: calc(70 / 160 * 100%);
-    margin-bottom: 6px;
+  .itemName {
+    margin: 0 -16px 8px -16px;
   }
-  span {
-    margin-bottom: 8px;
+  img {
+    width: 80%;
+    margin-bottom: 6px;
   }
   button {
     line-height: 22px;

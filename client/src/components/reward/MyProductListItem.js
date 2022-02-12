@@ -1,20 +1,23 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-function MyProductListItem({ item, listControl }) {
+function MyProductListItem({ item }) {
   const history = useNavigate();
-  const { pathname } = useLocation();
 
   return (
     <MyRewardListItemStyle>
-      {/* todo 이미지 변경 */}
-      <img className="item" src={require("./example.png")} alt={item.name} />
-      <span className="itemName">{item.name}</span>
-      {/* todo item의 id값을 넣어주는 것으로 변경 id라는 변수 명을 넣어줘야함 */}
+      <img className="item" src={item.productImageUrl} alt={item.name} />
+      <span
+        className={
+          item.productName.length > 10 ? "itemName longName" : "itemName"
+        }
+      >
+        {item.productName}
+      </span>
       <label
         onClick={() => {
-          history(`${pathname}/${item.id}`, { state: { item } });
+          history(`${item.productId}`, { state: item });
         }}
       >
         <img
@@ -43,9 +46,8 @@ const MyRewardListItemStyle = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: Pretendard;
-  font-style: normal;
-  font-weight: normal;
+  font-family: "Pretendard-Regular";
+
   font-size: 10px;
   line-height: 16px;
   color: var(--Body_03);
@@ -71,8 +73,11 @@ const MyRewardListItemStyle = styled.div`
     font-weight: 600;
     font-size: 16px;
     line-height: 25px;
-    margin-bottom: 8px;
+    margin: 0 0 8px 0;
     color: var(--Title_01);
+    &.longName {
+      font-size: 14px;
+    }
   }
   .barcode {
     width: 52px;

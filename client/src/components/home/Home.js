@@ -2,84 +2,154 @@ import Container from "components/common/Container";
 import { Header } from "components/common/Header";
 import NavBar from "components/common/NavBar";
 import ScrollBox from "components/common/ScrollBox";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { v1 as uuid } from "uuid";
 import BubbleContent from "./BubbleContent";
-import axios from "axios";
+import StoreSvg from "components/gather/addGoal/StoreSvg";
+import { UserData } from "store/User";
+import StateGather from "components/gather/detail/StateGather";
+import { GatherList } from "store/GatherListContext";
+import { AllCompete } from "store/CompeteAll";
+import { groupBy } from "components/common/utils";
+import createCardList from "components/compete/function/FilterList";
+const gatherCategorys = [
+  {
+    id: 1,
+    name: "군적금",
+    adText: "은행 최고이율과 국가지원혜택까지 받아보세요.",
+  },
+  {
+    id: 2,
+    name: "목표",
+    adText: "부대 내에서 목표를 잡고 돈을 모아나가보세요.",
+  },
+  {
+    id: 3,
+    name: "비상금",
+    adText: "저축하고 남은 돈을 비상금처럼 따로 보관하세요.",
+  },
+];
 
 function Home() {
+  const { userData } = useContext(UserData);
+  const { gatherList } = useContext(GatherList);
   const history = useNavigate();
   const [challengeList, setChallengeList] = useState([]);
+  const { allCompList } = useContext(AllCompete);
   useEffect(() => {
-    // todo 인기 챌린지 받아오기
-    setChallengeList([
-      { name: "1", type1: "A", type2: "B", 참여자: "100" },
-      { name: "2", type1: "A", type2: "B", 참여자: "200" },
-      { name: "3", type1: "A", type2: "B", 참여자: "300" },
-    ]);
+    setChallengeList([allCompList[0], allCompList[1], allCompList[2]]);
   }, []);
+
+  const filtered = groupBy(gatherList, "savingMode");
+  const filteredList = {
+    army: filtered["군적금"] ? filtered["군적금"] : [],
+    goal: filtered["목표"] ? filtered["목표"] : [],
+    safebox: filtered["비상금"] ? filtered["비상금"] : [],
+  };
+  const [gatherNumList, setGathersNumList] = useState({});
   useEffect(() => {
-    axios
-      .get("/v1/hello")
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    setGathersNumList({
+      army: filteredList.army.length,
+      goal: filteredList.goal.length,
+      safeBox: filteredList.safebox.length,
+    });
   }, []);
+  const totalAmount = gatherList.reduce((acc, cur) => {
+    return (acc += cur.currentAmount);
+  }, 0);
 
   return (
     <Container>
-      <Header title={true} keys={30} alarm={false}></Header>
+      <Header $title={true} keys={30} alarm={false}></Header>
       <ScrollBox paddingValue={"24px 0 "}>
         <UserAmountMsg>
-          <p>{"민수"}님이 지금까지 모은 금액은?</p>
-          <div className="num">
-            <span className="roboto">{Number(200000).toLocaleString()}</span>
-            <span>원</span>
-            <div className="highlight"></div>
-          </div>
+          {!userData.id && (
+            <>
+              <p>안녕하세요</p>
+              <p>저축을 시작하려는 군인이시군요!</p>
+            </>
+          )}
+          {userData.id && (
+            <>
+              <p>{userData.name}님이 지금까지 모은 금액은?</p>
+              <div className="num">
+                <span className="roboto">
+                  {Number(totalAmount).toLocaleString()}
+                </span>
+                <span>원</span>
+                <div className="highlight"></div>
+              </div>
+            </>
+          )}
         </UserAmountMsg>
-        <BubbleContent savingNum={0} />
-        {/* <AboutMoa
-            src={require("assets/about_moa.png")}
-            alt={"모아이용방법확인하기"}
-          /> */}
-        {/* 공통 */}
+        <BubbleContent gatherNumList={gatherNumList} isLogin={true} />
+        {!userData.id &&
+          gatherCategorys.map((x) => (
+            <AboutGather key={x.id}>
+              <div
+                className={`icon ${
+                  x.name === "군적금"
+                    ? "armySaving"
+                    : x.name === "목표"
+                    ? "goal"
+                    : ""
+                }`}
+              >
+                <StoreSvg category={x.name === "목표" ? "여행" : x.name} />
+              </div>
+              <div className="content">
+                <div>{x.name}</div>
+                <div className="adText">{x.adText}</div>
+              </div>
+            </AboutGather>
+          ))}
+        {userData.id && (
+          <>
+            {0 !==
+            (filteredList.army.length &&
+              filteredList.goal.length &&
+              filteredList.safebox.length)
+              ? [
+                  filteredList.army[0],
+                  filteredList.goal[0],
+                  filteredList.safebox[0],
+                ].map((x) => (
+                  <StateGather key={x.id} props={x} noneClick={true} />
+                ))
+              : gatherList
+                  .slice(0, 3)
+                  .map((x) => (
+                    <StateGather key={x.id} props={x} noneClick={true} />
+                  ))}
+          </>
+        )}
+        <Btn
+          onClick={() => {
+            if (!userData.id) {
+              history("/login");
+            } else {
+              history("/gather");
+            }
+          }}
+        >
+          {!userData.id ? "저축 시작하기" : "더보기"}
+        </Btn>
         <AboutChallenge>
           <div className="mainTitle">
             <span>현재 진행중인 </span>
             <span className="green">인기 챌린지</span>
           </div>
           <div className="challengeList">
-            {challengeList &&
-              challengeList.map((item) => (
-                <div className="challengeItem" key={uuid()}>
-                  <img src={require("./example.png")} alt="" />
-                  <div className="about">
-                    <div className="title">{item.name}</div>
-                    <div className="subtitle">
-                      <span>
-                        {item.type1} vs {item.type2}
-                      </span>
-                      <div className="tag">
-                        <span className="roboto">{item.참여자}</span>명 참여
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
+            {createCardList("popular", allCompList).slice(0, 3)}
           </div>
-          <button
+          <Btn
             onClick={() => {
               history("/compete");
             }}
           >
             더보기
-          </button>
+          </Btn>
         </AboutChallenge>
         <AboutReward
           onClick={() => {
@@ -93,14 +163,69 @@ function Home() {
     </Container>
   );
 }
-// style
 
-// const AboutMoa = styled.img`
-//   display: block;
-//   margin-bottom: 54px;
-// `;
+const Btn = styled.button`
+  width: 100%;
+  padding: 12px 0;
+  margin: 16px 0;
+  border-radius: 12px;
+  font-family: "Pretendard-Medium";
+  font-size: 16px;
+  line-height: 25px;
+  border: none;
+  color: var(--Body_01);
+  background-color: var(--Line_03);
+`;
+const AboutGather = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 17px 16px;
+  background: #fff;
+  box-shadow: 0px 1px 2px rgba(33, 33, 33, 0.08);
+  border-radius: 12px;
+
+  font-family: "Pretendard-SemiBold";
+  color: var(--Title_02);
+  font-size: 18px;
+  line-height: 28px;
+
+  .icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &.armySaving {
+      path.main {
+        fill: var(--a3);
+      }
+    }
+    &.goal {
+      path.main {
+        fill: var(--subBlue);
+      }
+    }
+  }
+  .content {
+    flex: 1;
+    text-align: left;
+  }
+  .adText {
+    margin-top: 4px;
+    font-family: "Pretendard-Regular";
+    font-size: 12px;
+    line-height: 19px;
+    color: var(--Body_01);
+  }
+  & + & {
+    margin-top: 8px;
+  }
+`;
+
 const AboutChallenge = styled.div`
-  margin-bottom: 40px;
+  margin-top: 24px;
+  margin-bottom: 5px;
   .mainTitle {
     font-family: "Pretendard-SemiBold";
     font-size: 18px;
@@ -115,64 +240,11 @@ const AboutChallenge = styled.div`
   .challengeList {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    margin-bottom: 12px;
-  }
+    margin-bottom: 4px;
 
-  .challengeItem {
-    display: flex;
-    align-items: center;
-    background: #ffffff;
-    box-shadow: 0px 1px 2px rgba(33, 33, 33, 0.08);
-    border-radius: 12px;
-    padding: 16px 20px;
-
-    .about {
-      margin-left: 12px;
-      text-align: start;
-      flex-grow: 1;
-      .title {
-        font-family: "Pretendard-SemiBold";
-        font-size: 16px;
-        line-height: 25px;
-        color: var(--Title_01);
-      }
-      .subtitle {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        font-family: "Pretendard-Medium";
-        color: var(--Body_01);
-        font-size: 14px;
-        line-height: 22px;
-        .tag {
-          display: flex;
-          align-items: center;
-          background: rgba(76, 175, 91, 0.15);
-          border-radius: 8px;
-          font-family: "Pretendard-Medium";
-          font-size: 12px;
-          color: var(--a2);
-          padding: 0 8px;
-          .roboto {
-            font-family: "Roboto";
-            font-weight: 500;
-            font-size: 13px;
-          }
-        }
-      }
+    * {
+      margin-top: 0;
     }
-  }
-  button {
-    width: 100%;
-    padding: 12px 0;
-    border-radius: 12px;
-    font-family: "Pretendard-Medium";
-    font-size: 16px;
-    line-height: 25px;
-    border: none;
-    color: var(--Body_01);
-    background-color: var(--Line_03);
   }
 `;
 const UserAmountMsg = styled.div`

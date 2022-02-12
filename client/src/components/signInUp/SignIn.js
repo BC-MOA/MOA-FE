@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import styled from "styled-components";
 import {
   styleTitle,
@@ -9,6 +9,10 @@ import {
 import CustomBtn from "components/gather/addGoal/CustomBtn";
 import CustomInput from "components/common/CustomInput";
 import { useNavigate } from "react-router-dom";
+import { UserData } from "store/User";
+import { gatherFormat } from "components/common/dummyData";
+import { GatherList } from "store/GatherListContext";
+import { UserAccount } from "store/UserAccount";
 
 const Container = styled.div`
   width: 100%;
@@ -108,6 +112,7 @@ const Content = styled.div`
   }
 `;
 function SignIn() {
+  const [isSuccess, setIsSuccess] = useState(true);
   const [login, setLogin] = useState({
     serviceNumber1: "",
     serviceNumber2: "",
@@ -122,7 +127,24 @@ function SignIn() {
   };
   const inputFocus = useRef();
   const history = useNavigate();
-  const isSuccess = true;
+  const checkLogin = (login) => {
+    if (
+      login.serviceNumber1 + login.serviceNumber2 === "2171264703" &&
+      login.password === "12345asdfg"
+    )
+      return true;
+    else return false;
+  };
+
+  const { login: funcLogin, userData, updateUserData } = useContext(UserData);
+  const { setGatherList } = useContext(GatherList);
+  const { userAccount } = useContext(UserAccount);
+
+  useEffect(() => {
+    if (userData.id !== "") {
+      history("/home");
+    }
+  }, []);
 
   return (
     <Container>
@@ -130,7 +152,7 @@ function SignIn() {
         <img src={require("assets/moa_logo.svg").default} alt="로고이미지" />
         <button
           onClick={() => {
-            history("home");
+            history("/home");
           }}
         >
           건너뛰기
@@ -144,6 +166,7 @@ function SignIn() {
           </label>
           <div className="dividedInput">
             <input
+              type="number"
               className="first"
               id="serviceNumber1"
               placeholder="연도 뒤 2자리"
@@ -156,6 +179,7 @@ function SignIn() {
             />
             <span>-</span>
             <input
+              type="number"
               className="second"
               id="serviceNumber2"
               placeholder="군번 8자리를 입력해주세요"
@@ -182,20 +206,43 @@ function SignIn() {
         )}
         <CustomBtn
           active={!Object.keys(login).filter((x) => login[x] === "").length}
+          path={checkLogin(login) ? "/home" : ""}
+          addFunc={() => {
+            if (checkLogin(login)) {
+              funcLogin({
+                id: [login.serviceNumber1, login.serviceNumber2].join("-"),
+                name: "박영찬",
+                join_date: "2021-08-01",
+                unit: "11사단 화랑부대",
+                phone: "01012345678",
+                key: 45,
+              });
+              userAccount.install.map((x) =>
+                setGatherList((prev) => [...prev, gatherFormat(x)])
+              );
+              updateUserData({
+                userAccountList: userAccount.inout,
+                userSavingList: userAccount.install,
+                userInterlock: userAccount.interlock,
+              });
+            } else {
+              setIsSuccess(false);
+            }
+          }}
         >
           로그인
         </CustomBtn>
         <div className="signup subTitle">
           <div
             onClick={() => {
-              history("sign-up");
+              history("/sign-up");
             }}
           >
             회원가입
           </div>
           <div
             onClick={() => {
-              history("reset-password");
+              history("/reset-password");
             }}
           >
             비밀번호 재설정

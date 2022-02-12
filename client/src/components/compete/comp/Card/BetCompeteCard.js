@@ -2,7 +2,7 @@ import styled from "styled-components";
 import formatDate from "../../function/DateChanger";
 import StyledLink from "components/common/StyledLink";
 import kFormatter from "../../function/kFormatter";
-import PopUp from "../PopUp";
+import { PopUp } from "../PopUp";
 import { NotLinkedKey } from "components/common/Header";
 import React, { useState } from "react";
 
@@ -36,18 +36,11 @@ const BetCard = styled.div`
  * [props]
  * 챌린지 정보
  */
-function BetCompeteCard(props) {
-  const obj = props.obj;
-
+function BetCompeteCard({ obj }) {
   const [pop, setPop] = useState(false);
 
   const togglePop = () => {
     setPop(!pop);
-  };
-
-  const popupProp = {
-    onclick: togglePop,
-    title: obj.title,
   };
 
   return (
@@ -68,7 +61,7 @@ function BetCompeteCard(props) {
           <Count>{kFormatter(obj.total)}명 참여</Count>
         </div>
       </ContentBox>
-      {pop && <PopUp obj={popupProp}></PopUp>}
+      {pop && <PopUp func={togglePop} obj={obj} type={true}></PopUp>}
       <StyledBetButtonBox>
         <StyledLink to={"/compete/" + obj.key} state={obj}>
           <StyledBetButton>배팅 수정</StyledBetButton>

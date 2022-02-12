@@ -5,15 +5,17 @@ import { Count, Date } from "../comp/Card/CardComps";
 import kFormatter from "../function/kFormatter";
 import formatDate from "../function/DateChanger";
 import PercentBar from "../comp/PercentBar";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Timer, TimerBox } from "../comp/Timer";
 import { PickUp } from "../comp/ChalOption";
 import { KeyPicker, options } from "../comp/KeyPicker";
 import ExpectedKey from "../comp/KeyExpect";
+import SubmitButton from "components/common/SubmitButton";
+import { PopUp } from "../comp/PopUp";
 
 //[styled comp] : 페이지 컨테이너
 const Detail = styled.div`
-  height: 650px;
+  height: calc(100vh - 100px);
 
   display: flex;
   flex-direction: column;
@@ -55,40 +57,12 @@ const BetCard = styled.div`
   }
 `;
 
-//[styled comp] : 배팅하기 버튼
-const Button = styled.button`
-  height: 49px;
-  width: 100%;
-  border: none;
-  border-radius: 12px;
-
-  background-color: var(--a5);
-  font-family: "Pretendard-SemiBold";
-  color: white;
-
-  transition: 1s all;
-  :hover {
-    opacity: 0.8;
-  }
-
-  :disabled {
-    background-color: var(--Line_02);
-    color: var(--Body_03);
-  }
-`;
-
 /**
- * [comp]
- * CompDetail
- *
  * [state]
  * isBetted : 베팅 여부 관련 state
  * pickUped : 선택 여부 관련 state
  * state : 챌린지 정보 - useLocation 통해 정보전달
  * keyCount: 열쇠 선택 관련 state
- *
- * [props]
- * none
  */
 function CompDetail() {
   //챌린지 정보 state
@@ -96,7 +70,7 @@ function CompDetail() {
   const comp = state;
 
   //베팅 여부 state
-  const [isBetted, setIsBetted] = useState(comp.bet != undefined);
+  const [isBetted, setIsBetted] = useState(comp.bet !== undefined);
 
   //베팅 대상 선택 state
   const [pick, setPick] = useState(isBetted ? comp.pick : false);
@@ -110,7 +84,7 @@ function CompDetail() {
   //베팅 열쇠 개수 관리
   const [keyCount, setKeyCount] = useState({
     valueGroups: {
-      number: comp.bet == undefined ? 1 : comp.bet,
+      number: comp.bet === undefined ? 1 : comp.bet,
     },
     optionGroups: options,
   });
@@ -124,11 +98,37 @@ function CompDetail() {
     }));
   };
 
-  //베팅 버튼 클릭
-  //API 추가 필요
-  const clickBet = () => {
-    console.log("bet!");
+  //팝업창
+  const [pop, setPop] = useState(false);
+
+  const togglePop = () => {
+    setPop(!pop);
   };
+
+  //전달되는 현재 배팅 정보
+  const betinfo = {
+    pick: pick,
+    bet: keyCount.valueGroups.number,
+    key: comp.key,
+  };
+
+  //totalkey 실시간 예시
+  function getRandomInt() {
+    const min = 1;
+    const max = 10;
+    return Math.floor(Math.random() * (max - min) + min);
+  }
+
+  const [ratio, setRatio] = useState(comp.totalkey);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      let temp = [...comp.totalkey];
+      temp = temp.map((int) => int + getRandomInt());
+      setRatio(temp);
+    }, 500);
+    return () => clearInterval(interval);
+  }, [ratio, setRatio]);
 
   return (
     <>
@@ -166,14 +166,14 @@ function CompDetail() {
               ></PickUp>
             </div>
           </div>
-          <PercentBar totalkey={comp.totalkey}></PercentBar>
+          <PercentBar totalkey={ratio}></PercentBar>
         </BetCard>
         {isBetted && (
           <>
             <ExpectedKey
               bet={keyCount.valueGroups.number}
               pick={pick}
-              keys={comp.totalkey}
+              keys={ratio}
             ></ExpectedKey>
             <KeyPicker onchange={handleChange} count={keyCount}></KeyPicker>
           </>
@@ -182,10 +182,20 @@ function CompDetail() {
           <TimerBox>
             <Timer due={comp.due}></Timer>
           </TimerBox>
-          <Button onClick={clickBet} disabled={!isBetted}>
-            배팅하기
-          </Button>
+          <SubmitButton
+            isActive={isBetted}
+            onClickFunc={togglePop}
+            title={"배팅하기"}
+          ></SubmitButton>
         </div>
+        {pop && (
+          <PopUp
+            betinfo={betinfo}
+            func={togglePop}
+            obj={comp}
+            type={false}
+          ></PopUp>
+        )}
       </Detail>
     </>
   );

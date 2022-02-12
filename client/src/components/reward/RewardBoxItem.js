@@ -1,19 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserData } from "store/User";
 import styled from "styled-components";
 import { css } from "styled-components";
 import { v1 as uuid } from "uuid";
 function RewardBoxItem({ setBuyBoxItem, boxItem, setBuyClick }) {
+  const { userData } = useContext(UserData);
+  const history = useNavigate();
   return (
     <BoxCard
       onClick={() => {
-        setBuyBoxItem(boxItem);
-        setBuyClick(true);
+        if (userData.id) {
+          setBuyBoxItem(boxItem);
+          setBuyClick(true);
+        } else {
+          history("/login");
+        }
       }}
     >
       <div className="boxContent">
         <img
           className="boxImage"
-          src={require(`assets/reward/reward_box_${boxItem.boxName}.png`)}
+          src={boxItem.boxImageUrl}
           alt={boxItem.boxName}
         />
         <BoxTitle>{boxItem.boxName}</BoxTitle>

@@ -31,18 +31,23 @@ const Custom = styled.div`
   border-radius: 10px;
 `;
 
-function SliderInput({ inputs, setInputs }) {
-  const { amount } = inputs;
+function SliderInput({ amount, setAmount, usage, setModal }) {
   const history = useNavigate();
 
   return (
     <Container>
-      <div className="Title">{Number(amount).toLocaleString()} 원</div>
+      <div className="Title">{amount.toLocaleString()} 원</div>
       <div
         className="SubTitle green btn"
-        onClick={() => {
-          history("/keypad");
-        }}
+        onClick={
+          usage
+            ? () => {
+                setModal(true);
+              }
+            : () => {
+                history("/keypad");
+              }
+        }
       >
         직접입력
       </div>
@@ -51,12 +56,9 @@ function SliderInput({ inputs, setInputs }) {
         max={1000000}
         min={0}
         value={amount}
-        onChange={(e) =>
-          setInputs({
-            ...inputs,
-            amount: e,
-          })
-        }
+        onChange={(e) => {
+          setAmount(e);
+        }}
         width={350}
         height={50}
         markStyle={{

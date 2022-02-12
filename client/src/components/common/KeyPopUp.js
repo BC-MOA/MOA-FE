@@ -1,18 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { UserData } from "store/User";
 import styled from "styled-components";
 import Container from "./Container";
 import ScrollBox from "./ScrollBox";
 
 function KeyPopUp() {
   const { state: keyInfo } = useLocation();
+  const { userData, updateUserData } = useContext(UserData);
   const history = useNavigate();
+
+  function updateUserKeyNum() {
+    const newKeyNum = userData.key + keyInfo.num;
+    updateUserData({ key: newKeyNum });
+  }
   return (
     <Container>
       <Header>
         <img
           onClick={() => {
-            history(-1);
+            updateUserKeyNum();
+            history(keyInfo.nextPath);
           }}
           src={require("assets/ic_close.svg").default}
           alt="나가기"
@@ -22,14 +30,15 @@ function KeyPopUp() {
         <KeyImage>
           <img
             className="animate__animated animate__tada"
-            src={require("assets/keyPopUp.png")}
+            src={
+              "https://raw.githubusercontent.com/BuenCamino3rd/test/219dfc7cbb07418738815ae70953cd7c4497f484/image/popupkey.svg"
+            }
             alt="열쇠이미지"
           />
         </KeyImage>
         <MessageCard>
           <div className="big">
             <span className=" bold">열쇠 </span>
-            {/* todo - props인 keyNum로 변경*/}
             <span className=" bold roboto green">
               {keyInfo ? keyInfo.num : 0}
             </span>
@@ -37,14 +46,14 @@ function KeyPopUp() {
             <span className=" bold"> 획득!</span>
           </div>
           <span>축하드려요~</span>
-          {/* todo - props인 message로 변경*/}
           <span className="bold">{keyInfo ? keyInfo.message : ""}</span>
           <span>받은 열쇠는 리워드 페이지에서</span>
           <span>상품으로 교환이 가능해요!</span>
         </MessageCard>
         <SaveBtn
           onClick={() => {
-            history(-1);
+            updateUserKeyNum();
+            history(keyInfo.nextPath);
           }}
         >
           확인

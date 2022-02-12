@@ -1,18 +1,32 @@
 import SubmitButton from "components/common/SubmitButton";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserData } from "store/User";
+import { UserInventoryData } from "store/UserInventory";
 import { styleModal, styleModalBackground } from "style/common";
 import styled from "styled-components";
-
-function BuyBox({ setBuyClick, buyBoxItem }) {
+import { v1 as uuid } from "uuid";
+function BuyBox({ setBuyClick, buyBoxItem, setIsValidBuy }) {
   const [isBought, setIsBought] = useState("");
-  // todo - 박스 구매 클릭시 로직 짤 것 - api 성공
+  const { userData, updateUserData } = useContext(UserData);
+  const { userBoxList, userRewardList, getUserBoxList, setUserBoxList } =
+    useContext(UserInventoryData);
+  const history = useNavigate();
+
   function funcBuyBox() {
-    // 사용자 열쇠 개수가 박스구매개수보다 많을때
-    // api호출
-    // setIsBought("true");
-    // // 사용자 열쇠 개수가 박스구매개수보다 적을때
-    // api호출없이 바로
-    setIsBought("false");
+    if (userData.key >= buyBoxItem.boxPrice) {
+      setIsBought("true");
+      const temp = JSON.parse(localStorage.getItem("userBoxList"))
+        ? JSON.parse(localStorage.getItem("userBoxList"))
+        : [];
+      const boxNew = { ...buyBoxItem, boxId: uuid() };
+      temp.push(boxNew);
+      localStorage.setItem("userBoxList", JSON.stringify(temp));
+      getUserBoxList();
+      updateUserData({ key: userData.key - buyBoxItem.boxPrice });
+    } else {
+      setIsBought("false");
+    }
   }
   return (
     <Background>
@@ -21,13 +35,25 @@ function BuyBox({ setBuyClick, buyBoxItem }) {
           className="closeBtn"
           onClick={() => {
             setBuyClick(false);
+            setIsValidBuy(false);
+            if ("true" === isBought) {
+              if (1 === userBoxList.length + userRewardList.length) {
+                history("/key", {
+                  state: {
+                    num: 1,
+                    message: "처음으로 MOA박스를 구매하셨네요",
+                    nextPath: "/reward",
+                  },
+                });
+              }
+            }
           }}
         >
           <img src={require("assets/ic_close.svg").default} alt="닫기" />
         </div>
         {"" === isBought && (
           <div className="content">
-            <div className="title">MOA박스를 구매하시겠어요?</div>
+            <div className="title">{buyBoxItem.boxName}를 구매하시겠어요?</div>
             <div className="aboutKey">
               열쇠 {buyBoxItem.boxPrice}개가 사용됩니다
             </div>
@@ -35,6 +61,7 @@ function BuyBox({ setBuyClick, buyBoxItem }) {
               <button
                 onClick={() => {
                   setBuyClick(false);
+                  setIsValidBuy(false);
                 }}
               >
                 취소하기
@@ -63,6 +90,16 @@ function BuyBox({ setBuyClick, buyBoxItem }) {
             <SubmitButton
               onClickFunc={() => {
                 setBuyClick(false);
+                setIsValidBuy(false);
+                if (1 === userBoxList.length + userRewardList.length) {
+                  history("/key", {
+                    state: {
+                      num: 1,
+                      message: "처음으로 MOA박스를 구매하셨네요",
+                      nextPath: "/reward",
+                    },
+                  });
+                }
               }}
               isActive={true}
               title={"확인"}
@@ -80,6 +117,7 @@ function BuyBox({ setBuyClick, buyBoxItem }) {
             <SubmitButton
               onClickFunc={() => {
                 setBuyClick(false);
+                setIsValidBuy(false);
               }}
               isActive={true}
               title={"확인"}
@@ -96,6 +134,7 @@ const Background = styled.div`
 const ModalBox = styled.div`
   ${styleModal}
   font-family: "Pretendard-SemiBold";
+  text-align: start;
   .content {
     text-align: center;
 
@@ -125,8 +164,6 @@ const ModalBox = styled.div`
       margin-bottom: 48px;
     }
   }
-
-  text-align: start;
 `;
 const ButtonList = styled.div`
   display: flex;
@@ -138,6 +175,7 @@ const ButtonList = styled.div`
     padding: 12px 0;
     border: none;
     border-radius: 12px;
+    background-color: #ebebeb;
     &.green {
       background-color: var(--a2);
       color: #ffffff;

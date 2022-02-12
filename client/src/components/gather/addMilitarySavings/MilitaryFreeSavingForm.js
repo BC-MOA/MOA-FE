@@ -5,10 +5,8 @@ import styled from "styled-components";
 function MilitaryFreeSavingForm({
   userMonthOptions,
   savingType,
-  item,
   formData,
   setFormData,
-  userAccountList,
 }) {
   return (
     <FreeSavingForm className={savingType === "자유입금" ? "isSelect" : ""}>
@@ -23,6 +21,7 @@ function MilitaryFreeSavingForm({
         <Dropdown
           valueName={"formDataMonth"}
           setValue={setFormData}
+          suffix={"개월"}
           selectValue={formData.formDataMonth}
           placeHolder={"적금하실 기간을 선택해주세요"}
           options={userMonthOptions}
@@ -30,12 +29,7 @@ function MilitaryFreeSavingForm({
       </div>
 
       <div className="title">출금계좌</div>
-      <Dropdown
-        valueName={"formDataAccount"}
-        setValue={setFormData}
-        selectValue={formData.formDataAccount}
-        options={userAccountList}
-      ></Dropdown>
+      <div className="fixData">{formData.formDataAccount[0].accountName}</div>
     </FreeSavingForm>
   );
 }
@@ -46,6 +40,16 @@ const FreeSavingForm = styled.div`
   }
   .marginBox {
     margin-bottom: 24px;
+  }
+  .fixData {
+    font-family: "Pretendard-Regular";
+    font-size: 16px;
+    line-height: 25px;
+    padding: 10px 0 10px 16px;
+    background: #ffffff;
+    border-radius: 8px;
+    color: var(Title_01);
+    text-align: start;
   }
 `;
 

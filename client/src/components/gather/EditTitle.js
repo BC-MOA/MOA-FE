@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserData } from "store/User";
 import styled from "styled-components";
 
 function EditTitle({ startTitle, newTitle, setNewTitle, setIsInputChange }) {
+  const { userData } = useContext(UserData);
   return (
     <EditTitleStyle>
       <div className="title">
-        <div>민수님!</div>
+        <div>{userData.name}님!</div>
         <div>군적금을 통해 무엇을 하고 싶나요?</div>
       </div>
       <input

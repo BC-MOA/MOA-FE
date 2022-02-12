@@ -1,17 +1,23 @@
 import BackHeader from "components/common/BackHeader";
 import Container from "components/common/Container";
 import SubmitButton from "components/common/SubmitButton";
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { UserData } from "store/User";
 import styled from "styled-components";
 
 function AddMoaSaving() {
   const history = useNavigate();
+  const { state: savingType } = useLocation();
+  const { userData } = useContext(UserData);
   return (
     <Container>
       <BackHeader path={-1} isScrolled={true} title={""} />
-      <Title className="first">{"민수"}님,</Title>
-      <Title>첫 {"목표"}를 세우시는군요!</Title>
+      <Title className="first">{userData.name}님,</Title>
+      <Title>
+        첫 {savingType}
+        {"목표" === savingType ? "를" : "을"} 세우시는군요!
+      </Title>
       <SubTitle>
         목표 금액과 비상금은 KEB 하나은행과 모아(MOA)가 함께 제휴해 제공하는
         통장에 모아져요
@@ -26,7 +32,7 @@ function AddMoaSaving() {
         <SubmitButton
           title={"통장 개설하기"}
           onClickFunc={() => {
-            history("term");
+            history("term", { state: savingType });
           }}
           isActive={true}
         />

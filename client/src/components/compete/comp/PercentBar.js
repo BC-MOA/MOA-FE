@@ -43,19 +43,11 @@ const StyledPercentBar = styled.div`
 `;
 
 /**
- * [comp]
- * PercentBar
- *
- * [state]
- * none
- *
- * [props]
  * totalkey : 베팅된 키의 개수 리스트
  */
-
-const PercentBar = (props) => {
-  const A = props.totalkey[0];
-  const B = props.totalkey[1];
+const PercentBar = ({ totalkey }) => {
+  const A = totalkey[0];
+  const B = totalkey[1];
   const ratioA = ((A / (A + B)) * 100).toFixed(2);
   const ratioB = ((B / (A + B)) * 100).toFixed(2);
 

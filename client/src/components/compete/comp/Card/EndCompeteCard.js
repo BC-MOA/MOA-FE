@@ -42,23 +42,11 @@ const Result = styled.div`
   font-family: "Pretendard-Regular";
   font-size: 12px;
   line-height: 19px;
-  background-color: ${({ result }) => (result ? "var(--a2)" : "var(--alert)")};
+  background-color: ${({ $result }) =>
+    $result ? "var(--a2)" : "var(--alert)"};
 `;
 
-/**
- * [comp]
- * EndCompeteCard
- *
- * [state]
- * none
- *
- * [props]
- * 챌린지 정보
- * type: 전체/내 챌린지 구분을 위한 bool
- */
-function EndCompeteCard(props) {
-  const obj = props.obj;
-
+function EndCompeteCard({ type, obj }) {
   const betResult = obj.pick === obj.win;
 
   return (
@@ -71,10 +59,10 @@ function EndCompeteCard(props) {
 
             <Versus>{betResult ? obj.versus[0] : obj.versus[1]}</Versus>
           </TextBox>
-          {props.type ? (
+          {type ? (
             <Count>{kFormatter(obj.total)}명 참여</Count>
           ) : (
-            <Result result={betResult}>{betResult ? "성공" : "실패"}</Result>
+            <Result $result={betResult}>{betResult ? "성공" : "실패"}</Result>
           )}
         </ContentBox>
       </BetEndCard>

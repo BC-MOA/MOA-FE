@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import styled from "styled-components";
 import {
   styleTitle,
@@ -9,6 +9,8 @@ import {
 import CustomBtn from "components/gather/addGoal/CustomBtn";
 import { hideScrollBar } from "style/common";
 import CustomInput from "components/common/CustomInput";
+import { UserData } from "store/User";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 100%;
@@ -113,7 +115,7 @@ function SignUp() {
     const { id, value } = e.target;
     setSignUp({
       ...signUp,
-      [id]: value,
+      [id]: `${id === "rrNumber2" ? value.slice(0, 1) : value}`,
     });
   };
   const focus1 = useRef();
@@ -129,6 +131,15 @@ function SignUp() {
       signUp.phoneNumber
     ),
   };
+
+  const { login: funcLogin, userData } = useContext(UserData);
+  const history = useNavigate();
+
+  useEffect(() => {
+    if (userData.id) {
+      history("/home");
+    }
+  }, []);
 
   return (
     <Container>
@@ -151,6 +162,7 @@ function SignUp() {
             <input
               className="first"
               id="rrNumber1"
+              type="number"
               placeholder="생년월일"
               onChange={onChange}
               onKeyUp={(e) => {
@@ -160,8 +172,10 @@ function SignUp() {
               }}
             />
             <span>-</span>
-            {/* Todo: 주민등록번호 뒷자리는 한자리만 입력받은 -> 뒷자리 X 표시 추가 필요 */}
             <input
+              type="number"
+              maxLength="1"
+              value={signUp.rrNumber2}
               className="second"
               id="rrNumber2"
               placeholder=""
@@ -179,6 +193,7 @@ function SignUp() {
           </label>
           <div className="dividedInput">
             <input
+              type="number"
               className="first"
               id="serviceNumber1"
               placeholder="연도 뒤 2자리"
@@ -191,6 +206,7 @@ function SignUp() {
             />
             <span>-</span>
             <input
+              type="number"
               className="second"
               id="serviceNumber2"
               placeholder="군번 8자리를 입력해주세요"
@@ -204,6 +220,7 @@ function SignUp() {
             핸드폰 번호
           </label>
           <CustomInput
+            type="number"
             id="phoneNumber"
             placeholder="01012345670"
             onChange={onChange}
@@ -278,13 +295,23 @@ function SignUp() {
           )}
         </div>
       </Content>
-      {/* Todo: 회원가입 버튼 클릭시, 이동할 라우터 경로 추가 */}
       <CustomBtn
         active={
           !Object.keys(signUp).filter((x) => signUp[x] === "").length &&
           !Object.keys(validationFunc).filter((x) => validationFunc[x] !== true)
             .length
         }
+        path={"/loading"}
+        addFunc={() => {
+          funcLogin({
+            id: [signUp.serviceNumber1, signUp.serviceNumber2].join("-"),
+            name: signUp.name,
+            join_date: "2021-08-01",
+            unit: "11사단 화랑부대",
+            phone: signUp.phoneNumber,
+            key: 0,
+          });
+        }}
       >
         회원가입
       </CustomBtn>

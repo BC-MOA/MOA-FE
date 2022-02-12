@@ -1,32 +1,31 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { v1 as uuid } from "uuid";
+import MyBoxOpenModal from "./MyBoxOpenModal";
 
-function MyBoxListItem({ itme }) {
-  const history = useNavigate();
+function MyBoxListItem({ item }) {
+  const [isOpenClick, setIsOpenClick] = useState(false);
   return (
     <MyBoxListItemStyle>
       <div className="boxContent">
-        <img
-          className="boxImage"
-          src={require(`assets/reward/reward_box_${itme.boxName}.png`)}
-          alt={itme.boxName}
-        />
-        <BoxTitle>{itme.boxName}</BoxTitle>
+        <img className="boxImage" src={item.boxImageUrl} alt={item.boxName} />
+        <BoxTitle>{item.boxName}</BoxTitle>
         <BoxDescription>
           <span className="bold">[획득 가능 상품]</span>
-          {itme.boxDescription &&
-            itme.boxDescription.map((item) => <span key={uuid()}>{item}</span>)}
+          {item.boxDescription &&
+            item.boxDescription.map((item) => <span key={uuid()}>{item}</span>)}
         </BoxDescription>
         <button
           onClick={() => {
-            history(`select/${itme.boxId}`);
+            setIsOpenClick(true);
           }}
         >
           열기
         </button>
       </div>
+      {isOpenClick && (
+        <MyBoxOpenModal item={item} setIsOpenClick={setIsOpenClick} />
+      )}
     </MyBoxListItemStyle>
   );
 }

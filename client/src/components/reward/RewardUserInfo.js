@@ -1,27 +1,39 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserData } from "store/User";
+import { UserInventoryData } from "store/UserInventory";
 import styled from "styled-components";
 
 function RewardUserInfo() {
   const history = useNavigate();
-  const userId = "1234";
+  const { userData } = useContext(UserData);
+  const { userBoxList, userRewardList } = useContext(UserInventoryData);
+
   return (
     <UserInfo>
       <div className="userKeyNum">
         <div className="header">
           <img src={require("assets/ic_key_big.svg").default} alt="" />
-          <span>30</span>
+          {!userData.id && <span>{"0"}</span>}
+          {userData.id && <span>{userData?.key}</span>}
         </div>
         <div className="infoTitle">내 열쇠 개수</div>
       </div>
       <label
         onClick={() => {
-          history(`/reward/${userId}`);
+          if (!userData.id) {
+            history("/login");
+          } else {
+            history(`/reward/${userData.id}`);
+          }
         }}
         className="userRewardNum"
       >
         <div className="header">
-          <span>2</span>
+          {!userData.id && <span>{"0"}</span>}
+          {userData.id && (
+            <span>{userBoxList.length + userRewardList.length}</span>
+          )}
         </div>
         <div className="infoTitle">
           <span>내 보관함</span>

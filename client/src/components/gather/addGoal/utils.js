@@ -1,9 +1,9 @@
 import moment from "moment";
 
 export const calcAmount = (inputs) => {
-  const { sDate, eDate, howOften: method, amount } = inputs;
+  const { sDate, eDate, limitCycle, amountPerCycle } = inputs;
 
-  switch (method) {
+  switch (limitCycle) {
     case "매월 10일":
       let monthCnt = (eDate.getYear() - sDate.getYear()) * 12;
       monthCnt += eDate.getMonth() - sDate.getMonth() + 1;
@@ -14,7 +14,7 @@ export const calcAmount = (inputs) => {
         monthCnt -= 1;
       }
 
-      return monthCnt * amount;
+      return monthCnt * amountPerCycle;
 
     case "매주 월요일":
       let calc_sDate = "";
@@ -26,11 +26,11 @@ export const calcAmount = (inputs) => {
 
       const calc_eDate = moment(eDate).day(1)._d;
       const weekCnt = moment(calc_eDate).diff(moment(calc_sDate), "weeks") + 1;
-      return weekCnt * amount;
+      return weekCnt * amountPerCycle;
 
     case "매일":
       const dayCnt = calc_days(sDate, eDate);
-      return dayCnt * amount;
+      return dayCnt * amountPerCycle;
 
     default:
       break;

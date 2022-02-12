@@ -8,19 +8,19 @@ function MilitaryFormBox({
   resetFormData,
   savingType,
   controlNameList,
-  item,
+  savingData,
   formData,
   userAccountList,
   setFormData,
 }) {
   const [monthOptions, setMonthOptions] = useState([]);
-  // todo - api
-  const userSavingMonth = [6, 7];
+  // todo - 유저 만기일로 남은 날 계산해서 값 바꾸기
+  const userSavingMonth = [6, 9];
   useEffect(() => {
     const dropDownOptions = [];
     for (let index = 0; index < userSavingMonth[1]; index++) {
       const month = userSavingMonth[0] + index;
-      dropDownOptions.push(`${month}개월`);
+      dropDownOptions.push(`${month}`);
     }
     setMonthOptions(dropDownOptions);
   }, []);
@@ -64,7 +64,7 @@ function MilitaryFormBox({
         userAccountList={userAccountList}
         userMonthOptions={monthOptions}
         savingType={savingType}
-        item={item}
+        savingData={savingData}
       />
       {/* 2. 자유입금*/}
       <MilitaryFreeSavingForm
@@ -73,7 +73,7 @@ function MilitaryFormBox({
         userAccountList={userAccountList}
         userMonthOptions={monthOptions}
         savingType={savingType}
-        item={item}
+        savingData={savingData}
       />
     </FormBox>
   );

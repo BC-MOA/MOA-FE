@@ -1,17 +1,44 @@
 import Dropdown from "components/common/Dropdown";
-import React from "react";
+import moment from "moment";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 function MilitaryAutoSavingForm({
   userMonthOptions,
   savingType,
-  item,
+  savingData,
   formData,
   setFormData,
 }) {
-  // todo - 예상원금 / 이자 계산해서 표시
-  const expectAmount = 0;
-  const expectInterest = 916800;
+  const [expectAmount, setExpectAmount] = useState(0);
+  const [expectInterest, setExpectInterest] = useState(0);
+  const [endDay, setEndDay] = useState("");
+  useEffect(() => {
+    const exAmount =
+      Number(formData.formDataAmount) * Number(formData.formDataMonth);
+    const exInterest = (exAmount * (33 + savingData.highestInterest)) / 100;
+    setExpectAmount(exAmount);
+    setExpectInterest(exInterest);
+  }, [formData.formDataMonth, formData.formDataAmount]);
 
+  useEffect(() => {
+    const now = moment();
+    const end = now.add(formData.formDataMonth, "months");
+    setEndDay(end.format("YYYY.MM.DD"));
+  }, [formData.formDataMonth]);
+
+  function funcCheckIsNumInput(value) {
+    if (Number(value)) {
+      setFormData((preData) => ({
+        ...preData,
+        formDataAmount: value,
+      }));
+    } else {
+      setFormData((preData) => ({
+        ...preData,
+        formDataAmount: "",
+      }));
+    }
+  }
   return (
     <AutoSavingForm className={savingType === "자동이체" ? "isSelect" : ""}>
       <div className="message">
@@ -22,7 +49,7 @@ function MilitaryAutoSavingForm({
         <span className="bold">매달 이체</span>
         <span>를 해주고 </span>
         <span className="bold">차액</span>
-        <span>은</span>
+        <span>은 </span>
         <span className="bold">월급</span>
         <span>으로 </span>
         <span className="bold">입금</span>
@@ -31,11 +58,12 @@ function MilitaryAutoSavingForm({
       <div className="marginBox">
         <div className="title">
           <span>기간</span>
-          <span className="green">만기일자:{"2023.03.15"}</span>
+          <span className="green">만기일자:{endDay}</span>
         </div>
         <Dropdown
           valueName={"formDataMonth"}
           setValue={setFormData}
+          suffix={"개월"}
           selectValue={formData.formDataMonth}
           placeHolder={"적금하실 기간을 선택해주세요"}
           options={userMonthOptions}
@@ -45,10 +73,7 @@ function MilitaryAutoSavingForm({
       <div className="inputBox">
         <input
           onChange={(e) => {
-            setFormData((preData) => ({
-              ...preData,
-              formDataAmount: e.target.value,
-            }));
+            funcCheckIsNumInput(e.target.value);
           }}
           placeholder="월 납입액을 입력해주세요"
           type="text"
@@ -62,17 +87,16 @@ function MilitaryAutoSavingForm({
         <span className="bold roboto">20</span>
         <span>만원까지 납입할 수 있습니다</span>
       </div>
-      {/* todo 예상원금 및 이자 표시  */}
       <div className="interestBox">
         <div className="boxItem">
           <span className="title">만기예상원금</span>
           <span className="boxNum">
             <span
               className={
-                expectAmount === 0 ? "green roboto empty" : "green roboto "
+                0 === expectAmount ? "green roboto empty" : "green roboto "
               }
             >
-              {expectAmount === 0 ? "-" : expectAmount}
+              {0 === expectAmount ? "-" : expectAmount.toLocaleString()}
             </span>
             <span> 원</span>
           </span>
@@ -82,14 +106,21 @@ function MilitaryAutoSavingForm({
           <span className="boxNum">
             <span
               className={
-                expectInterest === 0 ? "green roboto empty" : "green roboto "
+                0 === expectInterest ? "green roboto empty" : "green roboto "
               }
             >
-              {expectInterest === 0 ? "-" : expectInterest}
+              {0 === expectInterest
+                ? "-"
+                : Number(expectInterest.toFixed(0)).toLocaleString()}
             </span>
             <span> 원</span>
           </span>
         </div>
+      </div>
+      <div className="message">
+        <span>
+          ** 해당금액은 예상금액으로, 실제 수령 금액과는 다를 수 있습니다
+        </span>
       </div>
     </AutoSavingForm>
   );
