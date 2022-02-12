@@ -10,9 +10,10 @@ import ApplyDataCard from "./ApplyDataCard";
 
 function AddMoaSavingSuccess() {
   const history = useNavigate();
-  const { state: savingType } = useLocation();
+  const { state: stateData } = useLocation();
   const { updateUserData } = useContext(UserData);
   const { userAccount, setUserAccount } = useContext(UserAccount);
+  console.log(stateData);
   return (
     <Container>
       <ScrollBox paddingValue={"80px 0 114px "}>
@@ -41,6 +42,7 @@ function AddMoaSavingSuccess() {
             bankName: "KEB 하나은행",
             accountNumber: "123-456-78-910111",
             currentAmount: 0,
+            password: stateData.password,
             bankImageUrl:
               "https://raw.githubusercontent.com/BuenCamino3rd/test/d42a6f54e323fa3ed83729e8d294460253d53910/image/hana.svg",
           };
@@ -48,7 +50,7 @@ function AddMoaSavingSuccess() {
           const temp = userAccount;
           temp.interlock.push(data);
           setUserAccount(temp);
-          if ("목표" === savingType) {
+          if ("목표" === stateData.savingType) {
             history("/gather/add-goal");
           } else {
             history("/gather/add-safebox");
