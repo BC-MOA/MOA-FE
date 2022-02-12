@@ -56,7 +56,7 @@ const Container = styled.div`
 `;
 
 function TerminationCard({ props }) {
-  const { inout } = useContext(UserAccount).userAccount;
+  const { inout, interlock } = useContext(UserAccount).userAccount;
   return (
     <Container>
       <div className="accountInfo">
@@ -65,13 +65,20 @@ function TerminationCard({ props }) {
         </div>
         <div className="account">
           {props.savingMode === "군적금" ? (
-            <div className="subTitle">{props.account.productName}</div>
+            <>
+              <div className="subTitle">{props.account.productName}</div>
+              <div className="text txt_body2">
+                {props.account.bankName} {props.account.accountNumber}
+              </div>
+            </>
           ) : (
-            <div className="subTitle shortening">{props.goalName}</div>
+            <>
+              <div className="subTitle shortening">{props.goalName}</div>
+              <div className="text txt_body2">
+                {interlock[0].bankName} {interlock[0].accountNumber}
+              </div>
+            </>
           )}
-          <div className="text txt_body2">
-            {props.account.bankName} {props.account.accountNumber}
-          </div>
         </div>
       </div>
       <div className="InfoEl text">
