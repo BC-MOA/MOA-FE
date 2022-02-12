@@ -87,7 +87,7 @@ function Complete() {
   const { props, name } = state;
 
   const { setGatherList } = useContext(GatherList);
-  const { inout } = useContext(UserAccount).userAccount;
+  const { inout, interlock } = useContext(UserAccount).userAccount;
   return (
     <Container>
       <Content>
@@ -101,7 +101,7 @@ function Complete() {
           <>
             <div className="Title">목표를 세웠어요</div>
             <div className="Text">
-              {props.account.bankName} {props.account.accountNumber}에 <br />
+              {interlock[0].bankName} {interlock[0].accountNumber}에 <br />
               목표 금액이 모아져요.
             </div>
           </>
@@ -109,7 +109,7 @@ function Complete() {
           <>
             <div className="Title">비상금을 만들었어요</div>
             <div className="Text">
-              {props.account.bankName} {props.account.accountNumber}에 <br />
+              {interlock[0].bankName} {interlock[0].accountNumber}에 <br />
               비상금이 모아져요.
             </div>
           </>
