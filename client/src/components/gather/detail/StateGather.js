@@ -20,7 +20,7 @@ const Container = styled.div`
       border-radius: 12px;
       pointer-events: none;
       & + & {
-        /* margin-top: 14px; */
+        margin-top: 14px;
       }
     `}
   ${({ editToggle }) =>
